@@ -1,0 +1,12 @@
+.feedBackground{
+  flex: 9;
+  overflow-y: auto;
+  height: calc(100vh - 56px);
+}
+.feedBackgroundWrapper{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10rem;
+  padding: 10rem 10rem;
+}

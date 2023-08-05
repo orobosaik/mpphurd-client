@@ -6,12 +6,14 @@ export default function Header() {
 		<div className="headerContainer">
 			<div className="headerLeft">
 				<span className="headerLogo">
+					<img src="/assets/logos/Logo-Mpphurd.png" alt="" />
+					<div></div>
 					<p>MPPHURD</p>
 				</span>
 			</div>
 			<div className="headerCenter">
 				<div className="searchBar">
-					<Search />
+					<Search className="searchIcon" />
 					<input
 						type="text"
 						placeholder="Start typing to search"
@@ -27,15 +29,26 @@ export default function Header() {
 				</div>
 				<div className="headerIcons">
 					<div className="headerIconItem">
-						<Email />
+						<Notifications className="notificationIcon" />
 						<span className="headerIconBadge">3</span>
 					</div>
 					<div className="headerIconItem">
-						<Notifications />
-						<span className="headerIconBadge">1</span>
+						<Email className="emailIcon" />
+						<span className="headerIconBadge">5</span>
 					</div>
 				</div>
-				<img src="/assets/persons/headshot1.jpg" alt="" />
+				<div className="headerUser">
+					<div className="headerDetails">
+						<span className="headerName">Orobosa</span>
+						<span className="headerOffice">(Records)</span>
+					</div>
+
+					<img
+						src="/assets/persons/headshot1.jpg"
+						alt=""
+						className="headerImg"
+					/>
+				</div>
 			</div>
 		</div>
 	);

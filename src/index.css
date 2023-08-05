@@ -8,6 +8,17 @@
 	color: rgba(255, 255, 255, 0.87);
 	background-color: #242424;
 
+
+	--black: #2c2c2c;
+	--white: #ffffff;
+	--light-grey: #ececec;
+	--sc-grey: #bfbfbf;
+
+	--pc-green: #0d9f4f;
+	--accent-yellow: #ffcc00;
+	--accent-red: #F70000;
+	--green-background: #eef8f3;
+
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
@@ -15,6 +26,7 @@
 	-webkit-text-size-adjust: 100%;
 }
 html{
+	font-size: 62.5%;
   box-sizing: border-box;
 }
 *,
@@ -23,6 +35,7 @@ html{
 	margin: 0;
 	padding: 0;
   box-sizing: inherit;
+	font-size: 1.6rem;
 }
 
 a {
@@ -35,10 +48,15 @@ a:hover {
 }
 
 body {
+	font-size: 1.6rem;
 	/* display: flex; */
 	/* place-items: center; */
 	min-width: 320px;
 	min-height: 100vh;
+	/* background-color: lightgrey; */
+	background-image: url(/assets/banners/background1.png);
+	background-size: cover;
+	background-repeat: no-repeat;
 }
 
 h1 {
@@ -63,6 +81,22 @@ button:hover {
 button:focus,
 button:focus-visible {
 	outline: 4px auto -webkit-focus-ring-color;
+}
+input{
+	font: inherit;
+}
+::-webkit-scrollbar{
+	width: 5px;
+	height: 10px;
+}
+::-webkit-scrollbar-thumb{
+	background-color: var(--sc-grey);
+	border-radius: 100px;
+}
+
+::-webkit-scrollbar-track {
+	border: none;
+	background: transparent;
 }
 
 @media (prefers-color-scheme: light) {
