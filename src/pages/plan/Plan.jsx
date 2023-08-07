@@ -6,6 +6,8 @@ import "./plan.css";
 import MiddleBar from "../../components/middleBar/MiddleBar";
 import PlanInfo from "../../components/planInfo/PlanInfo";
 import FeedCard from "../../components/feedCard/FeedCard";
+import Activities from "../../components/activities/Activities";
+import Document from "../../components/document/Document";
 
 export default function Plan() {
 	return (
@@ -15,13 +17,11 @@ export default function Plan() {
 				<SideBar />
 				<MiddleBar>
 					<PlanInfo />
-					<FeedCard/>
-					<FeedCard/>
-					<FeedCard/>
-					<FeedCard/>
 				</MiddleBar>
 
-				<RightBar />
+				<RightBar>
+					<Document/>
+				</RightBar>
 			</div>
 		</>
 	);

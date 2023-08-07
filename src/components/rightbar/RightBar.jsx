@@ -1,7 +1,9 @@
 import "./rightBar.css"
 
-export default function RightBar () {
+export default function RightBar ({children}) {
   return (
-    <div className="rightBar">RightBar</div>
+    <div className="rightBar">
+      {children}
+    </div>
   )
 }

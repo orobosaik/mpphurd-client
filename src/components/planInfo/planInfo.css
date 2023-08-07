@@ -1,5 +1,59 @@
 .planInfo{
   width: 100%;
-  height: 50rem;
-  background: #ececec;
+  /* background: #ececec; */
+}
+.planInfoSummary{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+.planInfoSummaryName,.planInfoSummaryLocation{
+  display: flex;
+}
+.planInfoSummaryDetails{
+  margin-right:5rem;
+
+}
+.planInfoSummaryTitle{
+  flex: 3;
+  font-weight: 600;
+  /* width: 15rem; */
+}
+.planInfoSummaryText{
+  flex: 9;
+  /* width: 30rem; */
+}
+.planInfoSummaryEdit{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+    background-color: var(--light-grey);
+}
+.editIcon{
+  font-size: 1.8rem !important;
+
+}
+
+.planInfoWrapper{
+  background-color:var(--green-background);
+  padding: 2rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 1rem;
+
+
+
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
+
+.planInfoButtons{
+  display: flex;
+  gap: 1rem;
 }

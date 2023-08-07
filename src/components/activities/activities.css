@@ -1,0 +1,56 @@
+.activitiesTop {
+	display: flex;
+	height: 50px;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+}
+.activitiesTop span {
+	color: var(--black);
+	font-weight: 700;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 50px;
+	width: 50%;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+  cursor: pointer;
+}
+.activitiesTopActive {
+	background-color: var(--white);
+}
+.activitiesLabels {
+	position: relative;
+	height: 50px;
+	display: flex;
+	background-color: var(--white);
+	border-bottom: var(--sc-grey) solid 3px;
+}
+.activitiesLabels span {
+	flex: 1;
+	display: flex;
+	align-items: end;
+	justify-content: center;
+}
+.activitiesLabelActive {
+	color: var(--pc-green);
+	font-weight: 700;
+}
+.activitiesLabelActive::after {
+	content: "";
+	position: absolute;
+	display: block;
+	bottom: -3px;
+	left: 3.5%;
+	background-color: var(--pc-green);
+	font-weight: 700;
+	width: 26%;
+	height: 3px;
+}
+.activitiesWrapper {
+	background-color: var(--white);
+	height: calc(100vh - 156px);
+	border-bottom-left-radius: 8px;
+	border-bottom-right-radius: 8px;
+  overflow-y: auto;
+}

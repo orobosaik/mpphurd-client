@@ -1,0 +1,52 @@
+
+.planInfoCard{
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+.planInfoCardTitle{
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: var(--pc-green);
+}
+.planInfoItems{
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+.planInfoItem{
+  display: flex;
+}
+.planInfoTitle{
+  flex: 3;
+  font-weight: 700;
+  /* width: 15rem; */
+}
+.planInfoText{
+  flex: 9;
+
+  /* width: 15rem; */
+}
+.planInfoCard:not(:last-child)::after{
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  border-bottom: 1px var(--accent-yellow) dashed;
+}
+.planInfoDetails{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.planInfoImg{
+  height: 13rem;
+  width: 13rem;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}

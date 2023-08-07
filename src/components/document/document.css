@@ -1,0 +1,28 @@
+.documentTop {
+	display: flex;
+	height: 50px;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+}
+.documentTop span {
+	color: var(--black);
+	font-weight: 700;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 50px;
+	width: 50%;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+  cursor: pointer;
+}
+.documentTopActive {
+	background-color: var(--white);
+}
+.documentWrapper {
+	background-color: var(--white);
+	height: calc(100vh - 106px);
+	border-bottom-left-radius: 8px;
+	border-bottom-right-radius: 8px;
+  overflow-y: auto;
+}
