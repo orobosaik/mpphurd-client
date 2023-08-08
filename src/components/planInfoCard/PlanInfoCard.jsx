@@ -21,7 +21,7 @@ export default function PlanInfoCard({ AD, AD2, R, BD }) {
 					</div>
 				</div>
 			</div>
-      {BD && <img src="/assets/persons/headshot4.jpg" alt="" className="planInfoImg" />}
+			{BD && <img className="planInfoImg" src="#" alt="Passport" />}
 		</div>
 	);
 }

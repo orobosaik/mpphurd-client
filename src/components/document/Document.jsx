@@ -1,10 +1,10 @@
 import "./document.css";
 
-export default function Document() {
+export default function Document({ setRightBarView }) {
 	return (
 		<div className="document">
 			<div className="documentTop">
-				<span>Activities</span>
+				<span onClick={() => setRightBarView(0)}>Activities</span>
 				<span className="documentTopActive">Documents</span>
 			</div>
 			<div className="documentWrapper">

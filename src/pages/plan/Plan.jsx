@@ -8,8 +8,11 @@ import PlanInfo from "../../components/planInfo/PlanInfo";
 import FeedCard from "../../components/feedCard/FeedCard";
 import Activities from "../../components/activities/Activities";
 import Document from "../../components/document/Document";
+import { useState } from "react";
 
 export default function Plan() {
+	const [rightBarView, setRightBarView] = useState(0);
+
 	return (
 		<>
 			<Header />
@@ -20,7 +23,11 @@ export default function Plan() {
 				</MiddleBar>
 
 				<RightBar>
-					<Document/>
+					{rightBarView === 1 ? (
+						<Document setRightBarView={setRightBarView} />
+					) : (
+						<Activities setRightBarView={setRightBarView} />
+					)}
 				</RightBar>
 			</div>
 		</>

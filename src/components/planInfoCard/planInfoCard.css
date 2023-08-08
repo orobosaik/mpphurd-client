@@ -2,6 +2,7 @@
 .planInfoCard{
   display: flex;
   justify-content: space-between;
+  align-items: center;
   position: relative;
 }
 .planInfoCardTitle{
@@ -20,12 +21,10 @@
 .planInfoTitle{
   flex: 3;
   font-weight: 700;
-  /* width: 15rem; */
 }
 .planInfoText{
   flex: 9;
 
-  /* width: 15rem; */
 }
 .planInfoCard:not(:last-child)::after{
   content: "";
@@ -44,6 +43,7 @@
 .planInfoImg{
   height: 13rem;
   width: 13rem;
+  background-color: var(--light-grey);
   border-radius: 8px;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;

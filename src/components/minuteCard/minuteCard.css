@@ -1,0 +1,130 @@
+.minuteCard {
+	position: relative;
+	padding-left: 2rem;
+	/* background: lightgoldenrodyellow; */
+}
+.minuteCard * {
+	font-size: 1.5rem;
+}
+.minuteCard div {
+	display: flex;
+}
+.minuteCardDate {
+	color: var(--pc-green);
+	font-weight: 600;
+}
+.minuteCardTitle {
+	/* flex: 1; */
+	font-weight: 700;
+	width: 6rem;
+}
+.minuteCardText {
+	/* flex: 2; */
+	/* justify-self: flex-start; */
+}
+.minuteCardCommentText {
+	background-color: var(--light-grey);
+	padding: 1rem;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-o-border-radius: 5px;
+}
+
+.minuteCardArrow {
+	z-index: 10;
+	position: absolute;
+	background-color: green;
+	left: 0px;
+	top: 3rem;
+	width: 2px;
+	background-color: var(--black);
+	height: calc(100% - 3rem);
+}
+.minuteCardArrow::before {
+	position: absolute;
+	content: "\25b2";
+	font-size: 1.2rem;
+	top: -10px;
+	left: -4px;
+}
+.minuteCardArrow::after {
+	position: absolute;
+	content: "";
+	height: 0.7rem;
+	width: 0.7rem;
+	right: -2px;
+	bottom: -2px;
+	background-color: var(--black);
+	border-radius: 2px;
+	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	-ms-border-radius: 2px;
+	-o-border-radius: 2px;
+}
+.minuteCard:not(:last-of-type) {
+	margin-bottom: 1rem;
+}
+.minuteCardArrow:not(:last-of-type) {
+	height: calc(100% - 8px);
+}
+.minuteCard:last-of-type .minuteCardArrow {
+	height: calc(100% - 4rem);
+}
+
+.minuteCard:first-of-type::before {
+	content: "";
+	position: absolute;
+	height: 15px;
+	width: 15px;
+	left: -7px;
+	top: 3px;
+	border: solid green 4px;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-ms-border-radius: 50%;
+	-o-border-radius: 50%;
+
+}
+.minuteCard:first-of-type::after {
+	content: "";
+	position: absolute;
+	height: 15px;
+	width: 15px;
+	left: -7px;
+	top: 3px;
+	border: solid green 4px;
+	animation: minuteCardBlink 2s infinite;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-ms-border-radius: 50%;
+	-o-border-radius: 50%;
+	-webkit-animation: minuteCardBlink 2s infinite;
+}
+
+@keyframes minuteCardBlink {
+	50% {
+		opacity: 0;
+		transform: scale(1.5);
+		-webkit-transform: scale(1.5);
+		-moz-transform: scale(1.5);
+		-ms-transform: scale(1.5);
+		-o-transform: scale(1.5);
+}
+	100% {
+		opacity: 0;
+		transform: scale(1.5);
+		-webkit-transform: scale(1.5);
+		-moz-transform: scale(1.5);
+		-ms-transform: scale(1.5);
+		-o-transform: scale(1.5);
+}
+}

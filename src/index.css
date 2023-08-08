@@ -95,6 +95,9 @@ button:focus-visible {
 input{
 	font: inherit;
 }
+::selection {
+    background: var(--accent-yellow);
+}
 ::-webkit-scrollbar{
 	width: 2px;
 	height: 10px;

@@ -1,6 +1,6 @@
 .rightBar{
   flex: 3;
-  background-color: var(--sc-grey);
+  background-color: var(--light-grey);
   border-radius: 8px;
   height: calc(100vh - 56px);
 }
