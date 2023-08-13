@@ -9,9 +9,12 @@ import FeedCard from "../../components/feedCard/FeedCard";
 import Activities from "../../components/activities/Activities";
 import Document from "../../components/document/Document";
 import { useState } from "react";
+import TopBar from "../../components/topBar/TopBar";
+import ViewBill from "../../components/viewBill/ViewBill";
 
 export default function Plan() {
 	const [rightBarView, setRightBarView] = useState(0);
+	const [billView, setBillView] = useState(0);
 
 	return (
 		<>
@@ -19,7 +22,11 @@ export default function Plan() {
 			<div className="planContainer">
 				<SideBar />
 				<MiddleBar>
-					<PlanInfo />
+					{billView === 1 ? (
+						<ViewBill />
+					) : (
+						<PlanInfo setBillView={setBillView} />
+					)}
 				</MiddleBar>
 
 				<RightBar>

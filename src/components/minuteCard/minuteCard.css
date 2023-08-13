@@ -4,7 +4,7 @@
 	/* background: lightgoldenrodyellow; */
 }
 .minuteCard * {
-	font-size: 1.5rem;
+	font-size: 1.45rem;
 }
 .minuteCard div {
 	display: flex;
@@ -35,11 +35,10 @@
 .minuteCardArrow {
 	z-index: 10;
 	position: absolute;
-	background-color: green;
 	left: 0px;
 	top: 3rem;
 	width: 2px;
-	background-color: var(--black);
+	background-color: var(--sc-grey);
 	height: calc(100% - 3rem);
 }
 .minuteCardArrow::before {
@@ -48,6 +47,7 @@
 	font-size: 1.2rem;
 	top: -10px;
 	left: -4px;
+color: var(--pc-green);
 }
 .minuteCardArrow::after {
 	position: absolute;
@@ -56,7 +56,7 @@
 	width: 0.7rem;
 	right: -2px;
 	bottom: -2px;
-	background-color: var(--black);
+	background-color: var(--pc-green);
 	border-radius: 2px;
 	transform: rotate(45deg);
 	-webkit-transform: rotate(45deg);

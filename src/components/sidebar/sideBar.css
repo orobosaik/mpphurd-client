@@ -11,10 +11,10 @@
 .sideBarListItem{
   display: flex;
   font-weight: 600;
+  font-size: 1.6rem;
   align-items: center;
   gap: 1.5rem;
   margin-bottom: 2rem;
-  /* background-color: grey; */
   padding: .5rem 3rem;
   cursor: pointer;
   border-radius: 8px;
@@ -33,4 +33,9 @@
 }
 .sideBarIcon{
   font-size: 2.5rem !important;
+}
+.sideBarListItem.selected{
+  background-color: var(--pc-green);
+  color: var(--white);
+  font-weight: 800;
 }

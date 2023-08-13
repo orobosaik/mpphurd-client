@@ -1,8 +1,9 @@
 import { EditRounded } from "@mui/icons-material";
 import "./planInfo.css";
 import PlanInfoCard from "../planInfoCard/PlanInfoCard";
+import ViewBill from "../viewBill/ViewBill";
 
-export default function PlanInfo() {
+export default function PlanInfo({ setBillView }) {
 	return (
 		<div className="planInfo">
 			<div className="planInfoSummary">
@@ -35,7 +36,9 @@ export default function PlanInfo() {
 			</div>
 			<div className="planInfoButtons">
 				<button className="primary">Generate Bill</button>
-				<button className="secondary">View Bills</button>
+				<button className="secondary" onClick={() => setBillView(1)}>
+					View Bills
+				</button>
 			</div>
 		</div>
 	);

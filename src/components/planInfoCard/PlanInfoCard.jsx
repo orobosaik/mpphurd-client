@@ -16,7 +16,7 @@ export default function PlanInfoCard({ AD, AD2, R, BD }) {
 					<div className="planInfoItem">
 						<span className="planInfoTitle">Address:</span>
 						<span className="planInfoText">
-							20 Erie Street off sokponba road, Benin city.
+							20 Erie Street off sokponba road, Benin city. off Edo State, Nigeria, Africa Azis
 						</span>
 					</div>
 				</div>

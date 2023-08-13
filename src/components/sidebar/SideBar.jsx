@@ -6,9 +6,9 @@ export default function SideBar () {
 		<div className="sideBar">
 			<div className="sideBarWrapper">
 				<ul className="sideBarList">
-					<li className="sideBarListItem">
+					<li className="sideBarListItem selected">
 						<HomeRounded className="sideBarIcon" />
-						<span className="sideBarListItemText">Home</span>
+						<span className="sideBarListItemText ">Home</span>
 					</li>
 					<li className="sideBarListItem">
 						<LibraryBooksRounded className="sideBarIcon" />

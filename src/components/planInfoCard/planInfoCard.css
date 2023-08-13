@@ -20,6 +20,7 @@
 }
 .planInfoTitle{
   flex: 3;
+  max-width: 10rem;
   font-weight: 700;
 }
 .planInfoText{
@@ -43,6 +44,7 @@
 .planInfoImg{
   height: 13rem;
   width: 13rem;
+  margin-left: 3rem;
   background-color: var(--light-grey);
   border-radius: 8px;
   -webkit-border-radius: 8px;

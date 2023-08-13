@@ -33,7 +33,7 @@
  border-right: 1px dashed var(--sc-grey);
 }
 .headerLogo p {
-	font-size: 20px;
+	font-size: 1.8rem;
   font-weight: bold;
 }
 
