@@ -22,14 +22,26 @@
 	/* flex: 2; */
 	/* justify-self: flex-start; */
 }
-.minuteCardCommentText {
+
+.minuteCardComment{
+	flex-direction: column;
 	background-color: var(--light-grey);
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	-ms-border-radius: 8px;
+	-o-border-radius: 8px;
+}
+
+.minuteCardCommentButton{
+	cursor: pointer;
+	font-weight: 700;
+	padding: .5rem;
+}
+
+.minuteCardCommentText {
+	border-top: solid var(--sc-grey) 1px;
 	padding: 1rem;
-	border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	-ms-border-radius: 5px;
-	-o-border-radius: 5px;
 }
 
 .minuteCardArrow {

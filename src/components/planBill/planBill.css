@@ -1,0 +1,139 @@
+.planBillViewWrapper {
+	border: solid black 1px;
+
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	-ms-border-radius: 8px;
+	-o-border-radius: 8px;
+}
+.planBillView {
+	margin: 0 auto;
+	height: 1200px;
+	font-size: 1.4rem;
+	background-color: white;
+	padding: 2rem 1.5rem;
+}
+.planBillViewHeaderTop {
+	display: flex;
+	justify-content: space-between;
+	padding: 0 2rem;
+	padding-top: 2rem;
+}
+.planBillViewHeaderBottom {
+	font-size: 0.8em;
+	font-weight: 600;
+	display: flex;
+	justify-content: space-around;
+	padding: 0 15rem;
+}
+
+.pbhState {
+	font-weight: 600;
+	font-size: 1.6rem;
+	color: red;
+	text-transform: uppercase;
+}
+.pbhMinistry {
+	font-weight: 600;
+	font-size: 1.8rem;
+	font-family: "Algerian";
+	text-transform: uppercase;
+}
+.pbhAddress {
+	font-weight: 600;
+}
+.planBillViewHeaderText {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+.billLogo {
+	height: 100px;
+	width: 100px;
+}
+.billViewHeaderUnderline {
+	margin-top: 20px;
+	border: solid red 1px;
+}
+
+.billTitle {
+	padding: 15px 0;
+	font-weight: 700;
+	font-size: 18px;
+	text-align: center;
+	/* text-decoration: underline; */
+	text-transform: uppercase;
+}
+.billDetails {
+	padding: 0 65px;
+}
+.billDetailsTitle {
+	text-transform: uppercase;
+	text-decoration: underline;
+	font-weight: 700;
+	margin-bottom: 10px;
+	padding: 0 1rem;
+}
+.billDetailsTopItems {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding: 0 1rem;
+}
+.billDetailsTopItem {
+	display: flex;
+}
+.billDetailsTopItemTitle {
+	flex: 1.5;
+	max-width: 150px;
+}
+.billDetailsTopItemText {
+	flex: 4;
+	max-width: 450px;
+}
+
+.billAnalysisTitle {
+	text-transform: uppercase;
+	text-decoration: underline;
+	font-weight: 700;
+	margin: 2rem 0;
+	margin-bottom: 1rem;
+}
+.billAnalysis {
+	widows: 80%;
+	padding: 2rem;
+	background: var(--green-background);
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	-ms-border-radius: 8px;
+	-o-border-radius: 8px;
+}
+.billAnalysisItem{
+	padding: .5rem 1rem;
+	border-top: dashed 1px var(--accent-yellow);
+}
+.billAnalysisItem:last-of-type{
+	font-weight: 700;
+}
+.billAnalysisItemSum{
+	display: flex;
+	justify-content: space-between;
+}
+.billAnalysisBreakdown{
+	padding: 0 1rem;
+	display: flex;
+	gap: 1.5rem;
+}
+.billAnalysisBreakdownCal{
+	display: flex;
+	flex-direction: column;
+	margin-right: 7rem;
+}
+.billAnalysisBreakdownSum{
+align-self: center;
+}

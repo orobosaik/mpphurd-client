@@ -34,7 +34,8 @@
 }
 .headerLogo p {
 	font-size: 1.8rem;
-  font-weight: bold;
+  font-family: "Candara", "Nunito";
+  font-weight: 700;
 }
 
 .headerCenter {

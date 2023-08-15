@@ -1,9 +1,11 @@
+import { useState } from "react";
 import "./minuteCard.css";
 
-export default function MinuteCard({comment}) {
+export default function MinuteCard({ comment }) {
+	const [showComment, setShowComment] = useState(false);
 	return (
-    <div className="minuteCard">
-      <div className="minuteCardArrow"></div>
+		<div className="minuteCard">
+			<div className="minuteCardArrow"></div>
 			<h2>Orobosa Ikponmwosa (TPOII)</h2>
 
 			<div className="minuteCardDate">68 Days Ago</div>
@@ -19,13 +21,25 @@ export default function MinuteCard({comment}) {
 				<span className="minuteCardTitle">Status:</span>{" "}
 				<span className="miniteCardText">Issue Raised</span>
 			</div>
-			<div>Comment v</div>
-			{comment && <p className="minuteCardCommentText">
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis officia
-				odio, accusamus adipisci laboriosam ea iusto ducimus placeat laudantium
-				ut aspernatur nam veniam expedita. Harum aspernatur accusantium at fuga
-				temporibus?
-			</p>}
+
+			<div className="minuteCardComment">
+				{comment && (
+					<div
+						className="minuteCardCommentButton"
+						onClick={() => setShowComment(!showComment)}>
+						{showComment ? "Comment >": "Comment v"}
+					</div>
+				)}
+
+				{showComment && (
+					<p className="minuteCardCommentText">
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis
+						officia odio, accusamus adipisci laboriosam ea iusto ducimus placeat
+						laudantium ut aspernatur nam veniam expedita. Harum aspernatur
+						accusantium at fuga temporibus?
+					</p>
+				)}
+			</div>
 		</div>
 	);
 }

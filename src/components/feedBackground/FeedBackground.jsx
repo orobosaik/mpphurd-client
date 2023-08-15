@@ -1,21 +1,11 @@
 import FeedCard from "../feedCard/FeedCard";
 import "./feedBackground.css";
 
-export default function FeedBackground() {
+export default function FeedBackground({children}) {
 	return (
 		<div className="feedBackground">
 			<div className="feedBackgroundWrapper">
-				<FeedCard />
-				<FeedCard />
-				<FeedCard />
-				<FeedCard />
-				<FeedCard />
-				<FeedCard />
-				<FeedCard />
-				<FeedCard />
-				<FeedCard />
-				<FeedCard />
-				<FeedCard />
+				{children}
 			</div>
 		</div>
 	);
