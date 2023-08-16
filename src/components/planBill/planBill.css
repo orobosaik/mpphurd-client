@@ -1,5 +1,20 @@
+.planBillOptions{
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	margin-bottom: 2rem;
+}
+.planBillOptions .selected{
+	color: var(--pc-green);
+	font-weight: 800;
+	outline: 1px solid var(--pc-green);
+	/* background-color: var(--sc-grey); */
+}
+
 .planBillViewWrapper {
 	border: solid black 1px;
+	padding: 2px;
+
 
 	border-radius: 8px;
 	-webkit-border-radius: 8px;
@@ -9,7 +24,7 @@
 }
 .planBillView {
 	margin: 0 auto;
-	height: 1200px;
+	min-height: 1120px;
 	font-size: 1.4rem;
 	background-color: white;
 	padding: 2rem 1.5rem;
@@ -81,7 +96,7 @@
 .billDetailsTopItems {
 	display: flex;
 	flex-direction: column;
-	gap: 8px;
+	gap: 5px;
 	padding: 0 1rem;
 }
 .billDetailsTopItem {
@@ -103,9 +118,9 @@
 	margin: 2rem 0;
 	margin-bottom: 1rem;
 }
-.billAnalysis {
-	widows: 80%;
-	padding: 2rem;
+.billAnalysisItems {
+	/* width: 80%; */
+	padding: 3rem;
 	background: var(--green-background);
 	border-radius: 8px;
 	-webkit-border-radius: 8px;
@@ -136,4 +151,46 @@
 }
 .billAnalysisBreakdownSum{
 align-self: center;
+}
+.billAnalysisTotalPay{
+	display: flex;
+	font-size: 1.6rem;
+	font-weight: 700;
+	gap: 3rem;
+}
+.billAnalysisPrev{
+	display: flex;
+	flex-direction: column;
+}
+.billAnalysisTotalPay{
+	margin-top: 2rem;
+	padding: .5rem 0;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	font-size: 2rem;
+}
+.billAnalysisTotalPay span:last-child{
+	font-size: 2rem;
+}
+
+.planBillViewFooter{
+	margin-top: 3rem;
+	margin-bottom: 2rem;
+	display: flex;
+	justify-content: space-around;
+}
+.planBillViewFooterItem{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.planBillViewFooterItem span{
+	width: 100%;
+	text-align: center;
+}
+.planBillViewFooterItem span:first-child{
+	border-bottom: 1px dashed yellowgreen;
+}
+.planBillPrint{
+	margin-top: 1rem;
 }

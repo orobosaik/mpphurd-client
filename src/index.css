@@ -99,12 +99,12 @@ button:focus-visible {
 .primary {
 	background-color: var(--pc-green);
 	color: #fff;
-	font-weight: 600;
+	font-weight: 700;
 }
 .secondary {
 	background-color: var(--light-grey);
 	color: #333;
-	font-weight: 600;
+	font-weight: 400;
 }
 input {
 	font: inherit;

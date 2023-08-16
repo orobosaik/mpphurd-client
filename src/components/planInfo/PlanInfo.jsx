@@ -34,8 +34,12 @@ export default function PlanInfo({ setTopBarData, setViewBills }) {
 				<PlanInfoCard />
 			</div>
 			<div className="planInfoButtons">
-				<button className="primary">Generate Bill</button>
-				<button className="secondary" onClick={() => setViewBills(true)}>
+				<button
+					className="primary"
+					onClick={() => setViewBills("generateBill")}>
+					Generate Bill
+				</button>
+				<button className="secondary" onClick={() => setViewBills("viewBills")}>
 					View Bills
 				</button>
 			</div>

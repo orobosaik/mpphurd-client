@@ -11,19 +11,32 @@ import Document from "../../components/document/Document";
 import { useState } from "react";
 import TopBar from "../../components/topBar/TopBar";
 import PlanBill from "../../components/planBill/PlanBill";
+import GenerateBill from "../../components/generateBill/GenerateBill";
 
 export default function Plan() {
 	const [rightBarView, setRightBarView] = useState(0);
-	const [viewBills, setViewBills] = useState(true);
-	const [generateBills, setGenerateBills] = useState(false);
+	const [viewBills, setViewBills] = useState("generateBill");
 
 	return (
 		<>
 			<Header />
 			<div className="planContainer">
 				<SideBar />
-				<MiddleBar topBarData={viewBills ? "View Bills":"Plan Info"}>
-					{viewBills ? <PlanBill /> : <PlanInfo setViewBills={setViewBills} />}
+				<MiddleBar
+					topBarData={
+						viewBills === "viewBills"
+							? "View Bills"
+							: viewBills === "generateBill"
+							? "Generate Bill"
+							: "Plan Info"
+					}>
+					{viewBills === "viewBills" ? (
+						<PlanBill />
+					) : viewBills === "generateBill" ? (
+						<GenerateBill />
+					) : (
+						<PlanInfo setViewBills={setViewBills} />
+					)}
 				</MiddleBar>
 
 				<RightBar>

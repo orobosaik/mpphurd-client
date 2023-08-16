@@ -8,7 +8,14 @@ export default function PlanBill() {
 	return (
 		<>
 			<div className="planBill">
-				<div className="planBillOptions"></div>
+				<div className="planBillOptions">
+					<button className="secondary selected">Assessment</button>
+					<button className="secondary">Assessment2</button>
+					<button className="secondary">Fastrack</button>
+					<button className="secondary">Contravention</button>
+				</div>
+
+
 				<div className="planBillViewWrapper">
 					<div className="planBillView" ref={(el) => (componentRef = el)}>
 						<div className="planBillViewHeader">
@@ -87,7 +94,7 @@ export default function PlanBill() {
 								</div>
 							</div>
 							<div className="billAnalysisTitle">Fees Analysis</div>
-							<div className="billAnalysis">
+							<div className="billAnalysisItems">
 								<div className="billAnalysisItem">
 									<div className="billAnalysisItemSum">
 										<span className="billAnalysisName">Registration Fees:</span>
@@ -159,6 +166,30 @@ export default function PlanBill() {
 									</div>
 								</div>
 							</div>
+							<div className="billAnalysisPrev">
+								<span>Previous Assessment(1) = 3224</span>
+								<span>Previous Assessment(1) = 3224</span>
+								<span>TPA = 5625 - 3224 = 2342</span>
+								<span>New Total Assessment = 3224 + 2342 = 44,232</span>
+							</div>
+							<div className="billAnalysisTotalPay">
+								<span>Total Payable Amount:</span>
+								<span>N393,452</span>
+							</div>
+							<div className="planBillViewFooter">
+								<div className="planBillViewFooterItem">
+									<span>Aigbe F.O</span>
+									<span>Assessment Officer</span>
+								</div>
+								<div className="planBillViewFooterItem">
+									<span>Aigbe F.O</span>
+									<span>Sign</span>
+								</div>
+								<div className="planBillViewFooterItem">
+									<span>{ Date.now().toLocaleString()}</span>
+									<span>Assessment Date</span>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -166,7 +197,7 @@ export default function PlanBill() {
 				<ReactToPrint
 					documentTitle="Hello world"
 					trigger={() => (
-						<button className="planBillPrint">Print this out!</button>
+						<button className="planBillPrint primary">Print this out!</button>
 					)}
 					content={() => componentRef}
 				/>
