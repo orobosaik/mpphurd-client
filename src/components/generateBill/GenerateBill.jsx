@@ -28,22 +28,22 @@ export default function GenerateBill() {
 							<span className="generateBillItemName">Volume of Building:</span>
 							<span className="generateBillItemValue">65,989</span>
 						</div>
-						<div className="generateBillItemVOB">
-              <div>
-                <button>-</button>
-              </div>
+						<div className="generateBillBreakdown">
 							<div>
+								<button>-</button>
+							</div>
+							<div className="generateBillItemBreakdown">
 								<div className="VOBLength">
 									<span>Length:</span>
-									<input type="text" />
+									<input type="text" placeholder="Enter..." />
 								</div>
 								<div className="VOBBreath">
 									<span>Breath:</span>
-									<input type="text" />
+									<input type="text" placeholder="Enter..." />
 								</div>
 								<div>
 									<span className="VOBHeight">Height:</span>
-									<input type="text" />
+									<input type="text" placeholder="Enter..." />
 								</div>
 								<div>
 									<span>Fee Per Sq Meter:</span>
@@ -51,8 +51,8 @@ export default function GenerateBill() {
 								</div>
 							</div>
 							<div>54,908</div>
-            </div>
-            <button>+</button>
+						</div>
+						<button>+</button>
 					</div>
 				</div>
 			</div>

@@ -1,0 +1,61 @@
+.generateBillWrapper {
+	background-color: var(--green-background);
+
+	padding: 2rem 3.5rem;
+
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	-ms-border-radius: 8px;
+	-o-border-radius: 8px;
+}
+
+.generateBillTitle {
+	font-weight: 700;
+	text-transform: uppercase;
+	padding: 1rem 1rem;
+	color: var(--pc-green);
+}
+
+.generateBillItems {
+}
+
+.generateBillItem {
+	padding: 0.5rem 1rem;
+	border-top: 1px dashed var(--accent-yellow);
+}
+.generateBillItemSummary {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+}
+
+.generateBillBreakdown{
+  display: flex;
+}
+.generateBillItemBreakdown{
+  display: flex;
+}
+
+.generateBillItemBreakdown input{
+  width: 10rem;
+  padding: .2rem 1rem;
+  border: 1px solid var(--sc-grey);
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+.generateBillItemBreakdown input::placeholder{
+  color: var(--sc-grey);
+}
+
+.generateBillItem button{
+  padding: .2rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 4rem;
+  min-height: 2.5rem;
+}
