@@ -1,0 +1,12 @@
+.newApplicationWrapper{
+  display: flex;
+  width: 100%;
+  padding: 0 6px;
+  gap: 6px;
+}
+.newApplicationSideBar{
+  flex: 2;
+}
+.newApplicationMiddleBar{
+  flex: 10;
+}

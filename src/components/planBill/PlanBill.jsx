@@ -11,7 +11,7 @@ export default function PlanBill() {
 				<div className="planBillOptions">
 					<button className="secondary selected">Assessment</button>
 					<button className="secondary">Assessment2</button>
-					<button className="secondary">Fastrack</button>
+					<button className="secondary">FastTrack</button>
 					<button className="secondary">Contravention</button>
 				</div>
 

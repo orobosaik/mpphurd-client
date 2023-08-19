@@ -78,7 +78,7 @@ h1 {
 	line-height: 1.1;
 }
 
-button {
+button, select {
 	border-radius: 8px;
 	border: 1px solid transparent;
 	padding: 0.7rem 2rem;
@@ -93,13 +93,19 @@ button:hover {
 	border-color: #646cff;
 }
 button:focus,
-button:focus-visible {
-	outline: 4px auto -webkit-focus-ring-color;
+button:focus-visible,
+select:focus,
+select:focus-visible {
+	/* outline: 4px auto -webkit-focus-ring-color; */
+
+	outline: none;
 }
+
 .primary {
 	background-color: var(--pc-green);
 	color: #fff;
 	font-weight: 700;
+	text-transform: capitalize;
 }
 .secondary {
 	background-color: var(--light-grey);

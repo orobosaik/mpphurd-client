@@ -1,7 +1,14 @@
 .minuteCard {
 	position: relative;
-	padding-left: 2rem;
-	/* background: lightgoldenrodyellow; */
+	padding: 1rem 2rem;
+	/*background: lightgoldenrodyellow;
+	*/box-shadow: 0px 0px 11px -4px rgba(0,0,0,0.5);
+	margin-left: 1rem;
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	-ms-border-radius: 8px;
+	-o-border-radius: 8px;
 }
 .minuteCard * {
 	font-size: 1.45rem;
@@ -47,8 +54,8 @@
 .minuteCardArrow {
 	z-index: 10;
 	position: absolute;
-	left: 0px;
-	top: 3rem;
+	left: -1rem;
+	top: 4rem;
 	width: 2px;
 	background-color: var(--sc-grey);
 	height: calc(100% - 3rem);
@@ -84,10 +91,10 @@ color: var(--pc-green);
 	margin-bottom: 1rem;
 }
 .minuteCardArrow:not(:last-of-type) {
-	height: calc(100% - 8px);
+	height: calc(100% - .8rem);
 }
 .minuteCard:last-of-type .minuteCardArrow {
-	height: calc(100% - 4rem);
+	height: calc(100% - 5rem);
 }
 
 .minuteCard:first-of-type::before {
@@ -95,8 +102,8 @@ color: var(--pc-green);
 	position: absolute;
 	height: 15px;
 	width: 15px;
-	left: -7px;
-	top: 3px;
+	left: calc(-1rem + -7px);
+	top: 1.2rem;
 	border: solid green 4px;
 	border-radius: 50%;
 	-webkit-border-radius: 50%;
@@ -110,8 +117,8 @@ color: var(--pc-green);
 	position: absolute;
 	height: 15px;
 	width: 15px;
-	left: -7px;
-	top: 3px;
+	left: calc(-1rem + -7px);
+	top: 1.2rem;
 	border: solid green 4px;
 	animation: minuteCardBlink 2s infinite;
 	border-radius: 50%;
@@ -125,11 +132,11 @@ color: var(--pc-green);
 @keyframes minuteCardBlink {
 	50% {
 		opacity: 0;
-		transform: scale(1.5);
-		-webkit-transform: scale(1.5);
-		-moz-transform: scale(1.5);
-		-ms-transform: scale(1.5);
-		-o-transform: scale(1.5);
+		transform: scale(1.7);
+		-webkit-transform: scale(1.7);
+		-moz-transform: scale(1.7);
+		-ms-transform: scale(1.7);
+		-o-transform: scale(1.7);
 }
 	100% {
 		opacity: 0;
