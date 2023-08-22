@@ -1,4 +1,4 @@
-import "./newApplication.css";
+import "./createApplication.css";
 import Header from "../../components/header/Header";
 import SideBar from "../../components/sidebar/SideBar";
 import RightBar from "../../components/rightbar/RightBar";
@@ -12,35 +12,27 @@ import TopBar from "../../components/topBar/TopBar";
 import PlanBill from "../../components/planBill/PlanBill";
 import GenerateBill from "../../components/generateBill/GenerateBill";
 import FeedBackground from "../../components/feedBackground/FeedBackground";
+import ApplicationForm from "../../components/applicationForm/ApplicationForm";
 
-export default function NewApplication() {
+export default function CreateApplication() {
 	const [rightBarView, setRightBarView] = useState(0);
 	const [viewBills, setViewBills] = useState("generateBill");
 	return (
 		<>
-			<div className="newApplication">
+			<div className="createApplication">
 				<Header />
-				<div className="newApplicationWrapper">
-					<div className="newApplicationSideBar">
+				<div className="createApplicationWrapper">
+					<div className="createApplicationSideBar">
 						<SideBar />
 					</div>
 
-					<div className="newApplicationMiddleBar">
+					<div className="createApplicationMiddleBar">
 						<MiddleBar
-							topBarData={
-								viewBills === "viewBills"
-									? "View Bills"
-									: viewBills === "generateBill"
-									? "Generate Bill"
-									: "Plan Info"
-							}>
-							{viewBills === "viewBills" ? (
-								<PlanBill />
-							) : viewBills === "generateBill" ? (
-								<GenerateBill />
-							) : (
-								<PlanInfo setViewBills={setViewBills} />
-							)}
+							topBarData={{
+								action: "Create New Application",
+								planNumber: "BC/1212/2023",
+							}}>
+							<ApplicationForm />
 						</MiddleBar>
 					</div>
 				</div>

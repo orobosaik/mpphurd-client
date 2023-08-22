@@ -27,7 +27,17 @@
 	-ms-border-radius: 8px;
 	-o-border-radius: 8px;
 }
+.topBarAction{
+	display: flex;
+	gap: 1rem;
+}
+
 .topBarName,.topBarPlanNumber{
   font-size: 1.6rem;
   font-weight: 600;
+}
+.topBarDivider{
+	display: flex;
+	align-items: center;
+	/* background-color: black; */
 }

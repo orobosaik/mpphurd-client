@@ -8,7 +8,7 @@ export default function MiddleBar({ topBarData, children }) {
 	const [scroll, setScroll] = useState(false);
 	return (
 		<div className="middleBar">
-			<TopBar topBarData={topBarData}
+			<TopBar action={topBarData.action} planNumber={topBarData.planNumber}
 				style={{
 					boxShadow:
 						scroll > 0 ? "inset 0 8px 5px -5px rgb(0 0 0 / 0.4)" : "none",

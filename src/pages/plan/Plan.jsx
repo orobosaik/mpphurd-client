@@ -15,7 +15,7 @@ import GenerateBill from "../../components/generateBill/GenerateBill";
 
 export default function Plan() {
 	const [rightBarView, setRightBarView] = useState(0);
-	const [viewBills, setViewBills] = useState("generateBill");
+	const [viewBills, setViewBills] = useState("");
 
 	return (
 		<>
