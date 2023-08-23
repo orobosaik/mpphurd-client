@@ -1,0 +1,12 @@
+.OfficeWrapper{
+  display: flex;
+  width: 100%;
+  padding: 0 6px;
+  gap: 6px;
+}
+.OfficeSideBar{
+  flex: 2;
+}
+.OfficeMiddleBar{
+  flex: 10;
+}
