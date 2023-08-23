@@ -27,11 +27,9 @@ export default function PlanInfo({ setTopBarData, setViewBills }) {
 			</div>
 
 			<div className="planInfoWrapper">
-				<PlanInfoCard BD={true} />
-				<PlanInfoCard />
-				<PlanInfoCard />
-				<PlanInfoCard BD={true} />
-				<PlanInfoCard />
+				<PlanInfoCard type={"company"} title={"Applicant Information"} BD={true} />
+				<PlanInfoCard type={"individual"} title={"Representative Information"} BD={true} />
+				<PlanInfoCard type={"building"} title={"Building Details"} />
 			</div>
 			<div className="planInfoButtons">
 				<button

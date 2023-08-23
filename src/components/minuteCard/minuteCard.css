@@ -41,9 +41,16 @@
 }
 
 .minuteCardCommentButton{
+	display: flex;
+	justify-content: space-between;
 	cursor: pointer;
+
 	font-weight: 700;
 	padding: .5rem;
+}
+
+.minuteCardCommentButtonIcon{
+	font-size: 2rem !important;
 }
 
 .minuteCardCommentText {

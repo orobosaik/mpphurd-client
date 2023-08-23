@@ -16,9 +16,9 @@ export default function Activities({ setRightBarView }) {
 			</div>
 			<div className="activitiesWrapper">
 				<MinuteCard/>
-				<MinuteCard/>
-				<MinuteCard/>
 				<MinuteCard comment={true}/>
+				<MinuteCard/>
+				<MinuteCard/>
 				<MinuteCard/>
 				<MinuteCard/>
 				<MinuteCard/>

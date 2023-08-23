@@ -17,19 +17,20 @@ export default function Plan() {
 	const [rightBarView, setRightBarView] = useState(0);
 	const [viewBills, setViewBills] = useState("");
 
+	const topBarAction =
+		viewBills === "viewBills"
+			? "View Bills"
+			: viewBills === "generateBill"
+			? "Generate Bill"
+			: "Plan Info";
+
 	return (
 		<>
 			<Header />
 			<div className="planContainer">
 				<SideBar />
 				<MiddleBar
-					topBarData={
-						viewBills === "viewBills"
-							? "View Bills"
-							: viewBills === "generateBill"
-							? "Generate Bill"
-							: "Plan Info"
-					}>
+					topBarData={{ action: topBarAction, planNumber: "BC/3421/2023" }}>
 					{viewBills === "viewBills" ? (
 						<PlanBill />
 					) : viewBills === "generateBill" ? (

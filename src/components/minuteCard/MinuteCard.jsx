@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./minuteCard.css";
+import { ExpandLessRounded, ExpandMoreRounded } from "@mui/icons-material";
 
 export default function MinuteCard({ comment }) {
 	const [showComment, setShowComment] = useState(false);
@@ -27,7 +28,12 @@ export default function MinuteCard({ comment }) {
 					<div
 						className="minuteCardCommentButton"
 						onClick={() => setShowComment(!showComment)}>
-						{showComment ? "Comment >": "Comment v"}
+						<span>Comment</span>
+						{showComment ? (
+							<ExpandLessRounded className="minuteCardCommentButtonIcon" />
+						) : (
+							<ExpandMoreRounded className="minuteCardCommentButtonIcon" />
+						)}
 					</div>
 				)}
 

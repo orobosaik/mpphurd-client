@@ -6,7 +6,7 @@ import Plan from "./pages/plan/Plan.jsx";
 import CreateApplication from "./pages/createApplication/CreateApplication";
 
 function App() {
-	return <CreateApplication />;
+	return <Plan />;
 }
 
 export default App;

@@ -1,15 +1,15 @@
 import "./feedCard.css";
 
-export default function FeedCard() {
+export default function FeedCard({count, title, office}) {
 	return (
 		<div className="feedCard">
 			<div className="feedCardWrapper">
-				<span className="feedCardBadge">454</span>
+				<span className="feedCardBadge">{count}</span>
 				<span className="feedCardText">
-					Files Awaiting Town Planner's Action
+					{title}
 				</span>
 				<span className="feedCardOffice">
-					(Zone 6)
+					({office})
 				</span>
 			</div>
 		</div>
