@@ -1,4 +1,5 @@
 import "./sideBar.css";
+import { NavLink } from "react-router-dom";
 import {
 	ArticleRounded,
 	AssessmentRounded,
@@ -12,41 +13,29 @@ export default function SideBar({ selected }) {
 		<div className="sideBar">
 			<div className="sideBarWrapper">
 				<ul className="sideBarList">
-					<li
-						className={
-							selected === "home"
-								? "selected sideBarListItem"
-								: "sideBarListItem"
-						}>
-						<HomeRounded className="sideBarIcon" />
-						<span className="sideBarListItemText ">Home</span>
+					<li>
+						<NavLink className="sideBarListItem" to="/view">
+							<HomeRounded className="sideBarIcon" />
+							<span className="sideBarListItemText ">Home</span>
+						</NavLink>
 					</li>
-					<li
-						className={
-							selected === "office"
-								? "selected sideBarListItem"
-								: "sideBarListItem"
-						}>
-						<LibraryBooksRounded className="sideBarIcon" />
-						<span className="sideBarListItemText">Office</span>
+					<li>
+						<NavLink className="sideBarListItem" to="/office">
+							<LibraryBooksRounded className="sideBarIcon" />
+							<span className="sideBarListItemText">Office</span>
+						</NavLink>
 					</li>
-					<li
-						className={
-							selected === "activities"
-								? "selected sideBarListItem"
-								: "sideBarListItem"
-						}>
-						<AssessmentRounded className="sideBarIcon" />
-						<span className="sideBarListItemText">Activities</span>
+					<li>
+						<NavLink className="sideBarListItem" to="/activities">
+							<AssessmentRounded className="sideBarIcon" />
+							<span className="sideBarListItemText">Activities</span>
+						</NavLink>
 					</li>
-					<li
-						className={
-							selected === "analysis"
-								? "selected sideBarListItem"
-								: "sideBarListItem"
-						}>
-						<QueryStatsRounded className="sideBarIcon" />
-						<span className="sideBarListItemText">Analysis</span>
+					<li>
+						<NavLink className="sideBarListItem" to="/analysis">
+							<QueryStatsRounded className="sideBarIcon" />
+							<span className="sideBarListItemText">Analysis</span>
+						</NavLink>
 					</li>
 				</ul>
 			</div>

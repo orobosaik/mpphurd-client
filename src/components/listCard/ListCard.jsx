@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 import "./listCard.css"
 
 export default function ListCard() {
   return (
-		<div className="listCard listFormat">
+		<Link className="listCard listFormat" to="/view/planId">
 				<span>6898/2023</span>
 				<span>Osarodion Osawaru Igbinedion</span>
 				<span>
@@ -12,6 +13,6 @@ export default function ListCard() {
 				<span>Commercial</span>
 				<span>Yes</span>
 				<span>A5</span>
-		</div>
+		</Link>
 	);
 }

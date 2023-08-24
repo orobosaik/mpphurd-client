@@ -97,7 +97,7 @@ export default function PlanInfoCard({ type, title, AD2, R, BD }) {
 							<span className="planInfoText">Commercial</span>
 						</div>
 						<div className="planInfoItem">
-							<span className="planInfoTitle">Building Purpose:</span>
+							<span className="planInfoTitle">Purpose:</span>
 							<span className="planInfoText">Hotel</span>
 						</div>
 					</div>

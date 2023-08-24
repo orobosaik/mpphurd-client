@@ -9,6 +9,8 @@
 }
 
 .sideBarListItem{
+  text-decoration: none;
+  color: var(--black);
   display: flex;
   font-weight: 600;
   font-size: 1.6rem;
@@ -24,7 +26,8 @@
   -o-border-radius: 8px;
 }
 .sideBarListItem:hover{
-  background-color: var(--green-background);
+  color: var(--black);
+  background-color: var(--light-grey);
   transition: all .2s;
   -webkit-transition: all .2s;
   -moz-transition: all .2s;
@@ -34,13 +37,13 @@
 .sideBarIcon{
   font-size: 2.5rem !important;
 }
-.sideBarListItem.selected{
+.sideBarListItem.active{
   position: relative;
   background-color: var(--light-grey);
   /* color: var(--white); */
   font-weight: 800;
 }
-.sideBarListItem.selected::before{
+.sideBarListItem.active::before{
   content: "";
   position: absolute;
   left: 0;

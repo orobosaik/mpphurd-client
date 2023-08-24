@@ -1,4 +1,3 @@
-import Feed from "../../components/feed/Feed";
 import FeedBackground from "../../components/feedBackground/FeedBackground";
 import FeedCard from "../../components/feedCard/FeedCard";
 import Header from "../../components/header/Header";

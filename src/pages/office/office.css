@@ -10,3 +10,6 @@
 .OfficeMiddleBar{
   flex: 10;
 }
+.OfficeMiddleBar .middleBarWrapper{
+  padding-bottom: 0;
+}

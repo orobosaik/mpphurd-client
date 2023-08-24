@@ -1,5 +1,6 @@
 import { EditRounded } from "@mui/icons-material";
 import "./planInfo.css";
+import { Link } from "react-router-dom";
 import PlanInfoCard from "../planInfoCard/PlanInfoCard";
 import ViewBill from "../planBill/PlanBill";
 
@@ -27,19 +28,28 @@ export default function PlanInfo({ setTopBarData, setViewBills }) {
 			</div>
 
 			<div className="planInfoWrapper">
-				<PlanInfoCard type={"company"} title={"Applicant Information"} BD={true} />
-				<PlanInfoCard type={"individual"} title={"Representative Information"} BD={true} />
+				<PlanInfoCard
+					type={"company"}
+					title={"Applicant Information"}
+					BD={true}
+				/>
+				<PlanInfoCard
+					type={"individual"}
+					title={"Representative Information"}
+					BD={true}
+				/>
 				<PlanInfoCard type={"building"} title={"Building Details"} />
 			</div>
 			<div className="planInfoButtons">
-				<button
-					className="primary"
-					onClick={() => setViewBills("generateBill")}>
-					Generate Bill
-				</button>
-				<button className="secondary" onClick={() => setViewBills("viewBills")}>
-					View Bills
-				</button>
+				<Link to="./createbill">
+					<button className="primary">Generate Bill</button>
+				</Link>
+				<Link to="./bills">
+					<button className="secondary">View Bills</button>
+				</Link>
+				<Link to="./minute">
+					<button className="secondary">Minute Plan</button>
+				</Link>
 			</div>
 		</div>
 	);

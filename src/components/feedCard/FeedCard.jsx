@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 import "./feedCard.css";
 
 export default function FeedCard({count, title, office}) {
 	return (
-		<div className="feedCard">
+		<Link className="feedCard" to="./new">
 			<div className="feedCardWrapper">
 				<span className="feedCardBadge">{count}</span>
 				<span className="feedCardText">
@@ -12,6 +13,6 @@ export default function FeedCard({count, title, office}) {
 					({office})
 				</span>
 			</div>
-		</div>
+		</Link>
 	);
 }

@@ -1,0 +1,51 @@
+.minuteItems{
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* gap: 1rem; */
+}
+
+.minuteItem{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+.minuteItemActions{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.minuteItemAction{
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.minuteItem textarea:focus{
+  outline: none;
+  padding: 2rem;
+}
+
+.minuteItem input,
+.minuteItem textarea {
+	width: 100%;
+	display: flex;
+	background-color: transparent;
+	border: var(--sc-grey) solid 1px;
+	padding: 0.2rem 0.7rem;
+	transition: all 0.3s;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-o-border-radius: 4px;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-ms-transition: all 0.3s;
+	-o-transition: all 0.3s;
+}
+
+.minuteItem input:focus,
+.minuteItem textarea:focus {
+	box-shadow: 0px 0px 7px 0px rgb(0, 200, 83, 0.4);
+}

@@ -23,7 +23,7 @@ export default function Header() {
 			</div>
 			<div className="headerRight">
 				<div className="headerLinks">
-					<span className="headerLink">Approval</span>
+					<span className="headerLink active">Approval</span>
 					<span className="headerLink">Petition</span>
 					<span className="headerLink">B.Control</span>
 				</div>

@@ -1,4 +1,4 @@
-import MinuteCard from "../minuteCard/MinuteCard";
+import ActivityCard from "../activityCard/ActivityCard";
 import "./activities.css";
 
 export default function Activities({ setRightBarView }) {
@@ -15,14 +15,14 @@ export default function Activities({ setRightBarView }) {
 				<span>Issues</span>
 			</div>
 			<div className="activitiesWrapper">
-				<MinuteCard/>
-				<MinuteCard comment={true}/>
-				<MinuteCard/>
-				<MinuteCard/>
-				<MinuteCard/>
-				<MinuteCard/>
-				<MinuteCard/>
-				<MinuteCard/>
+				<ActivityCard/>
+				<ActivityCard comment={true}/>
+				<ActivityCard/>
+				<ActivityCard/>
+				<ActivityCard/>
+				<ActivityCard/>
+				<ActivityCard/>
+				<ActivityCard/>
 			</div>
 		</div>
 	);
