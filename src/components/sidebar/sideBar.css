@@ -3,12 +3,21 @@
   background-color: var(--white);
   border-radius: 8px;
   height: calc(100vh - 56px);
+  overflow-y: auto;
 }
 .sideBarWrapper{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
   padding: 60px 7px 0 7px;
+  height: calc(100vh - 56px);
+
 }
 
-.sideBarListItem{
+.sideBarListItem,
+.sideBarLogout{
   text-decoration: none;
   color: var(--black);
   display: flex;
@@ -25,7 +34,8 @@
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
 }
-.sideBarListItem:hover{
+.sideBarListItem:hover,
+.sideBarLogout:hover{
   color: var(--black);
   background-color: var(--light-grey);
   transition: all .2s;

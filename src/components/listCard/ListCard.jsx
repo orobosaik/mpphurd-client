@@ -3,7 +3,7 @@ import "./listCard.css"
 
 export default function ListCard() {
   return (
-		<Link className="listCard listFormat" to="/view/planId">
+		<Link className="listCard listFormat" to="/permit/planId">
 				<span>6898/2023</span>
 				<span>Osarodion Osawaru Igbinedion</span>
 				<span>

@@ -1,15 +1,18 @@
 import "./header.css";
+import { Link } from "react-router-dom";
 import { Email, Notifications, Search } from "@mui/icons-material";
 
 export default function Header() {
 	return (
 		<div className="headerContainer">
 			<div className="headerLeft">
-				<span className="headerLogo">
-					<img src="/assets/logos/Logo-Mpphurd.png" alt="" />
-					<div></div>
-					<p>MPPHURD</p>
-				</span>
+				<Link to="/">
+					<span className="headerLogo">
+						<img src="/assets/logos/Logo-Mpphurd.png" alt="" />
+						<div></div>
+						<p>MPPHURD</p>
+					</span>
+				</Link>
 			</div>
 			<div className="headerCenter">
 				<div className="searchBar">
@@ -23,9 +26,12 @@ export default function Header() {
 			</div>
 			<div className="headerRight">
 				<div className="headerLinks">
-					<span className="headerLink active">Approval</span>
+					<button>Theme</button>
+					{/* <Link to="/permit">
+						<span className="headerLink active">Approval</span>
+					</Link>
 					<span className="headerLink">Petition</span>
-					<span className="headerLink">B.Control</span>
+					<span className="headerLink">B.Control</span> */}
 				</div>
 				<div className="headerIcons">
 					<div className="headerIconItem">
@@ -37,6 +43,7 @@ export default function Header() {
 						<span className="headerIconBadge">5</span>
 					</div>
 				</div>
+
 				<div className="headerUser">
 					<div className="headerDetails">
 						<span className="headerName">Orobosa</span>
