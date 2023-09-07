@@ -19,7 +19,7 @@ export default function ApplicationForm() {
 						<div>
 							<label htmlFor={type + "Title"}>Title:</label>
 							<input
-								type="apl1Text"
+								type="text"
 								name={type + "Title"}
 								id={type + "Title"}
 							/>

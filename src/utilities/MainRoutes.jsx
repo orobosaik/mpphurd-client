@@ -13,6 +13,7 @@ import Analysis from "../pages/analysis/Analysis";
 import BuildingControl from "../pages/buildingControl/BuildingControl";
 import Petition from "../pages/petition/Petition";
 import Approval from "../pages/approval/Approval";
+import DocumentView from "../pages/documentView/DocumentView";
 
 function MainRoutes() {
 	return (
@@ -33,6 +34,7 @@ function MainRoutes() {
 						<Route path="bills" element={<ViewBill />} />
 						<Route path="createbill" element={<CreateBill />} />
 						<Route path="minute" element={<Minute />} />
+						<Route path="documents" element={<DocumentView />} />
 					</Route>
 				</Route>
 

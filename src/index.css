@@ -28,6 +28,7 @@
 	--white: #ffffff;
 	--light-grey: #ececec;
 	--sc-grey: #bfbfbf;
+	--accent-4: #7882a4;
 
 	--pc-green: #0d9f4f;
 	/* --pc-green: #00c853; */
@@ -132,7 +133,7 @@ input {
 	background: var(--accent-yellow);
 }
 ::-webkit-scrollbar {
-	width: 2px;
+	width: 5px;
 	height: 10px;
 }
 ::-webkit-scrollbar-thumb {

@@ -14,8 +14,8 @@ export default function Home() {
 				<FeedBackground>
 					<FeedCard
 						count={24}
-						title={"Awaiting Assessment"}
-						office={"Assessment"}
+						title={"Create New Application"}
+						office={"Clearing"}
 						route={"/permit/new"}
 					/>
 					<FeedCard count={44} title={"Payment made"} office={"Assessment"} />

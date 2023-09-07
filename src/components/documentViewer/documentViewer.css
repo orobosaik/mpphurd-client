@@ -1,0 +1,62 @@
+.documentViewerContainer{
+  background: transparent;
+}
+.documentViewerTopControl{
+  position: absolute;
+  display: flex;
+  margin: 0 1.5rem;
+  right: 0;
+  background-color: rgba(0, 0, 0, .1);
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+}
+
+.documentViewerBottomControl{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5rem;
+  position: absolute;
+  width: calc(100% - 12px);
+  bottom: 2rem;
+}
+.documentViewerBottomControl div{
+  background-color: rgba(255, 255, 255, .8);
+  padding: .2rem .6rem;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+.documentViewerBottomControl div:hover{
+  background-color: var(--white);
+}
+.documentViewerBottomControl div:nth-child(2):hover{
+  background-color: var(--white);
+  cursor:pointer;
+}
+.documentViewerBottomControl input{
+  /* display: flex; */
+  width: 4rem;
+  background-color: inherit;
+}
+
+
+/* ICONS */
+.documentViewerIcon{
+  font-size: 3rem !important;
+  padding: .4rem;
+  /* border: 1px red solid; */
+}
+.documentViewerIcon:hover{
+  cursor: pointer;
+  background-color: var(--light-grey);
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+}
