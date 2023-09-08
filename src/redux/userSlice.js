@@ -1,24 +1,40 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { PURGE } from "redux-persist";
 
 const initialState = {
-  user: null,
+  currentUser: null,
   loading: false,
   error: false
 }
 
 const userSlice = createSlice({
-  name: "user",
-  initialState,
+	name: "user",
+	initialState,
 	reducers: {
-		incremented: (state) => {
-			// Redux Toolkit allows us to write "mutating" logic in reducers. It
-			// doesn't actually mutate the state because it uses the Immer library,
-			// which detects changes to a "draft state" and produces a brand new
-			// immutable state based off those changes
-			state.value += 1;
+		loginStart: (state) => {
+			state.loading = true;
 		},
-		decremented: (state) => {
-			state.value -= 1;
+		loginSuccess: (state, action) => {
+			state.currentUser = action.payload;
+			state.loading = false;
+		},
+		loginFailure: (state) => {
+			state.currentUser = null;
+			state.loading = false;
+			state.error = true;
+		},
+		logout: (state) => {
+			state.currentUser = null;
+			state.loading = false;
+			state.error = false;
 		},
 	},
+	extraReducers: (builder) => {
+		builder.addCase(PURGE, (state) => {
+			customEntityAdapter.removeAll(state);
+		});
+	},
 });
+
+export const {loginStart,loginSuccess,loginFailure,logout} = userSlice.actions
+export default userSlice.reducer
