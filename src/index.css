@@ -67,30 +67,41 @@ a:hover {
 
 body {
 	font-size: 1.45rem;
+	color: var(--black);
+
 	/* display: flex; */
 	/* place-items: center; */
 	min-width: 320px;
 	min-height: 100vh;
 	/* background-color: lightgrey; */
-	background-image: url(/assets/banners/background1.png);
+	/* background-image: url(/assets/banners/background1.png); */
 	background-size: cover;
 	background-repeat: no-repeat;
+	/* z-index: -1; */
 }
 
 h1 {
 	font-size: 3.2em;
 	line-height: 1.1;
 }
-a{
+a {
 	color: inherit;
 	text-decoration: none;
 }
-a:hover{
+a:hover {
 	color: inherit;
 	text-decoration: none;
 }
 
-button, select {
+img {
+	width: 100%;
+}
+.btn{
+	cursor: pointer;
+}
+
+button,
+select {
 	border-radius: 8px;
 	border: 1px solid transparent;
 	padding: 0.7rem 2rem;
@@ -124,7 +135,8 @@ select:focus-visible {
 	color: #333;
 	font-weight: 400;
 }
-input {
+input,
+input:active {
 	font: inherit;
 	outline: none;
 	border: none;
@@ -158,3 +170,10 @@ input {
 		background-color: #f9f9f9;
 	}
 } */
+
+
+/* Loading Material UI component */
+.isLoadingPryBtn{
+	font-size: 1rem !important;
+	color: white;
+}

@@ -11,8 +11,14 @@ import {
 	QueryStatsRounded,
 	TaskRounded,
 } from "@mui/icons-material";
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/userSlice";
 
 export default function SideBar({ selected }) {
+	const dispatch = useDispatch()
+	const handleLogout = () => {
+		dispatch(logout())
+	}
 	return (
 		<div className="sideBar">
 			<div className="sideBarWrapper">
@@ -60,7 +66,7 @@ export default function SideBar({ selected }) {
 						</NavLink>
 					</li>
 				</ul>
-				<div className="sideBarLogout">
+				<div className="sideBarLogout" onClick={handleLogout}>
 					<LogoutRounded className="sideBarIcon" />
 					<span>Log Out</span>
 				</div>

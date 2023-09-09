@@ -2,10 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 import { PURGE } from "redux-persist";
 
 const initialState = {
-  currentUser: null,
-  loading: false,
-  error: false
-}
+	currentUser: null,
+	loading: null,
+	error: null,
+};
 
 const userSlice = createSlice({
 	name: "user",
@@ -16,17 +16,18 @@ const userSlice = createSlice({
 		},
 		loginSuccess: (state, action) => {
 			state.currentUser = action.payload;
-			state.loading = false;
+			state.loading = null;
+			state.error = null;
 		},
 		loginFailure: (state) => {
 			state.currentUser = null;
-			state.loading = false;
-			state.error = true;
+			state.loading = null;
+			state.error = true
 		},
 		logout: (state) => {
 			state.currentUser = null;
-			state.loading = false;
-			state.error = false;
+			state.loading = null;
+			state.error = null;
 		},
 	},
 	extraReducers: (builder) => {
@@ -36,5 +37,6 @@ const userSlice = createSlice({
 	},
 });
 
-export const {loginStart,loginSuccess,loginFailure,logout} = userSlice.actions
-export default userSlice.reducer
+export const { loginStart, loginSuccess, loginFailure, logout } =
+	userSlice.actions;
+export default userSlice.reducer;

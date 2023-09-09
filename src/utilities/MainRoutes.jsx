@@ -14,15 +14,29 @@ import BuildingControl from "../pages/buildingControl/BuildingControl";
 import Petition from "../pages/petition/Petition";
 import Approval from "../pages/approval/Approval";
 import DocumentView from "../pages/documentView/DocumentView";
+import LoginPage from "../pages/loginPage/LoginPage";
+import { useSelector } from "react-redux";
 
-function MainRoutes() {
+export default function MainRoutes() {
+	const {currentUser} = useSelector((state) => state.user);
+	console.log(currentUser);
 	return (
 		<>
 			<Routes>
 				{/* HOME PAGE */}
-				{/* <Route path="/" element={<Navigate to="/home" />} /> */}
 				<Route path="/">
-					<Route index element={<Home />} />
+					<Route
+						index
+						element={!currentUser ? <Navigate to="/login" /> : <Home />}
+					/>
+				</Route>
+
+				{/* LOGIN PAGE */}
+				<Route path="/login">
+					<Route
+						index
+						element={!currentUser ? <LoginPage /> : <Navigate to="/" />}
+					/>
 				</Route>
 
 				{/* PERMIT | APPROVAL */}
@@ -30,7 +44,10 @@ function MainRoutes() {
 					<Route index element={<Approval />} />
 					<Route path="new" element={<CreateApplication />} />
 					<Route path="planId">
-						<Route index element={<Plan />} />
+						<Route
+							index
+							element={!currentUser ? <Navigate to="/login" /> : <Plan />}
+						/>
 						<Route path="bills" element={<ViewBill />} />
 						<Route path="createbill" element={<CreateBill />} />
 						<Route path="minute" element={<Minute />} />
@@ -66,4 +83,4 @@ function MainRoutes() {
 	);
 }
 
-export default MainRoutes;
+// export default MainRoutes;
