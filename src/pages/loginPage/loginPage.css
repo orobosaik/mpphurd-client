@@ -120,9 +120,10 @@
 
 .login__formBackground {
 	background-color: rgba(255, 255, 255, 0.85);
-	width: 70%;
+	/* min-width: 70%; */
+	/* width: auto; */
 	/* height: 45rem; */
-	margin: 10rem 0;
+	margin: 10rem 1rem;
 	padding: 5rem 5rem;
 
 	display: flex;

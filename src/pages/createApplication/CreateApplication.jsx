@@ -19,6 +19,8 @@ export default function CreateApplication() {
 	const [viewBills, setViewBills] = useState("generateBill");
 	return (
 		<>
+			<div className="pageWrapper"></div>
+
 			<div className="createApplication">
 				<Header />
 				<div className="createApplicationWrapper">

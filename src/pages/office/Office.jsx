@@ -8,11 +8,13 @@ import ListWrapper from "../../components/listWrapper/ListWrapper";
 export default function Office() {
   return (
 		<>
+			<div className="pageWrapper"></div>
+
 			<div className="Office">
 				<Header />
 				<div className="OfficeWrapper">
 					<div className="OfficeSideBar">
-						<SideBar selected={'office'} />
+						<SideBar selected={"office"} />
 					</div>
 
 					<div className="OfficeMiddleBar">
@@ -21,8 +23,7 @@ export default function Office() {
 								action: "Vetting Office Record",
 								// planNumber: "BC/1212/2023",
 							}}>
-              <ListWrapper>
-                </ListWrapper>
+							<ListWrapper></ListWrapper>
 						</MiddleBar>
 					</div>
 				</div>

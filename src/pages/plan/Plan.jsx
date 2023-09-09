@@ -26,6 +26,8 @@ export default function Plan() {
 
 	return (
 		<>
+			<div className="pageWrapper"></div>
+
 			<Header />
 			<div className="planContainer">
 				<SideBar />

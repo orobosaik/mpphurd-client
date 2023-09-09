@@ -13,12 +13,29 @@ import {
 } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/userSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { persistor } from "../../redux/store";
 
 export default function SideBar({ selected }) {
-	const dispatch = useDispatch()
-	const handleLogout = () => {
-		dispatch(logout())
-	}
+	const dispatch = useDispatch();
+	const handleLogout =  () => {
+		toast.success("Logout Successful", {
+			position: "top-right",
+			autoClose: 1000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: "light",
+		});
+
+		setTimeout(() => {
+			persistor.purge();
+		}, 1000);
+		// dispatch(logout());
+	};
 	return (
 		<div className="sideBar">
 			<div className="sideBarWrapper">
@@ -42,7 +59,7 @@ export default function SideBar({ selected }) {
 						</NavLink>
 					</li>
 					<li>
-						<NavLink className="sideBarListItem" to="/control" >
+						<NavLink className="sideBarListItem" to="/control">
 							<PolicyRounded className="sideBarIcon" />
 							<span className="sideBarListItemText">B.Control</span>
 						</NavLink>
@@ -70,6 +87,7 @@ export default function SideBar({ selected }) {
 					<LogoutRounded className="sideBarIcon" />
 					<span>Log Out</span>
 				</div>
+				<ToastContainer />
 			</div>
 		</div>
 	);

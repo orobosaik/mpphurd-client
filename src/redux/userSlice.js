@@ -13,6 +13,8 @@ const userSlice = createSlice({
 	reducers: {
 		loginStart: (state) => {
 			state.loading = true;
+			state.error = null;
+			state.currentUser = null;
 		},
 		loginSuccess: (state, action) => {
 			state.currentUser = action.payload;
@@ -22,7 +24,7 @@ const userSlice = createSlice({
 		loginFailure: (state) => {
 			state.currentUser = null;
 			state.loading = null;
-			state.error = true
+			state.error = true;
 		},
 		logout: (state) => {
 			state.currentUser = null;
@@ -32,7 +34,7 @@ const userSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder.addCase(PURGE, (state) => {
-			customEntityAdapter.removeAll(state);
+			return initialState;
 		});
 	},
 });

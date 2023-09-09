@@ -18,6 +18,8 @@ export default function CreateBill() {
 
 	return (
 		<>
+			<div className="pageWrapper"></div>
+
 			<Header />
 			<div className="planContainer">
 				<SideBar selected={"home"} />

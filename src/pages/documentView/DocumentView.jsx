@@ -19,13 +19,18 @@ export default function DocumentView() {
 
   return (
 		<>
+			<div className="pageWrapper"></div>
+
 			<Header />
 			<div className="documentViewContainer">
 				<SideBar />
-				<MiddleBar style={{"background":"transparent"}}
-          topBarData={{ action: "Environmental Impact Analysis", planNumber: "BC/3421/2023" }}>
-          <DocumentViewer/>
-
+				<MiddleBar
+					style={{ background: "transparent" }}
+					topBarData={{
+						action: "Environmental Impact Analysis",
+						planNumber: "BC/3421/2023",
+					}}>
+					<DocumentViewer />
 				</MiddleBar>
 
 				<RightBar>

@@ -14,6 +14,8 @@ import {
 } from "@mui/icons-material";
 import { loginFailure, loginStart, loginSuccess } from "../../redux/userSlice";
 import { CircularProgress } from "@mui/material";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function LoginPage() {
 	const [showPassword, setShowPassword] = useState(false);
@@ -30,13 +32,40 @@ export default function LoginPage() {
 		dispatch(loginStart());
 
 		try {
-			const res = await axios.post("/staffs/auth/login", {
-				email: email.current.value,
-				password: password.current.value,
-			});
+			const res = await axios.post(
+				"http://localhost:8800/api/staffs/auth/login",
+				{
+					email: email.current.value,
+					password: password.current.value,
+				}
+			);
 			dispatch(loginSuccess(res.data));
+						toast.success("Login Successful", {
+							position: "top-right",
+							autoClose: 2000,
+							hideProgressBar: false,
+							closeOnClick: true,
+							pauseOnHover: true,
+							draggable: true,
+							progress: undefined,
+							theme: "light",
+						});
+
 		} catch (error) {
 			console.log(error);
+			console.log(error.response.data.message);
+
+			toast.error(error.response.data.message, {
+				position: "top-right",
+				autoClose: 2000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "light",
+			});
+
 			dispatch(loginFailure());
 		}
 	};
@@ -123,6 +152,7 @@ export default function LoginPage() {
 									"Login"
 								)}
 							</button>
+							<ToastContainer />
 						</form>
 					</div>
 				</section>
