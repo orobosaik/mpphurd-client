@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {
+	AddPhotoAlternateRounded,
 	FileUploadRounded,
 	Image,
 	UploadFileRounded,
@@ -19,6 +20,8 @@ import { Link } from "react-router-dom";
 export default function AdminStaffUpdate() {
 	const [isCompany, setIsCompany] = useState(false);
 	const [isJoint, setIsJoint] = useState(true);
+	const [isActive, setIsActive] = useState(true);
+	const [isManagement, setIsManagement] = useState(false);
 
 	const individualApplicationItems = (type) => {
 		return (
@@ -230,76 +233,40 @@ export default function AdminStaffUpdate() {
 							topBarData={{
 								action: "Add New Staff",
 							}}>
-							{/*
-
-		profilePicture: {
-			type: String,
-		},
-		coverPicture: {
-			type: String,
-		},
-
-		jobTitle: {
-			full: {
-				type: String,
-			},
-			short: {
-				type: String,
-			},
-		},
-
-		task: {
-			type: Array,
-			default: [],
-		},
-
-		isAdmin: {
-			type: Boolean,
-			default: false,
-		},
-
-		isStaff: {
-			type: Boolean,
-			default: true,
-		},
-		isActive: {
-			type: Boolean,
-			default: true,
-		}, */}
 
 							<div className="applicationForm">
-								<div className="applicationHeader">
+								<div className="inputStaffHeader">
 									<div className="staffImage">
 										<label
-											htmlFor={"Staff MeansOfIdentification"}
+											htmlFor={"staffMeansOfIdentification"}
 											className="uploadImageWrapper">
 											<span>
-												<FileUploadRounded />
+												<AddPhotoAlternateRounded fontSize="large" />
 											</span>
 											<span>Select Image</span>
 											<input
 												type="file"
-												name={"Staff MeansOfIdentification"}
-												id={"Staff MeansOfIdentification"}
+												name={"staffMeansOfIdentification"}
+												id={"staffMeansOfIdentification"}
 												accept="image/png, image/jpeg, image/jpg"
 											/>
 										</label>
 									</div>
-									<div>
+									<div className="inputStaffHeaderRight">
 										<div>
-											<span>Joint Application:</span>
+											<span>Active Status:</span>
 											<ToggleSwitch
-												toggled={isJoint}
-												label={"isJointApplication"}
-												onClick={setIsJoint}
+												toggled={isActive}
+												label={"isActive"}
+												onClick={setIsActive}
 											/>
 										</div>
 										<div>
-											<span>Joint Application:</span>
+											<span>Management Staff:</span>
 											<ToggleSwitch
-												toggled={isJoint}
-												label={"isJointApplication"}
-												onClick={setIsJoint}
+												toggled={isManagement}
+												label={"isManagement"}
+												onClick={setIsManagement}
 											/>
 										</div>
 									</div>
@@ -314,114 +281,128 @@ export default function AdminStaffUpdate() {
 											<div className="applicationItem">
 												<div className="applicationItemName">
 													<div>
-														<label htmlFor={"Staff Title"}>Title:</label>
+														<label htmlFor={"staffTitle"}>Title:</label>
 														<input
 															type="text"
-															name={"Staff Title"}
-															id={"Staff Title"}
+															name={"staffTitle"}
+															id={"staffTitle"}
 														/>
 													</div>
 													<div>
-														<label htmlFor={"Staff FirstName"}>
+														<label htmlFor={"staffFirstName"}>
 															First name:
 														</label>
 														<input
 															type="text"
-															name={"Staff FirstName"}
-															id={"Staff FirstName"}
+															name={"staffFirstName"}
+															id={"staffFirstName"}
 															required
 															min={2}
 														/>
 													</div>
 													<div>
-														<label htmlFor={"Staff Surname"}>Surname:</label>
+														<label htmlFor={"staffSurname"}>Surname:</label>
 														<input
 															type="text"
-															name={"Staff Surname"}
-															id={"Staff Surname"}
+															name={"staffSurname"}
+															id={"staffSurname"}
 															required
 															min={2}
 														/>
 													</div>
 													<div>
-														<label htmlFor={"Staff OtherName"}>
+														<label htmlFor={"staffOtherName"}>
 															Other name:
 														</label>
 														<input
 															type="text"
-															name={"Staff OtherName"}
-															id={"Staff OtherName"}
+															name={"staffOtherName"}
+															id={"staffOtherName"}
 															min={2}
 														/>
 													</div>
 													<div>
-														<label htmlFor={"Staff Suffix"}>Suffix:</label>
+														<label htmlFor={"staffSuffix"}>Suffix:</label>
 														<input
 															type="text"
-															name={"Staff Suffix"}
-															id={"Staff Suffix"}
+															name={"staffSuffix"}
+															id={"staffSuffix"}
 														/>
 													</div>
 												</div>
 											</div>
 
 											<div className="applicationItem">
-												<label htmlFor={"Staff Gender"}>Gender:</label>
+												<label htmlFor={"staffGender"}>Gender:</label>
 												<div className="radioBoxWrapper">
-													<label htmlFor={"Staff Gender1"}>
+													<label htmlFor={"staffGender1"}>
 														<span>Female</span>
 														<input
 															type="radio"
 															name="gender"
 															value="female"
-															id={"Staff Gender1"}
+															id={"staffGender1"}
 														/>
 													</label>
 
-													<label htmlFor={"Staff Gender2"}>
+													<label htmlFor={"staffGender2"}>
 														<span>Male</span>
 														<input
 															type="radio"
 															name="gender"
 															value="male"
-															id={"Staff Gender2"}
+															id={"staffGender2"}
 														/>
 													</label>
 												</div>
 											</div>
 											<div className="applicationItem">
-												<label htmlFor={"Staff Address"}>Address:</label>
+												<label htmlFor={"staffAddress"}>Address:</label>
 												<input
 													type="text"
-													name={"Staff Address"}
-													id={"Staff Address"}
+													name={"staffAddress"}
+													id={"staffAddress"}
 												/>
 											</div>
 											<div className="applicationItem">
 												<div className="applicationItemPhone">
 													<div>
-														<label htmlFor={"Staff Phone1"}>Phone 1:</label>
+														<label htmlFor={"staffPhone1"}>Phone 1:</label>
 														<input
 															type="tel"
-															name={"Staff Phone1"}
-															id={"Staff Phone1"}
+															name={"staffPhone1"}
+															id={"staffPhone1"}
 														/>
 													</div>
 													<div>
-														<label htmlFor={"Staff Phone2"}>Phone 2:</label>
+														<label htmlFor={"staffPhone2"}>Phone 2:</label>
 														<input
 															type="tel"
-															name={"Staff Phone1"}
-															id={"Staff Phone2"}
+															name={"staffPhone1"}
+															id={"staffPhone2"}
 														/>
 													</div>
 												</div>
 											</div>
 											<div className="applicationItem">
-												<label htmlFor={"Staff Email"}>Email:</label>
+												<label htmlFor={"staffOfficialEmail"}>
+													Official Email:
+												</label>
 												<input
 													type="email"
-													id={"Staff Email"}
+													id={"staffOfficialEmail"}
+													required
+													min={10}
+													max={50}
+												/>
+											</div>
+											<div className="applicationItem">
+												<label htmlFor={"staffAlternativeEmail"}>
+													Alternative Email:
+												</label>
+												<input
+													type="email"
+													id={"staffAlternativeEmail"}
 													required
 													min={10}
 													max={50}
@@ -440,7 +421,7 @@ export default function AdminStaffUpdate() {
 														/>
 													</div>
 													<div>
-														<label htmlFor="staffOffice">Office:</label>
+														<label htmlFor="staffOffice">Position:</label>
 														<select name="staffOffice" id="staffOffice">
 															<option value="proposed">Proposed</option>
 															<option value="underConstruction">
@@ -461,84 +442,85 @@ export default function AdminStaffUpdate() {
 													</div>
 												</div>
 											</div>
+
 											<div className="applicationItem">
-												<div className="applicationItemLocation">
-													<div>
-														<label htmlFor="staffPosition">Position:</label>
-														<input
-															type="text"
-															name="staffPosition"
-															id="staffPosition"
-														/>
+												<label htmlFor="">Office and Tasks</label>
+												<div className="inputStaffOfficeWrapper">
+													<div className="inputStaffOfficeList">
+
+
+														<div className="inputStaffOffice">
+															<button>-</button>
+															<div>
+																<label>Office</label>
+																<select name="" id=""></select>
+															</div>
+															<div>
+																<label>Tasks</label>
+																<div className="taskList">
+																	<span>
+																		<input
+																			type="checkbox"
+																			name="task"
+																			id="task"
+																		/>
+																		<label htmlFor="task">Task 1</label>
+																	</span>
+																	<span>
+																		<input
+																			type="checkbox"
+																			name="task"
+																			id="task"
+																		/>
+																		<label htmlFor="task">Minute FIle</label>
+																	</span>
+																	<span>
+																		<input
+																			type="checkbox"
+																			name="task"
+																			id="task"
+																		/>
+																		<label htmlFor="task">Create Plan</label>
+																	</span>
+																	<span>
+																		<input
+																			type="checkbox"
+																			name="task"
+																			id="task"
+																		/>
+																		<label htmlFor="task">Send File</label>
+																	</span>
+																	<span>
+																		<input
+																			type="checkbox"
+																			name="task"
+																			id="task"
+																		/>
+																		<label htmlFor="task">
+																			Upload Document
+																		</label>
+																	</span>
+																	<span>
+																		<input
+																			type="checkbox"
+																			name="task"
+																			id="task"
+																		/>
+																		<label htmlFor="task">Send Message</label>
+																	</span>
+																</div>
+															</div>
+														</div>
+
 													</div>
-													<div>
-														<label htmlFor="staffManagementStatus">
-															Management Staff:
-														</label>
-														<select
-															name="staffManagementStatus"
-															id="staffManagementStatus">
-															<option value="yes">Yes</option>
-															<option value="no">No</option>
-														</select>
-													</div>
-													<div>
-														<label htmlFor="staffRegion">Region:</label>
-														<select name="staffRegion" id="staffRegion">
-															<option value="proposed">Proposed</option>
-															<option value="underConstruction">
-																Under Construction
-															</option>
-															<option value="built">Built</option>
-														</select>
-													</div>
+													<button>+</button>
 												</div>
-											</div>
-											<div className="applicationItem">
-												<label htmlFor={"Staff MeansOfIdentification"}>
-													Select Means of identification:
-												</label>
-												<label
-													htmlFor={"Staff MeansOfIdentification"}
-													className="uploadFileWrapper">
-													<span>
-														<FileUploadRounded />
-														Upload File
-													</span>
-													<input
-														type="file"
-														name={"Staff MeansOfIdentification"}
-														id={"Staff MeansOfIdentification"}
-														accept="image/png, image/jpeg, image/jpg"
-													/>
-												</label>
-											</div>
-											<div className="applicationItem">
-												<label htmlFor={"Staff Passport"}>
-													Select passport:
-												</label>
-												<label
-													htmlFor={"Staff Passport"}
-													className="uploadFileWrapper">
-													<span>
-														<FileUploadRounded />
-														Upload File
-													</span>
-													<input
-														type="file"
-														name={"Staff Passport"}
-														id={"Staff Passport"}
-														accept="image/png, image/jpeg, image/jpg"
-													/>
-												</label>
 											</div>
 										</div>
 									</div>
-
-
 								</div>
 								<button className="save-application primary">
-									Save Application
+									Save Staff
 								</button>
 							</div>
 						</MiddleBar>

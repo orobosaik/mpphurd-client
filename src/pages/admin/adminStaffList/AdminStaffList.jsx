@@ -26,18 +26,24 @@ export default function AdminStaffList() {
 						<MiddleBar
 							topBarData={{
 								action: "Staff List",
-								planNumber: "BC/1212/2023",
 								options: (
 									<Link to="./new">
 										<button className="addStaffButton primary">
 											<PersonAddRounded className="icon" />
-											<span>Create Staff Profile</span>
+											<span>Add New Staff</span>
 										</button>
 									</Link>
 								),
 							}}>
 							{/* <ListWrapper></ListWrapper> */}
 							<div className="listQuery">
+								<div className="listQueryOptions">
+									<span>STATUS: </span>
+									<select name="listQueryOption" id="listQueryOption">
+										<option value="active" selected>Active</option>
+										<option value="inactive">Inactive</option>
+									</select>
+								</div>
 								<div className="listQueryOptions">
 									<span>REGION: </span>
 									<select name="listQueryOption" id="listQueryOption">
@@ -92,7 +98,38 @@ export default function AdminStaffList() {
 								<AdminStaffListCard active={true} />
 								<AdminStaffListCard />
 								<AdminStaffListCard />
+								<AdminStaffListCard active={true} />
 								<AdminStaffListCard />
+								<AdminStaffListCard active={true} />
+								<AdminStaffListCard active={true} />
+								<AdminStaffListCard active={true} />
+								<AdminStaffListCard active={true} />
+								<AdminStaffListCard active={true} />
+								<AdminStaffListCard active={true} />
+								<AdminStaffListCard active={true} />
+								<AdminStaffListCard active={true} />
+								<AdminStaffListCard active={true} />
+								<AdminStaffListCard active={true} />
+								<AdminStaffListCard active={true} />
+								<AdminStaffListCard active={true} />
+								<AdminStaffListCard active={true} />
+								<AdminStaffListCard active={true} />
+								<AdminStaffListCard active={true} />
+								<AdminStaffListCard active={true} />
+								<AdminStaffListCard active={true} />
+								<AdminStaffListCard active={true} />
+								<AdminStaffListCard active={true} />
+								<AdminStaffListCard active={true} />
+								<AdminStaffListCard active={true} />
+								<AdminStaffListCard active={true} />
+								<AdminStaffListCard active={true} />
+								<AdminStaffListCard active={true} />
+								<AdminStaffListCard active={true} />
+								<AdminStaffListCard active={true} />
+								<AdminStaffListCard active={true} />
+								<AdminStaffListCard active={true} />
+								<AdminStaffListCard active={true} />
+								<AdminStaffListCard active={true} />
 								<AdminStaffListCard />
 								<AdminStaffListCard />
 								<ListCard />

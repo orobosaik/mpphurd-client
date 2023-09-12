@@ -14,45 +14,51 @@
 	padding-bottom: 0;
 }
 
-
-.applicationForm{
-  padding-bottom: 10rem;
+.applicationForm {
+	padding-bottom: 10rem;
 }
 
-
-
-
-.applicationHeader {
+.inputStaffHeader {
 	display: flex;
 	justify-content: space-between;
 	font-size: 1.6rem;
 	max-width: 70rem;
 	margin-bottom: 2rem;
 }
-.applicationHeader div {
+.inputStaffHeader div {
 	display: flex;
+	justify-content: center;
+	align-items: end;
 	gap: 1rem;
+}
+
+.inputStaffHeaderRight{
+	/* display: flex; */
+	flex-direction: column;
+	/* justify-content: center; */
+	align-items: right;
+}
+.uploadImageWrapper {
+	height: 15rem;
+	cursor: pointer;
+	width: 15rem;
+	display: flex;
+	flex-direction: column;
 	align-items: center;
-}
-.uploadImageWrapper{
-  height: 15rem;
-  width: 15rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--light-grey);
-  border-radius: 2rem;
-  -webkit-border-radius: 2rem;
-  -moz-border-radius: 2rem;
-  -ms-border-radius: 2rem;
-  -o-border-radius: 2rem;
+	justify-content: center;
+	background-color: var(--light-grey);
+	border-radius: 2rem;
+	-webkit-border-radius: 2rem;
+	-moz-border-radius: 2rem;
+	-ms-border-radius: 2rem;
+	-o-border-radius: 2rem;
 }
 
-.uploadImageWrapper input[type="file"]{
-  display: none;
+.uploadImageWrapper input[type="file"] {
+	display: none;
 }
-
+.staffImage {
+}
 
 .applicationInputWrapper {
 	display: flex;
@@ -130,8 +136,10 @@
 	border-bottom: 2px solid var(--pc-green);
 }
 .applicationItem input[type="radio"]:focus,
+.applicationItem input[type="checkbox"]:focus,
 .applicationItem input[type="file"]:focus {
 	box-shadow: none;
+	cursor: pointer;
 }
 
 .applicationItemName {
@@ -205,14 +213,64 @@ input[type="file"]::file-selector {
 	flex: 10;
 }
 
-.applicationItemLocation {
+.inputStaffOfficeWrapper {
+
+	width: 100%;
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	background-color: transparent;
+	border: var(--sc-grey) solid 1px;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-o-border-radius: 4px;
+}
+.inputStaffOfficeList{
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+
+
+}
+
+.inputStaffOffice {
 	display: flex;
 	width: 100%;
 	gap: 1rem;
+	position: relative;
 }
-.applicationItemLocation div {
+
+.inputStaffOffice div {
 	flex: 1;
 }
+.inputStaffOffice .taskList span input {
+	width: 1.5rem;
+	height: 1.5rem;
+}
+.inputStaffOffice .taskList span {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+.inputStaffOffice .taskList {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 1rem;
+}
+.inputStaffOffice::after{
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  border-bottom: 1px var(--sc-grey) dashed;
+}
+
 
 .applicationItemType {
 	display: flex;
