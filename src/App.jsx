@@ -23,7 +23,7 @@ function App() {
 			{!subdomain ? (
 				<MainRoutes />
 			) : subdomain !== "admin" ? (
-				<div>Error Page</div>
+				<MainRoutes />
 			) : (
 				<AdminRoutes />
 			)}
