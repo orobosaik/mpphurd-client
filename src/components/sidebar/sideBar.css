@@ -13,7 +13,7 @@
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  padding: 60px 7px 0 7px;
+  padding: 60px 7px 60px 7px;
   height: calc(100vh - 56px);
 
 }
@@ -35,6 +35,9 @@
   -moz-border-radius: 8px;
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
+}
+.sideBarLogout{
+  margin-bottom: -2rem;
 }
 .sideBarListItem:hover,
 .sideBarLogout:hover{

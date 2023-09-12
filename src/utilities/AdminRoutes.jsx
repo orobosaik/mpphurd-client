@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import AdminHome from "../pages/admin/home/Home";
 
 
 import Home from "../pages/home/Home";
@@ -15,21 +14,40 @@ import Analysis from "../pages/analysis/Analysis";
 import BuildingControl from "../pages/buildingControl/BuildingControl";
 import Petition from "../pages/petition/Petition";
 import Approval from "../pages/approval/Approval";
+import AdminLogin from "../pages/admin/adminLogin/adminLogin";
+import AdminHome from "../pages/admin/adminHome/AdminHome";
+import { useSelector } from "react-redux";
+import AdminStaffList from "../pages/admin/adminStaffList/AdminStaffList";
+import AdminStaffUpdate from "../pages/admin/adminStaffUpdate/AdminStaffUpdate";
+
+
 
 function AdminRoutes() {
+	const { currentAdmin, loading } = useSelector((state) => state.admin);
 	return (
 		<>
+
 			<Routes>
 				{/* HOME PAGE */}
-				{/* <Route path="/" element={<Navigate to="/home" />} /> */}
 				<Route path="/">
-					<Route index element={<Home />} />
+					<Route
+						index
+						element={!currentAdmin ? <Navigate to="/login" /> : <AdminHome />}
+					/>
+				</Route>
+
+				{/* LOGIN PAGE */}
+				<Route path="/login">
+					<Route
+						index
+						element={!currentAdmin ? <AdminLogin /> : <Navigate to="/" />}
+					/>
 				</Route>
 
 				{/* PERMIT | APPROVAL */}
-				<Route path="/permit">
-					<Route index element={<Approval />} />
-					<Route path="new" element={<CreateApplication />} />
+				<Route path="/staff">
+					<Route index element={<AdminStaffList />} />
+					<Route path="new" element={<AdminStaffUpdate />} />
 					<Route path="planId">
 						<Route index element={<Plan />} />
 						<Route path="bills" element={<ViewBill />} />

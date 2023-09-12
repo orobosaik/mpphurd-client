@@ -18,19 +18,22 @@
 	font-weight: 400;
 
 	/* color-scheme: light dark; */
-	/* color: rgba(255, 255, 255, 0.87);
-	background-color: #242424; */
+	/* color: rgba(255, 255, 255, 0.87); */
+	/* background-color: #242424; */
 
 	color: #213547;
-	background-color: #ffffff;
+	/* background-color: #ffffff; */
 
+	/* --black: #ffffff; */
 	--black: #2c2c2c;
+	/* --white: #2c2c2c; */
 	--white: #ffffff;
 	--light-grey: #ececec;
 	--sc-grey: #bfbfbf;
 	--accent-4: #7882a4;
 
-	--pc-green: #0d9f4f;
+	--pc-green: #07bc0c;
+	/* --pc-green: #0d9f4f; */
 	/* --pc-green: #0d9f4f; */
 
 	/* --accent-yellow: #ffcc00; */
@@ -67,7 +70,7 @@ a:hover {
 
 body {
 	font-size: 1.45rem;
-	color: var(--black);
+	/* color: var(--black); */
 
 	/* display: flex; */
 	/* place-items: center; */
@@ -91,6 +94,7 @@ a:hover {
 
 img {
 	width: 100%;
+	object-fit: contain;
 }
 .btn {
 	cursor: pointer;

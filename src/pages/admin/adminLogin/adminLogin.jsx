@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useRef, useState } from "react";
-import "./loginPage.css";
+import "./adminLogin.css";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -12,14 +12,14 @@ import {
 	VisibilityOffOutlined,
 	VisibilityOutlined,
 } from "@mui/icons-material";
-import { loginFailure, loginStart, loginSuccess } from "../../redux/userSlice";
+import { adminLoginFailure, adminLoginStart, adminLoginSuccess } from "../../../redux/adminSlice";
 import { CircularProgress } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function LoginPage() {
+export default function AdminLogin() {
 	const [showPassword, setShowPassword] = useState(false);
-	const { currentUser, loading } = useSelector((state) => state.user);
+	const { currentUser, loading } = useSelector((state) => state.admin);
 	const dispatch = useDispatch();
 
 	const email = useRef();
@@ -29,27 +29,29 @@ export default function LoginPage() {
 		e.preventDefault();
 		console.log(email, password);
 
-		dispatch(loginStart());
+		dispatch(adminLoginStart());
+
+    dispatch(adminLoginSuccess(true));
+    toast.success("Login Successful", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+
 
 		try {
 			const res = await axios.post(
-				"http://localhost:8800/api/staffs/auth/login",
+				"http://localhost:8800/api/admin/auth/login",
 				{
 					email: email.current.value,
 					password: password.current.value,
 				}
 			);
-			dispatch(loginSuccess(res.data));
-			toast.success("Login Successful", {
-				position: "top-right",
-				autoClose: 2000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-				theme: "light",
-			});
 		} catch (error) {
 			let message = error.response
 				? error.response.data.message
@@ -79,7 +81,7 @@ export default function LoginPage() {
 				<section className="login__header">
 					<div className="login__formBackground">
 						<section className="app-cover__info">
-							<h1>M-FLOW</h1>
+							<h1>M-FLOW - ADMIN</h1>
 							<h2>
 								ministry of physical planning, housing, urban and regional
 								development app
@@ -97,7 +99,7 @@ export default function LoginPage() {
 							<div className="form-logo">
 								{/* <img src="Mpphurd.png" alt="Mpphurd Logo" /> */}
 							</div>
-							<p className="form-greeting"> Please Login to continue</p>
+							<p className="form-greeting"> Please Login to continue as Admin</p>
 							<div className="form-input">
 								<label htmlFor="email">Email</label>
 								<div>
@@ -151,7 +153,7 @@ export default function LoginPage() {
 										sx={{ color: "white" }}
 									/>
 								) : (
-									"Login"
+									"Login Admin"
 								)}
 							</button>
 							<ToastContainer />

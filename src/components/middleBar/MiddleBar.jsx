@@ -11,6 +11,7 @@ export default function MiddleBar({ topBarData, children }) {
 			<TopBar
 				action={topBarData.action}
 				planNumber={topBarData.planNumber}
+				options={topBarData.options}
 				style={{
 					boxShadow:
 						scroll > 0 ? "inset 0 8px 5px -5px rgb(0 0 0 / 0.4)" : "none",

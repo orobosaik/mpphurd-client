@@ -1,28 +1,31 @@
-import "./sideBar.css";
+import "./adminSideBar.css";
 import { NavLink } from "react-router-dom";
 import {
-	ApartmentRounded,
 	ArticleRounded,
 	AssessmentRounded,
 	AssignmentLateRounded,
 	CorporateFareRounded,
+	DashboardOutlined,
 	DashboardRounded,
+	EngineeringRounded,
 	HomeRounded,
 	LibraryBooksRounded,
+	LocalPostOfficeRounded,
+	LocationCityRounded,
 	LogoutRounded,
+	PeopleRounded,
 	PolicyRounded,
 	QueryStatsRounded,
 	TaskRounded,
 } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
-import { logout } from "../../redux/userSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { persistor } from "../../redux/store";
 
-export default function SideBar({ selected }) {
+export default function AdminSideBar({ selected }) {
 	const dispatch = useDispatch();
-	const handleLogout =  () => {
+	const handleLogout = () => {
 		toast.success("Logout Successful", {
 			position: "top-right",
 			autoClose: 1000,
@@ -50,27 +53,27 @@ export default function SideBar({ selected }) {
 						</NavLink>
 					</li>
 					<li>
-						<NavLink className="sideBarListItem" to="/permit">
-							<TaskRounded className="sideBarIcon" />
-							<span className="sideBarListItemText">Approval</span>
+						<NavLink className="sideBarListItem" to="/staff">
+							<EngineeringRounded className="sideBarIcon" />
+							<span className="sideBarListItemText">Staff</span>
 						</NavLink>
 					</li>
 					<li>
-						<NavLink className="sideBarListItem" to="/petition">
-							<AssignmentLateRounded className="sideBarIcon" />
-							<span className="sideBarListItemText">Petition</span>
-						</NavLink>
-					</li>
-					<li>
-						<NavLink className="sideBarListItem" to="/control">
-							<PolicyRounded className="sideBarIcon" />
-							<span className="sideBarListItemText">B.Control</span>
-						</NavLink>
-					</li>
-					<li>
-						<NavLink className="sideBarListItem" to="/office">
+						<NavLink className="sideBarListItem" to="/offices">
 							<CorporateFareRounded className="sideBarIcon" />
-							<span className="sideBarListItemText">Office</span>
+							<span className="sideBarListItemText">Offices</span>
+						</NavLink>
+					</li>
+					<li>
+						<NavLink className="sideBarListItem" to="/regions">
+							<LocationCityRounded className="sideBarIcon" />
+							<span className="sideBarListItemText">Regions</span>
+						</NavLink>
+					</li>
+					<li>
+						<NavLink className="sideBarListItem" to="/public">
+							<PeopleRounded className="sideBarIcon" />
+							<span className="sideBarListItemText">Public Users</span>
 						</NavLink>
 					</li>
 					<li>
