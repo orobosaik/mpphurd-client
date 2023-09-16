@@ -20,13 +20,14 @@ function App() {
 
 	return (
 		<>
-			{!subdomain ? (
+				<MainRoutes />
+			{/* {!subdomain ? (
 				<MainRoutes />
 			) : subdomain !== "admin" ? (
 				<MainRoutes />
 			) : (
 				<AdminRoutes />
-			)}
+			)} */}
 		</>
 	);
 }

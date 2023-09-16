@@ -166,12 +166,12 @@ export default function LoginPage() {
 						<div className="login__footer--logos">
 							<div className="login__footer--logo">
 								<img
-									src="/assets/logos/Logo-Edo State.png"
+									src="/mpphurd-client/assets/logos/Logo-Edo State.png"
 									alt="Edo State Logo"
 								/>
 							</div>
 							<div className="login__footer--logo">
-								<img src="/assets/logos/Logo-Mpphurd.png" alt="MPPHURD Logo" />
+								<img src="/mpphurd-client/assets/logos/Logo-Mpphurd.png" alt="MPPHURD Logo" />
 							</div>
 						</div>
 						<div className="login__footer--text">
