@@ -8,9 +8,9 @@ export default defineConfig(({ command }) => {
 		base: "/",
 	};
 
-	if (command !== "serve") {
-		config.base = "/mpphurd-client/";
-	}
+	// if (command !== "serve") {
+	// 	config.base = "/mpphurd-client/";
+	// }
 
 	return config;
 });
