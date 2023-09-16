@@ -47,43 +47,43 @@ export default function AdminSideBar({ selected }) {
 			<div className="sideBarWrapper">
 				<ul className="sideBarList">
 					<li>
-						<NavLink className="sideBarListItem" to="/">
+						<NavLink className="sideBarListItem" to="/admin/">
 							<DashboardRounded className="sideBarIcon" />
 							<span className="sideBarListItemText ">Dashboard</span>
 						</NavLink>
 					</li>
 					<li>
-						<NavLink className="sideBarListItem" to="/staff">
+						<NavLink className="sideBarListItem" to="/admin/staff">
 							<EngineeringRounded className="sideBarIcon" />
 							<span className="sideBarListItemText">Staff</span>
 						</NavLink>
 					</li>
 					<li>
-						<NavLink className="sideBarListItem" to="/offices">
+						<NavLink className="sideBarListItem" to="/admin/offices">
 							<CorporateFareRounded className="sideBarIcon" />
 							<span className="sideBarListItemText">Offices</span>
 						</NavLink>
 					</li>
 					<li>
-						<NavLink className="sideBarListItem" to="/regions">
+						<NavLink className="sideBarListItem" to="/admin/regions">
 							<LocationCityRounded className="sideBarIcon" />
 							<span className="sideBarListItemText">Regions</span>
 						</NavLink>
 					</li>
 					<li>
-						<NavLink className="sideBarListItem" to="/public">
+						<NavLink className="sideBarListItem" to="/admin/public">
 							<PeopleRounded className="sideBarIcon" />
 							<span className="sideBarListItemText">Public Users</span>
 						</NavLink>
 					</li>
 					<li>
-						<NavLink className="sideBarListItem" to="/activities">
+						<NavLink className="sideBarListItem" to="/admin/activities">
 							<AssessmentRounded className="sideBarIcon" />
 							<span className="sideBarListItemText">Activities</span>
 						</NavLink>
 					</li>
 					<li>
-						<NavLink className="sideBarListItem" to="/analysis">
+						<NavLink className="sideBarListItem" to="/admin/analysis">
 							<QueryStatsRounded className="sideBarIcon" />
 							<span className="sideBarListItemText">Analysis</span>
 						</NavLink>
@@ -92,7 +92,7 @@ export default function AdminSideBar({ selected }) {
 				<div className="sideBarLogout" onClick={handleLogout}>
 					<LogoutRounded className="sideBarIcon" />
 					<span>Log Out</span>
-				<ToastContainer />
+					<ToastContainer />
 				</div>
 			</div>
 		</div>

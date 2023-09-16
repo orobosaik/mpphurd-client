@@ -29,23 +29,23 @@ function AdminRoutes() {
 
 			<Routes>
 				{/* HOME PAGE */}
-				<Route path="/">
+				<Route path="/admin">
 					<Route
 						index
-						element={!currentAdmin ? <Navigate to="/login" /> : <AdminHome />}
+						element={!currentAdmin ? <Navigate to="/admin/login" /> : <AdminHome />}
 					/>
 				</Route>
 
 				{/* LOGIN PAGE */}
-				<Route path="/login">
+				<Route path="/admin/login">
 					<Route
 						index
-						element={!currentAdmin ? <AdminLogin /> : <Navigate to="/" />}
+						element={!currentAdmin ? <AdminLogin /> : <Navigate to="/admin" />}
 					/>
 				</Route>
 
 				{/* PERMIT | APPROVAL */}
-				<Route path="/staff">
+				<Route path="/admin/staff">
 					<Route index element={<AdminStaffList />} />
 					<Route path="new" element={<AdminStaffUpdate />} />
 					<Route path="planId">
@@ -57,26 +57,26 @@ function AdminRoutes() {
 				</Route>
 
 				{/* PETITION */}
-				<Route path="/petition">
+				<Route path="/admin/petition">
 					<Route index element={<Petition />} />
 				</Route>
 
 				{/* BUILDING CONTROL */}
-				<Route path="/control">
+				<Route path="/admin/control">
 					<Route index element={<BuildingControl />} />
 				</Route>
 
 				{/* OFFICE */}
-				<Route path="/office">
+				<Route path="/admin/office">
 					<Route index element={<Office />} />
 				</Route>
 
 				{/* ACTIVITIES */}
-				<Route path="/activities">
+				<Route path="/admin/activities">
 					<Route index element={<ActivitiesView />} />
 				</Route>
 				{/* ANALYSIS */}
-				<Route path="/analysis">
+				<Route path="/admin/analysis">
 					<Route index element={<Analysis />} />
 				</Route>
 			</Routes>

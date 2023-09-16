@@ -32,17 +32,17 @@ export default function LoginPage() {
 		dispatch(loginStart());
 
 		try {
+			let host = import.meta.env.VITE_SERVER
 			const res = await axios.post(
-				"http://localhost:8800/api/staffs/auth/login",
+				`${host}/staffs/auth/login`,
 				{
 					email: email.current.value,
 					password: password.current.value,
 				}
 			);
-			dispatch(loginSuccess(res.data));
 			toast.success("Login Successful", {
 				position: "top-right",
-				autoClose: 2000,
+				autoClose: 1000,
 				hideProgressBar: false,
 				closeOnClick: true,
 				pauseOnHover: true,
@@ -50,6 +50,9 @@ export default function LoginPage() {
 				progress: undefined,
 				theme: "light",
 			});
+			setTimeout(() => {
+				dispatch(loginSuccess(res.data));
+			}, 1100);
 		} catch (error) {
 			let message = error.response
 				? error.response.data.message
@@ -166,12 +169,12 @@ export default function LoginPage() {
 						<div className="login__footer--logos">
 							<div className="login__footer--logo">
 								<img
-									src="/mpphurd-client/assets/logos/Logo-Edo State.png"
+									src="/assets/logos/Logo-Edo State.png"
 									alt="Edo State Logo"
 								/>
 							</div>
 							<div className="login__footer--logo">
-								<img src="/mpphurd-client/assets/logos/Logo-Mpphurd.png" alt="MPPHURD Logo" />
+								<img src="/assets/logos/Logo-Mpphurd.png" alt="MPPHURD Logo" />
 							</div>
 						</div>
 						<div className="login__footer--text">
