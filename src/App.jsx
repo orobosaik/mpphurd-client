@@ -5,31 +5,31 @@ import AdminRoutes from "./utilities/AdminRoutes";
 import MainRoutes from "./utilities/MainRoutes";
 
 function App() {
-	// const [subDomain, setSubDomain] = useState(null);
-	const [firstRoute, setFirstRoute] = useState(null);
+	const [view, setView] = useState(null);
 
 	useEffect(() => {
-		// const host = window.location.host;
-		const path = window.location.pathname;
+		const host = window.location.host;
 
-		// const arr = host.split(".").slice(0, host.includes("localhost") ? -1 : -1);
-		const arr = path.split("/")
+		// const path = window.location.pathname;
+		// const arr = path.split("/");
 
-		if (arr.length > 1) setFirstRoute(arr[1].toLowerCase());
-		console.log("subdomain: "+firstRoute);
-		console.log("path: "+path);
-		console.log("all arr :"+arr);
-		console.log("arr :"+arr[1]);
+		const arr = host.split(".").slice(0, host.includes("localhost") ? -1 : -1);
+
+		if (arr.length === 1 && arr[0].toLowerCase() === "admin-mpphurd") {
+			setView("admin");
+		} else if (arr.length === 1 && arr[0].toLowerCase() === "mpphurd") {
+			setView("staff");
+		}
 	}, []);
 
 	return (
 		<>
-			{!firstRoute ? (
+			{view === "staff" ? (
 				<MainRoutes />
-			) : firstRoute !== "admin" ? (
-				<MainRoutes />
-			) : (
+			) : view === "admin" ? (
 				<AdminRoutes />
+			) : (
+				""
 			)}
 		</>
 	);
