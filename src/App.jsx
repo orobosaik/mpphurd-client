@@ -15,9 +15,9 @@ function App() {
 
 		const arr = host.split(".").slice(0, host.includes("localhost") ? -1 : -1);
 
-		if (arr.length === 1 && arr[0].toLowerCase() === "admin-mpphurd") {
+		if (arr.length < 3 && arr[0].toLowerCase() === "admin-mpphurd") {
 			setView("admin");
-		} else if (arr.length === 1 && arr[0].toLowerCase() === "mpphurd") {
+		} else if (arr.length < 3 && arr[0].toLowerCase() === "mpphurd") {
 			setView("staff");
 		}
 	}, []);
