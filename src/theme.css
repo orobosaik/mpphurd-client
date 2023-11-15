@@ -114,7 +114,7 @@ html[data-theme="dark"] body {
 	background-color: var(--white);
 }
 
-html[data-theme="dark"] img {
+/* html[data-theme="dark"] img {
 	opacity: 0.75;
 	-webkit-transition: opacity 0.5s ease-in-out;
 	-o-transition: opacity 0.5s ease-in-out;
@@ -122,4 +122,4 @@ html[data-theme="dark"] img {
 }
 html[data-theme="dark"] img:hover {
 	opacity: 1;
-}
+} */

@@ -1,6 +1,7 @@
 import "./header.css";
 import { Link } from "react-router-dom";
 import { Email, Notifications, Search } from "@mui/icons-material";
+import ThemeChanger from "../../widgets/themeChanger/ThemeChanger";
 
 export default function Header() {
 	return (
@@ -26,7 +27,8 @@ export default function Header() {
 			</div>
 			<div className="headerRight">
 				<div className="headerLinks">
-					<button>Theme</button>
+					<ThemeChanger />
+
 					{/* <Link to="/permit">
 						<span className="headerLink active">Approval</span>
 					</Link>
