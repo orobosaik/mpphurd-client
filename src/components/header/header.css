@@ -59,6 +59,11 @@
 	-ms-border-radius: 8px;
 	-o-border-radius: 8px;
 }
+.searchBar:hover{
+	background-color: var(--white);
+	outline: var(--sc-grey) solid 1px;
+
+}
 .searchBar:focus-within {
 	background-color: var(--white);
 	outline: var(--sc-grey) solid 2px;
@@ -78,8 +83,8 @@
 	border: none;
 }
 .searchInput:focus {
-	border: none;
-	outline: none;
+	/* border: none; */
+	/* outline: none; */
 }
 
 .headerRight {

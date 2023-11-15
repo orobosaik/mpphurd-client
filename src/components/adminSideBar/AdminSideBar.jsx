@@ -47,43 +47,43 @@ export default function AdminSideBar({ selected }) {
 			<div className="sideBarWrapper">
 				<ul className="sideBarList">
 					<li>
-						<NavLink className="sideBarListItem" to="/admin/">
+						<NavLink className="sideBarListItem" to="/">
 							<DashboardRounded className="sideBarIcon" />
 							<span className="sideBarListItemText ">Dashboard</span>
 						</NavLink>
 					</li>
 					<li>
-						<NavLink className="sideBarListItem" to="/admin/staff">
+						<NavLink className="sideBarListItem" to="/staff">
 							<EngineeringRounded className="sideBarIcon" />
 							<span className="sideBarListItemText">Staff</span>
 						</NavLink>
 					</li>
 					<li>
-						<NavLink className="sideBarListItem" to="/admin/offices">
+						<NavLink className="sideBarListItem" to="/offices">
 							<CorporateFareRounded className="sideBarIcon" />
 							<span className="sideBarListItemText">Offices</span>
 						</NavLink>
 					</li>
 					<li>
-						<NavLink className="sideBarListItem" to="/admin/regions">
+						<NavLink className="sideBarListItem" to="/regions">
 							<LocationCityRounded className="sideBarIcon" />
 							<span className="sideBarListItemText">Regions</span>
 						</NavLink>
 					</li>
 					<li>
-						<NavLink className="sideBarListItem" to="/admin/public">
+						<NavLink className="sideBarListItem" to="/public">
 							<PeopleRounded className="sideBarIcon" />
 							<span className="sideBarListItemText">Public Users</span>
 						</NavLink>
 					</li>
 					<li>
-						<NavLink className="sideBarListItem" to="/admin/activities">
+						<NavLink className="sideBarListItem" to="/activities">
 							<AssessmentRounded className="sideBarIcon" />
 							<span className="sideBarListItemText">Activities</span>
 						</NavLink>
 					</li>
 					<li>
-						<NavLink className="sideBarListItem" to="/admin/analysis">
+						<NavLink className="sideBarListItem" to="/analysis">
 							<QueryStatsRounded className="sideBarIcon" />
 							<span className="sideBarListItemText">Analysis</span>
 						</NavLink>

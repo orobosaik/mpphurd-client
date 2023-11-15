@@ -1,6 +1,7 @@
 import "./adminHeader.css";
 import { Link } from "react-router-dom";
 import { Email, Notifications, Search } from "@mui/icons-material";
+import ThemeChanger from "../../widgets/themeChanger/ThemeChanger";
 
 export default function AdminHeader() {
 	return (
@@ -10,7 +11,7 @@ export default function AdminHeader() {
 					<span className="headerLogo">
 						<img src="/assets/logos/Logo-Mpphurd.png" alt="" />
 						<div></div>
-						<p>MPPHURD - ADMIN</p>
+						<p>MPPHURD / ADMIN</p>
 					</span>
 				</Link>
 			</div>
@@ -26,7 +27,8 @@ export default function AdminHeader() {
 			</div>
 			<div className="headerRight">
 				<div className="headerLinks">
-					<button>Theme</button>
+					{/* <button>Theme</button> */}
+					<ThemeChanger/>
 					{/* <Link to="/permit">
 						<span className="headerLink active">Approval</span>
 					</Link>

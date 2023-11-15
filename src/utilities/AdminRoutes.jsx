@@ -67,7 +67,7 @@ function AdminRoutes() {
 				</Route>
 
 				{/* OFFICE */}
-				<Route path="/office">
+				<Route path="/offices">
 					<Route index element={<Office />} />
 				</Route>
 

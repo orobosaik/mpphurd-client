@@ -81,7 +81,7 @@ export default function AdminLogin() {
 				<section className="login__header">
 					<div className="login__formBackground">
 						<section className="app-cover__info">
-							<h1>M-FLOW - ADMIN</h1>
+							<h1>M-FLOW / ADMIN</h1>
 							<h2>
 								ministry of physical planning, housing, urban and regional
 								development app

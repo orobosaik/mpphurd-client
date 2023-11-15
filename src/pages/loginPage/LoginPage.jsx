@@ -50,6 +50,7 @@ export default function LoginPage() {
 				progress: undefined,
 				theme: "light",
 			});
+			console.log(res.data);
 			setTimeout(() => {
 				dispatch(loginSuccess(res.data));
 			}, 1100);

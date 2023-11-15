@@ -1,0 +1,31 @@
+.dropdown-container {
+	padding: 6px;
+	margin: 12px 0;
+	min-width: 200px;
+	border-radius: 12px;
+	overflow: auto;
+	background: #fff;
+	border: 1px solid darkgrey;
+	color: var(--black);
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.dropdown-item {
+	list-style: none;
+	padding: 8px;
+	border-radius: 8px;
+	cursor: default;
+	user-select: none;
+}
+
+.dropdown-item:last-of-type {
+	border-bottom: none;
+}
+.dropdown-item:hover {
+	background-color: var(--light-grey);
+	cursor: pointer;
+}
+
+.dropdown-container {
+	z-index: 1;
+}
