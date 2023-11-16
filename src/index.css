@@ -132,7 +132,7 @@ select:focus-visible {
 }
 .secondary {
 	background-color: var(--light-grey);
-	color: #333;
+	color: var(--black);
 	font-weight: 400;
 }
 input,
@@ -156,6 +156,13 @@ input:active {
 ::-webkit-scrollbar-track {
 	border: none;
 	background: transparent;
+}
+
+html[data-theme="dark"] ::selection {
+	color: var(--white);
+}
+html[data-theme="dark"] ::-webkit-scrollbar-thumb {
+	background-color: var(--light-grey);
 }
 
 /* @media (prefers-color-scheme: light) {
@@ -202,4 +209,8 @@ height: 100%;
 width: 100%;
 	/* background-color: rgba(255, 255, 255, .85); */
 
+}
+html[data-theme="dark"] .pageWrapper{
+		filter: brightness(50%) blur(4px);
+		-webkit-filter: brightness(50%) blur(4px);
 }

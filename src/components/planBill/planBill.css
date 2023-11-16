@@ -26,7 +26,7 @@
 	margin: 0 auto;
 	min-height: 1120px;
 	font-size: 1.4rem;
-	background-color: white;
+	background-color: var(--white);
 	padding: 2rem 1.5rem;
 }
 .planBillViewHeaderTop {

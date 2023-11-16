@@ -212,5 +212,5 @@ input[type="file"]::file-selector {
 }
 
 .uploadFileWrapper:hover span {
-	background-color: var(--sc-grey);
+	background-color: var(--light-grey);
 }
