@@ -43,7 +43,7 @@
 }
 
 .feedCardBadge {
-  z-index: 100;
+  z-index: 2;
 	height: 2.5rem;
 	min-width: 2.5rem;
 	padding: 5px 5px;

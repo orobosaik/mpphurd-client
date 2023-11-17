@@ -1,9 +1,28 @@
 import "./header.css";
 import { Link } from "react-router-dom";
-import { Email, Notifications, Search } from "@mui/icons-material";
+import {
+	CloseRounded,
+	Email,
+	Notifications,
+	Search,
+} from "@mui/icons-material";
 import ThemeChanger from "../../widgets/themeChanger/ThemeChanger";
+import { useState } from "react";
+import SearchResult from "../searchResult/SearchResult";
+import { ClickAwayListener } from "@mui/base/ClickAwayListener";
 
 export default function Header() {
+	const [searchQuery, setSearchQuery] = useState("");
+	const [open, setOpen] = useState(false);
+
+	const handleSearchInput = (e) => {
+		setSearchQuery(e.target.value);
+	};
+
+	const handleClickedAway = () => {
+		setOpen(false);
+	};
+
 	return (
 		<div className="headerContainer">
 			<div className="headerLeft">
@@ -16,14 +35,29 @@ export default function Header() {
 				</Link>
 			</div>
 			<div className="headerCenter">
-				<div className="searchBar">
-					<Search className="searchIcon" />
-					<input
-						type="text"
-						placeholder="Start typing to search"
-						className="searchInput"
-					/>
-				</div>
+				<ClickAwayListener onClickAway={handleClickedAway}>
+					<div className="searchBar">
+						<label htmlFor="headerSearchInput">
+							<Search className="searchIcon" />
+						</label>
+						<input
+							id="headerSearchInput"
+							type="text"
+							placeholder="Start typing to search"
+							className="searchInput"
+							onChange={(e) => handleSearchInput(e)}
+							onFocus={() => setOpen(true)}
+							value={searchQuery}
+						/>
+						{searchQuery && (
+							<div className="searchBarCloseButton" onClick={() => setSearchQuery("")}>
+								{" "}
+								<CloseRounded />
+							</div>
+						)}
+						{searchQuery && open && <SearchResult />}
+					</div>
+				</ClickAwayListener>
 			</div>
 			<div className="headerRight">
 				<div className="headerLinks">

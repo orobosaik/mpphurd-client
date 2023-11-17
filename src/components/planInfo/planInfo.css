@@ -8,7 +8,7 @@
   justify-content: space-between;
   margin-bottom: 2rem;
 }
-.planInfoSummaryName,.planInfoSummaryLocation{
+.planInfoSummaryItem{
   display: flex;
 }
 .planInfoSummaryDetails{
@@ -21,19 +21,36 @@
   /* width: 15rem; */
 }
 .planInfoSummaryText{
+  display: flex;
+  gap: 1rem;
   flex: 9;
   /* width: 30rem; */
 }
-.planInfoSummaryEdit{
+.planInfoSummaryStack{
+  font-weight: bold;
+}
+.tag{
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2px;
-    background-color: var(--light-grey);
+  color: var(--white);
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 0 .6rem;
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
 }
-.editIcon{
-  font-size: 1.8rem !important;
-
+.tag-fastTrack{
+  background-color: var(--accent-red);
+}
+.tag-oldFile{
+  background-color: var(--accent-yellow);
+}
+.tag-fileOfInterest{
+  background-color: var(--accent-4);
 }
 
 .planInfoWrapper{

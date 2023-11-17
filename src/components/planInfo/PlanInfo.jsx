@@ -3,28 +3,42 @@ import "./planInfo.css";
 import { Link } from "react-router-dom";
 import PlanInfoCard from "../planInfoCard/PlanInfoCard";
 import ViewBill from "../planBill/PlanBill";
+import PlanEditInfoModal from "../planEditInfoModal/PlanEditInfoModal";
 
 export default function PlanInfo({ setTopBarData, setViewBills }) {
+
 	return (
 		<div className="planInfo">
 			<div className="planInfoSummary">
 				<div className="planInfoSummaryDetails">
-					<div className="planInfoSummaryName">
-						<span className="planInfoSummaryTitle">File Name</span>
+					<div className="planInfoSummaryItem">
+						<span className="planInfoSummaryTitle">File Name:</span>
 						<span className="planInfoSummaryText">Abel Igbinedion</span>
 					</div>
-					<div className="planInfoSummaryLocation">
-						<span className="planInfoSummaryTitle">Site Location</span>
+					<div className="planInfoSummaryItem">
+						<span className="planInfoSummaryTitle">Site Location:</span>
 						<span className="planInfoSummaryText">
 							Plot 4, Amagba cresent off Sapele Road, Benin city Crescent by
 							Mobil Oil.
 						</span>
 					</div>
+					<div className="planInfoSummaryItem">
+						<span className="planInfoSummaryTitle">Current Stack:</span>
+						<span className="planInfoSummaryText">
+							<span className="planInfoSummaryStack">Stack A7</span>.
+						</span>
+					</div>
+					<div className="planInfoSummaryItem">
+						<span className="planInfoSummaryTitle">Tags:</span>
+						<span className="planInfoSummaryText">
+							<span className="tag tag-fastTrack">Fast Track</span>
+							<span className="tag tag-oldFile">Old File</span>
+							<span className="tag tag-fileOfInterest">File Of Interest</span>
+						</span>
+					</div>
 				</div>
-				{/* <button className="planInfoSummaryEdit">
-					<EditRounded className="editIcon" />
-					Edit
-				</button> */}
+
+				<PlanEditInfoModal />
 			</div>
 
 			<div className="planInfoWrapper">

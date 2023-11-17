@@ -1,0 +1,308 @@
+.modalTrigger {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+}
+.editIcon {
+	font-size: 1.5rem !important;
+}
+
+dialog {
+
+	max-height: 90%;
+	max-width: 50rem;
+	margin: auto;
+	outline: none;
+	padding: 2rem;
+	border: 0;
+	border-radius: 0.8rem;
+	box-shadow: 0 0 0.5rem 0.25rem hsl(0 0% 0% / 10%);
+	-webkit-border-radius: 0.8rem;
+	-moz-border-radius: 0.8rem;
+	-ms-border-radius: 0.8rem;
+	-o-border-radius: 0.8rem;
+}
+
+html[data-theme="dark"] dialog{
+  background-color: var(--white);
+	box-shadow: 0 0 0.5rem 0.25rem rgba(255, 255, 255, .2);
+}
+.planEditInfoModal {
+}
+
+
+.modalViewCloseButton{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  color: var(--black);
+  padding: .5rem;
+  /* outline: 2px solid grey; */
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+.modalViewCloseButton:hover{
+  background-color: var(--light-grey);
+}
+.closeButton{
+  font-size: 2.5rem !important;
+	font-weight: bold;
+}
+
+.currentStackEdit{
+	margin: 1rem 0;
+	margin-bottom: .5rem;
+	display: flex;
+	gap: 2rem;
+	align-items: center;
+}
+.currentStackEdit label{
+	font-weight: bold;
+	font-size: 1.6rem;
+}
+
+.modalView header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid grey;
+  font-size: 1.8rem;
+	padding-bottom: 1rem;
+}
+
+.modalView footer{
+	align-self: end;
+	margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+/* background-color: red; */
+}
+
+
+
+
+
+
+.applicationHeader {
+	display: flex;
+	justify-content: space-between;
+	font-size: 1.6rem;
+	max-width: 70rem;
+	margin-bottom: 2rem;
+}
+.applicationHeader div {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+}
+
+.applicationInputWrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 3rem;
+}
+.applicationItemsWrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.applicationTitle {
+	display: flex;
+	justify-content: space-between;
+	font-size: 1.6rem;
+	max-width: 70rem;
+}
+.applicationTitle h3 {
+	color: var(--pc-green);
+}
+.applicationTitle div {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+}
+.applicantCode input {
+	text-align: center;
+	max-width: 9rem;
+	background-color: var(--light-grey);
+}
+
+.applicationItems {
+	display: flex;
+	flex-direction: column;
+	gap: 0.8rem;
+}
+
+.applicationItem {
+	display: flex;
+	flex-direction: column;
+	max-width: 70rem;
+}
+
+.applicationItem label {
+	display: flex;
+	justify-content: start;
+	text-transform: capitalize;
+	font-weight: 600;
+}
+
+.applicationItem input,
+.applicantCode input,
+.applicationItem select {
+	width: 100%;
+	display: flex;
+	background-color: transparent;
+	border: var(--sc-grey) solid 1px;
+	height: 2.9rem;
+	padding: 0.2rem 0.7rem;
+	transition: box-shadow 0.3s;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-o-border-radius: 4px;
+	-webkit-transition: box-shadow 0.3s;
+	-moz-transition: box-shadow 0.3s;
+	-ms-transition: box-shadow 0.3s;
+	-o-transition: box-shadow 0.3s;
+}
+
+.applicationItem input:active,
+.applicationItem input:focus {
+	border: var(--sc-grey) solid 1px;
+	box-shadow: 0px 0px 7px 0px rgb(0, 200, 83, 0.4);
+	border-bottom: 2px solid var(--pc-green);
+}
+.applicationItem input[type="radio"]:focus,
+.applicationItem input[type="file"]:focus {
+	box-shadow: none;
+}
+
+.applicationItemName {
+	display: flex;
+	width: 100%;
+	gap: 1rem;
+}
+.applicationItemPhone div {
+	flex: 1;
+}
+.applicationItemName div:first-child,
+.applicationItemName div:last-child {
+	max-width: 10rem;
+}
+.applicationItemPhone {
+	display: flex;
+	width: 100%;
+	gap: 2rem;
+}
+.radioBoxWrapper {
+	display: flex;
+	gap: 2rem;
+}
+.radioBoxWrapper label {
+	flex: 1;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	align-items: center;
+	padding: 0.2rem 0.7rem;
+	cursor: pointer;
+	border: var(--sc-grey) solid 1px;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-o-border-radius: 4px;
+}
+.radioBoxWrapper input[type="radio"] {
+	width: 1.5rem;
+	accent-color: green;
+}
+
+input[type="file"],
+input[type="file"]:focus {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+	padding: 0.4rem 0.7rem;
+	border: none;
+	cursor: pointer;
+}
+
+input[type="file"]::file-selector-button {
+	display: none;
+}
+input[type="file"]::file-selector {
+	display: none;
+}
+
+.applicationItemAddressModal {
+	display: flex;
+	width: 100%;
+	gap: 1rem;
+}
+.applicationItemAddressModal div:nth-child(1) {
+	flex: 2;
+}
+.applicationItemAddressModal div:nth-child(2) {
+	flex: 10;
+}
+
+.applicationItemLocation {
+	display: flex;
+	width: 100%;
+	gap: 1rem;
+}
+.applicationItemLocation div {
+	flex: 1;
+}
+
+.applicationItemType {
+	display: flex;
+	width: 100%;
+	gap: 1rem;
+}
+.applicationItemType div {
+	flex: 1;
+}
+
+.save-application {
+	margin-top: 3rem;
+}
+
+.uploadFileWrapper {
+	display: flex;
+	padding: none;
+	width: 100%;
+	align-items: center;
+	gap: 2rem;
+	cursor: pointer;
+	border: var(--sc-grey) solid 1px;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-o-border-radius: 4px;
+}
+
+.uploadFileWrapper span {
+	padding: 0.4rem 0.7rem;
+	background-color: var(--light-grey);
+	display: flex;
+	align-items: center;
+	min-width: fit-content;
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+}
+
+.uploadFileWrapper:hover span {
+	background-color: var(--light-grey);
+}

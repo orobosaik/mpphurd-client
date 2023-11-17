@@ -5,7 +5,11 @@ const initialState = {
 	currentUser: null,
 	loading: null,
 	error: null,
-	theme: "system"
+	theme: "system",
+	modal : {
+		open: false,
+		
+	}
 };
 
 const userSlice = createSlice({

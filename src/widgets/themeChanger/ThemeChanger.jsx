@@ -7,9 +7,13 @@ import { Dropdown } from "@mui/base/Dropdown";
 import { MenuButton } from "@mui/base/MenuButton";
 import { Menu } from "@mui/base/Menu";
 import { MenuItem } from "@mui/base/MenuItem";
-import { AutoModeRounded, DarkModeRounded, LightModeRounded } from "@mui/icons-material";
+import {
+	AutoModeRounded,
+	DarkModeRounded,
+	LightModeRounded,
+} from "@mui/icons-material";
 
-export default function ThemeChanger({client}) {
+export default function ThemeChanger({ client }) {
 	const { theme } = useSelector((state) => state.user);
 
 	const dispatch = useDispatch();
@@ -25,9 +29,24 @@ export default function ThemeChanger({client}) {
 		};
 	};
 
+	const changeTheme = () => {
+		// media query for default theme
+		const isDark = window.matchMedia("(prefers-color-scheme: dark)");
+
+		const doc = document.querySelector("html");
+		const icon = document.querySelector(".theme-icon");
+		// const path = document.querySelector(".theme-icon path");
+		// path.setAttribute("d", dayAndNightIcon);
+		// icon.classList = "theme-icon theme-system";
+
+		dispatch(setTheme("system"));
+
+		!isDark ? (doc.dataset.theme = "dark") : (doc.dataset.theme = "light");
+	}
 	const systemTheme = () => {
 		// media query for default theme
 		const isDark = window.matchMedia("(prefers-color-scheme: dark)");
+		console.log(isDark.matches)
 
 		const doc = document.querySelector("html");
 		const icon = document.querySelector(".theme-icon");
@@ -62,33 +81,6 @@ export default function ThemeChanger({client}) {
 	};
 
 	useEffect(() => {
-		// 	// Remove Event
-		// 	prefersDark.removeEventListener("change", (e) => {
-		// 		systemTheme(e.matches);
-		// 	});
-
-		// 	// Theme Switcher
-		// 	// media query for default theme
-		// 	const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
-		// 	// media query event
-		// 	prefersDark.addEventListener("change", (e) => {
-		// 		systemTheme(e.matches);
-		// 	});
-		// 	// load default theme
-		// 	systemTheme(prefersDark.matches);
-
-		// 	return () => {
-		// 		if (currentTheme === "dark") {
-		// 			darkTheme();
-		// 			dispatch(setTheme("dark"));
-		// 		} else if (currentTheme === "light") {
-		// 			lightTheme();
-		// 			dispatch(setTheme("light"));
-		// 		} else if (currentTheme === "system") {
-		// 			systemTheme(prefersDark.matches);
-		// 			dispatch(setTheme("system"));
-		// 		}
-		// 	};
 
 		return () => {
 			theme === "light"
