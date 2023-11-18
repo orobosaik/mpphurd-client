@@ -7,7 +7,7 @@ export default function AdminStaffListCard({ active }) {
 			className={
 				active ? "adminStaffListCard active" : " adminStaffListCard inactive"
 			}
-			to="/permit/planId">
+			to="./staff">
 			<span className="adminStaffListCard__avatar">
 				<img src="/assets/persons/no_avatar.png" alt="" />
 			</span>

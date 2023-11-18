@@ -53,7 +53,7 @@ export default function AdminSideBar({ selected }) {
 						</NavLink>
 					</li>
 					<li>
-						<NavLink className="sideBarListItem" to="/staff">
+						<NavLink className="sideBarListItem" to="/staffs">
 							<EngineeringRounded className="sideBarIcon" />
 							<span className="sideBarListItemText">Staff</span>
 						</NavLink>

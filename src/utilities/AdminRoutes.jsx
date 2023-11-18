@@ -18,7 +18,7 @@ import AdminLogin from "../pages/admin/adminLogin/adminLogin";
 import AdminHome from "../pages/admin/adminHome/AdminHome";
 import { useSelector } from "react-redux";
 import AdminStaffList from "../pages/admin/adminStaffList/AdminStaffList";
-import AdminStaffUpdate from "../pages/admin/adminStaffUpdate/AdminStaffUpdate";
+import AdminStaffView from "../pages/admin/adminStaffView/adminStaffView";
 
 
 
@@ -44,12 +44,12 @@ function AdminRoutes() {
 					/>
 				</Route>
 
-				{/* PERMIT | APPROVAL */}
-				<Route path="/staff">
+				{/* STAFF */}
+				<Route path="/staffs">
 					<Route index element={<AdminStaffList />} />
-					<Route path="new" element={<AdminStaffUpdate />} />
-					<Route path="planId">
-						<Route index element={<Plan />} />
+					{/* <Route path="new" element={<AdminStaffUpdate />} /> */}
+					<Route path="staff">
+						<Route index element={<AdminStaffView />} />
 						<Route path="bills" element={<ViewBill />} />
 						<Route path="createbill" element={<CreateBill />} />
 						<Route path="minute" element={<Minute />} />

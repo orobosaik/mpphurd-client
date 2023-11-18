@@ -214,3 +214,9 @@ html[data-theme="dark"] .pageWrapper{
 		filter: brightness(50%) blur(4px);
 		-webkit-filter: brightness(50%) blur(4px);
 }
+html[data-theme="light"]{
+	color-scheme: "light";
+}
+html[data-theme="dark"]{
+	color-scheme: "dark";
+}

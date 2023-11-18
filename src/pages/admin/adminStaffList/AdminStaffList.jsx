@@ -8,6 +8,7 @@ import ListCard from "../../../components/listCard/ListCard";
 import { ExpandMoreRounded, PersonAddRounded } from "@mui/icons-material";
 import AdminStaffListCard from "../../../components/adminStaffListCard/AdminStaffListCard";
 import { Link } from "react-router-dom";
+import AdminStaffEditModal from "../../../components/adminStaffEditModal/AdminStaffEditModal";
 
 export default function AdminStaffList() {
 	const todayDate = new Date().toISOString().slice(0, 10);
@@ -27,12 +28,17 @@ export default function AdminStaffList() {
 							topBarData={{
 								action: "Staff List",
 								options: (
-									<Link to="./new">
-										<button className="addStaffButton primary">
-											<PersonAddRounded className="icon" />
-											<span>Add New Staff</span>
-										</button>
-									</Link>
+									<AdminStaffEditModal
+										buttonIcon={<PersonAddRounded />}
+										buttonClass={"addStaffButton primary"}
+										buttonName={"Add New Staff"}
+									/>
+									// <Link to="./new">
+									// 	<button className="addStaffButton primary">
+									// 		<PersonAddRounded className="icon" />
+									// 		<span>Add New Staff</span>
+									// 	</button>
+									// </Link>
 								),
 							}}>
 							{/* <ListWrapper></ListWrapper> */}
@@ -40,7 +46,9 @@ export default function AdminStaffList() {
 								<div className="listQueryOptions">
 									<span>STATUS: </span>
 									<select name="listQueryOption" id="listQueryOption">
-										<option value="active" selected>Active</option>
+										<option value="active" selected>
+											Active
+										</option>
 										<option value="inactive">Inactive</option>
 									</select>
 								</div>

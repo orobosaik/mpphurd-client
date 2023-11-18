@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "./planEditInfoModal.css";
 import {
 	CloseRounded,
@@ -13,8 +13,8 @@ export default function PlanEditInfoModal({
 }) {
 	const [open, setOpen] = useState(false);
 	const [assessment, setAssessment] = useState(false);
-	const [clearing, setClearing] = useState(false);
-	const [archive, setArchive] = useState(true);
+	const [clearing, setClearing] = useState(true);
+	const [archive, setArchive] = useState(false);
 
 	const [collectedApproval, setCollectedApproval] = useState(false);
 
@@ -152,6 +152,30 @@ export default function PlanEditInfoModal({
 			</div>
 		);
 	};
+
+		const KEY_NAME_ESC = "Escape";
+		const KEY_EVENT_TYPE = "keyup";
+
+		useEscapeKey(handleClose);
+
+		function useEscapeKey(handleClose) {
+			const handleEscKey = useCallback(
+				(event) => {
+					if (event.key === KEY_NAME_ESC) {
+						handleClose();
+					}
+				},
+				[handleClose]
+			);
+
+			useEffect(() => {
+				document.addEventListener(KEY_EVENT_TYPE, handleEscKey, false);
+
+				return () => {
+					document.removeEventListener(KEY_EVENT_TYPE, handleEscKey, false);
+				};
+			}, [handleEscKey]);
+		}
 
 	useEffect(() => {
 		const modal = document.querySelector(".modalView");

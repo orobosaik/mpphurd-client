@@ -1,3 +1,7 @@
+.adminStaffEditModal header{
+  margin-bottom: 2rem;
+}
+
 .OfficeWrapper {
 	display: flex;
 	width: 100%;
