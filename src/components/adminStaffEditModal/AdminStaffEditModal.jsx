@@ -1,4 +1,4 @@
-import "./adminStaffEditModal.css"
+import "./adminStaffEditModal.css";
 import {
 	AddPhotoAlternateRounded,
 	FileUploadRounded,
@@ -8,7 +8,6 @@ import {
 import ToggleSwitch from "../toggleSwitch/ToggleSwitch";
 import React, { useCallback, useEffect, useState } from "react";
 import { CloseRounded, EditRounded } from "@mui/icons-material";
-
 
 // return (
 // 	<div>
@@ -215,9 +214,9 @@ export default function AdminStaffEditModal({ ...props }) {
 	const handleClose = () => setOpen(false);
 
 	const KEY_NAME_ESC = "Escape";
-  const KEY_EVENT_TYPE = "keyup";
+	const KEY_EVENT_TYPE = "keyup";
 
-  useEscapeKey(handleClose);
+	useEscapeKey(handleClose);
 
 	function useEscapeKey(handleClose) {
 		const handleEscKey = useCallback(
@@ -229,15 +228,14 @@ export default function AdminStaffEditModal({ ...props }) {
 			[handleClose]
 		);
 
-    useEffect(() => {
+		useEffect(() => {
 			document.addEventListener(KEY_EVENT_TYPE, handleEscKey, false);
 
 			return () => {
 				document.removeEventListener(KEY_EVENT_TYPE, handleEscKey, false);
 			};
 		}, [handleEscKey]);
-  }
-
+	}
 
 	useEffect(() => {
 		const modal = document.querySelector(".adminStaffEditModal");
@@ -249,6 +247,17 @@ export default function AdminStaffEditModal({ ...props }) {
 
 	const [isActive, setIsActive] = useState(true);
 	const [isManagement, setIsManagement] = useState(false);
+
+	const [photo, setPhoto] = useState(null);
+	const [clearPhotoButton, setClearPhotoButton] = useState(true);
+
+	const onPhotoChange = (event) => {
+		if (event.target.files && event.target.files[0]) {
+			setPhoto(URL.createObjectURL(event.target.files[0]));
+			console.log(URL.createObjectURL(event.target.files[0]));
+		}
+	};
+
 
 	return (
 		<>
@@ -268,19 +277,34 @@ export default function AdminStaffEditModal({ ...props }) {
 					</header>
 
 					<div className="inputStaffHeader">
-						<div className="staffImage">
+						<div
+							className="staffImage"
+							onMouseEnter={() => setClearPhotoButton(true)}
+							onMouseLeave={() => setClearPhotoButton(false)}>
+							{(clearPhotoButton && photo) && (
+								<div className="clearPhotoButton">
+									<CloseRounded className="clearPhotoIcon" onClick={() => setPhoto(null)} />
+								</div>
+							)}
 							<label
 								htmlFor={"staffMeansOfIdentification"}
 								className="uploadImageWrapper">
-								<span>
-									<AddPhotoAlternateRounded fontSize="large" />
-								</span>
-								<span>Select Image</span>
+								{photo ? (
+									<img src={photo} alt="" />
+								) : (
+									<div>
+										<span>
+											<AddPhotoAlternateRounded fontSize="large" />
+										</span>
+										<span>Select Image</span>
+									</div>
+								)}
 								<input
 									type="file"
 									name={"staffMeansOfIdentification"}
 									id={"staffMeansOfIdentification"}
 									accept="image/png, image/jpeg, image/jpg"
+									onChange={onPhotoChange}
 								/>
 							</label>
 						</div>
