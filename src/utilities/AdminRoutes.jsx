@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
-
 import Home from "../pages/home/Home";
 import Plan from "../pages/plan/Plan.jsx";
 import CreateApplication from "../pages/createApplication/CreateApplication";
@@ -19,14 +18,13 @@ import AdminHome from "../pages/admin/adminHome/AdminHome";
 import { useSelector } from "react-redux";
 import AdminStaffList from "../pages/admin/adminStaffList/AdminStaffList";
 import AdminStaffView from "../pages/admin/adminStaffView/adminStaffView";
-
-
+import AdminOfficeList from "../pages/admin/adminOfficeList/AdminOfficeList";
+import AdminOfficeView from "../pages/admin/adminOfficeView/AdminOfficeView";
 
 function AdminRoutes() {
 	const { currentAdmin, loading } = useSelector((state) => state.admin);
 	return (
 		<>
-
 			<Routes>
 				{/* HOME PAGE */}
 				<Route path="/">
@@ -50,6 +48,18 @@ function AdminRoutes() {
 					{/* <Route path="new" element={<AdminStaffUpdate />} /> */}
 					<Route path="staff">
 						<Route index element={<AdminStaffView />} />
+						<Route path="bills" element={<ViewBill />} />
+						<Route path="createbill" element={<CreateBill />} />
+						<Route path="minute" element={<Minute />} />
+					</Route>
+				</Route>
+
+				{/* OFFICE */}
+				<Route path="/offices">
+					<Route index element={<AdminOfficeList />} />
+					{/* <Route path="new" element={<AdminStaffUpdate />} /> */}
+					<Route path="office">
+						<Route index element={<AdminOfficeView />} />
 						<Route path="bills" element={<ViewBill />} />
 						<Route path="createbill" element={<CreateBill />} />
 						<Route path="minute" element={<Minute />} />
@@ -83,6 +93,5 @@ function AdminRoutes() {
 		</>
 	);
 }
-
 
 export default AdminRoutes;

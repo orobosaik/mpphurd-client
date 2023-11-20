@@ -50,12 +50,10 @@ export default function AdminStaffView() {
 									<div>
 										<h2>Orobosa Ikponmwosa</h2>
 
-
 										<h4>Town Planning Officer</h4>
 										<h4>TPO2 (Zone 2)</h4>
 
 										<p>Department of Development Control</p>
-
 
 										<div>
 											<span>Official Email:</span>
@@ -73,8 +71,6 @@ export default function AdminStaffView() {
 											<span>Gender:</span>
 											<span>Male</span>
 										</div>
-
-
 									</div>
 
 									<div className="staffImage">
@@ -85,7 +81,6 @@ export default function AdminStaffView() {
 										</label>
 									</div>
 								</div>
-
 
 								<div className="inputStaffHeaderRight">
 									<div>
@@ -105,7 +100,6 @@ export default function AdminStaffView() {
 										/>
 									</div>
 								</div>
-								
 							</div>
 						</MiddleBar>
 					</div>

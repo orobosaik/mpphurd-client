@@ -1,4 +1,4 @@
-.adminStaffListCard {
+.adminOfficeListCard {
 	position: relative;
 	width: 100%;
 	/* background-color: lightgray; */
@@ -15,20 +15,20 @@
 	-o-border-radius: 8px;
 }
 
-.adminStaffListCard:hover {
+.adminOfficeListCard:hover {
 	/* box-shadow: 0px 0px 7px 0px rgb(0, 200, 83, 0.4); */
 	/* font-weight: 700; */
 	background-color: var(--green-background);
 }
 
-.adminStaffListCard span {
+.adminOfficeListCard span {
 	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
-.adminStaffListCard span:not(:nth-child(1)):before {
+.adminOfficeListCard span:not(:nth-child(1)):before {
 	position: absolute;
 	content: "";
 	left: -1rem;
@@ -38,19 +38,7 @@
 }
 
 
-
-.active .adminStaffListCard__status span{
-	background-color: rgb(101, 101, 223);
-	color: aliceblue;
-	padding: 2px 5px;
-	width: 100%;
-	border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	-ms-border-radius: 5px;
-	-o-border-radius: 5px;
-}
-.inactive .adminStaffListCard__status span{
+ .adminOfficeListCardEditButton{
 	background-color: rgb(206, 206, 206);
 	color: rgb(51, 51, 51);
 	padding: 2px 5px;
@@ -62,7 +50,7 @@
 	-o-border-radius: 5px;
 }
 
-.adminStaffListCard__avatar{
+.adminOfficeListCard__avatar{
 	overflow: hidden;
 	width: 4.5rem;
 	height: 4.5rem;
@@ -76,32 +64,32 @@
 	-o-border-radius: 50%;
 }
 
-.adminStaffListCard__name {
-	width: 20rem;
-	/* flex: 4; */
+.adminOfficeListCard__name {
+	/* width: 20rem; */
+	flex: 1;
 }
-.adminStaffListCard__email {
-	width: 20rem;
-	/* flex: 4; */
+.adminOfficeListCard__email {
+	/* width: 20rem; */
+	flex: 2;
 }
-.adminStaffListCard__phone {
-	width: 10rem;
-	/* flex: 2; */
+.adminOfficeListCard__phone {
+	/* width: 10rem; */
+	flex: 5;
 }
-.adminStaffListCard__region {
+.adminOfficeListCard__region {
 	width: 8rem;
 	/* flex: 2; */
 }
-.adminStaffListCard__office {
+.adminOfficeListCard__office {
 	width: 8rem;
 	/* flex: 2.5; */
 
 }
-.adminStaffListCard__title {
+.adminOfficeListCard__title {
 	width: 8rem;
 	/* flex: 2; */
 }
-.adminStaffListCard__status {
-	width: 6rem;
-	/* flex: 2; */
+.adminOfficeListCard__status {
+	/* width: 6rem; */
+	flex: 1;
 }

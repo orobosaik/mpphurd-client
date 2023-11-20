@@ -1,0 +1,100 @@
+.addStaffButton {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+}
+.addStaffButton .icon {
+	font-size: 1.6rem !important;
+}
+
+.OfficeWrapper {
+	display: flex;
+	width: 100%;
+	padding: 0 6px;
+	gap: 6px;
+}
+.OfficeSideBar {
+	flex: 2;
+}
+.OfficeMiddleBar {
+	flex: 10;
+}
+.OfficeMiddleBar .middleBarWrapper {
+	padding-bottom: 0;
+}
+
+.adminStaffListHeader {
+	font-weight: 700;
+
+	position: relative;
+	width: calc(100% - 2rem);
+	display: flex;
+  flex-wrap: wrap;
+	margin: 0 auto;
+	gap: 2rem;
+	padding: 0 2rem;
+	padding: 1rem 1.5rem;
+  padding-right: 2rem;
+	/* border: 1px solid rgba(0, 0, 0, 0.2); */
+}
+
+.adminStaffListHeader span {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.adminStaffListHeader span:not(:nth-child(1)):before {
+	position: absolute;
+	content: "";
+	left: -1rem;
+	width: 1px;
+	height: 100%;
+	border-left: solid var(--sc-grey) 1px;
+}
+
+.adminStaffListHeader__avatar {
+	/* width: 4.5rem; */
+	/* flex: 1; */
+}
+.adminStaffListHeader__name {
+	/* width: 20rem; */
+	flex: 1;
+}
+.adminStaffListHeader__email {
+	/* width: 20rem; */
+	flex: 2;
+}
+.adminStaffListHeader__phone {
+	/* width: 10rem; */
+	flex: 5;
+}
+.adminStaffListHeader__region {
+	width: 8rem;
+	/* flex: 2; */
+}
+.adminStaffListHeader__office {
+	width: 8rem;
+	/* flex: 2.5; */
+
+}
+.adminStaffListHeader__designation {
+	width: 8rem;
+	/* flex: 2; */
+}
+.adminStaffListHeader__status {
+	/* width: 6rem; */
+	flex: 1;
+}
+
+.adminStaffListCardWrapper {
+	display: flex;
+	position: relative;
+	flex-direction: column;
+	gap: 1rem;
+	padding: 1rem;
+	padding-bottom: 2rem;
+	height: calc(100vh - 200px);
+	overflow-y: auto;
+}
