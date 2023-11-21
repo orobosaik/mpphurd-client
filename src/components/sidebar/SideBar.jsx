@@ -99,8 +99,8 @@ export default function SideBar({ selected }) {
 				<div className="sideBarLogout" onClick={handleLogout}>
 					<LogoutRounded className="sideBarIcon" />
 					<span>Log Out</span>
-					<ToastContainer />
 				</div>
+					<ToastContainer />
 			</div>
 		</div>
 	);

@@ -31,7 +31,7 @@ export default function AdminSideBar({ selected }) {
 	const { theme } = useSelector((state) => state.app);
 	const themeColor = getThemeColor(theme);
 
-	const handleLogout = () => {
+	const handleAdminLogout = () => {
 		console.log("YAYAYAYAYAYA");
 		dispatch(adminLogout());
 		navigate("/login");
@@ -101,11 +101,11 @@ export default function AdminSideBar({ selected }) {
 						</NavLink>
 					</li>
 				</ul>
-				<div className="sideBarLogout" onClick={handleLogout}>
+				<div className="sideBarLogout" onClick={handleAdminLogout}>
 					<LogoutRounded className="sideBarIcon" />
 					<span>Log Out</span>
-					<ToastContainer />
 				</div>
+					<ToastContainer />
 			</div>
 		</div>
 	);
