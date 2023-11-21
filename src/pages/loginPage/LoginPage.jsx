@@ -16,10 +16,11 @@ import { loginFailure, loginStart, loginSuccess } from "../../redux/userSlice";
 import { CircularProgress } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ChangePasswordModal from "../../components/changePasswordModal/ChangePasswordModal";
 
 export default function LoginPage() {
 	const [showPassword, setShowPassword] = useState(false);
-	const { currentUser, loading } = useSelector((state) => state.user);
+	const { currentUser, loading, theme } = useSelector((state) => state.user);
 	const dispatch = useDispatch();
 
 	const email = useRef();
@@ -32,28 +33,27 @@ export default function LoginPage() {
 		dispatch(loginStart());
 
 		try {
-			let host = import.meta.env.VITE_SERVER
-			const res = await axios.post(
-				`${host}/staffs/auth/login`,
-				{
-					email: email.current.value,
-					password: password.current.value,
-				}
-			);
-			toast.success("Login Successful", {
-				position: "top-right",
-				autoClose: 1000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-				theme: "light",
+			let host = import.meta.env.VITE_SERVER;
+			const res = await axios.post(`${host}/staffs/auth/login`, {
+				email: email.current.value,
+				password: password.current.value,
 			});
+			dispatch(loginSuccess(res.data));
 			console.log(res.data);
+
 			setTimeout(() => {
-				dispatch(loginSuccess(res.data));
-			}, 1100);
+				toast.success("Login Successful", {
+					position: "top-right",
+					autoClose: 1000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: theme !== "system" ? theme : "light",
+				});
+			}, 200);
+
 		} catch (error) {
 			let message = error.response
 				? error.response.data.message
@@ -69,7 +69,7 @@ export default function LoginPage() {
 				pauseOnHover: true,
 				draggable: true,
 				progress: undefined,
-				theme: "light",
+				theme: theme,
 			});
 
 			dispatch(loginFailure());
@@ -79,7 +79,8 @@ export default function LoginPage() {
 	return (
 		<>
 			<div className="login">
-				<div className="login__background"></div>
+				{/* <div className="login__background"></div> */}
+				<div className="pageWrapper"></div>
 				<section className="login__header">
 					<div className="login__formBackground">
 						<section className="app-cover__info">
@@ -143,7 +144,10 @@ export default function LoginPage() {
 									</span>
 								</div>
 							</div>
-							<p className="btn password-reset">Forgot Password</p>
+
+							<p className="btn password-reset">
+								<ChangePasswordModal name={"Forgot Password"} />
+							</p>
 							<button
 								type="submit"
 								className="btn btn-form-submit"

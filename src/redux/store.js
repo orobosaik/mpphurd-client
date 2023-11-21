@@ -12,6 +12,7 @@ import {
 import storage from "redux-persist/lib/storage";
 import userReducer from "./userSlice";
 import adminReducer from "./adminSlice";
+import appReducer from "./appSlice";
 
 const persistConfig = {
 	key: "root",
@@ -22,6 +23,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
 	user: userReducer,
 	admin: adminReducer,
+	app: appReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

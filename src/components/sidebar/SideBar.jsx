@@ -1,5 +1,5 @@
 import "./sideBar.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, Navigate, useNavigate } from "react-router-dom";
 import {
 	ApartmentRounded,
 	ArticleRounded,
@@ -14,30 +14,42 @@ import {
 	QueryStatsRounded,
 	TaskRounded,
 } from "@mui/icons-material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/userSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { persistor } from "../../redux/store";
 
 export default function SideBar({ selected }) {
+	const navigate = useNavigate()
 	const dispatch = useDispatch();
-	const handleLogout =  () => {
-		toast.success("Logout Successful", {
-			position: "top-right",
-			autoClose: 1000,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true,
-			progress: undefined,
-			theme: "light",
-		});
+
+	const { theme } = useSelector((state) => state.app);
+
+
+	const handleLogout = () => {
+		console.log("YAYAYAYAYAYA");
+		navigate("/login");
+		// persistor.purge();
+		dispatch(logout());
 
 		setTimeout(() => {
-			persistor.purge();
-		}, 1000);
-		// dispatch(logout());
+			toast.success("Logout Successful", {
+				position: "top-right",
+				autoClose: 1000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: theme !== "system" ? theme : "light",
+			});
+
+
+			console.log("LOGEDOUT");
+
+		}, 0);
+
 	};
 	return (
 		<div className="sideBar">
@@ -89,7 +101,7 @@ export default function SideBar({ selected }) {
 				<div className="sideBarLogout" onClick={handleLogout}>
 					<LogoutRounded className="sideBarIcon" />
 					<span>Log Out</span>
-				<ToastContainer />
+					<ToastContainer />
 				</div>
 			</div>
 		</div>

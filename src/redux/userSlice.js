@@ -5,11 +5,6 @@ const initialState = {
 	currentUser: null,
 	loading: null,
 	error: null,
-	theme: "system",
-	modal : {
-		open: false,
-		
-	}
 };
 
 const userSlice = createSlice({
@@ -36,9 +31,6 @@ const userSlice = createSlice({
 			state.loading = null;
 			state.error = null;
 		},
-		setTheme: (state, action) => {
-			state.theme = action.payload
-		},
 	},
 	extraReducers: (builder) => {
 		builder.addCase(PURGE, (state) => {
@@ -47,6 +39,6 @@ const userSlice = createSlice({
 	},
 });
 
-export const { loginStart, loginSuccess, loginFailure, logout, setTheme } =
+export const { loginStart, loginSuccess, loginFailure, logout } =
 	userSlice.actions;
 export default userSlice.reducer;

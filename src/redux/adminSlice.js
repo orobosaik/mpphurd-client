@@ -5,7 +5,6 @@ const initialState = {
 	currentAdmin: null,
 	loading: null,
 	error: null,
-	theme: "system",
 };
 
 const adminSlice = createSlice({
@@ -32,9 +31,6 @@ const adminSlice = createSlice({
 			state.loading = null;
 			state.error = null;
 		},
-		setTheme: (state, action) => {
-			state.theme = action.payload;
-		},
 	},
 	extraReducers: (builder) => {
 		builder.addCase(PURGE, (state) => {
@@ -43,6 +39,6 @@ const adminSlice = createSlice({
 	},
 });
 
-export const { adminLoginStart, adminLoginSuccess, adminLoginFailure, adminLogout, setTheme } =
+export const { adminLoginStart, adminLoginSuccess, adminLoginFailure, adminLogout } =
 	adminSlice.actions;
 export default adminSlice.reducer;

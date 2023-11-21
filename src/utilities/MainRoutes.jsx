@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
 import Home from "../pages/home/Home";
 import Plan from "../pages/plan/Plan.jsx";
@@ -18,8 +18,18 @@ import LoginPage from "../pages/loginPage/LoginPage";
 import { useSelector } from "react-redux";
 
 export default function MainRoutes() {
-	const {currentUser} = useSelector((state) => state.user);
+	const navigate = useNavigate();
+	const { currentUser } = useSelector((state) => state.user);
 	console.log(currentUser);
+
+	useEffect(() => {
+		return () => {
+			if (!currentUser) {
+				navigate("/login");
+			}
+		};
+	}, []);
+
 	return (
 		<>
 			<Routes>
@@ -41,7 +51,7 @@ export default function MainRoutes() {
 
 				{/* PERMIT | APPROVAL */}
 				<Route path="/permit">
-					<Route index element={<Approval />} />
+					<Route index element={currentUser && <Approval />} />
 					<Route path="new" element={<CreateApplication />} />
 					<Route path="planId">
 						<Route

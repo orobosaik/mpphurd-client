@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setTheme } from "../../redux/userSlice";
+import { setTheme } from "../../redux/appSlice";
 import "./themeChanger.css";
 
 import { Dropdown } from "@mui/base/Dropdown";
@@ -14,7 +14,7 @@ import {
 } from "@mui/icons-material";
 
 export default function ThemeChanger({ client }) {
-	const { theme } = useSelector((state) => state.user);
+	const {theme} = useSelector((state) => state.app);
 
 	const dispatch = useDispatch();
 
