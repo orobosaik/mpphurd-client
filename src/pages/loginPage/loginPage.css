@@ -151,7 +151,7 @@ html[data-theme="dark"] .login .pageWrapper{
 	-o-border-radius: 8px;
 }
 html[data-theme="dark"] .login__formBackground{
-	background-color: rgba(0, 0, 0, 0.85);
+	background-color: rgba(0, 0, 0, 0.55);
 
 }
 .login__form {

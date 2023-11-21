@@ -30,6 +30,11 @@ export default function LoginPage() {
 	const email = useRef();
 	const password = useRef();
 
+	const funFun = (e) => {
+		e.preventDefault()
+		alert("THIS IS WILD")
+	}
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
@@ -150,7 +155,10 @@ export default function LoginPage() {
 							</div>
 
 							<p className="btn password-reset">
-								<ChangePasswordModal name={"Forgot Password"} />
+								<ChangePasswordModal name={"Forgot Password"} fun={funFun} onSubmit={e => {
+									e.preventDefault()
+									alert("WOWOWOWOWOWO")
+								}} />
 							</p>
 							<button
 								type="submit"
