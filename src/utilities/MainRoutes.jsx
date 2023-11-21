@@ -16,11 +16,19 @@ import Approval from "../pages/approval/Approval";
 import DocumentView from "../pages/documentView/DocumentView";
 import LoginPage from "../pages/loginPage/LoginPage";
 import { useSelector } from "react-redux";
+import { setThemeColor } from "./themeColor";
 
 export default function MainRoutes() {
 	const navigate = useNavigate();
 	const { currentUser } = useSelector((state) => state.user);
+	const { theme } = useSelector((state) => state.app);
 	console.log(currentUser);
+
+	useEffect(() => {
+
+		setThemeColor(theme)
+
+	}, [theme]);
 
 	useEffect(() => {
 		return () => {

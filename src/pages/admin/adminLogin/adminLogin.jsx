@@ -12,66 +12,89 @@ import {
 	VisibilityOffOutlined,
 	VisibilityOutlined,
 } from "@mui/icons-material";
-import { adminLoginFailure, adminLoginStart, adminLoginSuccess } from "../../../redux/adminSlice";
+import {
+	adminLoginFailure,
+	adminLoginStart,
+	adminLoginSuccess,
+} from "../../../redux/adminSlice";
 import { CircularProgress } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { getThemeColor } from "../../../utilities/themeColor";
 
 export default function AdminLogin() {
 	const [showPassword, setShowPassword] = useState(false);
-	const { currentUser, loading } = useSelector((state) => state.admin);
+	const { currentAdmin, loading } = useSelector((state) => state.admin);
 	const dispatch = useDispatch();
+
+		const { theme } = useSelector((state) => state.app);
+		const themeColor = getThemeColor(theme);
 
 	const email = useRef();
 	const password = useRef();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
 		console.log(email, password);
 
 		dispatch(adminLoginStart());
+		dispatch(adminLoginSuccess(true));
 
-    dispatch(adminLoginSuccess(true));
-    toast.success("Login Successful", {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
+			setTimeout(() => {
+				toast.success("Login Successful", {
+					position: "top-right",
+					autoClose: 1000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: themeColor,
+				});
+			}, 200);
 
+		// try {
+		// 	let host = import.meta.env.VITE_SERVER;
+		// 	const res = await axios.post(`${host}/admin/auth/login`, {
+		// 		email: email.current.value,
+		// 		password: password.current.value,
+		// 	});
+		// 	dispatch(adminLoginSuccess(res.data));
+		// 	console.log(res.data);
 
-		try {
-			const res = await axios.post(
-				"http://localhost:8800/api/admin/auth/login",
-				{
-					email: email.current.value,
-					password: password.current.value,
-				}
-			);
-		} catch (error) {
-			let message = error.response
-				? error.response.data.message
-				: error.message;
-			console.log(error);
-			console.log(message);
+		// 	setTimeout(() => {
+		// 		toast.success("Login Successful", {
+		// 			position: "top-right",
+		// 			autoClose: 1000,
+		// 			hideProgressBar: false,
+		// 			closeOnClick: true,
+		// 			pauseOnHover: true,
+		// 			draggable: true,
+		// 			progress: undefined,
+		// 			theme: themeColor,
+		// 		});
+		// 	}, 200);
+		// } catch (error) {
+		// 	let message = error.response
+		// 		? error.response.data.message
+		// 		: error.message;
+		// 	console.log(error);
+		// 	console.log(message);
 
-			toast.error(message, {
-				position: "top-right",
-				autoClose: 2000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-				theme: "light",
-			});
+		// 	toast.error(message, {
+		// 		position: "top-right",
+		// 		autoClose: 2000,
+		// 		hideProgressBar: false,
+		// 		closeOnClick: true,
+		// 		pauseOnHover: true,
+		// 		draggable: true,
+		// 		progress: undefined,
+		// 		theme: themeColor,
+		// 	});
 
-			dispatch(loginFailure());
-		}
+		// 	dispatch(adminLoginFailure());
+		// }
 	};
 
 	return (
@@ -99,7 +122,10 @@ export default function AdminLogin() {
 							<div className="form-logo">
 								{/* <img src="Mpphurd.png" alt="Mpphurd Logo" /> */}
 							</div>
-							<p className="form-greeting"> Please Login to continue as Admin</p>
+							<p className="form-greeting">
+								{" "}
+								Please Login to continue as Admin
+							</p>
 							<div className="form-input">
 								<label htmlFor="email">Email</label>
 								<div>

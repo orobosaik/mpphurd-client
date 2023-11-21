@@ -17,10 +17,14 @@ import { CircularProgress } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ChangePasswordModal from "../../components/changePasswordModal/ChangePasswordModal";
+import { getThemeColor } from "../../utilities/themeColor";
 
 export default function LoginPage() {
 	const [showPassword, setShowPassword] = useState(false);
-	const { currentUser, loading, theme } = useSelector((state) => state.user);
+	const { currentUser, loading } = useSelector((state) => state.user);
+	const { theme } = useSelector((state) => state.app);
+	const themeColor = getThemeColor(theme);
+
 	const dispatch = useDispatch();
 
 	const email = useRef();
@@ -28,6 +32,7 @@ export default function LoginPage() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
 		console.log(email, password);
 
 		dispatch(loginStart());
@@ -50,10 +55,9 @@ export default function LoginPage() {
 					pauseOnHover: true,
 					draggable: true,
 					progress: undefined,
-					theme: theme !== "system" ? theme : "light",
+					theme: themeColor,
 				});
 			}, 200);
-
 		} catch (error) {
 			let message = error.response
 				? error.response.data.message
@@ -69,7 +73,7 @@ export default function LoginPage() {
 				pauseOnHover: true,
 				draggable: true,
 				progress: undefined,
-				theme: theme,
+				theme: themeColor,
 			});
 
 			dispatch(loginFailure());

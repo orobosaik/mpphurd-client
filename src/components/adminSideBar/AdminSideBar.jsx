@@ -1,5 +1,5 @@
 import "./adminSideBar.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
 	ArticleRounded,
 	AssessmentRounded,
@@ -18,30 +18,42 @@ import {
 	QueryStatsRounded,
 	TaskRounded,
 } from "@mui/icons-material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { persistor } from "../../redux/store";
+import { getThemeColor } from "../../utilities/themeColor";
+import { adminLogout } from "../../redux/adminSlice";
 
 export default function AdminSideBar({ selected }) {
 	const dispatch = useDispatch();
+	const navigate = useNavigate()
+	const { theme } = useSelector((state) => state.app);
+	const themeColor = getThemeColor(theme);
+
 	const handleLogout = () => {
-		toast.success("Logout Successful", {
-			position: "top-right",
-			autoClose: 1000,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true,
-			progress: undefined,
-			theme: "light",
-		});
+		console.log("YAYAYAYAYAYA");
+		dispatch(adminLogout());
+		navigate("/login");
+		// persistor.purge();
 
 		setTimeout(() => {
-			persistor.purge();
-		}, 1000);
-		// dispatch(logout());
+			toast.success("Logout Successful", {
+				position: "top-right",
+				autoClose: 1000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: themeColor,
+			});
+
+			console.log("LOGEDOUT");
+		}, 0);
 	};
+
+
 	return (
 		<div className="sideBar">
 			<div className="sideBarWrapper">

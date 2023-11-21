@@ -15,82 +15,7 @@ import {
 
 export default function ThemeChanger({ client }) {
 	const {theme} = useSelector((state) => state.app);
-
 	const dispatch = useDispatch();
-
-	const handleThemeClick = (theme) => {
-		return () => {
-		theme === "light"
-		? lightTheme()
-			: theme === "dark"
-			? darkTheme()
-			: systemTheme();
-			// alert(theme);
-		};
-	};
-
-	const changeTheme = () => {
-		// media query for default theme
-		const isDark = window.matchMedia("(prefers-color-scheme: dark)");
-
-		const doc = document.querySelector("html");
-		const icon = document.querySelector(".theme-icon");
-		// const path = document.querySelector(".theme-icon path");
-		// path.setAttribute("d", dayAndNightIcon);
-		// icon.classList = "theme-icon theme-system";
-
-		dispatch(setTheme("system"));
-
-		!isDark ? (doc.dataset.theme = "dark") : (doc.dataset.theme = "light");
-	}
-	const systemTheme = () => {
-		// media query for default theme
-		const isDark = window.matchMedia("(prefers-color-scheme: dark)");
-		console.log(isDark.matches)
-
-		const doc = document.querySelector("html");
-		const icon = document.querySelector(".theme-icon");
-		// const path = document.querySelector(".theme-icon path");
-		// path.setAttribute("d", dayAndNightIcon);
-		// icon.classList = "theme-icon theme-system";
-
-		dispatch(setTheme("system"));
-
-		!isDark ? (doc.dataset.theme = "dark") : (doc.dataset.theme = "light");
-	};
-	const darkTheme = () => {
-		const doc = document.querySelector("html");
-		// const icon = document.querySelector(".theme-icon");
-		// const path = document.querySelector(".theme-icon path");
-
-		dispatch(setTheme("dark"));
-
-		doc.dataset.theme = "dark";
-		// path.setAttribute("d", nightIcon);
-		// icon.classList = "theme-icon theme-dark";
-	};
-	const lightTheme = () => {
-		const doc = document.querySelector("html");
-		// const icon = document.querySelector(".theme-icon");
-		// const path = document.querySelector(".theme-icon path");
-		dispatch(setTheme("light"));
-
-		doc.dataset.theme = "light";
-		// path.setAttribute("d", dayIcon);
-		// icon.classList = "theme-icon theme-light";
-	};
-
-	useEffect(() => {
-
-		return () => {
-			theme === "light"
-				? lightTheme()
-				: theme === "dark"
-				? darkTheme()
-					: systemTheme();
-			// alert("heyyy")
-		};
-	}, []);
 
 	return (
 		<Dropdown>
@@ -109,17 +34,21 @@ export default function ThemeChanger({ client }) {
 				slotProps={{
 					listbox: { className: "dropdown-listbox" },
 				}}>
-				<MenuItem className="dropdown-item" onClick={handleThemeClick("light")}>
+				<MenuItem
+					className="dropdown-item"
+					onClick={()=> dispatch(setTheme("light"))}>
 					<LightModeRounded className="theme-icon" />
 					<span>Light</span>
 				</MenuItem>
-				<MenuItem className="dropdown-item" onClick={handleThemeClick("dark")}>
+				<MenuItem
+					className="dropdown-item"
+					onClick={()=> dispatch(setTheme("dark"))}>
 					<DarkModeRounded className="theme-icon" />
 					<span>Dark</span>
 				</MenuItem>
 				<MenuItem
 					className="dropdown-item"
-					onClick={handleThemeClick("system")}>
+					onClick={()=> dispatch(setTheme("system"))}>
 					<AutoModeRounded className="theme-icon" />
 					<span>System</span>
 				</MenuItem>

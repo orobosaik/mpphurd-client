@@ -19,19 +19,20 @@ import { logout } from "../../redux/userSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { persistor } from "../../redux/store";
+import { getThemeColor } from "../../utilities/themeColor";
 
 export default function SideBar({ selected }) {
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const { theme } = useSelector((state) => state.app);
-
+	const themeColor = getThemeColor(theme);
 
 	const handleLogout = () => {
 		console.log("YAYAYAYAYAYA");
+		dispatch(logout());
 		navigate("/login");
 		// persistor.purge();
-		dispatch(logout());
 
 		setTimeout(() => {
 			toast.success("Logout Successful", {
@@ -42,14 +43,11 @@ export default function SideBar({ selected }) {
 				pauseOnHover: true,
 				draggable: true,
 				progress: undefined,
-				theme: theme !== "system" ? theme : "light",
+				theme: themeColor,
 			});
 
-
 			console.log("LOGEDOUT");
-
 		}, 0);
-
 	};
 	return (
 		<div className="sideBar">

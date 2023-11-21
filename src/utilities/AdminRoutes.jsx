@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
 import Home from "../pages/home/Home";
 import Plan from "../pages/plan/Plan.jsx";
@@ -20,9 +20,28 @@ import AdminStaffList from "../pages/admin/adminStaffList/AdminStaffList";
 import AdminStaffView from "../pages/admin/adminStaffView/adminStaffView";
 import AdminOfficeList from "../pages/admin/adminOfficeList/AdminOfficeList";
 import AdminOfficeView from "../pages/admin/adminOfficeView/AdminOfficeView";
+import { setThemeColor } from "./themeColor";
 
 function AdminRoutes() {
-	const { currentAdmin, loading } = useSelector((state) => state.admin);
+	const { currentAdmin } = useSelector((state) => state.admin);
+
+	const navigate = useNavigate();
+
+	const { theme } = useSelector((state) => state.app);
+	console.log(currentAdmin);
+
+	useEffect(() => {
+		setThemeColor(theme);
+	}, [theme]);
+
+	useEffect(() => {
+		return () => {
+			if (!currentAdmin) {
+				navigate("/login");
+			}
+		};
+	}, []);
+
 	return (
 		<>
 			<Routes>
