@@ -10,10 +10,15 @@ import ThemeChanger from "../../widgets/themeChanger/ThemeChanger";
 import { useState } from "react";
 import SearchResult from "../searchResult/SearchResult";
 import { ClickAwayListener } from "@mui/base/ClickAwayListener";
+import { useSelector } from "react-redux";
+
+
 
 export default function Header() {
 	const [searchQuery, setSearchQuery] = useState("");
 	const [open, setOpen] = useState(false);
+	const { currentUser, loading } = useSelector((state) => state.user);
+	const staff = currentUser
 
 	const handleSearchInput = (e) => {
 		setSearchQuery(e.target.value);
@@ -82,12 +87,12 @@ export default function Header() {
 
 				<div className="headerUser">
 					<div className="headerDetails">
-						<span className="headerName">Orobosa</span>
-						<span className="headerOffice">(Records)</span>
+						<span className="headerName">{`${staff.firstName} ${staff.lastName}`}</span>
+						<span className="headerOffice">{`${staff.office[0].fullName}`}</span>
 					</div>
 
 					<img
-						src="/assets/persons/headshot1.jpg"
+						src={staff.profilePicture}
 						alt=""
 						className="headerImg"
 					/>

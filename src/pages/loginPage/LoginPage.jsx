@@ -43,7 +43,7 @@ export default function LoginPage() {
 		dispatch(loginStart());
 
 		try {
-			let host = import.meta.env.VITE_SERVER;
+			let host = import.meta.env.VITE_SERVER_DEV;
 			const res = await axios.post(`${host}/staffs/auth/login`, {
 				email: email.current.value,
 				password: password.current.value,
