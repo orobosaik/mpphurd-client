@@ -22,8 +22,7 @@ import { getThemeColor } from "../../utilities/themeColor";
 export default function LoginPage() {
 	const [showPassword, setShowPassword] = useState(false);
 	const { currentUser, loading } = useSelector((state) => state.user);
-	const { theme } = useSelector((state) => state.app);
-	const themeColor = getThemeColor(theme);
+	const themeColor = getThemeColor();
 
 	const dispatch = useDispatch();
 
@@ -43,7 +42,7 @@ export default function LoginPage() {
 		dispatch(loginStart());
 
 		try {
-			let host = import.meta.env.VITE_SERVER_DEV;
+			let host = import.meta.env.VITE_SERVER;
 			const res = await axios.post(`${host}/staffs/auth/login`, {
 				email: email.current.value,
 				password: password.current.value,
@@ -154,12 +153,12 @@ export default function LoginPage() {
 								</div>
 							</div>
 
-							<p className="btn password-reset">
+							<div className="btn password-reset">
 								<ChangePasswordModal name={"Forgot Password"} fun={funFun} onSubmit={e => {
 									e.preventDefault()
 									alert("WOWOWOWOWOWO")
 								}} />
-							</p>
+							</div>
 							<button
 								type="submit"
 								className="btn btn-form-submit"

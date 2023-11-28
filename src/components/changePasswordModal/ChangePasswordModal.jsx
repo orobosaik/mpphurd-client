@@ -1,4 +1,5 @@
 import "./changePasswordModal.css";
+import axios from "axios";
 import {
 	LockOutlined,
 	MailOutlineRounded,
@@ -9,7 +10,8 @@ import ToggleSwitch from "../toggleSwitch/ToggleSwitch";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { CloseRounded, EditRounded } from "@mui/icons-material";
 import { CircularProgress } from "@mui/material";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import { getThemeColor } from "../../utilities/themeColor";
 
 export default function ChangePasswordModal({ ...props }) {
 	const [open, setOpen] = useState(false);
@@ -18,10 +20,16 @@ export default function ChangePasswordModal({ ...props }) {
 	const [passwordErr, setPasswordErr] = useState("");
 	const [loading, setLoading] = useState(false);
 
-	const emailUpdate = useRef();
-	const passwordUpdate1 = useRef();
-	const passwordUpdate2 = useRef();
-	const otpCode = useRef();
+	const [emailUpdate, setEmailUpdate] = useState("");
+	const [passwordUpdate1, setPasswordUpdate1] = useState("");
+	const [passwordUpdate2, setPasswordUpdate2] = useState("");
+	const [otpCode, setOtpCode] = useState("");
+
+	console.log(emailUpdate);
+	console.log(passwordUpdate1);
+	console.log(passwordUpdate2);
+
+	const themeColor = getThemeColor();
 
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => {
@@ -32,12 +40,96 @@ export default function ChangePasswordModal({ ...props }) {
 
 	const handleStartReset = (e) => {
 		console.log("In Handle Start Reset");
+		setLoading(true);
 
-		if (passwordUpdate1.current.value !== passwordUpdate2.current.value) {
+		if (
+			emailUpdate === "" ||
+			passwordUpdate1 === "" ||
+			passwordUpdate1 !== passwordUpdate2
+		) {
 			setPasswordErr("Passwords do not match");
+			setLoading(false);
 			return;
 		}
-		setReset(() => !reset);
+
+		const resetPassword = async (email, password, otp) => {
+			try {
+				let host = import.meta.env.VITE_SERVER;
+				const res = await axios.post(`${host}/staffs/auth/change-password`, {
+					email: email,
+					password: password,
+					otp: otp,
+				});
+				setLoading(false);
+				setReset(true);
+				setOpen(false);
+
+
+				setTimeout(() => {
+					toast.success(res.data, {
+						position: "top-right",
+						autoClose: 1000,
+						hideProgressBar: false,
+						closeOnClick: true,
+						pauseOnHover: true,
+						draggable: true,
+						progress: undefined,
+						theme: themeColor,
+					});
+				}, 0);
+			} catch (error) {
+				let message = error.response
+					? error.response.data.message
+					: error.message;
+
+				toast.error(message, {
+					position: "top-right",
+					autoClose: 2000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: themeColor,
+				});
+
+				setLoading(false);
+			}
+		};
+		const sendOTPCode = async (email) => {
+			try {
+				let host = import.meta.env.VITE_SERVER;
+				const res = await axios.post(`${host}/staffs/staff/send-otp`, {
+					email: email,
+				});
+				setLoading(false);
+				setReset(false);
+			} catch (error) {
+				setLoading(false);
+
+				let message = error.response
+					? error.response.data.message
+					: error.message;
+
+				toast.error(message, {
+					position: "top-right",
+					autoClose: 2000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: themeColor,
+				});
+			}
+		};
+
+		if (reset) {
+			sendOTPCode(emailUpdate);
+		} else if (!reset) {
+			resetPassword(emailUpdate, passwordUpdate1, otpCode);
+		}
+		// setReset(() => !reset);
 
 		// e.preventDefault();
 
@@ -112,7 +204,7 @@ export default function ChangePasswordModal({ ...props }) {
 						</form>
 					)} */}
 
-					<form className="">
+					<div className="">
 						<header>
 							<span>Change Password</span>
 							<div className="modalViewCloseButton" onClick={handleClose}>
@@ -128,7 +220,7 @@ export default function ChangePasswordModal({ ...props }) {
 										email
 									</p>
 
-									<div className="form-input">
+									<div className="form-input otp-code">
 										<label htmlFor="email">Enter OTP Code</label>
 										<div>
 											<input
@@ -136,7 +228,8 @@ export default function ChangePasswordModal({ ...props }) {
 												name="otpCode"
 												id="otpCode"
 												required
-												ref={otpCode}
+												// ref={otpCode}
+												onChange={(e) => setOtpCode(e.target.value)}
 											/>
 										</div>
 									</div>
@@ -160,7 +253,8 @@ export default function ChangePasswordModal({ ...props }) {
 												id="emailUpdate"
 												placeholder="Enter your email address"
 												required
-												ref={emailUpdate}
+												// ref={emailUpdate}
+												onChange={(e) => setEmailUpdate(e.target.value)}
 											/>
 										</div>
 									</div>
@@ -176,8 +270,11 @@ export default function ChangePasswordModal({ ...props }) {
 												id="passwordUpdate1"
 												placeholder="Enter new password"
 												required
-												ref={passwordUpdate1}
-												onChange={() => setPasswordErr("")}
+												// ref={passwordUpdate1}
+												onChange={(e) => {
+													setPasswordUpdate1(e.target.value);
+													setPasswordErr("");
+												}}
 											/>
 											<span
 												className="btn"
@@ -204,8 +301,12 @@ export default function ChangePasswordModal({ ...props }) {
 												id="passwordUpdate2"
 												placeholder="Confirm new password"
 												required
-												ref={passwordUpdate2}
-												onChange={() => setPasswordErr("")}
+												// ref={passwordUpdate2}
+
+												onChange={(e) => {
+													setPasswordUpdate2(e.target.value);
+													setPasswordErr("");
+												}}
 											/>
 											<span
 												className="btn"
@@ -234,7 +335,7 @@ export default function ChangePasswordModal({ ...props }) {
 								{loading ? (
 									<CircularProgress
 										thickness={5}
-										size={25}
+										size={20}
 										sx={{ color: "white" }}
 									/>
 								) : !reset ? (
@@ -245,7 +346,7 @@ export default function ChangePasswordModal({ ...props }) {
 							</button>
 						</footer>
 						<ToastContainer />
-					</form>
+					</div>
 				</dialog>
 			)}
 		</div>

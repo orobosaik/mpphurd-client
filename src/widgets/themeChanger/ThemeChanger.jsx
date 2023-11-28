@@ -8,7 +8,7 @@ import { MenuButton } from "@mui/base/MenuButton";
 import { Menu } from "@mui/base/Menu";
 import { MenuItem } from "@mui/base/MenuItem";
 import {
-	AutoModeRounded,
+	BrightnessMediumRounded,
 	DarkModeRounded,
 	LightModeRounded,
 } from "@mui/icons-material";
@@ -25,7 +25,7 @@ export default function ThemeChanger({ client }) {
 				) : theme === "dark" ? (
 					<DarkModeRounded className="theme-icon" />
 				) : (
-					<AutoModeRounded className="theme-icon" />
+					<BrightnessMediumRounded className="theme-icon" />
 				)}
 				<span>Theme</span>
 			</MenuButton>
@@ -36,20 +36,20 @@ export default function ThemeChanger({ client }) {
 				}}>
 				<MenuItem
 					className="dropdown-item"
-					onClick={()=> dispatch(setTheme("light"))}>
+					onClick={() => dispatch(setTheme("light"))}>
 					<LightModeRounded className="theme-icon" />
 					<span>Light</span>
 				</MenuItem>
 				<MenuItem
 					className="dropdown-item"
-					onClick={()=> dispatch(setTheme("dark"))}>
+					onClick={() => dispatch(setTheme("dark"))}>
 					<DarkModeRounded className="theme-icon" />
 					<span>Dark</span>
 				</MenuItem>
 				<MenuItem
 					className="dropdown-item"
-					onClick={()=> dispatch(setTheme("system"))}>
-					<AutoModeRounded className="theme-icon" />
+					onClick={() => dispatch(setTheme("system"))}>
+					<BrightnessMediumRounded className="theme-icon" />
 					<span>System</span>
 				</MenuItem>
 			</Menu>
