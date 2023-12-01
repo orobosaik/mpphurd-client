@@ -223,6 +223,7 @@ html[data-theme="dark"] .searchInput::placeholder{
 	height: 40px;
 	object-fit: cover;
 	border: var(--light-grey) solid 3px;
+	z-index: 100;
 	border-radius: 50%;
 	-webkit-border-radius: 50%;
 	-moz-border-radius: 50%;

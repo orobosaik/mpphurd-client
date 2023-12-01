@@ -25,7 +25,8 @@
 	position: relative;
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	/* justify-content: center; */
+	flex-wrap: wrap;
 }
 
 .adminStaffListCard span:not(:nth-child(1)):before {
@@ -39,7 +40,7 @@
 
 
 
-.active .adminStaffListCard__status span{
+.adminStaffListCard__status.active span{
 	background-color: rgb(101, 101, 223);
 	color: aliceblue;
 	padding: 2px 5px;
@@ -50,7 +51,7 @@
 	-ms-border-radius: 5px;
 	-o-border-radius: 5px;
 }
-.inactive .adminStaffListCard__status span{
+.adminStaffListCard__status.inactive span{
 	background-color: rgb(206, 206, 206);
 	color: rgb(51, 51, 51);
 	padding: 2px 5px;
@@ -74,6 +75,11 @@
 	-moz-border-radius: 50%;
 	-ms-border-radius: 50%;
 	-o-border-radius: 50%;
+}
+.adminStaffListCard__avatar img{
+		width: 4.5rem;
+	height: 4.5rem;
+	object-fit: cover;
 }
 
 .adminStaffListCard__name {

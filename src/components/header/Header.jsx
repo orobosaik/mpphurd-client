@@ -55,7 +55,9 @@ export default function Header() {
 							value={searchQuery}
 						/>
 						{searchQuery && (
-							<div className="searchBarCloseButton" onClick={() => setSearchQuery("")}>
+							<div
+								className="searchBarCloseButton"
+								onClick={() => setSearchQuery("")}>
 								{" "}
 								<CloseRounded />
 							</div>
@@ -92,7 +94,7 @@ export default function Header() {
 					</div>
 
 					<img
-						src={staff.profilePicture}
+						src={staff.profilePicture || import.meta.env.VITE_NO_AVATAR}
 						alt=""
 						className="headerImg"
 					/>

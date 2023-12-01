@@ -54,40 +54,6 @@
 	border-left: solid var(--sc-grey) 1px;
 }
 
-.adminStaffListHeader__avatar {
-	/* width: 4.5rem; */
-	/* flex: 1; */
-}
-.adminStaffListHeader__name {
-	/* width: 20rem; */
-	flex: 1;
-}
-.adminStaffListHeader__email {
-	/* width: 20rem; */
-	flex: 2;
-}
-.adminStaffListHeader__phone {
-	/* width: 10rem; */
-	flex: 5;
-}
-.adminStaffListHeader__region {
-	width: 8rem;
-	/* flex: 2; */
-}
-.adminStaffListHeader__office {
-	width: 8rem;
-	/* flex: 2.5; */
-
-}
-.adminStaffListHeader__designation {
-	width: 8rem;
-	/* flex: 2; */
-}
-.adminStaffListHeader__status {
-	/* width: 6rem; */
-	flex: 1;
-}
-
 .adminStaffListCardWrapper {
 	display: flex;
 	position: relative;

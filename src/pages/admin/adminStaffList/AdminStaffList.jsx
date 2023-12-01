@@ -9,9 +9,60 @@ import { ExpandMoreRounded, PersonAddRounded } from "@mui/icons-material";
 import AdminStaffListCard from "../../../components/adminStaffListCard/AdminStaffListCard";
 import { Link } from "react-router-dom";
 import AdminStaffEditModal from "../../../components/adminStaffEditModal/AdminStaffEditModal";
+import { useEffect, useState } from "react";
+import { CircularProgress } from "@mui/material";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import { getThemeColor } from "../../../utilities/themeColor";
 
 export default function AdminStaffList() {
+	const [isLoading, setIsLoading] = useState(true);
+	const [data, setData] = useState(null);
+	const themeColor = getThemeColor();
+
+	
+
+	useEffect(() => {
+		const getData = async () => {
+			try {
+				let host = import.meta.env.VITE_SERVER;
+				const res = await axios.get(`${host}/admin/staff/get-all-staff`);
+
+				setData(res.data);
+				setIsLoading(false);
+				console.log(res.data);
+			} catch (error) {
+				let message = error.response
+					? error.response.data.message
+					: error.message;
+				console.log(error);
+				console.log(message);
+
+				setTimeout(() => {
+					toast.error(message, {
+						position: "top-right",
+						autoClose: 2000,
+						hideProgressBar: false,
+						closeOnClick: true,
+						pauseOnHover: true,
+						draggable: true,
+						progress: undefined,
+						theme: themeColor,
+					});
+				}, 0);
+				setIsLoading(false);
+			}
+		};
+
+		getData();
+
+		// return () => {
+		// 	second
+		// }
+	}, []);
+
 	const todayDate = new Date().toISOString().slice(0, 10);
+
 	return (
 		<>
 			<div className="pageWrapper"></div>
@@ -42,108 +93,90 @@ export default function AdminStaffList() {
 								),
 							}}>
 							{/* <ListWrapper></ListWrapper> */}
-							<div className="listQuery">
-								<div className="listQueryOptions">
-									<span>STATUS: </span>
-									<select name="listQueryOption" id="listQueryOption">
-										<option value="active" selected>
-											Active
-										</option>
-										<option value="inactive">Inactive</option>
-									</select>
+							{isLoading && (
+								<div className="loading-container">
+									<CircularProgress
+										thickness={3}
+										size={55}
+										className="loading-icon"
+									/>
 								</div>
-								<div className="listQueryOptions">
-									<span>REGION: </span>
-									<select name="listQueryOption" id="listQueryOption">
-										<option value="incoming">Incoming</option>
-										<option value="Outgoing">Outgoing</option>
-										<option value="current">Current</option>
-									</select>
-								</div>
-								<div className="listQueryOptions">
-									<span>DESIGNATION: </span>
-									<select name="listQueryOption" id="listQueryOption">
-										<option value="incoming">Incoming</option>
-										<option value="Outgoing">Outgoing</option>
-										<option value="current">Current</option>
-										<option value="current">Current</option>
-										<option value="current">Current</option>
-										<option value="current">Current</option>
-										<option value="current">Current</option>
-									</select>
-								</div>
+							)}
+							{data && (
+								<>
+									<div className="listQuery">
+										<div className="listQueryOptions">
+											<span>STATUS: </span>
+											<select name="listQueryOption" id="listQueryOption">
+												<option value="active" selected>
+													Active
+												</option>
+												<option value="inactive">Inactive</option>
+											</select>
+										</div>
+										<div className="listQueryOptions">
+											<span>REGION: </span>
+											<select name="listQueryOption" id="listQueryOption">
+												<option value="incoming">Incoming</option>
+												<option value="Outgoing">Outgoing</option>
+												<option value="current">Current</option>
+											</select>
+										</div>
+										<div className="listQueryOptions">
+											<span>DESIGNATION: </span>
+											<select name="listQueryOption" id="listQueryOption">
+												<option value="incoming">Incoming</option>
+												<option value="Outgoing">Outgoing</option>
+												<option value="current">Current</option>
+												<option value="current">Current</option>
+												<option value="current">Current</option>
+												<option value="current">Current</option>
+												<option value="current">Current</option>
+											</select>
+										</div>
 
-								<div>
-									<input type="text" placeholder="Search list..." />
-								</div>
+										<div>
+											<input type="text" placeholder="Search list..." />
+										</div>
 
-								<div className="listCount">
-									<span>Count:</span>
-									<span>78,867</span>
-								</div>
+										<div className="listCount">
+											<span>Count:</span>
+											<span>78,867</span>
+										</div>
 
-								<div className="listSort">
-									<span>Latest to Oldest</span>
-									<ExpandMoreRounded />
-								</div>
-							</div>
-							<div className="adminStaffListHeader">
-								<span className="adminStaffListHeader__avatar">Photo</span>
+										<div className="listSort">
+											<span>Latest to Oldest</span>
+											<ExpandMoreRounded />
+										</div>
+									</div>
 
-								<span className="adminStaffListHeader__name"> Name</span>
-								<span className="adminStaffListHeader__email">Email</span>
-								<span className="adminStaffListHeader__phone">Phone</span>
-								<span className="adminStaffListHeader__region">Region</span>
-								<span className="adminStaffListHeader__office">Office</span>
-								<span className="adminStaffListHeader__designation">
-									Designation
-								</span>
-								<span className="adminStaffListHeader__status">Status</span>
-							</div>
+									<div className="adminStaffListHeader">
+										<span className="adminStaffListHeader__avatar">Photo</span>
 
-							<div className="adminStaffListCardWrapper">
-								<AdminStaffListCard />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard />
-								<AdminStaffListCard />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard active={true} />
-								<AdminStaffListCard />
-								<AdminStaffListCard />
-								<ListCard />
-								<ListCard />
-							</div>
+										<span className="adminStaffListHeader__name"> Name</span>
+										<span className="adminStaffListHeader__email">Email</span>
+										<span className="adminStaffListHeader__phone">Phone</span>
+										<span className="adminStaffListHeader__region">Region</span>
+										<span className="adminStaffListHeader__office">Office</span>
+										<span className="adminStaffListHeader__designation">
+											Designation
+										</span>
+										<span className="adminStaffListHeader__status">Status</span>
+									</div>
+
+									<div className="adminStaffListCardWrapper">
+
+
+										<AdminStaffListCard data={data} />
+										{/* <AdminStaffListCard data={data} /> */}
+
+										<ListCard />
+										<ListCard />
+									</div>
+								</>
+							)}
 						</MiddleBar>
+						<ToastContainer />
 					</div>
 				</div>
 			</div>

@@ -1,31 +1,54 @@
 import { Link } from "react-router-dom";
 import "./adminStaffListCard.css";
 
-export default function AdminStaffListCard({ active }) {
+export default function AdminStaffListCard(props) {
+	const data = props.data;
+
 	return (
-		<Link
-			className={
-				active ? "adminStaffListCard active" : " adminStaffListCard inactive"
-			}
-			to="./staff">
-			<span className="adminStaffListCard__avatar">
-				<img src="/assets/persons/no_avatar.png" alt="" />
-			</span>
+		<>
+			{data.map((d) => {
+				return (
+					<Link
+						className="adminStaffListCard"
+						key={d._id}
+						to="./staff"
+						state={d}>
+						<span className="adminStaffListCard__avatar">
+							<img
+								src={d.profilePicture || import.meta.env.VITE_NO_AVATAR}
+								alt="avatar"
+							/>
+						</span>
 
-			<span className="adminStaffListCard__name">
-				Osarodion Osawaru Igbinedion
-			</span>
+						<span className="adminStaffListCard__name">
+							{d.middleName
+								? d.firstName + " " + d.middleName + " " + d.lastName
+								: d.firstName + " " + d.lastName}
+						</span>
+						{/* <span className="adminStaffListCard__name">{d.fullName}</span> */}
 
-			<span className="adminStaffListCard__email">
-				ig.osarodion@edostate.gov.ng
-			</span>
-			<span className="adminStaffListCard__phone">09088833323</span>
-			<span className="adminStaffListCard__region">Benin</span>
-			<span className="adminStaffListCard__office">Vetting</span>
-			<span className="adminStaffListCard__title">APO 3</span>
-			<span className="adminStaffListCard__status">
-				<span>{active ? "Active" : "Inactive"}</span>
-			</span>
-		</Link>
+						<span className="adminStaffListCard__email">{d.email}</span>
+						<span className="adminStaffListCard__phone">{d.phone}</span>
+						<span className="adminStaffListCard__region">
+							{d.region?.fullName}
+						</span>
+						<span className="adminStaffListCard__office">
+							{d.office?.fullName}
+						</span>
+						<span className="adminStaffListCard__title">
+							{d.jobTitle?.fullName}
+						</span>
+						<span
+							className={
+								d.isActive
+									? "adminStaffListCard__status active"
+									: "adminStaffListCard__status inactive"
+							}>
+							<span>{d.isActive ? "Active" : "Inactive"}</span>
+						</span>
+					</Link>
+				);
+			})}
+		</>
 	);
 }

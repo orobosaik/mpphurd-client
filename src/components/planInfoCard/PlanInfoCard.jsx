@@ -34,7 +34,7 @@ export default function PlanInfoCard({ type, title, AD2, R, BD }) {
 				{BD && (
 					<img
 						className="planInfoImg"
-						src="/assets/persons/no_avater.png"
+						src="/assets/persons/no_avatar.png"
 						alt="Passport"
 					/>
 				)}
