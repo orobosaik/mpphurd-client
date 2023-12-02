@@ -106,8 +106,11 @@ export default function AdminStaffView() {
 												: data.firstName + " " + data.lastName}
 										</h2>
 
-										<h4>{data.jobTitle.fullName}</h4>
-										<h4>TPO2 (Zone 2)</h4>
+										<h4>{data.jobTitle?.fullName}</h4>
+
+										{data.office?.map((d, i) => {
+											return <h4 key={i}> {d.fullName}</h4>;
+										})}
 
 										<p>Department of Development Control+</p>
 

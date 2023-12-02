@@ -20,8 +20,6 @@ export default function AdminStaffList() {
 	const [data, setData] = useState(null);
 	const themeColor = getThemeColor();
 
-	
-
 	useEffect(() => {
 		const getData = async () => {
 			try {
@@ -141,7 +139,7 @@ export default function AdminStaffList() {
 
 										<div className="listCount">
 											<span>Count:</span>
-											<span>78,867</span>
+											<span>{data.length}</span>
 										</div>
 
 										<div className="listSort">
@@ -165,13 +163,7 @@ export default function AdminStaffList() {
 									</div>
 
 									<div className="adminStaffListCardWrapper">
-
-
 										<AdminStaffListCard data={data} />
-										{/* <AdminStaffListCard data={data} /> */}
-
-										<ListCard />
-										<ListCard />
 									</div>
 								</>
 							)}
