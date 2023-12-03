@@ -21,6 +21,7 @@ import AdminStaffView from "../pages/admin/adminStaffView/adminStaffView";
 import AdminOfficeList from "../pages/admin/adminOfficeList/AdminOfficeList";
 import AdminOfficeView from "../pages/admin/adminOfficeView/AdminOfficeView";
 import { setThemeColor } from "./themeColor";
+import AdminRegionList from "../pages/admin/adminRegionList/AdminRegionList.jsx";
 
 function AdminRoutes() {
 	const { currentAdmin } = useSelector((state) => state.admin);
@@ -86,8 +87,8 @@ function AdminRoutes() {
 				</Route>
 
 				{/* PETITION */}
-				<Route path="/petition">
-					<Route index element={<Petition />} />
+				<Route path="/regions">
+					<Route index element={<AdminRegionList />} />
 				</Route>
 
 				{/* BUILDING CONTROL */}

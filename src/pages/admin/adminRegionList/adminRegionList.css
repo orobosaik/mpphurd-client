@@ -1,0 +1,46 @@
+
+.adminRegionListCard__code,
+.adminRegionListHeader__code {
+	min-width: 4.5rem;
+	flex: 1;
+}
+.adminRegionListCard__name,
+.adminRegionListHeader__name {
+	min-width: 8rem;
+	flex: 4;
+}
+
+.adminRegionListCard__zones,
+.adminRegionListHeader__zones {
+	min-width: 20rem;
+	flex: 8;
+}
+
+
+.adminRegionListCard__status,
+.adminRegionListHeader__status {
+	min-width: 1rem;
+	flex: 1;
+}
+.adminRegionListCard__status.active{
+	color: var(--pc-green);
+	font-weight: 700;
+}
+.adminRegionListCard__edit,
+.adminRegionListHeader__edit {
+	min-width: 1rem;
+	flex: 1;
+}
+
+
+ .adminOfficeListCardEditButton{
+	background-color: rgb(206, 206, 206);
+	color: rgb(51, 51, 51);
+	padding: 2px 5px;
+	width: 100%;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-o-border-radius: 5px;
+}

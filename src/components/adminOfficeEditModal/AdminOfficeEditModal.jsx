@@ -73,7 +73,7 @@ export default function AdminOfficeEditModal({ ...props }) {
 					<header>
 						<span>
 							{props.modalType === "add"
-								? "Office Info"
+								? "Create New Office"
 								: props.modalType === "edit"
 								? "Edit Office Info"
 								: ""}
@@ -111,7 +111,7 @@ export default function AdminOfficeEditModal({ ...props }) {
 											<option value="built">Built</option>
 										</select>
 									</div>
-									
+
 
 									<div className="applicationItem">
 										<label htmlFor="">Office and Tasks</label>

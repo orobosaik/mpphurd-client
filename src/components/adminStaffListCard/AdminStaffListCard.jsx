@@ -21,11 +21,13 @@ export default function AdminStaffListCard(props) {
 						</span>
 
 						<span className="adminStaffListCard__name">
-							{d.middleName
-								? d.firstName + " " + d.middleName + " " + d.lastName
-								: d.firstName + " " + d.lastName}
+
+							{[d.firstName, d.middleName, d.lastName]
+								.filter(function (value) {
+									return value !== null && value !== "" && value !== undefined;
+								})
+								.join(" ")}
 						</span>
-						{/* <span className="adminStaffListCard__name">{d.fullName}</span> */}
 
 						<span className="adminStaffListCard__email">{d.email}</span>
 						<span className="adminStaffListCard__phone">{d.phone}</span>
