@@ -22,17 +22,22 @@ export default function AdminRegionEditModal({ ...props }) {
 
 	const [name, setName] = useState(undefined);
 	const [code, setCode] = useState(undefined);
+	const [zones, setZones] = useState([]);
 
-			const navigate = useNavigate();
+	const [removeItemButton, setRemoveItemButton] = useState(null);
 
-	const theme = getThemeColor()
+	const theme = getThemeColor();
 
 	const handleOpen = () => {
 		setOpen(true);
-		setData(props.data);
-		setName(props.data.name.full);
-		setCode(props.data.name.short);
-		setIsActive(props.data.isActive)
+
+		if (props.modalType === "edit") {
+			setData(props.data);
+			setName(props.data.name.full);
+			setCode(props.data.name.short);
+			setZones(props.data.zones);
+			setIsActive(props.data.isActive);
+		}
 	};
 	const handleClose = () => setOpen(false);
 
@@ -68,10 +73,53 @@ export default function AdminRegionEditModal({ ...props }) {
 		return () => {};
 	}, [open]);
 
-	const handleSubmitNew = () => {
-		console.log("inside new");
-	};
+	const handleSubmitNew = async () => {
+		setLoading(true);
+		let newData = {};
+		newData.isActive = isActive;
+		code && (newData.name = {});
+		code && (newData.name.short = code);
+		name && (newData.name.full = name);
+		zones && (newData.zones = zones.filter((str) => str !== ""));
 
+		try {
+			let host = import.meta.env.VITE_SERVER;
+			let res = await axios.post(`${host}/admin/region`, newData);
+
+			setLoading(false);
+			setOpen(false);
+			props.setReload(() => []);
+
+			setTimeout(() => {
+				toast.success(res.data, {
+					position: "top-right",
+					autoClose: 1000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: theme,
+				});
+			}, 0);
+		} catch (error) {
+			setLoading(false);
+
+			let message = error.response
+				? error.response.data.message
+				: error.message;
+
+			toast.error(message, {
+				position: "top-right",
+				autoClose: 2000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: theme,
+			});
+		}}
 	const handleSubmitEdit = async () => {
 		setLoading(true);
 		let newData = {};
@@ -79,13 +127,15 @@ export default function AdminRegionEditModal({ ...props }) {
 		code && (newData.name = {});
 		code && (newData.name.short = code);
 		name && (newData.name.full = name);
+		zones && (newData.zones = zones.filter((str) => str !== ""));
 
 		try {
 			let host = import.meta.env.VITE_SERVER;
-			const res = await axios.put(`${host}/admin/region/${data._id}`, newData);
+			let res = await axios.put(`${host}/admin/region/${data._id}`, newData);
+
 			setLoading(false);
 			setOpen(false);
-			props.setReload(()=>[])
+			props.setReload(() => []);
 
 			setTimeout(() => {
 				toast.success(res.data, {
@@ -189,15 +239,54 @@ export default function AdminRegionEditModal({ ...props }) {
 												value={name}
 											/>
 										</div>
-										<p>Zone</p>
-										<div className="applicationItem">
-											<label htmlFor={"staffAddress"}>Name:</label>
-											<input
-												type="text"
-												name={"staffAddress"}
-												id={"staffAddress"}
-											/>
+										<br />
+										<div className="applicationTitle">
+											<h3>Zones</h3>
 										</div>
+
+										{zones.map((d, i) => {
+											return (
+												<div
+													className="applicationItem zones"
+													onMouseEnter={() => setRemoveItemButton(i)}
+													onMouseLeave={() => setRemoveItemButton(false)}>
+													{removeItemButton === i && (
+														<div className="removeItemButton">
+															<CloseRounded
+																className="clearPhotoIcon"
+																onClick={() => {
+																	let newArr = [...zones];
+																	newArr.splice(i, 1);
+																	setZones(newArr);
+																}}
+															/>
+														</div>
+													)}
+													<label htmlFor={"staffAddress"}>{i + 1} :</label>
+													<input
+														type="text"
+														name={"staffAddress"}
+														id={"staffAddress"}
+														value={zones[i]}
+														// onChange={(e)=>setZones(zones[i] = e.target.value)}
+														onChange={(e) => {
+															let newArr = [...zones];
+															newArr[i] = e.target.value;
+															setZones(newArr);
+														}}
+													/>
+												</div>
+											);
+										})}
+
+										<button
+											onClick={() => {
+												let newArr = [...zones];
+												newArr.push("");
+												setZones(newArr);
+											}}>
+											Add
+										</button>
 									</div>
 								</div>
 							</div>

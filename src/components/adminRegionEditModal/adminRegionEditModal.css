@@ -1,3 +1,46 @@
 .adminRegionEditModal{
 	min-width: 40rem;
 }
+
+.applicationItem.zones{
+	display: flex;
+	flex-direction: row;
+	position: relative;
+}
+.applicationItem.zones label{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 4rem;
+}
+
+.removeItemButton{
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: larger;
+	right: -1.5rem;
+	bottom: 50%;
+	cursor: pointer;
+	transform:translateY(50%);
+	-webkit-transform:translateY(50%);
+	-moz-transform:translateY(50%);
+	-ms-transform:translateY(50%);
+	-o-transform:translateY(50%);
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-ms-border-radius: 50%;
+	-o-border-radius: 50%;
+}
+.removeItemButton:hover{
+	background-color: rgb(255, 0, 0, .6);
+	color: white;
+	font-weight: 700;
+}
+
+
+.removeItemButton .clearPhotoIcon{
+	font-size: 2rem !important;
+}

@@ -84,6 +84,7 @@ export default function AdminRegionList() {
 										// buttonIcon={<PersonAddRounded />}
 										buttonClass={"addStaffButton primary"}
 										buttonName={"Add New Region"}
+										setReload={setReload}
 										modalType={"add"}
 									/>
 								),
@@ -144,10 +145,10 @@ export default function AdminRegionList() {
 											return (
 												<div className=" adminOfficeListCard">
 													<span className="adminRegionListCard__code">
-														{d.name.short.toUpperCase()}{" "}
+														{d.name?.short.toUpperCase()}{" "}
 													</span>
 													<span className="adminRegionListCard__name">
-														{d.name.full}{" "}
+														{d.name?.full}{" "}
 													</span>
 													<span className="adminRegionListCard__zones">
 														{" "}
