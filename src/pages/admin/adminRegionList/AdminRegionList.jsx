@@ -141,14 +141,15 @@ export default function AdminRegionList() {
 
 									{/* LIST CARD */}
 									<div className="adminStaffListCardWrapper">
+										{data.length < 1 ? <p className="nodatacurrently">No Data Currently</p>:""}
 										{data.map((d) => {
 											return (
 												<div className=" adminOfficeListCard">
 													<span className="adminRegionListCard__code">
-														{d.name?.short.toUpperCase()}{" "}
+														{d?.code.toUpperCase() || ""}{" "}
 													</span>
 													<span className="adminRegionListCard__name">
-														{d.name?.full}{" "}
+														{d?.name}
 													</span>
 													<span className="adminRegionListCard__zones">
 														{" "}

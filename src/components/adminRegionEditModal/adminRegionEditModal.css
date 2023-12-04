@@ -44,3 +44,10 @@
 .removeItemButton .clearPhotoIcon{
 	font-size: 2rem !important;
 }
+
+.adminRegionEditModal footer button{
+	width: 10rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

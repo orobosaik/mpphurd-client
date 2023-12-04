@@ -33,13 +33,19 @@ export default function AdminRegionEditModal({ ...props }) {
 
 		if (props.modalType === "edit") {
 			setData(props.data);
-			setName(props.data.name.full);
-			setCode(props.data.name.short);
+			setName(props.data.name);
+			setCode(props.data.code);
 			setZones(props.data.zones);
 			setIsActive(props.data.isActive);
 		}
 	};
-	const handleClose = () => setOpen(false);
+	const handleClose = () => {
+		setLoading(false)
+		setOpen(false)
+		setName(undefined)
+		setCode(undefined)
+		setZones([])
+	};
 
 	const KEY_NAME_ESC = "Escape";
 	const KEY_EVENT_TYPE = "keyup";
@@ -77,17 +83,16 @@ export default function AdminRegionEditModal({ ...props }) {
 		setLoading(true);
 		let newData = {};
 		newData.isActive = isActive;
-		code && (newData.name = {});
-		code && (newData.name.short = code);
-		name && (newData.name.full = name);
+		code && (newData.code = code);
+		name && (newData.name = name);
 		zones && (newData.zones = zones.filter((str) => str !== ""));
 
 		try {
 			let host = import.meta.env.VITE_SERVER;
 			let res = await axios.post(`${host}/admin/region`, newData);
 
-			setLoading(false);
-			setOpen(false);
+			handleClose()
+
 			props.setReload(() => []);
 
 			setTimeout(() => {
@@ -119,14 +124,14 @@ export default function AdminRegionEditModal({ ...props }) {
 				progress: undefined,
 				theme: theme,
 			});
-		}}
+		}
+	};
 	const handleSubmitEdit = async () => {
 		setLoading(true);
 		let newData = {};
 		newData.isActive = isActive;
-		code && (newData.name = {});
-		code && (newData.name.short = code);
-		name && (newData.name.full = name);
+		code && (newData.code = code);
+		name && (newData.name = name);
 		zones && (newData.zones = zones.filter((str) => str !== ""));
 
 		try {
@@ -293,6 +298,7 @@ export default function AdminRegionEditModal({ ...props }) {
 						</div>
 						<footer>
 							<button
+								disabled = {loading}
 								onClick={
 									props.modalType === "edit"
 										? handleSubmitEdit
