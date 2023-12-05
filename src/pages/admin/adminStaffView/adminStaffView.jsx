@@ -25,10 +25,10 @@ export default function AdminStaffView() {
 	const location = useLocation();
 
 	const [isLoading, setIsLoading] = useState(true);
-	// const [data, setData] = useState(null);
+	// const [data, setData] = useState(location.data);
 	const themeColor = getThemeColor();
 
-	const data = location.state;
+	const data = location.state.d;
 	console.log("IN IN IN ", data);
 
 	// useEffect(() => {

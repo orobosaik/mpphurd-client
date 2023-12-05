@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "./adminStaffListCard.css";
+import { getFullName } from "../../utilities/getFullName";
 
 export default function AdminStaffListCard(props) {
 	const data = props.data;
@@ -12,7 +13,7 @@ export default function AdminStaffListCard(props) {
 						className="adminStaffListCard"
 						key={d._id}
 						to="./staff"
-						state={d}>
+						state={{d}}>
 						<span className="adminStaffListCard__avatar">
 							<img
 								src={d.profilePicture || import.meta.env.VITE_NO_AVATAR}
@@ -22,11 +23,7 @@ export default function AdminStaffListCard(props) {
 
 						<span className="adminStaffListCard__name">
 
-							{[d.firstName, d.middleName, d.lastName]
-								.filter(function (value) {
-									return value !== null && value !== "" && value !== undefined;
-								})
-								.join(" ")}
+							{getFullName(d.tittle,d.firstName,d.middleName,d.lastName,d.prefix)}
 						</span>
 
 						<span className="adminStaffListCard__email">{d.email}</span>

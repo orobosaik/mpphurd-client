@@ -24,7 +24,7 @@ export default function AdminStaffList() {
 		const getData = async () => {
 			try {
 				let host = import.meta.env.VITE_SERVER;
-				const res = await axios.get(`${host}/admin/staff/get-all-staff`);
+				const res = await axios.get(`${host}/admin/staff`);
 
 				setData(res.data);
 				setIsLoading(false);
