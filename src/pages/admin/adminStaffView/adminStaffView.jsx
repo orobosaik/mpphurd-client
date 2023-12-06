@@ -18,57 +18,63 @@ import AdminStaffListCard from "../../../components/adminStaffListCard/AdminStaf
 import { Link, useLocation } from "react-router-dom";
 import AdminStaffEditModal from "../../../components/adminStaffEditModal/AdminStaffEditModal";
 import { getThemeColor } from "../../../utilities/themeColor";
+import { getFullName } from "../../../utilities/getFullName";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 export default function AdminStaffView() {
+	const [isLoading, setIsLoading] = useState(true);
+	const [data, setData] = useState({});
 	const [isActive, setIsActive] = useState(true);
 	const [isManagement, setIsManagement] = useState(false);
-	const location = useLocation();
-
-	const [isLoading, setIsLoading] = useState(true);
-	// const [data, setData] = useState(location.data);
+	const { state } = useLocation();
 	const themeColor = getThemeColor();
 
-	const data = location.state.d;
-	console.log("IN IN IN ", data);
+	useEffect(() => {
+		const getData = async () => {
+			console.log(state);
+			try {
+				let host = import.meta.env.VITE_SERVER;
+				const res = await axios.get(`${host}/admin/staff/${state.id}`);
 
-	// useEffect(() => {
-	// 	const getData = async () => {
-	// 		try {
-	// 			let host = import.meta.env.VITE_SERVER;
-	// 			const res = await axios.get(`${host}/admin/staff/${}`);
+				setData(res.data);
+				setIsLoading(false);
+				console.log(res.data);
+			} catch (error) {
+				let message = error.response
+					? error.response.data.message
+					: error.message;
+				console.log(error);
+				console.log(message);
 
-	// 			setData(res.data);
-	// 			setIsLoading(false);
-	// 			console.log(res.data);
-	// 		} catch (error) {
-	// 			let message = error.response
-	// 				? error.response.data.message
-	// 				: error.message;
-	// 			console.log(error);
-	// 			console.log(message);
+				setTimeout(() => {
+					toast.error(message, {
+						position: "top-right",
+						autoClose: 2000,
+						hideProgressBar: false,
+						closeOnClick: true,
+						pauseOnHover: true,
+						draggable: true,
+						progress: undefined,
+						theme: themeColor,
+					});
+				}, 0);
+				setIsLoading(false);
+			}
+		};
 
-	// 			setTimeout(() => {
-	// 				toast.error(message, {
-	// 					position: "top-right",
-	// 					autoClose: 2000,
-	// 					hideProgressBar: false,
-	// 					closeOnClick: true,
-	// 					pauseOnHover: true,
-	// 					draggable: true,
-	// 					progress: undefined,
-	// 					theme: themeColor,
-	// 				});
-	// 			}, 0);
-	// 			setIsLoading(false);
-	// 		}
-	// 	};
+		if (state.data) {
+			setData(state.data);
+			setIsLoading(false);
+			console.log(state.data);
+		} else {
+			getData();
+		}
 
-	// 	getData();
-
-	// 	// return () => {
-	// 	// 	second
-	// 	// }
-	// }, []);
+		// 	// return () => {
+		// 	// 	second
+		// 	// }
+	}, []);
 
 	return (
 		<>
@@ -97,19 +103,29 @@ export default function AdminStaffView() {
 								<div className="staffViewHeader">
 									<div>
 										<h2>
-											{data.middleName
-												? data.firstName +
-												  " " +
-												  data.middleName +
-												  " " +
-												  data.lastName
-												: data.firstName + " " + data.lastName}
+											{" "}
+											{[
+												data.title,
+												data.firstName,
+												data.middleName,
+												data.lastName,
+												data.prefix,
+											]
+												.filter(function (value) {
+													return (
+														value !== null &&
+														value !== "" &&
+														value !== undefined
+													);
+												})
+												.join(" ")}{" "}
 										</h2>
 
 										<h4>{data.jobTitle?.fullName}</h4>
 
 										{data.office?.map((d, i) => {
-											return <h4 key={i}> {d.fullName}</h4>;
+											console.log(d)
+											return <h4 key={i}> {d?.id?.name}</h4>;
 										})}
 
 										<p>Department of Development Control+</p>

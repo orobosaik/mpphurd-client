@@ -13,7 +13,7 @@ export default function AdminStaffListCard(props) {
 						className="adminStaffListCard"
 						key={d._id}
 						to="./staff"
-						state={{d}}>
+						state={{ data: d }}>
 						<span className="adminStaffListCard__avatar">
 							<img
 								src={d.profilePicture || import.meta.env.VITE_NO_AVATAR}
@@ -22,17 +22,22 @@ export default function AdminStaffListCard(props) {
 						</span>
 
 						<span className="adminStaffListCard__name">
-
-							{getFullName(d.tittle,d.firstName,d.middleName,d.lastName,d.prefix)}
+							{[d.title, d.firstName, d.middleName, d.lastName, d.prefix]
+								.filter(function (value) {
+									return value !== null && value !== "" && value !== undefined;
+								})
+								.join(" ")}
 						</span>
 
 						<span className="adminStaffListCard__email">{d.email}</span>
 						<span className="adminStaffListCard__phone">{d.phone}</span>
 						<span className="adminStaffListCard__region">
-							{d.region?.fullName}
+							{d.region?.name}
 						</span>
 						<span className="adminStaffListCard__office">
-							{d.office?.fullName}
+
+
+							{d.office?.map((a, i) => { return <span key={i}>{a?.id?.name}</span> })}
 						</span>
 						<span className="adminStaffListCard__title">
 							{d.jobTitle?.fullName}

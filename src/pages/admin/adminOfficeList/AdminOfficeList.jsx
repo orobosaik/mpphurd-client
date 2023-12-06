@@ -14,20 +14,24 @@ import {
 	ExpandMoreRounded,
 	PersonAddRounded,
 } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AdminOfficeEditModal from "../../../components/adminOfficeEditModal/AdminOfficeEditModal";
 import { getThemeColor } from "../../../utilities/themeColor";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { getFullName } from "../../../utilities/getFullName";
+import AdminStaffView from "../adminStaffView/adminStaffView";
+import { CircularProgress } from "@mui/material";
 
 export default function AdminOfficeList() {
 	const [isLoading, setIsLoading] = useState(true);
-	const [data, setData] = useState([]);
+	const [data, setData] = useState();
 	const [staff, setStaff] = useState([]);
 	const themeColor = getThemeColor();
 	const [reload, setReload] = useState();
+
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		const getData = async () => {
@@ -100,85 +104,123 @@ export default function AdminOfficeList() {
 									/>
 								),
 							}}>
-							{/* <ListWrapper></ListWrapper> */}
-							<div className="listQuery">
-								<div className="listQueryOptions">
-									<span>REGION: </span>
-									<select name="listQueryOption" id="listQueryOption">
-										<option value="incoming">Incoming</option>
-										<option value="Outgoing">Outgoing</option>
-										<option value="current">Current</option>
-									</select>
+							{isLoading && (
+								<div className="loading-container">
+									<CircularProgress
+										thickness={3}
+										size={55}
+										className="loading-icon"
+									/>
 								</div>
+							)}
 
-								<div>
-									<input type="text" placeholder="Search list..." />
-								</div>
-
-								<div className="listCount">
-									<span>Count:</span>
-									<span>78,867</span>
-								</div>
-
-								<div className="listSort">
-									<span>Latest to Oldest</span>
-									<ExpandMoreRounded />
-								</div>
-							</div>
-							<div className="adminStaffListHeader">
-								<span className="adminOfficeListHeader__name"> Name</span>
-								<span className="adminOfficeListHeader__staff">Staff</span>
-								<span className="adminOfficeListHeader__tasks">Tasks</span>
-								<span className="adminOfficeListHeader__region">Region</span>
-								<span className="adminOfficeListHeader__status">Status</span>
-								<span className="adminOfficeListHeader__edit">Edit</span>
-							</div>
-
-							<div className="adminStaffListCardWrapper">
-								{data.map((d) => {
-									return (
-										<div className=" adminOfficeListCard" key={d._id}>
-											<div className="adminOfficeListCard__name">{d.name}</div>
-
-											<div className="adminOfficeListCard__staff">
-												{staff.map((s) => {
-													if (s.office._id === d._id) {
-														return (
-															<Link to={`/staff/d._id`}>
-																{getFullName(
-																	s.title,
-																	s.firstName,
-																	s.middleName,
-																	s.lastName,
-																	s.prefix
-																)}
-															</Link>
-														);
-													}
-												})}
-											</div>
-											<div className="adminOfficeListCard__tasks">
-												{d.tasks.join(", ")}
-											</div>
-											<div className="adminOfficeListCard__region">Benin</div>
-											<div className="adminOfficeListCard__status">
-												{d.isActive ? "Active" : "Inactive"}
-											</div>
-
-											<div className="adminOfficeListCard__edit">
-												<AdminOfficeEditModal
-													className="adminOfficeListCardEditButton"
-													buttonName={"Edit"}
-													modalType={"edit"}
-												/>
-											</div>
+							{data && (
+								<>
+									<div className="listQuery">
+										<div className="listQueryOptions">
+											<span>REGION: </span>
+											<select name="listQueryOption" id="listQueryOption">
+												<option value="incoming">Incoming</option>
+												<option value="Outgoing">Outgoing</option>
+												<option value="current">Current</option>
+											</select>
 										</div>
-									);
-								})}
 
-								<ListCard />
-								<ListCard />
-							</div>
+										<div>
+											<input type="text" placeholder="Search list..." />
+										</div>
+
+										<div className="listCount">
+											<span>Count:</span>
+											<span>{data.length}</span>
+										</div>
+
+										<div className="listSort">
+											<span>Latest to Oldest</span>
+											<ExpandMoreRounded />
+										</div>
+									</div>
+									<div className="adminStaffListHeader">
+										<span className="adminOfficeListHeader__name"> Name</span>
+										<span className="adminOfficeListHeader__staff">Staff</span>
+										<span className="adminOfficeListHeader__tasks">Tasks</span>
+										<span className="adminOfficeListHeader__region">
+											Region
+										</span>
+										<span className="adminOfficeListHeader__status">
+											Status
+										</span>
+										<span className="adminOfficeListHeader__edit">Edit</span>
+									</div>
+
+									<div className="adminStaffListCardWrapper">
+										{data.map((d) => {
+											return (
+												<div className=" adminOfficeListCard" key={d._id}>
+													<div className="adminOfficeListCard__name">
+														{d.name}
+													</div>
+
+													<div className="adminOfficeListCard__staff">
+														{staff.map((s) => {
+															if (
+																s.office[0]?.id?._id === d?._id ||
+																s.office[1]?.id?._id === d?._id ||
+																s.office[2]?.id?._id === d?._id
+															) {
+																return (
+																	<span
+																		onClick={() => {
+																			navigate("/staffs/staff", {
+																				state: { data: s },
+																			});
+																		}}>
+																		{[
+																			s.title,
+																			s.firstName,
+																			s.middleName,
+																			s.lastName,
+																			s.prefix,
+																		]
+																			.filter(function (value) {
+																				return (
+																					value !== null &&
+																					value !== "" &&
+																					value !== undefined
+																				);
+																			})
+																			.join(" ")}
+																	</span>
+																);
+															}
+														})}
+													</div>
+													<div className="adminOfficeListCard__tasks">
+														{d.tasks.join(", ")}
+													</div>
+													<div className="adminOfficeListCard__region">
+														Benin
+													</div>
+													<div className="adminOfficeListCard__status">
+														{d.isActive ? "Active" : "Inactive"}
+													</div>
+
+													<div className="adminOfficeListCard__edit">
+														<AdminOfficeEditModal
+															className="adminOfficeListCardEditButton"
+															buttonName={"Edit"}
+															modalType={"edit"}
+														/>
+													</div>
+												</div>
+											);
+										})}
+										{/*
+										<ListCard />
+										<ListCard /> */}
+									</div>
+								</>
+							)}
 						</MiddleBar>
 					</div>
 				</div>
