@@ -145,26 +145,26 @@ export default function AdminRegionList() {
 										{data.map((d) => {
 											return (
 												<div className=" adminOfficeListCard">
-													<span className="adminRegionListCard__code">
+													<div className="adminRegionListCard__code">
 														{d?.code.toUpperCase() || ""}{" "}
-													</span>
-													<span className="adminRegionListCard__name">
+													</div>
+													<div className="adminRegionListCard__name">
 														{d?.name}
-													</span>
-													<span className="adminRegionListCard__zones">
+													</div>
+													<div className="adminRegionListCard__zones">
 														{" "}
 														{d.zones.join(",   ")}
-													</span>
-													<span
+													</div>
+													<div
 														className={
 															d.isActive
 																? "adminRegionListCard__status active"
 																: "adminRegionListCard__status inactive"
 														}>
 														{d.isActive ? "Active" : "Inactive"}{" "}
-													</span>
+													</div>
 
-													<span className="adminRegionListCard__edit">
+													<div className="adminRegionListCard__edit">
 														<AdminRegionEditModal
 															// buttonIcon={<PersonAddRounded />}
 															// buttonClass={"adminOfficeListCardEditButton"}
@@ -173,7 +173,7 @@ export default function AdminRegionList() {
 															buttonName={"Edit"}
 															modalType={"edit"}
 														/>
-													</span>
+													</div>
 												</div>
 											);
 										})}

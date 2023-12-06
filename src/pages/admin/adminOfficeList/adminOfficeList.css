@@ -89,7 +89,7 @@
 	background-color: var(--green-background);
 }
 
-.adminOfficeListCard div {
+.adminOfficeListCard > div {
 	position: relative;
 	display: flex;
 	align-items: center;
@@ -97,7 +97,7 @@
 }
 
 /* .adminOfficeListHeader div:not(:nth-child(1)):before, */
-.adminOfficeListCard div:not(:nth-child(1)):before {
+.adminOfficeListCard > div:not(:nth-child(1)):before {
 	position: absolute;
 	content: "";
 	left: -1rem;

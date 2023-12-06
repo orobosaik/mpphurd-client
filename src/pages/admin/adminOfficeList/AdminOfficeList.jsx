@@ -196,7 +196,14 @@ export default function AdminOfficeList() {
 														})}
 													</div>
 													<div className="adminOfficeListCard__tasks">
-														{d.tasks.join(", ")}
+														{d.tasks.map((word) => {
+															let wordsArray = word.split(" ");
+															let capitalizedArray = wordsArray.map(
+																(word) =>
+																	word.charAt(0).toUpperCase() + word.slice(1)
+															);
+															return capitalizedArray.join(" ");
+														})}
 													</div>
 													<div className="adminOfficeListCard__region">
 														Benin
