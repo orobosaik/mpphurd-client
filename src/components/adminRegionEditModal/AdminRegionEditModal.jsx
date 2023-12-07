@@ -252,6 +252,7 @@ export default function AdminRegionEditModal({ ...props }) {
 										{zones.map((d, i) => {
 											return (
 												<div
+													key={i}
 													className="applicationItem zones"
 													onMouseEnter={() => setRemoveItemButton(i)}
 													onMouseLeave={() => setRemoveItemButton(false)}>

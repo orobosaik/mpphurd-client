@@ -28,6 +28,7 @@ export default function AdminOfficeList() {
 	const [isLoading, setIsLoading] = useState(true);
 	const [data, setData] = useState();
 	const [staff, setStaff] = useState([]);
+	const [region, setRegion] = useState([]);
 	const themeColor = getThemeColor();
 	const [reload, setReload] = useState();
 
@@ -41,10 +42,12 @@ export default function AdminOfficeList() {
 				const res = await Promise.all([
 					axios.get(`${host}/admin/office`),
 					axios.get(`${host}/admin/staff`),
+					axios.get(`${host}/admin/region`),
 				]);
 
 				setData(res[0].data);
 				setStaff(res[1].data);
+				setRegion(res[2].data);
 				setIsLoading(false);
 
 				console.log(res[0].data);
@@ -101,6 +104,8 @@ export default function AdminOfficeList() {
 										buttonIcon={<AddRounded />}
 										buttonClass={"addStaffButton primary"}
 										buttonName={"Create Office"}
+										setReload={setReload}
+										region={region}
 									/>
 								),
 							}}>
@@ -206,7 +211,7 @@ export default function AdminOfficeList() {
 														})}
 													</div>
 													<div className="adminOfficeListCard__region">
-														Benin
+														{d.region.name}
 													</div>
 													<div className="adminOfficeListCard__status">
 														{d.isActive ? "Active" : "Inactive"}
@@ -217,6 +222,9 @@ export default function AdminOfficeList() {
 															className="adminOfficeListCardEditButton"
 															buttonName={"Edit"}
 															modalType={"edit"}
+															setReload={setReload}
+															data={d}
+															region={region}
 														/>
 													</div>
 												</div>
