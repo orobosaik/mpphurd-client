@@ -1,5 +1,10 @@
+dialog{
+	min-width: 50rem;
+
+}
 .adminStaffEditModal header{
   margin-bottom: 2rem;
+
 }
 
 .OfficeWrapper {

@@ -22,25 +22,25 @@ export default function AdminOfficeEditModal({ ...props }) {
 	const [zone, setZone] = useState(undefined);
 	const [tasks, setTasks] = useState([]);
 
-	const [regionZones, setRegionZones] = useState(null);
+	const [selectedRegion, setSelectedRegion] = useState(null);
 
 	const [removeTaskButton, setRemoveTaskButton] = useState(null);
 
 	const handleOpen = () => {
-		setOpen(true);
-
+		setRegions(props.region);
 		if (props.modalType === "edit") {
-			setRegions(props.region);
 			setData(props.data);
 			setIsActive(props.data.isActive);
 			setName(props.data.name);
 			setRegion(props.data.region);
 			setZone(props.data.zone);
-			console.log("REGION DATA", props.data.region);
 			setZone(props.data.zone);
 			setTasks(props.data.tasks);
 			setIsActive(props.data.isActive);
+		} else {
+			setRegion(props.region[0])
 		}
+		setOpen(true);
 	};
 	const handleClose = () => {
 		setLoading(false);
@@ -187,7 +187,6 @@ export default function AdminOfficeEditModal({ ...props }) {
 
 			{open && (
 				<dialog className="modalView adminOfficeEditModal ">
-					{console.log(regionZones)}
 					<header>
 						<span>
 							{props.modalType === "add"
@@ -226,11 +225,11 @@ export default function AdminOfficeEditModal({ ...props }) {
 								</div>
 								<div className="applicationItems">
 									<div className="applicationItem">
-										<label htmlFor={"officeName"}>Office Name:</label>
+										<label htmlFor={"adminEditOfficeName"}>Office Name:</label>
 										<input
 											type="text"
-											name={"officeName"}
-											id={"officeName"}
+											name={"adminEditOfficeName"}
+											id={"adminEditOfficeName"}
 											value={name}
 											onChange={(e) => setName(e.target.value)}
 										/>
@@ -239,19 +238,23 @@ export default function AdminOfficeEditModal({ ...props }) {
 									<div className="applicationItem">
 										<div className="applicationItemType">
 											<div>
-												<label htmlFor="staffOffice">Region:</label>
+												<label htmlFor="adminEditOfficeRegion">Region:</label>
 												<select
-													name="staffOffice"
-													id="staffOffice"
-													onChange={(e) => setRegionZones(e.target.value)}>
-													{/* {console.log(region.zones)} */}
+													name="adminEditOfficeRegion"
+													id="adminEditOfficeRegion"
+													defaultValue={region?._id}
+													// onChange={(e) => setRegion(regions[e.target.value])}>
 
-													{regions.map((r) => {
-														console.log(regions);
+													onChange={(e) => {
+														const reg = regions.find(
+															(option) => option._id === e.target.value
+														);
+														setRegion(reg)
+													}
+													}>
+													{regions?.map((r, i) => {
 														return (
-															<option
-																selected={r._id === region._id}
-																value={r.zones}>
+															<option key={i} data={i} value={r._id}>
 																{r.name}
 															</option>
 														);
@@ -259,15 +262,13 @@ export default function AdminOfficeEditModal({ ...props }) {
 												</select>
 											</div>
 											<div>
-												<label htmlFor="staffOffice">Zone:</label>
-												<select name="staffOffice" id="staffOffice" defaultValue={zone}>
-													{regionZones?.split(",").map((sr) => {
-														console.log(sr[0]);
-														return (
-															<option value={sr}>
-																{sr}
-															</option>
-														);
+												<label htmlFor="adminEditOfficeZone">Zone:</label>
+												<select
+													name="adminEditOfficeZone"
+													id="adminEditOfficeZone"
+													defaultValue={zone ?? zone}>
+													{region?.zones?.map((rz) => {
+														return <option value={rz}>{rz}</option>;
 													})}
 												</select>
 											</div>
@@ -278,7 +279,7 @@ export default function AdminOfficeEditModal({ ...props }) {
 									<div className="applicationTitle">
 										<h3>Tasks</h3>
 									</div>
-									{tasks.map((d, i) => {
+									{tasks?.map((d, i) => {
 										return (
 											<div
 												key={i}
@@ -297,11 +298,13 @@ export default function AdminOfficeEditModal({ ...props }) {
 														/>
 													</div>
 												)}
-												<label htmlFor={"staffAddress"}>{i + 1} :</label>
+												<label htmlFor={"adminEditOfficeTaskCount"}>
+													{i + 1} :
+												</label>
 												<input
 													type="text"
-													name={"staffAddress"}
-													id={"staffAddress"}
+													name={"adminEditOfficeTaskCount"}
+													id={"adminEditOfficeTaskCount"}
 													value={tasks[i]}
 													// onChange={(e)=>setTasks(tasks[i] = e.target.value)}
 													onChange={(e) => {

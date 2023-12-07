@@ -167,7 +167,7 @@ export default function AdminOfficeList() {
 													</div>
 
 													<div className="adminOfficeListCard__staff">
-														{staff.map((s) => {
+														{staff.map((s, i) => {
 															if (
 																s.office[0]?.id?._id === d?._id ||
 																s.office[1]?.id?._id === d?._id ||
@@ -175,6 +175,7 @@ export default function AdminOfficeList() {
 															) {
 																return (
 																	<span
+																		key={i}
 																		onClick={() => {
 																			navigate("/staffs/staff", {
 																				state: { data: s },

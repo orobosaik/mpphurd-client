@@ -4,7 +4,6 @@
 
 .applicationItem.zones{
 	display: flex;
-	min-width: 40rem;
 	flex-direction: row;
 	position: relative;
 }
