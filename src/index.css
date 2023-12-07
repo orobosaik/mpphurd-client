@@ -156,6 +156,7 @@ input:active {
 ::-webkit-scrollbar-track {
 	border: none;
 	background: transparent;
+	margin: .8rem 0;
 }
 
 html[data-theme="dark"] ::selection {
