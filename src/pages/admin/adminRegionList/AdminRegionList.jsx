@@ -146,7 +146,7 @@ export default function AdminRegionList() {
 											return (
 												<div className=" adminOfficeListCard">
 													<div className="adminRegionListCard__code">
-														{d?.code.toUpperCase() || ""}{" "}
+														{d?.code?.toUpperCase() || ""}{" "}
 													</div>
 													<div className="adminRegionListCard__name">
 														{d?.name}
