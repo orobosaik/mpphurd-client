@@ -214,7 +214,12 @@ export default function AdminOfficeList() {
 													<div className="adminOfficeListCard__region">
 														{d.region.name}
 													</div>
-													<div className="adminOfficeListCard__status">
+													<div
+														className={
+															d.isActive
+																? "adminOfficeListCard__status active"
+																: "adminOfficeListCard__status inactive"
+														}>
 														{d.isActive ? "Active" : "Inactive"}
 													</div>
 

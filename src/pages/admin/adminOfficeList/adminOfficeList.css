@@ -181,3 +181,13 @@
 	cursor: pointer;
 	box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 }
+
+.adminOfficeListCard__status.active{
+	color: var(--pc-green);
+	padding: 0 1px;
+	font-weight: 700;
+}
+.adminOfficeListCard__status.inactive{
+	color: var(--sc-grey);
+	font-weight: 700;
+}

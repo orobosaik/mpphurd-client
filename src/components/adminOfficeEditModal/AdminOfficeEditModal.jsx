@@ -8,6 +8,10 @@ import {
 import ToggleSwitch from "../toggleSwitch/ToggleSwitch";
 import React, { useCallback, useEffect, useState } from "react";
 import { CloseRounded, EditRounded } from "@mui/icons-material";
+import { CircularProgress } from "@mui/material";
+import { toast } from "react-toastify";
+import { getThemeColor } from "../../utilities/themeColor";
+import axios from "axios";
 
 export default function AdminOfficeEditModal({ ...props }) {
 	const [open, setOpen] = useState(false);
@@ -22,7 +26,7 @@ export default function AdminOfficeEditModal({ ...props }) {
 	const [zone, setZone] = useState(undefined);
 	const [tasks, setTasks] = useState([]);
 
-	const [selectedRegion, setSelectedRegion] = useState(null);
+	const theme = getThemeColor();
 
 	const [removeTaskButton, setRemoveTaskButton] = useState(null);
 
@@ -33,7 +37,6 @@ export default function AdminOfficeEditModal({ ...props }) {
 			setIsActive(props.data.isActive);
 			setName(props.data.name);
 			setRegion(props.data.region);
-			setZone(props.data.zone);
 			setZone(props.data.zone);
 			setTasks(props.data.tasks);
 			setIsActive(props.data.isActive);
@@ -87,13 +90,15 @@ export default function AdminOfficeEditModal({ ...props }) {
 		setLoading(true);
 		let newData = {};
 		newData.isActive = isActive;
-		code && (newData.code = code);
 		name && (newData.name = name);
-		zones && (newData.zones = zones.filter((str) => str !== ""));
+		region && (newData.region = region._id);
+		zone && (newData.zone = zone);
+		tasks && (newData.tasks = tasks.filter((str) => str !== ""));
+
 
 		try {
 			let host = import.meta.env.VITE_SERVER;
-			let res = await axios.post(`${host}/admin/region`, newData);
+			let res = await axios.post(`${host}/admin/office`, newData);
 
 			handleClose();
 
@@ -134,13 +139,14 @@ export default function AdminOfficeEditModal({ ...props }) {
 		setLoading(true);
 		let newData = {};
 		newData.isActive = isActive;
-		code && (newData.code = code);
 		name && (newData.name = name);
-		zones && (newData.zones = zones.filter((str) => str !== ""));
+		region && (newData.region = region._id);
+		zone && (newData.zone = zone);
+		tasks && (newData.tasks = tasks.filter((str) => str !== ""));
 
 		try {
 			let host = import.meta.env.VITE_SERVER;
-			let res = await axios.put(`${host}/admin/region/${data._id}`, newData);
+			let res = await axios.put(`${host}/admin/office/${data._id}`, newData);
 
 			setLoading(false);
 			setOpen(false);
@@ -249,9 +255,8 @@ export default function AdminOfficeEditModal({ ...props }) {
 														const reg = regions.find(
 															(option) => option._id === e.target.value
 														);
-														setRegion(reg)
-													}
-													}>
+														setRegion(reg);
+													}}>
 													{regions?.map((r, i) => {
 														return (
 															<option key={i} data={i} value={r._id}>
@@ -266,10 +271,11 @@ export default function AdminOfficeEditModal({ ...props }) {
 												<select
 													name="adminEditOfficeZone"
 													id="adminEditOfficeZone"
-													defaultValue={zone ?? zone}>
+													defaultValue={zone ? zone : ""}>
 													{region?.zones?.map((rz) => {
 														return <option value={rz}>{rz}</option>;
 													})}
+													<option value="">----</option>
 												</select>
 											</div>
 										</div>
@@ -324,58 +330,28 @@ export default function AdminOfficeEditModal({ ...props }) {
 										}}>
 										Add
 									</button>
-
-									{/* <div className="applicationItem">
-										<label htmlFor="">Office and Tasks</label>
-										<div className="inputStaffOfficeWrapper">
-											<div className="inputStaffOfficeList">
-												<div className="inputStaffOffice">
-													<button>-</button>
-													<div>
-														<label>Office</label>
-														<select name="" id=""></select>
-													</div>
-													<div>
-														<label>Tasks</label>
-														<div className="taskList">
-															<span>
-																<input type="checkbox" name="task" id="task" />
-																<label htmlFor="task">Task 1</label>
-															</span>
-															<span>
-																<input type="checkbox" name="task" id="task" />
-																<label htmlFor="task">Minute FIle</label>
-															</span>
-															<span>
-																<input type="checkbox" name="task" id="task" />
-																<label htmlFor="task">Create Plan</label>
-															</span>
-															<span>
-																<input type="checkbox" name="task" id="task" />
-																<label htmlFor="task">Send File</label>
-															</span>
-															<span>
-																<input type="checkbox" name="task" id="task" />
-																<label htmlFor="task">Upload Document</label>
-															</span>
-															<span>
-																<input type="checkbox" name="task" id="task" />
-																<label htmlFor="task">Send Message</label>
-															</span>
-														</div>
-													</div>
-												</div>
-											</div>
-											<button>+</button>
-										</div>
-									</div> */}
 								</div>
 							</div>
 						</div>
 					</div>
 					<footer>
-						<button className="primary">
-							{props.modalType === "edit" ? "Update" : "Save"}
+						<button
+							disabled={loading}
+							onClick={
+								props.modalType === "edit" ? handleSubmitEdit : handleSubmitNew
+							}
+							className="primary">
+							{loading ? (
+								<CircularProgress
+									thickness={5}
+									size={20}
+									sx={{ color: "white" }}
+								/>
+							) : props.modalType === "edit" ? (
+								"Update"
+							) : (
+								"Save"
+							)}
 						</button>
 					</footer>
 				</dialog>
