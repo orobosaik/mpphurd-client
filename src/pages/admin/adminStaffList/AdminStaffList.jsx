@@ -20,6 +20,8 @@ export default function AdminStaffList() {
 	const [data, setData] = useState(null);
 	const themeColor = getThemeColor();
 
+	const [reload, setReload] = useState();
+
 	useEffect(() => {
 		const getData = async () => {
 			try {
@@ -57,7 +59,7 @@ export default function AdminStaffList() {
 		// return () => {
 		// 	second
 		// }
-	}, []);
+	}, [reload]);
 
 	const todayDate = new Date().toISOString().slice(0, 10);
 
@@ -81,6 +83,8 @@ export default function AdminStaffList() {
 										buttonIcon={<PersonAddRounded />}
 										buttonClass={"addStaffButton primary"}
 										buttonName={"Add New Staff"}
+										setReload={setReload}
+										modalType={"new"}
 									/>
 									// <Link to="./new">
 									// 	<button className="addStaffButton primary">

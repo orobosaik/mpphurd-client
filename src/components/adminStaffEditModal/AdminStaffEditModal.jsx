@@ -8,210 +8,117 @@ import {
 import ToggleSwitch from "../toggleSwitch/ToggleSwitch";
 import React, { useCallback, useEffect, useState } from "react";
 import { CloseRounded, EditRounded } from "@mui/icons-material";
-
-// return (
-// 	<div>
-// 		<button className="modalTrigger" onClick={handleOpen}>
-// 			<EditRounded className="editIcon" />
-// 			{archive ? "Update" : "Edit"}
-// 		</button>
-
-// 		{open && (
-// 			<dialog className="modalView">
-// 				<header>
-// 					<span>Edit Plan Info</span>
-// 					<div className="modalViewCloseButton" onClick={handleClose}>
-// 						<CloseRounded className="closeButton" />
-// 					</div>
-// 				</header>
-// 				{!clearing && (
-// 					<div className="currentStackEdit">
-// 						<label htmlFor="planBuildingStatus">Current Stack:</label>
-// 						<select name="planBuildingStatus" id="planBuildingStatus">
-// 							<option value="proposed">Stack A1</option>
-// 							<option value="underConstruction">Stack A2</option>
-// 							<option value="built">Stack A3</option>
-// 						</select>
-// 					</div>
-// 				)}
-// 				{archive && (
-// 					<>
-// 						<div className="minuteItem">
-// 							<label htmlFor="minuteText">Description:</label>
-// 							<textarea
-// 								name="minuteText"
-// 								id="minuteText"
-// 								cols="30"
-// 								rows="10"></textarea>
-// 						</div>
-// 						<div className="currentStackEdit">
-// 							<label htmlFor="planBuildingStatus">Has Tax:</label>
-// 							<select name="planBuildingStatus" id="planBuildingStatus">
-// 								<option value="no">No</option>
-// 								<option value="yes">Yes</option>
-// 							</select>
-// 						</div>
-// 						<div className="currentStackEdit">
-// 							<label htmlFor="collectedApproval">Collected Approval:</label>
-// 							<select
-// 								name="collectedApproval"
-// 								id="collectedApproval"
-// 								onChange={(e) => {
-// 									setCollectedApproval(e.target.value == "yes" ? true : false);
-// 								}}>
-// 								<option value="no">No</option>
-// 								<option value="yes">Yes</option>
-// 							</select>
-// 						</div>
-// 						{collectedApproval && (
-// 							<div className="currentStackEdit">
-// 								<label htmlFor="collectedApprovalDate">Collection Date:</label>
-// 								<input
-// 									type="date"
-// 									name="collectedApprovalDate"
-// 									id="collectedApprovalDate"
-// 								/>
-// 							</div>
-// 						)}
-// 					</>
-// 				)}
-// 				{assessment && (
-// 					<div className="planEditInfoTags">
-// 						<h4>Tags:</h4>
-
-// 						<div className="planEditInfoTagsOptions">
-// 							<div>
-// 								<label htmlFor="fastTrack">Fast Track</label>
-// 								<input type="checkbox" name="fastTrack" id="fastTrack" />
-// 							</div>
-
-// 							<div>
-// 								<label htmlFor="oldFile">Old File</label>
-// 								<input type="checkbox" name="oldFile" id="oldFile" />
-// 							</div>
-
-// 							<div>
-// 								<label htmlFor="fileOfInterest">File Of Interest</label>
-// 								<input
-// 									type="checkbox"
-// 									name="fileOfInterest"
-// 									id="fileOfInterest"
-// 								/>
-// 							</div>
-// 						</div>
-// 					</div>
-// 				)}
-// 				{/* APPLICANT INFORMATION */}
-// 				{clearing && individualApplicationItems("applicant")}
-// 				{/* BUILDING APPLICATION INFORMATION */}
-// 				{clearing || assessment ? (
-// 					<div className="applicationItemsWrapper">
-// 						<div className="applicationTitle">
-// 							<h3>Development Information</h3>
-// 						</div>
-// 						<div className="applicationItems">
-// 							<div className="applicationItem">
-// 								<div>
-// 									<label htmlFor="planBusinessName">Building Name:</label>
-// 									<input
-// 										type="text"
-// 										name="planBusinessName"
-// 										id="planBusinessName"
-// 									/>
-// 								</div>
-// 							</div>
-// 							<div className="applicationItem">
-// 								<div className="applicationItemAddressModal">
-// 									<div>
-// 										<label htmlFor="planPlotNo">Plot No:</label>
-// 										<input type="text" name="planPlotNo" id="planPlotNo" />
-// 									</div>
-// 									<div>
-// 										<label htmlFor="planAddress">Address:</label>
-// 										<input type="text" name="planAddress" id="planAddress" />
-// 									</div>
-// 								</div>
-// 							</div>
-// 							<div className="applicationItem">
-// 								<div className="applicationItemLocation">
-// 									<div>
-// 										<label htmlFor="planRegion">Region:</label>
-// 										<input type="text" name="planRegion" id="planRegion" />
-// 									</div>
-// 									<div>
-// 										<label htmlFor="planLga">LGA:</label>
-// 										<input type="text" name="planLga" id="planLga" />
-// 									</div>
-// 									<div>
-// 										<label htmlFor="planZone">Zone:</label>
-// 										<input type="text" name="planZone" id="planZone" />
-// 									</div>
-// 								</div>
-// 							</div>
-// 							<div className="applicationItem">
-// 								<div className="applicationItemType">
-// 									<div>
-// 										<label htmlFor="planBuildingType">Building Type:</label>
-// 										<input
-// 											type="text"
-// 											name="planBuildingType"
-// 											id="planBuildingType"
-// 										/>
-// 									</div>
-// 									<div>
-// 										<label htmlFor="planBuildingUse">Building Use:</label>
-// 										<input
-// 											type="text"
-// 											name="planBuildingUse"
-// 											id="planBuildingUse"
-// 										/>
-// 									</div>
-// 									<div>
-// 										<label htmlFor="planBuildingStatus">Building Status:</label>
-// 										<select name="planBuildingStatus" id="planBuildingStatus">
-// 											<option value="proposed">Proposed</option>
-// 											<option value="underConstruction">
-// 												Under Construction
-// 											</option>
-// 											<option value="built">Built</option>
-// 										</select>
-// 									</div>
-// 								</div>
-// 							</div>
-// 							<div className="applicationItem">
-// 								<div className="applicationItemType">
-// 									<div>
-// 										<label htmlFor="planFloors">No of Floors:</label>
-// 										<input type="text" name="planFloors" id="planFloors" />
-// 									</div>
-// 									<div>
-// 										<label htmlFor="planCoordinate">Survey Coordinates:</label>
-// 										<input
-// 											type="text"
-// 											name="planCoordinate"
-// 											id="planCoordinate"
-// 										/>
-// 									</div>
-// 								</div>
-// 							</div>
-// 						</div>
-// 					</div>
-// 				) : (
-// 					""
-// 				)}
-// 				<footer>
-// 					<button className="primary">Save</button>
-// 				</footer>
-// 			</dialog>
-// 		)}
-// 	</div>
-// );
+import axios from "axios";
+import { toast } from "react-toastify";
+import { getThemeColor } from "../../utilities/themeColor";
+import { CircularProgress } from "@mui/material";
 
 export default function AdminStaffEditModal({ ...props }) {
 	const [open, setOpen] = useState(false);
 
-	const handleOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
+	const [isActive, setIsActive] = useState(true);
+	const [isManagement, setIsManagement] = useState(false);
+
+	const [loading, setLoading] = useState(false);
+	const [initLoading, setInitLoading] = useState(true);
+
+	const [data, setData] = useState(null);
+	const [name, setName] = useState(undefined);
+	const [phones, setPhones] = useState(undefined);
+	const [gender, setGender] = useState(undefined);
+	const [address, setAddress] = useState(undefined);
+	const [emails, setEmails] = useState(undefined);
+	const [position, setPosition] = useState(undefined);
+	const [designation, setDesignation] = useState(undefined);
+
+	const [tasks, setTasks] = useState([]);
+	const [zone, setZone] = useState(undefined);
+	const [office, setOffice] = useState({});
+	const [region, setRegion] = useState(undefined);
+
+	const [offices, setOffices] = useState();
+	const [regions, setRegions] = useState([]);
+	const [list, setList] = useState([
+		"thinking",
+		"Out",
+		"Loud",
+		"YEAHH",
+		"OKAYDOKE",
+	]);
+
+	const theme = getThemeColor();
+
+	const [removeListButton, setRemoveListButton] = useState(null);
+
+	const handleOpen = async () => {
+		const loadOffices = async () => {
+			try {
+				let host = import.meta.env.VITE_SERVER;
+				let res = await axios.get(`${host}/admin/office`);
+
+				setInitLoading(false);
+
+				const offices = await res.data;
+				setOffices(offices);
+				setOffice(offices[0]);
+
+				const filteredRegions = await res.data
+					.filter((value, index, self) => {
+						return (
+							self.findIndex((v) => v.region._id === value.region._id) === index
+						);
+					})
+					.map((item) => item.region);
+
+				setRegion(filteredRegions[0]);
+				setRegions(filteredRegions);
+
+				console.log(offices, filteredRegions, filteredRegions[0]);
+			} catch (error) {
+				setInitLoading(false);
+
+				let message = error.response
+					? error.response.data.message
+					: error.message;
+
+				toast.error(message, {
+					position: "top-right",
+					autoClose: 2000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: theme,
+				});
+			}
+		};
+		loadOffices();
+
+		console.log(offices);
+
+		if (props.modalType === "edit") {
+			setData(props.data);
+			setIsActive(props.data.isActive);
+			setName(props.data.name);
+			setRegion(props.data.region);
+			setZone(props.data.zone);
+			setTasks(props.data.tasks);
+			setIsActive(props.data.isActive);
+		} else {
+			setRegion(regions[0]);
+		}
+		setOpen(true);
+	};
+	const handleClose = () => {
+		setLoading(false);
+		setOpen(false);
+		setPhoto(null);
+		setName(undefined);
+		setRegion(undefined);
+		setZone(undefined);
+		setTasks([]);
+	};
 
 	const KEY_NAME_ESC = "Escape";
 	const KEY_EVENT_TYPE = "keyup";
@@ -245,9 +152,6 @@ export default function AdminStaffEditModal({ ...props }) {
 		return () => {};
 	}, [open]);
 
-	const [isActive, setIsActive] = useState(true);
-	const [isManagement, setIsManagement] = useState(false);
-
 	const [photo, setPhoto] = useState(null);
 	const [clearPhotoButton, setClearPhotoButton] = useState(true);
 
@@ -258,6 +162,102 @@ export default function AdminStaffEditModal({ ...props }) {
 		}
 	};
 
+	const handleSubmitNew = async () => {
+		setLoading(true);
+		let newData = {};
+		newData.isActive = isActive;
+		name && (newData.name = name);
+		region && (newData.region = region._id);
+		zone && (newData.zone = zone);
+		tasks && (newData.tasks = tasks.filter((str) => str !== ""));
+
+		try {
+			let host = import.meta.env.VITE_SERVER;
+			let res = await axios.post(`${host}/admin/office`, newData);
+
+			handleClose();
+
+			props.setReload(() => []);
+
+			setTimeout(() => {
+				toast.success(res.data, {
+					position: "top-right",
+					autoClose: 1000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: theme,
+				});
+			}, 0);
+		} catch (error) {
+			setLoading(false);
+
+			let message = error.response
+				? error.response.data.message
+				: error.message;
+
+			toast.error(message, {
+				position: "top-right",
+				autoClose: 2000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: theme,
+			});
+		}
+	};
+	const handleSubmitEdit = async () => {
+		setLoading(true);
+		let newData = {};
+		newData.isActive = isActive;
+		name && (newData.name = name);
+		region && (newData.region = region._id);
+		zone && (newData.zone = zone);
+		tasks && (newData.tasks = tasks.filter((str) => str !== ""));
+
+		try {
+			let host = import.meta.env.VITE_SERVER;
+			let res = await axios.put(`${host}/admin/office/${data._id}`, newData);
+
+			setLoading(false);
+			setOpen(false);
+			props.setReload(() => []);
+
+			setTimeout(() => {
+				toast.success(res.data, {
+					position: "top-right",
+					autoClose: 1000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: theme,
+				});
+			}, 0);
+		} catch (error) {
+			setLoading(false);
+
+			let message = error.response
+				? error.response.data.message
+				: error.message;
+
+			toast.error(message, {
+				position: "top-right",
+				autoClose: 2000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: theme,
+			});
+		}
+	};
 
 	return (
 		<>
@@ -270,6 +270,9 @@ export default function AdminStaffEditModal({ ...props }) {
 				<dialog className="modalView adminStaffEditModal ">
 					<header>
 						<span>Staff Info</span>
+						{
+							// offices.filter((v, i, self)=> i == self.indexOf(v))
+						}
 
 						<div className="modalViewCloseButton" onClick={handleClose}>
 							<CloseRounded className="closeButton" />
@@ -281,9 +284,12 @@ export default function AdminStaffEditModal({ ...props }) {
 							className="staffImage"
 							onMouseEnter={() => setClearPhotoButton(true)}
 							onMouseLeave={() => setClearPhotoButton(false)}>
-							{(clearPhotoButton && photo) && (
+							{clearPhotoButton && photo && (
 								<div className="clearPhotoButton">
-									<CloseRounded className="clearPhotoIcon" onClick={() => setPhoto(null)} />
+									<CloseRounded
+										className="clearPhotoIcon"
+										onClick={() => setPhoto(null)}
+									/>
 								</div>
 							)}
 							<label
@@ -487,14 +493,30 @@ export default function AdminStaffEditModal({ ...props }) {
 													<option value="built">Built</option>
 												</select>
 											</div>
+
 											<div>
-												<label htmlFor="staffRegion">Region:</label>
-												<select name="staffRegion" id="staffRegion">
-													<option value="proposed">Proposed</option>
-													<option value="underConstruction">
-														Under Construction
-													</option>
-													<option value="built">Built</option>
+												<label htmlFor="staffEditRegion">Region:</label>
+												<select
+													name="staffEditRegion"
+													id="staffEditRegion"
+													defaultValue={region?._id}
+													onChange={(e) => {
+														const reg = regions.find(
+															(option) => option._id === e.target.value
+														);
+														const off = offices.find(
+															(option) => option.region._id === e.target.value
+														);
+														setOffice(off);
+														setRegion(reg);
+													}}>
+													{regions?.map((r, i) => {
+														return (
+															<option key={i} data={i} value={r._id}>
+																{r.name}
+															</option>
+														);
+													})}
 												</select>
 											</div>
 										</div>
@@ -502,46 +524,85 @@ export default function AdminStaffEditModal({ ...props }) {
 
 									<div className="applicationItem">
 										<label htmlFor="">Office and Tasks</label>
+
 										<div className="inputStaffOfficeWrapper">
 											<div className="inputStaffOfficeList">
-												<div className="inputStaffOffice">
-													<button>-</button>
-													<div>
-														<label>Office</label>
-														<select name="" id=""></select>
-													</div>
-													<div>
-														<label>Tasks</label>
-														<div className="taskList">
-															<span>
-																<input type="checkbox" name="task" id="task" />
-																<label htmlFor="task">Task 1</label>
-															</span>
-															<span>
-																<input type="checkbox" name="task" id="task" />
-																<label htmlFor="task">Minute FIle</label>
-															</span>
-															<span>
-																<input type="checkbox" name="task" id="task" />
-																<label htmlFor="task">Create Plan</label>
-															</span>
-															<span>
-																<input type="checkbox" name="task" id="task" />
-																<label htmlFor="task">Send File</label>
-															</span>
-															<span>
-																<input type="checkbox" name="task" id="task" />
-																<label htmlFor="task">Upload Document</label>
-															</span>
-															<span>
-																<input type="checkbox" name="task" id="task" />
-																<label htmlFor="task">Send Message</label>
-															</span>
+												{list.map((li, index) => {
+													return (
+														<div className="inputStaffOffice" key={index}>
+															<button
+																onMouseEnter={() => console.log(index)}
+																onMouseLeave={() => console.log(false)}
+																onClick={() => {
+																	let newArr = [...list];
+																	newArr.splice(index, 1);
+																	setList(newArr);
+																}}>
+																Del
+															</button>
+
+															<div>
+																<label>{li}</label>
+																<select
+																	name="staffEditOffice"
+																	id="staffEditOffice"
+																	onChange={(e) => {
+																		// const office = offices.find(
+																		// 	(option) => option._id === e.target.value
+																		// );
+																		// setOffice(office);
+
+																		let newArr = [...list];
+																		newArr[index].office = offices.find(
+																			(option) => option._id === e.target.value
+																		);
+																		setList(newArr);
+																	}}>
+																	{offices?.map((o, i) => {
+																		if (o?.region?._id === region?._id) {
+																			return (
+																				<option key={i} data={i} value={o._id}>
+																					{o.name}
+																				</option>
+																			);
+																		}
+																	})}
+																</select>
+															</div>
+
+															<div>
+																<label>Tasks</label>
+																<div className="taskList">
+																	{list[index].office?.tasks?.map((task, i) => {
+																		return (
+																			<span key={i}>
+																				<input
+																					type="checkbox"
+																					name={`staffEditTasks${i}`}
+																					id={`staffEditTasks${i}`}
+																				/>
+																				<label htmlFor={`staffEditTasks${i}`}>
+																					{task}
+																				</label>
+																			</span>
+																		);
+																	})}
+																</div>
+															</div>
 														</div>
-													</div>
-												</div>
+													);
+												})}
 											</div>
-											<button>+</button>
+											<button
+												onClick={() => {
+													let newArr = [...list];
+													newArr.push([])
+													newArr[list.length].office = offices[0];
+													setList(newArr);
+
+												}}>
+												Add
+											</button>
 										</div>
 									</div>
 								</div>
@@ -549,7 +610,24 @@ export default function AdminStaffEditModal({ ...props }) {
 						</div>
 					</div>
 					<footer>
-						<button className="primary">Save</button>
+						<button
+							disabled={loading}
+							onClick={
+								props.modalType === "edit" ? handleSubmitEdit : handleSubmitNew
+							}
+							className="primary">
+							{loading ? (
+								<CircularProgress
+									thickness={5}
+									size={20}
+									sx={{ color: "white" }}
+								/>
+							) : props.modalType === "edit" ? (
+								"Update"
+							) : (
+								"Save"
+							)}
+						</button>
 					</footer>
 				</dialog>
 			)}

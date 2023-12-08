@@ -212,7 +212,7 @@ export default function AdminOfficeList() {
 														})}
 													</div>
 													<div className="adminOfficeListCard__region">
-														{d.region.name}
+														{d?.region?.name}
 													</div>
 													<div
 														className={

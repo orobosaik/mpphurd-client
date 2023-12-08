@@ -96,6 +96,9 @@ export default function AdminStaffView() {
 										buttonIcon={<PersonAddRounded />}
 										buttonClass={"addStaffButton primary"}
 										buttonName={"Update Staff"}
+										data={data}
+										setReload={setReload}
+										modalType={"edit"}
 									/>
 								),
 							}}>
@@ -124,7 +127,7 @@ export default function AdminStaffView() {
 										<h4>{data.jobTitle?.fullName}</h4>
 
 										{data.office?.map((d, i) => {
-											console.log(d)
+											console.log(d);
 											return <h4 key={i}> {d?.id?.name}</h4>;
 										})}
 
