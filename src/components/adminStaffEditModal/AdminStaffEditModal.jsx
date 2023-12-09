@@ -524,32 +524,22 @@ export default function AdminStaffEditModal({ ...props }) {
 											<div className="inputStaffOfficeList">
 												{list.map((li, index) => {
 													return (
-														<div key={li.office._id} className="inputStaffOffice">
+														<div
+															key={`${li.office._id}${index}`}
+															className="inputStaffOffice">
 															<button
 																onMouseEnter={() => {
-																	setRemoveListButton(() => false);
-																	// console.log(removeListButton);
-																	// console.log(list)
+																	// setRemoveListButton(() => false);
 																}}
 																onMouseLeave={() => {
-																	setRemoveListButton(() => index);
-																	// console.log(removeListButton);
+																	// setRemoveListButton(
+																	// 	() => `${li.office._id}${index}`
+																	// );
 																}}
 																onClick={() => {
 																	let newArr = [...list];
-
-																	console.log(index);
-																	console.log(newArr[index].office);
-
-																	const arrayEd = [];
-
-																	setList((list) =>
-																		list.filter((el, i) => i !== index)
-																	);
-
-																	// newArr.splice(index + 1, 1);
-
-																	// setList(() => arrayEd);
+																	newArr.splice(index, 1);
+																	setList(newArr);
 																	console.log(list);
 																}}>
 																Del
@@ -560,17 +550,13 @@ export default function AdminStaffEditModal({ ...props }) {
 																<select
 																	name="staffEditOffice"
 																	id="staffEditOffice"
+																	defaultValue={li.office._id}
 																	onChange={(e) => {
-																		// const office = offices.find(
-																		// 	(option) => option._id === e.target.value
-																		// );
-																		// setOffice(office);
-
 																		let newArr = [...list];
 																		newArr[index].office = offices.find(
 																			(option) => option._id === e.target.value
 																		);
-																		setList(newArr);
+																		setList(() => newArr);
 																	}}>
 																	{offices?.map((o, i) => {
 																		if (o?.region?._id === region?._id) {
