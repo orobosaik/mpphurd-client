@@ -524,7 +524,7 @@ export default function AdminStaffEditModal({ ...props }) {
 											<div className="inputStaffOfficeList">
 												{list.map((li, index) => {
 													return (
-														<div className="inputStaffOffice" key={li._id}>
+														<div key={li.office._id} className="inputStaffOffice">
 															<button
 																onMouseEnter={() => {
 																	setRemoveListButton(() => false);
@@ -541,15 +541,22 @@ export default function AdminStaffEditModal({ ...props }) {
 																	console.log(index);
 																	console.log(newArr[index].office);
 
-																	newArr.splice(index + 1, 1);
-																	
-																	setList(newArr);
+																	const arrayEd = [];
+
+																	setList((list) =>
+																		list.filter((el, i) => i !== index)
+																	);
+
+																	// newArr.splice(index + 1, 1);
+
+																	// setList(() => arrayEd);
+																	console.log(list);
 																}}>
 																Del
 															</button>
 
 															<div>
-																<label>{li}</label>
+																<label>Office</label>
 																<select
 																	name="staffEditOffice"
 																	id="staffEditOffice"
@@ -605,7 +612,7 @@ export default function AdminStaffEditModal({ ...props }) {
 													let newArr = [...list];
 													newArr.push([]);
 													newArr[list.length].office = offices[0];
-													console.log(newArr)
+													console.log(newArr);
 													setList(newArr);
 												}}>
 												Add
