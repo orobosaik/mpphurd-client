@@ -27,6 +27,7 @@ export default function AdminStaffView() {
 	const [data, setData] = useState({});
 	const [isActive, setIsActive] = useState(true);
 	const [isManagement, setIsManagement] = useState(false);
+	const [reload, setReload] = useState();
 	const { state } = useLocation();
 	const themeColor = getThemeColor();
 
@@ -74,7 +75,7 @@ export default function AdminStaffView() {
 		// 	// return () => {
 		// 	// 	second
 		// 	// }
-	}, []);
+	}, [reload]);
 
 	return (
 		<>

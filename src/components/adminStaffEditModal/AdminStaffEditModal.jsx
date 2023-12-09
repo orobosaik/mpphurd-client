@@ -38,13 +38,7 @@ export default function AdminStaffEditModal({ ...props }) {
 
 	const [offices, setOffices] = useState();
 	const [regions, setRegions] = useState([]);
-	const [list, setList] = useState([
-		"thinking",
-		"Out",
-		"Loud",
-		"YEAHH",
-		"OKAYDOKE",
-	]);
+	const [list, setList] = useState([]);
 
 	const theme = getThemeColor();
 
@@ -112,6 +106,7 @@ export default function AdminStaffEditModal({ ...props }) {
 	};
 	const handleClose = () => {
 		setLoading(false);
+		setList([]);
 		setOpen(false);
 		setPhoto(null);
 		setName(undefined);
@@ -529,13 +524,25 @@ export default function AdminStaffEditModal({ ...props }) {
 											<div className="inputStaffOfficeList">
 												{list.map((li, index) => {
 													return (
-														<div className="inputStaffOffice" key={index}>
+														<div className="inputStaffOffice" key={li._id}>
 															<button
-																onMouseEnter={() => console.log(index)}
-																onMouseLeave={() => console.log(false)}
+																onMouseEnter={() => {
+																	setRemoveListButton(() => false);
+																	// console.log(removeListButton);
+																	// console.log(list)
+																}}
+																onMouseLeave={() => {
+																	setRemoveListButton(() => index);
+																	// console.log(removeListButton);
+																}}
 																onClick={() => {
 																	let newArr = [...list];
-																	newArr.splice(index, 1);
+
+																	console.log(index);
+																	console.log(newArr[index].office);
+
+																	newArr.splice(index + 1, 1);
+																	
 																	setList(newArr);
 																}}>
 																Del
@@ -596,10 +603,10 @@ export default function AdminStaffEditModal({ ...props }) {
 											<button
 												onClick={() => {
 													let newArr = [...list];
-													newArr.push([])
+													newArr.push([]);
 													newArr[list.length].office = offices[0];
+													console.log(newArr)
 													setList(newArr);
-
 												}}>
 												Add
 											</button>
