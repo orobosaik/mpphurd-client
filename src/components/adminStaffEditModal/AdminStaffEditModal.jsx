@@ -42,8 +42,6 @@ export default function AdminStaffEditModal({ ...props }) {
 
 	const theme = getThemeColor();
 
-	const [removeListButton, setRemoveListButton] = useState(null);
-
 	const handleOpen = async () => {
 		const loadOffices = async () => {
 			try {
@@ -502,8 +500,9 @@ export default function AdminStaffEditModal({ ...props }) {
 														const off = offices.find(
 															(option) => option.region._id === e.target.value
 														);
-														setOffice(off);
 														setRegion(reg);
+														setOffice(off);
+														setList([]);
 													}}>
 													{regions?.map((r, i) => {
 														return (
@@ -528,19 +527,10 @@ export default function AdminStaffEditModal({ ...props }) {
 															key={`${li.office._id}${index}`}
 															className="inputStaffOffice">
 															<button
-																onMouseEnter={() => {
-																	// setRemoveListButton(() => false);
-																}}
-																onMouseLeave={() => {
-																	// setRemoveListButton(
-																	// 	() => `${li.office._id}${index}`
-																	// );
-																}}
 																onClick={() => {
 																	let newArr = [...list];
 																	newArr.splice(index, 1);
 																	setList(newArr);
-																	console.log(list);
 																}}>
 																Del
 															</button>
@@ -597,8 +587,9 @@ export default function AdminStaffEditModal({ ...props }) {
 												onClick={() => {
 													let newArr = [...list];
 													newArr.push([]);
-													newArr[list.length].office = offices[0];
-													console.log(newArr);
+													newArr[list.length].office = offices.find(
+														(o) => o?.region?._id === region?._id
+													);
 													setList(newArr);
 												}}>
 												Add
