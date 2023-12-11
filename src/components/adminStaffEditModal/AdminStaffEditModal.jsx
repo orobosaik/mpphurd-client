@@ -33,16 +33,16 @@ export default function AdminStaffEditModal({ ...props }) {
 
 	const [tasks, setTasks] = useState([]);
 	const [zone, setZone] = useState(undefined);
-	const [office, setOffice] = useState({});
 	const [region, setRegion] = useState(undefined);
 
-	const [offices, setOffices] = useState();
+	const [offices, setOffices] = useState([]);
 	const [regions, setRegions] = useState([]);
 	const [list, setList] = useState([]);
 
 	const theme = getThemeColor();
 
 	const handleOpen = async () => {
+		console.log(props.data)
 		const loadOffices = async () => {
 			try {
 				let host = import.meta.env.VITE_SERVER;
@@ -52,7 +52,6 @@ export default function AdminStaffEditModal({ ...props }) {
 
 				const offices = await res.data;
 				setOffices(offices);
-				setOffice(offices[0]);
 
 				const filteredRegions = await res.data
 					.filter((value, index, self) => {
@@ -64,10 +63,10 @@ export default function AdminStaffEditModal({ ...props }) {
 
 				setRegion(filteredRegions[0]);
 				setRegions(filteredRegions);
+				setInitLoading(false)
 
 				console.log(offices, filteredRegions, filteredRegions[0]);
 			} catch (error) {
-				setInitLoading(false);
 
 				let message = error.response
 					? error.response.data.message
@@ -97,10 +96,12 @@ export default function AdminStaffEditModal({ ...props }) {
 			setZone(props.data.zone);
 			setTasks(props.data.tasks);
 			setIsActive(props.data.isActive);
+			setList(props.data.office)
 		} else {
 			setRegion(regions[0]);
 		}
 		setOpen(true);
+		console.log(props.data.office)
 	};
 	const handleClose = () => {
 		setLoading(false);
@@ -501,7 +502,6 @@ export default function AdminStaffEditModal({ ...props }) {
 															(option) => option.region._id === e.target.value
 														);
 														setRegion(reg);
-														setOffice(off);
 														setList([]);
 													}}>
 													{regions?.map((r, i) => {
@@ -521,10 +521,11 @@ export default function AdminStaffEditModal({ ...props }) {
 
 										<div className="inputStaffOfficeWrapper">
 											<div className="inputStaffOfficeList">
+												{console.log(list)}
 												{list.map((li, index) => {
 													return (
 														<div
-															key={`${li.office._id}${index}`}
+															key={`${li?.id?._id}${index}`}
 															className="inputStaffOffice">
 															<button
 																onClick={() => {
@@ -540,14 +541,15 @@ export default function AdminStaffEditModal({ ...props }) {
 																<select
 																	name="staffEditOffice"
 																	id="staffEditOffice"
-																	defaultValue={li.office._id}
+																	defaultValue={li?.id?._id}
 																	onChange={(e) => {
 																		let newArr = [...list];
-																		newArr[index].office = offices.find(
+																		newArr[index].id = offices.find(
 																			(option) => option._id === e.target.value
 																		);
 																		setList(() => newArr);
 																	}}>
+																	{ console.log(li.id)}
 																	{offices?.map((o, i) => {
 																		if (o?.region?._id === region?._id) {
 																			return (
@@ -563,13 +565,16 @@ export default function AdminStaffEditModal({ ...props }) {
 															<div>
 																<label>Tasks</label>
 																<div className="taskList">
-																	{list[index].office?.tasks?.map((task, i) => {
+																	{list[index].id?.tasks?.map((task, i) => {
 																		return (
 																			<span key={i}>
 																				<input
 																					type="checkbox"
 																					name={`staffEditTasks${i}`}
 																					id={`staffEditTasks${i}`}
+																					defaultChecked={list[index].tasks.includes(
+																						task
+																					)}
 																				/>
 																				<label htmlFor={`staffEditTasks${i}`}>
 																					{task}
@@ -587,7 +592,7 @@ export default function AdminStaffEditModal({ ...props }) {
 												onClick={() => {
 													let newArr = [...list];
 													newArr.push([]);
-													newArr[list.length].office = offices.find(
+													newArr[list.length].id = offices.find(
 														(o) => o?.region?._id === region?._id
 													);
 													setList(newArr);

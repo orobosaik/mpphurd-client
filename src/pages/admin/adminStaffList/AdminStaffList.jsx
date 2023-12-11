@@ -109,8 +109,11 @@ export default function AdminStaffList() {
 									<div className="listQuery">
 										<div className="listQueryOptions">
 											<span>STATUS: </span>
-											<select name="listQueryOption" id="listQueryOption">
-												<option value="active" selected>
+											<select
+												defaultValue="active"
+												name="listQueryOption"
+												id="listQueryOption">
+												<option value="active">
 													Active
 												</option>
 												<option value="inactive">Inactive</option>
