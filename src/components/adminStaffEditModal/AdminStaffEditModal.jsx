@@ -16,15 +16,21 @@ import { CircularProgress } from "@mui/material";
 export default function AdminStaffEditModal({ ...props }) {
 	const [open, setOpen] = useState(false);
 
-	const [isActive, setIsActive] = useState(true);
+	const [isActive, setIsActive] = useState(null);
 	const [isManagement, setIsManagement] = useState(false);
 
 	const [loading, setLoading] = useState(false);
 	const [initLoading, setInitLoading] = useState(true);
 
+
+
+	const [photo, setPhoto] = useState(null);
+	const [clearPhotoButton, setClearPhotoButton] = useState(true);
+
 	const [data, setData] = useState(null);
-	const [name, setName] = useState(undefined);
-	const [phones, setPhones] = useState(undefined);
+
+	const [name, setName] = useState({});
+	const [phones, setPhones] = useState({});
 	const [gender, setGender] = useState(undefined);
 	const [address, setAddress] = useState(undefined);
 	const [emails, setEmails] = useState(undefined);
@@ -43,6 +49,7 @@ export default function AdminStaffEditModal({ ...props }) {
 
 	const handleOpen = async () => {
 		console.log(props.data);
+
 		const loadOffices = async () => {
 			try {
 				let host = import.meta.env.VITE_SERVER;
@@ -88,14 +95,31 @@ export default function AdminStaffEditModal({ ...props }) {
 		console.log(offices);
 
 		if (props.modalType === "edit") {
-			setData(props.data);
-			setIsActive(props.data.isActive);
-			setName(props.data.name);
-			setRegion(props.data.region);
-			setZone(props.data.zone);
-			setTasks(props.data.tasks);
-			setIsActive(props.data.isActive);
-			setList(props.data.office);
+			const data = { ...props.data };
+			console.log(data);
+			setPhoto(data.profilePicture)
+			setName({
+				title: data.title,
+				firstName: data.firstName,
+				middleName: data.middleName,
+				lastName: data.lastName,
+				suffix: data.suffix,
+			});
+			setAddress(data.address)
+
+			setPhones({
+				phone: data.phone,
+				phone1: data.phone1
+			})
+			setEmails({
+				email: data.email,
+				email1: data.email1
+			})
+
+			setIsActive(data.isActive);
+			setRegion(data.region);
+			setZone(data.zone);
+			setList(data.office);
 		} else {
 			setRegion(regions[0]);
 		}
@@ -145,8 +169,6 @@ export default function AdminStaffEditModal({ ...props }) {
 		return () => {};
 	}, [open]);
 
-	const [photo, setPhoto] = useState(null);
-	const [clearPhotoButton, setClearPhotoButton] = useState(true);
 
 	const onPhotoChange = (event) => {
 		if (event.target.files && event.target.files[0]) {
@@ -342,6 +364,13 @@ export default function AdminStaffEditModal({ ...props }) {
 													type="text"
 													name={"staffTitle"}
 													id={"staffTitle"}
+													value={name?.title}
+													onChange={(e) => {
+														let val = e.target.value;
+														let newWord = { ...name };
+														newWord.title = val;
+														setName(newWord);
+													}}
 												/>
 											</div>
 											<div>
@@ -352,7 +381,16 @@ export default function AdminStaffEditModal({ ...props }) {
 													id={"staffFirstName"}
 													required
 													min={2}
+													value={name?.firstName}
+													onChange={(e) => {
+														let val = e.target.value;
+														let newWord = { ...name };
+														newWord.firstName = val;
+														setName(newWord);
+													}}
 												/>
+												{console.log(name)}
+												{console.log(props.data.firstName)}
 											</div>
 											<div>
 												<label htmlFor={"staffSurname"}>Surname:</label>
@@ -362,6 +400,13 @@ export default function AdminStaffEditModal({ ...props }) {
 													id={"staffSurname"}
 													required
 													min={2}
+													value={name?.lastName}
+													onChange={(e) => {
+														let val = e.target.value;
+														let newWord = { ...name };
+														newWord.lastName = val;
+														setName(newWord);
+													}}
 												/>
 											</div>
 											<div>
@@ -371,6 +416,13 @@ export default function AdminStaffEditModal({ ...props }) {
 													name={"staffOtherName"}
 													id={"staffOtherName"}
 													min={2}
+													value={name?.middleName}
+													onChange={(e) => {
+														let val = e.target.value;
+														let newWord = { ...name };
+														newWord.middleName = val;
+														setName(newWord);
+													}}
 												/>
 											</div>
 											<div>
@@ -379,6 +431,13 @@ export default function AdminStaffEditModal({ ...props }) {
 													type="text"
 													name={"staffSuffix"}
 													id={"staffSuffix"}
+													value={name?.suffix}
+													onChange={(e) => {
+														let val = e.target.value;
+														let newWord = { ...name };
+														newWord.suffix = val;
+														setName(newWord);
+													}}
 												/>
 											</div>
 										</div>
@@ -414,6 +473,8 @@ export default function AdminStaffEditModal({ ...props }) {
 											type="text"
 											name={"staffAddress"}
 											id={"staffAddress"}
+											value={address}
+											onChange={(e) => setName(e.target.value)}
 										/>
 									</div>
 									<div className="applicationItem">
@@ -424,6 +485,13 @@ export default function AdminStaffEditModal({ ...props }) {
 													type="tel"
 													name={"staffPhone1"}
 													id={"staffPhone1"}
+													value={phones?.phone}
+													onChange={(e) => {
+														let val = e.target.value;
+														let newPhone = { ...phones };
+														newPhone.phone = val;
+														setPhones(newPhone);
+													}}
 												/>
 											</div>
 											<div>
@@ -432,6 +500,13 @@ export default function AdminStaffEditModal({ ...props }) {
 													type="tel"
 													name={"staffPhone1"}
 													id={"staffPhone2"}
+													value={phones?.phone1}
+													onChange={(e) => {
+														let val = e.target.value;
+														let newPhone = { ...phones };
+														newPhone.phone1 = val;
+														setPhones(newPhone);
+													}}
 												/>
 											</div>
 										</div>
@@ -449,7 +524,14 @@ export default function AdminStaffEditModal({ ...props }) {
 													required
 													min={10}
 													max={50}
-												/>
+													value={emails?.email}
+													onChange={(e) => {
+														let val = e.target.value;
+														let newMail = { ...emails };
+														newMail.email = val;
+														setName(newMail);
+													}}
+													/>
 											</div>
 											<div>
 												<label htmlFor={"staffAlternativeEmail"}>
@@ -461,7 +543,14 @@ export default function AdminStaffEditModal({ ...props }) {
 													required
 													min={10}
 													max={50}
-												/>
+													value={emails?.email1}
+													onChange={(e) => {
+														let val = e.target.value;
+														let newMail = { ...emails };
+														newMail.email1 = val;
+														setName(newMail);
+													}}
+													/>
 											</div>
 										</div>
 									</div>
