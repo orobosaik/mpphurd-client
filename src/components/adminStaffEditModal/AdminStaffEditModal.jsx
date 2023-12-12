@@ -42,7 +42,7 @@ export default function AdminStaffEditModal({ ...props }) {
 	const theme = getThemeColor();
 
 	const handleOpen = async () => {
-		console.log(props.data)
+		console.log(props.data);
 		const loadOffices = async () => {
 			try {
 				let host = import.meta.env.VITE_SERVER;
@@ -63,11 +63,10 @@ export default function AdminStaffEditModal({ ...props }) {
 
 				setRegion(filteredRegions[0]);
 				setRegions(filteredRegions);
-				setInitLoading(false)
+				setInitLoading(false);
 
 				console.log(offices, filteredRegions, filteredRegions[0]);
 			} catch (error) {
-
 				let message = error.response
 					? error.response.data.message
 					: error.message;
@@ -84,7 +83,7 @@ export default function AdminStaffEditModal({ ...props }) {
 				});
 			}
 		};
-		loadOffices();
+		await loadOffices();
 
 		console.log(offices);
 
@@ -96,12 +95,12 @@ export default function AdminStaffEditModal({ ...props }) {
 			setZone(props.data.zone);
 			setTasks(props.data.tasks);
 			setIsActive(props.data.isActive);
-			setList(props.data.office)
+			setList(props.data.office);
 		} else {
 			setRegion(regions[0]);
 		}
 		setOpen(true);
-		console.log(props.data.office)
+		console.log(props.data.office);
 	};
 	const handleClose = () => {
 		setLoading(false);
@@ -549,11 +548,13 @@ export default function AdminStaffEditModal({ ...props }) {
 																		);
 																		setList(() => newArr);
 																	}}>
-																	{ console.log(li.id)}
 																	{offices?.map((o, i) => {
 																		if (o?.region?._id === region?._id) {
 																			return (
-																				<option key={i} data={i} value={o._id}>
+																				<option
+																					key={o._id}
+																					data={o._id}
+																					value={o._id}>
 																					{o.name}
 																				</option>
 																			);
@@ -572,9 +573,9 @@ export default function AdminStaffEditModal({ ...props }) {
 																					type="checkbox"
 																					name={`staffEditTasks${i}`}
 																					id={`staffEditTasks${i}`}
-																					defaultChecked={list[index].tasks.includes(
-																						task
-																					)}
+																					defaultChecked={list[
+																						index
+																					]?.tasks?.includes(task)}
 																				/>
 																				<label htmlFor={`staffEditTasks${i}`}>
 																					{task}
