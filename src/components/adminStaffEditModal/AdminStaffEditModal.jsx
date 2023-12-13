@@ -16,29 +16,26 @@ import { CircularProgress } from "@mui/material";
 export default function AdminStaffEditModal({ ...props }) {
 	const [open, setOpen] = useState(false);
 
-	const [isActive, setIsActive] = useState(null);
+	const [isActive, setIsActive] = useState(false);
 	const [isManagement, setIsManagement] = useState(false);
 
 	const [loading, setLoading] = useState(false);
-	const [initLoading, setInitLoading] = useState(true);
+	const [initLoading, setInitLoading] = useState(false);
 
-
-
-	const [photo, setPhoto] = useState(null);
+	const [photo, setPhoto] = useState("");
 	const [clearPhotoButton, setClearPhotoButton] = useState(true);
 
 	const [data, setData] = useState(null);
 
 	const [name, setName] = useState({});
 	const [phones, setPhones] = useState({});
-	const [gender, setGender] = useState(undefined);
-	const [address, setAddress] = useState(undefined);
-	const [emails, setEmails] = useState(undefined);
+	const [gender, setGender] = useState("");
+	const [address, setAddress] = useState("");
+	const [emails, setEmails] = useState({});
 	const [position, setPosition] = useState(undefined);
-	const [designation, setDesignation] = useState(undefined);
+	const [designation, setDesignation] = useState("");
 
 	const [tasks, setTasks] = useState([]);
-	const [zone, setZone] = useState(undefined);
 	const [region, setRegion] = useState(undefined);
 
 	const [offices, setOffices] = useState([]);
@@ -49,13 +46,13 @@ export default function AdminStaffEditModal({ ...props }) {
 
 	const handleOpen = async () => {
 		console.log(props.data);
+		setOpen(true);
+		setInitLoading(true);
 
 		const loadOffices = async () => {
 			try {
 				let host = import.meta.env.VITE_SERVER;
 				let res = await axios.get(`${host}/admin/office`);
-
-				setInitLoading(false);
 
 				const offices = await res.data;
 				setOffices(offices);
@@ -70,7 +67,6 @@ export default function AdminStaffEditModal({ ...props }) {
 
 				setRegion(filteredRegions[0]);
 				setRegions(filteredRegions);
-				setInitLoading(false);
 
 				console.log(offices, filteredRegions, filteredRegions[0]);
 			} catch (error) {
@@ -96,8 +92,11 @@ export default function AdminStaffEditModal({ ...props }) {
 
 		if (props.modalType === "edit") {
 			const data = { ...props.data };
-			console.log(data);
-			setPhoto(data.profilePicture)
+
+			setIsActive(data.isActive);
+			setIsManagement(data.isManagement);
+
+			setPhoto(data.profilePicture);
 			setName({
 				title: data.title,
 				firstName: data.firstName,
@@ -105,36 +104,48 @@ export default function AdminStaffEditModal({ ...props }) {
 				lastName: data.lastName,
 				suffix: data.suffix,
 			});
-			setAddress(data.address)
+
+			setGender(data.gender);
+			setAddress(data.address);
 
 			setPhones({
 				phone: data.phone,
-				phone1: data.phone1
-			})
+				phone1: data.phone1,
+			});
 			setEmails({
 				email: data.email,
-				email1: data.email1
-			})
+				email1: data.email1,
+			});
 
-			setIsActive(data.isActive);
+			setDesignation(data.jobTitle);
+			setPosition(data.position);
+
 			setRegion(data.region);
-			setZone(data.zone);
 			setList(data.office);
-		} else {
-			setRegion(regions[0]);
 		}
-		setOpen(true);
-		console.log(props.data.office);
+		setInitLoading(false);
 	};
+
 	const handleClose = () => {
-		setLoading(false);
+		setIsActive(null);
+		setIsManagement(null);
+
+		setPhoto(null);
+		setName({});
+		setPhones({});
+		setGender("");
+		setAddress("");
+		setEmails({});
+		setPosition(undefined);
+		setDesignation("");
+
+		setTasks([]);
+		setRegion(undefined);
+
+		setOffices([]);
+		setRegions([]);
 		setList([]);
 		setOpen(false);
-		setPhoto(null);
-		setName(undefined);
-		setRegion(undefined);
-		setZone(undefined);
-		setTasks([]);
 	};
 
 	const KEY_NAME_ESC = "Escape";
@@ -169,26 +180,59 @@ export default function AdminStaffEditModal({ ...props }) {
 		return () => {};
 	}, [open]);
 
-
 	const onPhotoChange = (event) => {
 		if (event.target.files && event.target.files[0]) {
-			setPhoto(URL.createObjectURL(event.target.files[0]));
-			console.log(URL.createObjectURL(event.target.files[0]));
+
+			setPhoto(event.target.files[0]);
+			// console.log(event.target.files[0]);
+			// // setPhoto(URL.createObjectURL(event.target.files[0]));
+			// console.log(URL.createObjectURL(event.target.files[0]));
+
+
+
+			    const formData = new FormData();
+					//FILE INFO NAME WILL BE "my-image-file"
+					formData.append(
+						"my-image-file",
+						event.target.files[0],
+						event.target.files[0].name
+					);
+			// setPhoto(formData);
+			console.log(photo)
+			console.log(formData)
+
 		}
 	};
 
 	const handleSubmitNew = async () => {
 		setLoading(true);
 		let newData = {};
+		newData.password = "909090";
 		newData.isActive = isActive;
-		name && (newData.name = name);
-		region && (newData.region = region._id);
-		zone && (newData.zone = zone);
-		tasks && (newData.tasks = tasks.filter((str) => str !== ""));
+		newData.isManagement = isManagement;
+		// newData.profilePicture =
+			// "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1249.jpg";
+		newData.profilePicture = photo;
+		newData.title = name.title;
+		newData.firstName = name.firstName;
+		newData.middleName = name.middleName;
+		newData.lastName = name.lastName;
+		newData.suffix = name.suffix;
+		newData.gender = gender;
+		newData.address = address;
+		newData.phone = phones.phone;
+		newData.phone1 = phones.phone1;
+		newData.email = emails.email;
+		newData.email1 = emails.email1;
+		newData.designation = designation;
+		newData.position = position;
+		newData.region = region;
+		newData.office = list;
+		console.log(newData);
 
 		try {
 			let host = import.meta.env.VITE_SERVER;
-			let res = await axios.post(`${host}/admin/office`, newData);
+			let res = await axios.post(`${host}/admin/staff`, newData);
 
 			handleClose();
 
@@ -231,7 +275,6 @@ export default function AdminStaffEditModal({ ...props }) {
 		newData.isActive = isActive;
 		name && (newData.name = name);
 		region && (newData.region = region._id);
-		zone && (newData.zone = zone);
 		tasks && (newData.tasks = tasks.filter((str) => str !== ""));
 
 		try {
@@ -283,438 +326,467 @@ export default function AdminStaffEditModal({ ...props }) {
 
 			{open && (
 				<dialog className="modalView adminStaffEditModal ">
-					<header>
-						<span>Staff Info</span>
-						{
-							// offices.filter((v, i, self)=> i == self.indexOf(v))
-						}
-
-						<div className="modalViewCloseButton" onClick={handleClose}>
-							<CloseRounded className="closeButton" />
+					{initLoading ? (
+						<div className="loading-container">
+							<CircularProgress
+								thickness={3}
+								size={55}
+								className="loading-icon"
+							/>
 						</div>
-					</header>
+					) : (
+						<>
+							<header>
+								<span>Staff Info</span>
+								{
+									// offices.filter((v, i, self)=> i == self.indexOf(v))
+								}
 
-					<div className="inputStaffHeader">
-						<div
-							className="staffImage"
-							onMouseEnter={() => setClearPhotoButton(true)}
-							onMouseLeave={() => setClearPhotoButton(false)}>
-							{clearPhotoButton && photo && (
-								<div className="clearPhotoButton">
-									<CloseRounded
-										className="clearPhotoIcon"
-										onClick={() => setPhoto(null)}
-									/>
+								<div className="modalViewCloseButton" onClick={handleClose}>
+									<CloseRounded className="closeButton" />
 								</div>
-							)}
-							<label
-								htmlFor={"staffMeansOfIdentification"}
-								className="uploadImageWrapper">
-								{photo ? (
-									<img src={photo} alt="" />
-								) : (
-									<div>
-										<span>
-											<AddPhotoAlternateRounded fontSize="large" />
-										</span>
-										<span>Select Image</span>
-									</div>
-								)}
-								<input
-									type="file"
-									name={"staffMeansOfIdentification"}
-									id={"staffMeansOfIdentification"}
-									accept="image/png, image/jpeg, image/jpg"
-									onChange={onPhotoChange}
-								/>
-							</label>
-						</div>
-						<div className="inputStaffHeaderRight">
-							<div>
-								<span>Active Status:</span>
+							</header>
 
-								<ToggleSwitch
-									toggled={isActive}
-									label={"isActive"}
-									onClick={setIsActive}
-								/>
-							</div>
-							<div>
-								<span>Management Staff:</span>
-								<ToggleSwitch
-									toggled={isManagement}
-									label={"isManagement"}
-									onClick={setIsManagement}
-								/>
-							</div>
-						</div>
-					</div>
-					<div className="applicationForm">
-						<div className="applicationInputWrapper">
-							<div className="applicationItemsWrapper">
-								<div className="applicationTitle">
-									<h3>Staff Personal Information</h3>
-								</div>
-								<div className="applicationItems">
-									<div className="applicationItem">
-										<div className="applicationItemName">
-											<div>
-												<label htmlFor={"staffTitle"}>Title:</label>
-												<input
-													type="text"
-													name={"staffTitle"}
-													id={"staffTitle"}
-													value={name?.title}
-													onChange={(e) => {
-														let val = e.target.value;
-														let newWord = { ...name };
-														newWord.title = val;
-														setName(newWord);
-													}}
-												/>
-											</div>
-											<div>
-												<label htmlFor={"staffFirstName"}>First name:</label>
-												<input
-													type="text"
-													name={"staffFirstName"}
-													id={"staffFirstName"}
-													required
-													min={2}
-													value={name?.firstName}
-													onChange={(e) => {
-														let val = e.target.value;
-														let newWord = { ...name };
-														newWord.firstName = val;
-														setName(newWord);
-													}}
-												/>
-												{console.log(name)}
-												{console.log(props.data.firstName)}
-											</div>
-											<div>
-												<label htmlFor={"staffSurname"}>Surname:</label>
-												<input
-													type="text"
-													name={"staffSurname"}
-													id={"staffSurname"}
-													required
-													min={2}
-													value={name?.lastName}
-													onChange={(e) => {
-														let val = e.target.value;
-														let newWord = { ...name };
-														newWord.lastName = val;
-														setName(newWord);
-													}}
-												/>
-											</div>
-											<div>
-												<label htmlFor={"staffOtherName"}>Other name:</label>
-												<input
-													type="text"
-													name={"staffOtherName"}
-													id={"staffOtherName"}
-													min={2}
-													value={name?.middleName}
-													onChange={(e) => {
-														let val = e.target.value;
-														let newWord = { ...name };
-														newWord.middleName = val;
-														setName(newWord);
-													}}
-												/>
-											</div>
-											<div>
-												<label htmlFor={"staffSuffix"}>Suffix:</label>
-												<input
-													type="text"
-													name={"staffSuffix"}
-													id={"staffSuffix"}
-													value={name?.suffix}
-													onChange={(e) => {
-														let val = e.target.value;
-														let newWord = { ...name };
-														newWord.suffix = val;
-														setName(newWord);
-													}}
-												/>
-											</div>
+							<div className="inputStaffHeader">
+								<div
+									className="staffImage"
+									onMouseEnter={() => setClearPhotoButton(true)}
+									onMouseLeave={() => setClearPhotoButton(false)}>
+									{clearPhotoButton && photo && (
+										<div className="clearPhotoButton">
+											<CloseRounded
+												className="clearPhotoIcon"
+												onClick={() => setPhoto(null)}
+											/>
 										</div>
-									</div>
-
-									<div className="applicationItem">
-										<label htmlFor={"staffGender"}>Gender:</label>
-										<div className="radioBoxWrapper">
-											<label htmlFor={"staffGender1"}>
-												<span>Female</span>
-												<input
-													type="radio"
-													name="gender"
-													value="female"
-													id={"staffGender1"}
-												/>
-											</label>
-
-											<label htmlFor={"staffGender2"}>
-												<span>Male</span>
-												<input
-													type="radio"
-													name="gender"
-													value="male"
-													id={"staffGender2"}
-												/>
-											</label>
-										</div>
-									</div>
-									<div className="applicationItem">
-										<label htmlFor={"staffAddress"}>Address:</label>
+									)}
+									<label
+										htmlFor={"staffMeansOfIdentification"}
+										className="uploadImageWrapper">
+										{photo ? (
+											<img src={URL.createObjectURL(photo)} alt="" />
+										) : (
+											<div>
+												<span>
+													<AddPhotoAlternateRounded fontSize="large" />
+												</span>
+												<span>Select Image</span>
+											</div>
+										)}
 										<input
-											type="text"
-											name={"staffAddress"}
-											id={"staffAddress"}
-											value={address}
-											onChange={(e) => setName(e.target.value)}
+											type="file"
+											name={"staffMeansOfIdentification"}
+											id={"staffMeansOfIdentification"}
+											accept="image/png, image/jpeg, image/jpg"
+											onChange={onPhotoChange}
+										/>
+									</label>
+								</div>
+								<div className="inputStaffHeaderRight">
+									<div>
+										<span>Active Status:</span>
+
+										<ToggleSwitch
+											toggled={isActive}
+											label={"isActive"}
+											onClick={setIsActive}
 										/>
 									</div>
-									<div className="applicationItem">
-										<div className="applicationItemPhone">
-											<div>
-												<label htmlFor={"staffPhone1"}>Phone 1:</label>
-												<input
-													type="tel"
-													name={"staffPhone1"}
-													id={"staffPhone1"}
-													value={phones?.phone}
-													onChange={(e) => {
-														let val = e.target.value;
-														let newPhone = { ...phones };
-														newPhone.phone = val;
-														setPhones(newPhone);
-													}}
-												/>
-											</div>
-											<div>
-												<label htmlFor={"staffPhone2"}>Phone 2:</label>
-												<input
-													type="tel"
-													name={"staffPhone1"}
-													id={"staffPhone2"}
-													value={phones?.phone1}
-													onChange={(e) => {
-														let val = e.target.value;
-														let newPhone = { ...phones };
-														newPhone.phone1 = val;
-														setPhones(newPhone);
-													}}
-												/>
-											</div>
-										</div>
+									<div>
+										<span>Management Staff:</span>
+										<ToggleSwitch
+											toggled={isManagement}
+											label={"isManagement"}
+											onClick={setIsManagement}
+										/>
 									</div>
-
-									<div className="applicationItem">
-										<div className="applicationItemEmail">
-											<div>
-												<label htmlFor={"staffOfficialEmail"}>
-													Official Email:
-												</label>
-												<input
-													type="email"
-													id={"staffOfficialEmail"}
-													required
-													min={10}
-													max={50}
-													value={emails?.email}
-													onChange={(e) => {
-														let val = e.target.value;
-														let newMail = { ...emails };
-														newMail.email = val;
-														setName(newMail);
-													}}
-													/>
-											</div>
-											<div>
-												<label htmlFor={"staffAlternativeEmail"}>
-													Alternative Email:
-												</label>
-												<input
-													type="email"
-													id={"staffAlternativeEmail"}
-													required
-													min={10}
-													max={50}
-													value={emails?.email1}
-													onChange={(e) => {
-														let val = e.target.value;
-														let newMail = { ...emails };
-														newMail.email1 = val;
-														setName(newMail);
-													}}
-													/>
-											</div>
+								</div>
+							</div>
+							<div className="applicationForm">
+								<div className="applicationInputWrapper">
+									<div className="applicationItemsWrapper">
+										<div className="applicationTitle">
+											<h3>Staff Personal Information</h3>
 										</div>
-									</div>
+										<div className="applicationItems">
+											<div className="applicationItem">
+												<div className="applicationItemName">
+													<div>
+														<label htmlFor={"staffTitle"}>Title:</label>
+														<input
+															type="text"
+															name={"staffTitle"}
+															id={"staffTitle"}
+															value={name.title}
+															onChange={(e) => {
+																let val = e.target.value;
+																let newWord = { ...name };
+																newWord.title = val;
+																console.log(newWord)
+																setName(newWord);
+															}}
+														/>
+													</div>
+													<div>
+														<label htmlFor={"staffFirstName"}>
+															First name:
+														</label>
+														<input
+															type="text"
+															name={"staffFirstName"}
+															id={"staffFirstName"}
+															required
+															min={2}
+															value={name?.firstName}
+															onChange={(e) => {
+																let val = e.target.value;
+																let newWord = { ...name };
+																newWord.firstName = val;
+																setName(newWord);
+															}}
+														/>
+													</div>
+													<div>
+														<label htmlFor={"staffSurname"}>Surname:</label>
+														<input
+															type="text"
+															name={"staffSurname"}
+															id={"staffSurname"}
+															required
+															min={2}
+															value={name?.lastName}
+															onChange={(e) => {
+																let val = e.target.value;
+																let newWord = { ...name };
+																newWord.lastName = val;
+																setName(newWord);
+															}}
+														/>
+													</div>
+													<div>
+														<label htmlFor={"staffOtherName"}>
+															Other name:
+														</label>
+														<input
+															type="text"
+															name={"staffOtherName"}
+															id={"staffOtherName"}
+															min={2}
+															value={name?.middleName}
+															onChange={(e) => {
+																let val = e.target.value;
+																let newWord = { ...name };
+																newWord.middleName = val;
+																setName(newWord);
+															}}
+														/>
+													</div>
+													<div>
+														<label htmlFor={"staffSuffix"}>Suffix:</label>
+														<input
+															type="text"
+															name={"staffSuffix"}
+															id={"staffSuffix"}
+															value={name?.suffix}
+															onChange={(e) => {
+																let val = e.target.value;
+																let newWord = { ...name };
+																newWord.suffix = val;
+																setName(newWord);
+															}}
+														/>
+													</div>
+												</div>
+											</div>
 
-									<div className="applicationItem">
-										<div className="applicationItemLocation">
-											<div>
-												<label htmlFor="staffDesignation">Designation:</label>
+											<div className="applicationItem">
+												<label htmlFor={"staffGender"}>Gender:</label>
+												<div className="radioBoxWrapper">
+													<label htmlFor={"staffGender1"}>
+														<span>Female</span>
+														<input
+															type="radio"
+															name="gender"
+															value="female"
+															id={"staffGender1"}
+															defaultChecked={gender === "female"}
+															onChange={(e) => setGender(e.target.value)}
+														/>
+													</label>
+
+													<label htmlFor={"staffGender2"}>
+														<span>Male</span>
+														<input
+															type="radio"
+															name="gender"
+															value="male"
+															id={"staffGender2"}
+															defaultChecked={gender === "male"}
+															onChange={(e) => setGender(e.target.value)}
+														/>
+													</label>
+												</div>
+											</div>
+											<div className="applicationItem">
+												<label htmlFor={"staffAddress"}>Address:</label>
 												<input
 													type="text"
-													name="staffDesignation"
-													id="staffDesignation"
+													name={"staffAddress"}
+													id={"staffAddress"}
+													value={address}
+													onChange={(e) => setAddress(e.target.value)}
 												/>
 											</div>
-											<div>
-												<label htmlFor="staffOffice">Position:</label>
-												<select name="staffOffice" id="staffOffice">
-													<option value="proposed">Proposed</option>
-													<option value="underConstruction">
-														Under Construction
-													</option>
-													<option value="built">Built</option>
-												</select>
+											<div className="applicationItem">
+												<div className="applicationItemPhone">
+													<div>
+														<label htmlFor={"staffPhone1"}>Phone 1:</label>
+														<input
+															type="tel"
+															name={"staffPhone1"}
+															id={"staffPhone1"}
+															value={phones?.phone}
+															onChange={(e) => {
+																let val = e.target.value;
+																let newPhone = { ...phones };
+																newPhone.phone = val;
+																setPhones(newPhone);
+															}}
+														/>
+													</div>
+													<div>
+														<label htmlFor={"staffPhone2"}>Phone 2:</label>
+														<input
+															type="tel"
+															name={"staffPhone1"}
+															id={"staffPhone2"}
+															value={phones?.phone1}
+															onChange={(e) => {
+																let val = e.target.value;
+																let newPhone = { ...phones };
+																newPhone.phone1 = val;
+																setPhones(newPhone);
+															}}
+														/>
+													</div>
+												</div>
 											</div>
 
-											<div>
-												<label htmlFor="staffEditRegion">Region:</label>
-												<select
-													name="staffEditRegion"
-													id="staffEditRegion"
-													defaultValue={region?._id}
-													onChange={(e) => {
-														const reg = regions.find(
-															(option) => option._id === e.target.value
-														);
-														const off = offices.find(
-															(option) => option.region._id === e.target.value
-														);
-														setRegion(reg);
-														setList([]);
-													}}>
-													{regions?.map((r, i) => {
-														return (
-															<option key={i} data={i} value={r._id}>
-																{r.name}
-															</option>
-														);
-													})}
-												</select>
+											<div className="applicationItem">
+												<div className="applicationItemEmail">
+													<div>
+														<label htmlFor={"staffOfficialEmail"}>
+															Official Email:
+														</label>
+														<input
+															type="email"
+															id={"staffOfficialEmail"}
+															required
+															min={10}
+															max={50}
+															value={emails.email}
+															onChange={(e) => {
+																let val = e.target.value;
+																let newMail = { ...emails };
+																newMail.email = val;
+																setEmails(newMail);
+															}}
+														/>
+													</div>
+													<div>
+														<label htmlFor={"staffAlternativeEmail"}>
+															Alternative Email:
+														</label>
+														<input
+															type="email"
+															id={"staffAlternativeEmail"}
+															required
+															min={10}
+															max={50}
+															value={emails.email1}
+															onChange={(e) => {
+																let val = e.target.value;
+																let newMail = { ...emails };
+																newMail.email1 = val;
+																setEmails(newMail);
+															}}
+														/>
+													</div>
+												</div>
 											</div>
-										</div>
-									</div>
 
-									<div className="applicationItem">
-										<label htmlFor="">Office and Tasks</label>
+											<div className="applicationItem">
+												<div className="applicationItemLocation">
+													<div>
+														<label htmlFor="staffDesignation">
+															Designation:
+														</label>
+														<input
+															type="text"
+															name="staffDesignation"
+															id="staffDesignation"
+															defaultValue={designation}
+															onChange={(e) => setDesignation(e.target.value)}
+														/>
+													</div>
+													<div>
+														<label htmlFor="staffPosition">Position:</label>
+														<input
+															type="text"
+															name="staffPosition"
+															id="staffPosition"
+															defaultValue={position}
+															onChange={(e) => setPosition(e.target.value)}
+														/>
+													</div>
 
-										<div className="inputStaffOfficeWrapper">
-											<div className="inputStaffOfficeList">
-												{console.log(list)}
-												{list.map((li, index) => {
-													return (
-														<div
-															key={`${li?.id?._id}${index}`}
-															className="inputStaffOffice">
-															<button
-																onClick={() => {
-																	let newArr = [...list];
-																	newArr.splice(index, 1);
-																	setList(newArr);
-																}}>
-																Del
-															</button>
+													<div>
+														<label htmlFor="staffEditRegion">Region:</label>
+														<select
+															name="staffEditRegion"
+															id="staffEditRegion"
+															defaultValue={region?._id}
+															onChange={(e) => {
+																const reg = regions.find(
+																	(option) => option._id === e.target.value
+																);
+																const off = offices.find(
+																	(option) =>
+																		option.region._id === e.target.value
+																);
+																setRegion(reg);
+																setList([]);
+															}}>
+															{regions?.map((r, i) => {
+																return (
+																	<option key={i} data={i} value={r._id}>
+																		{r.name}
+																	</option>
+																);
+															})}
+														</select>
+													</div>
+												</div>
+											</div>
 
-															<div>
-																<label>Office</label>
-																<select
-																	name="staffEditOffice"
-																	id="staffEditOffice"
-																	defaultValue={li?.id?._id}
-																	onChange={(e) => {
-																		let newArr = [...list];
-																		newArr[index].id = offices.find(
-																			(option) => option._id === e.target.value
-																		);
-																		setList(() => newArr);
-																	}}>
-																	{offices?.map((o, i) => {
-																		if (o?.region?._id === region?._id) {
-																			return (
-																				<option
-																					key={o._id}
-																					data={o._id}
-																					value={o._id}>
-																					{o.name}
-																				</option>
-																			);
-																		}
-																	})}
-																</select>
-															</div>
+											<div className="applicationItem">
+												<label htmlFor="">Office and Tasks</label>
 
-															<div>
-																<label>Tasks</label>
-																<div className="taskList">
-																	{list[index].id?.tasks?.map((task, i) => {
-																		return (
-																			<span key={i}>
-																				<input
-																					type="checkbox"
-																					name={`staffEditTasks${i}`}
-																					id={`staffEditTasks${i}`}
-																					defaultChecked={list[
-																						index
-																					]?.tasks?.includes(task)}
-																				/>
-																				<label htmlFor={`staffEditTasks${i}`}>
-																					{task}
-																				</label>
-																			</span>
-																		);
-																	})}
+												<div className="inputStaffOfficeWrapper">
+													<div className="inputStaffOfficeList">
+														{console.log(list)}
+														{list.map((li, index) => {
+															return (
+																<div
+																	key={`${li?.id?._id}${index}`}
+																	className="inputStaffOffice">
+																	<button
+																		onClick={() => {
+																			let newArr = [...list];
+																			newArr.splice(index, 1);
+																			setList(newArr);
+																		}}>
+																		Del
+																	</button>
+
+																	<div>
+																		<label>Office</label>
+																		<select
+																			name="staffEditOffice"
+																			id="staffEditOffice"
+																			defaultValue={li?.id?._id}
+																			onChange={(e) => {
+																				let newArr = [...list];
+																				newArr[index].id = offices.find(
+																					(option) =>
+																						option._id === e.target.value
+																				);
+																				setList(() => newArr);
+																			}}>
+																			{offices?.map((o, i) => {
+																				if (o?.region?._id === region?._id) {
+																					return (
+																						<option
+																							key={o._id}
+																							data={o._id}
+																							value={o._id}>
+																							{o.name}
+																						</option>
+																					);
+																				}
+																			})}
+																		</select>
+																	</div>
+
+																	<div>
+																		<label>Tasks</label>
+																		<div className="taskList">
+																			{list[index].id?.tasks?.map((task, i) => {
+																				return (
+																					<span key={i}>
+																						<input
+																							type="checkbox"
+																							name={`staffEditTasks${i}`}
+																							id={`staffEditTasks${i}`}
+																							defaultChecked={list[
+																								index
+																							]?.tasks?.includes(task)}
+																						/>
+																						<label
+																							htmlFor={`staffEditTasks${i}`}>
+																							{task}
+																						</label>
+																					</span>
+																				);
+																			})}
+																		</div>
+																	</div>
 																</div>
-															</div>
-														</div>
-													);
-												})}
+															);
+														})}
+													</div>
+
+													<button
+														onClick={() => {
+															let newArr = [...list];
+															newArr.push([]);
+															newArr[list.length].id = offices.find(
+																(o) => o?.region?._id === region?._id
+															);
+															setList(newArr);
+														}}>
+														Add
+													</button>
+												</div>
 											</div>
-											<button
-												onClick={() => {
-													let newArr = [...list];
-													newArr.push([]);
-													newArr[list.length].id = offices.find(
-														(o) => o?.region?._id === region?._id
-													);
-													setList(newArr);
-												}}>
-												Add
-											</button>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-					<footer>
-						<button
-							disabled={loading}
-							onClick={
-								props.modalType === "edit" ? handleSubmitEdit : handleSubmitNew
-							}
-							className="primary">
-							{loading ? (
-								<CircularProgress
-									thickness={5}
-									size={20}
-									sx={{ color: "white" }}
-								/>
-							) : props.modalType === "edit" ? (
-								"Update"
-							) : (
-								"Save"
-							)}
-						</button>
-					</footer>
+							<footer>
+								<button
+									disabled={loading}
+									onClick={
+										props.modalType === "edit"
+											? handleSubmitEdit
+											: handleSubmitNew
+									}
+									className="primary">
+									{loading ? (
+										<CircularProgress
+											thickness={5}
+											size={20}
+											sx={{ color: "white" }}
+										/>
+									) : props.modalType === "edit" ? (
+										"Update"
+									) : (
+										"Save"
+									)}
+								</button>
+							</footer>
+						</>
+					)}
 				</dialog>
 			)}
 		</>
