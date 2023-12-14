@@ -55,7 +55,7 @@ export default function AdminStaffEditModal({ ...props }) {
 		console.log(props.data);
 		setOpen(true);
 		setInitLoading(true);
-		setPhotoUrl(props?.data?.profilePicture || import.meta.env.VITE_NO_AVATAR)
+		setPhotoUrl(props?.data?.profilePicture || import.meta.env.VITE_NO_AVATAR);
 
 		const loadOffices = async () => {
 			try {
@@ -63,7 +63,7 @@ export default function AdminStaffEditModal({ ...props }) {
 				let res = await axios.get(`${host}/admin/office`);
 
 				const offices = await res.data;
-				setOffices(offices.filter((o)=> o.isActive === true));
+				setOffices(offices.filter((o) => o.isActive === true));
 
 				const filteredRegions = await res.data
 					.filter((value, index, self) => {
@@ -100,7 +100,7 @@ export default function AdminStaffEditModal({ ...props }) {
 
 		if (props.modalType === "edit") {
 			const data = { ...props.data };
-			setData(data)
+			setData(data);
 
 			setIsActive(data.isActive);
 			setIsManagement(data.isManagement);
@@ -296,7 +296,6 @@ export default function AdminStaffEditModal({ ...props }) {
 		newData.office = list;
 		console.log(newData);
 		console.log(data._id);
-
 
 		try {
 			let host = import.meta.env.VITE_SERVER;
@@ -821,7 +820,7 @@ export default function AdminStaffEditModal({ ...props }) {
 															newArr[list.length].id = offices.find(
 																(o) => o?.region?._id === region?._id
 															);
-															newArr[list.length].tasks = []
+															newArr[list.length].tasks = [];
 															setList(newArr);
 														}}>
 														Add
@@ -837,7 +836,7 @@ export default function AdminStaffEditModal({ ...props }) {
 									disabled={loading}
 									onClick={
 										props.modalType === "edit"
-											? (e) => handleSubmitEdit(e,data)
+											? (e) => handleSubmitEdit(e, data)
 											: handleSubmitNew
 									}
 									className="primary">
