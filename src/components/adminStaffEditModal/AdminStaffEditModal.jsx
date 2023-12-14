@@ -23,17 +23,24 @@ export default function AdminStaffEditModal({ ...props }) {
 	const [initLoading, setInitLoading] = useState(false);
 
 	const [photo, setPhoto] = useState("");
+	const [photoUrl, setPhotoUrl] = useState("");
 	const [clearPhotoButton, setClearPhotoButton] = useState(true);
 
 	const [data, setData] = useState(null);
 
-	const [name, setName] = useState({});
+	const [name, setName] = useState({
+		firstName: "",
+		title: "",
+		middleName: "",
+		lastName: "",
+		suffix: "",
+	});
 	const [phones, setPhones] = useState({});
 	const [gender, setGender] = useState("");
-	const [address, setAddress] = useState("");
+	const [address, setAddress] = useState(undefined);
 	const [emails, setEmails] = useState({});
 	const [position, setPosition] = useState(undefined);
-	const [designation, setDesignation] = useState("");
+	const [designation, setDesignation] = useState(undefined);
 
 	const [tasks, setTasks] = useState([]);
 	const [region, setRegion] = useState(undefined);
@@ -48,6 +55,7 @@ export default function AdminStaffEditModal({ ...props }) {
 		console.log(props.data);
 		setOpen(true);
 		setInitLoading(true);
+		setPhotoUrl(props?.data?.profilePicture || import.meta.env.VITE_NO_AVATAR)
 
 		const loadOffices = async () => {
 			try {
@@ -55,7 +63,7 @@ export default function AdminStaffEditModal({ ...props }) {
 				let res = await axios.get(`${host}/admin/office`);
 
 				const offices = await res.data;
-				setOffices(offices);
+				setOffices(offices.filter((o)=> o.isActive === true));
 
 				const filteredRegions = await res.data
 					.filter((value, index, self) => {
@@ -92,6 +100,7 @@ export default function AdminStaffEditModal({ ...props }) {
 
 		if (props.modalType === "edit") {
 			const data = { ...props.data };
+			setData(data)
 
 			setIsActive(data.isActive);
 			setIsManagement(data.isManagement);
@@ -182,25 +191,22 @@ export default function AdminStaffEditModal({ ...props }) {
 
 	const onPhotoChange = (event) => {
 		if (event.target.files && event.target.files[0]) {
-
 			setPhoto(event.target.files[0]);
+			setPhotoUrl(URL.createObjectURL(event.target.files[0]));
 			// console.log(event.target.files[0]);
 			// // setPhoto(URL.createObjectURL(event.target.files[0]));
 			// console.log(URL.createObjectURL(event.target.files[0]));
 
-
-
-			    const formData = new FormData();
-					//FILE INFO NAME WILL BE "my-image-file"
-					formData.append(
-						"my-image-file",
-						event.target.files[0],
-						event.target.files[0].name
-					);
+			const formData = new FormData();
+			//FILE INFO NAME WILL BE "my-image-file"
+			formData.append(
+				"my-image-file",
+				event.target.files[0],
+				event.target.files[0].name
+			);
 			// setPhoto(formData);
-			console.log(photo)
-			console.log(formData)
-
+			console.log(photo);
+			console.log(formData);
 		}
 	};
 
@@ -210,9 +216,7 @@ export default function AdminStaffEditModal({ ...props }) {
 		newData.password = "909090";
 		newData.isActive = isActive;
 		newData.isManagement = isManagement;
-		// newData.profilePicture =
-			// "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1249.jpg";
-		newData.profilePicture = photo;
+		// newData.profilePicture = photo;
 		newData.title = name.title;
 		newData.firstName = name.firstName;
 		newData.middleName = name.middleName;
@@ -224,7 +228,7 @@ export default function AdminStaffEditModal({ ...props }) {
 		newData.phone1 = phones.phone1;
 		newData.email = emails.email;
 		newData.email1 = emails.email1;
-		newData.designation = designation;
+		newData.jobTitle = designation;
 		newData.position = position;
 		newData.region = region;
 		newData.office = list;
@@ -269,17 +273,34 @@ export default function AdminStaffEditModal({ ...props }) {
 			});
 		}
 	};
-	const handleSubmitEdit = async () => {
+	const handleSubmitEdit = async (e, data) => {
 		setLoading(true);
 		let newData = {};
 		newData.isActive = isActive;
-		name && (newData.name = name);
-		region && (newData.region = region._id);
-		tasks && (newData.tasks = tasks.filter((str) => str !== ""));
+		newData.isManagement = isManagement;
+		// newData.profilePicture = photo;
+		newData.title = name.title;
+		newData.firstName = name.firstName;
+		newData.middleName = name.middleName;
+		newData.lastName = name.lastName;
+		newData.suffix = name.suffix;
+		newData.gender = gender;
+		newData.address = address;
+		newData.phone = phones.phone;
+		newData.phone1 = phones.phone1;
+		newData.email = emails.email;
+		newData.email1 = emails.email1;
+		newData.designation = designation;
+		newData.position = position;
+		newData.region = region;
+		newData.office = list;
+		console.log(newData);
+		console.log(data._id);
+
 
 		try {
 			let host = import.meta.env.VITE_SERVER;
-			let res = await axios.put(`${host}/admin/office/${data._id}`, newData);
+			let res = await axios.put(`${host}/admin/staff/${data._id}`, newData);
 
 			setLoading(false);
 			setOpen(false);
@@ -338,10 +359,6 @@ export default function AdminStaffEditModal({ ...props }) {
 						<>
 							<header>
 								<span>Staff Info</span>
-								{
-									// offices.filter((v, i, self)=> i == self.indexOf(v))
-								}
-
 								<div className="modalViewCloseButton" onClick={handleClose}>
 									<CloseRounded className="closeButton" />
 								</div>
@@ -364,7 +381,7 @@ export default function AdminStaffEditModal({ ...props }) {
 										htmlFor={"staffMeansOfIdentification"}
 										className="uploadImageWrapper">
 										{photo ? (
-											<img src={URL.createObjectURL(photo)} alt="" />
+											<img src={photoUrl} alt="" />
 										) : (
 											<div>
 												<span>
@@ -422,7 +439,7 @@ export default function AdminStaffEditModal({ ...props }) {
 																let val = e.target.value;
 																let newWord = { ...name };
 																newWord.title = val;
-																console.log(newWord)
+																console.log(newWord);
 																setName(newWord);
 															}}
 														/>
@@ -527,7 +544,7 @@ export default function AdminStaffEditModal({ ...props }) {
 													</label>
 												</div>
 											</div>
-											<div className="applicationItem">
+											{/* <div className="applicationItem">
 												<label htmlFor={"staffAddress"}>Address:</label>
 												<input
 													type="text"
@@ -536,7 +553,7 @@ export default function AdminStaffEditModal({ ...props }) {
 													value={address}
 													onChange={(e) => setAddress(e.target.value)}
 												/>
-											</div>
+											</div> */}
 											<div className="applicationItem">
 												<div className="applicationItemPhone">
 													<div>
@@ -721,19 +738,70 @@ export default function AdminStaffEditModal({ ...props }) {
 																	<div>
 																		<label>Tasks</label>
 																		<div className="taskList">
-																			{list[index].id?.tasks?.map((task, i) => {
+																			{li.id?.tasks?.map((task, i) => {
 																				return (
-																					<span key={i}>
+																					<span key={task + i}>
 																						<input
 																							type="checkbox"
-																							name={`staffEditTasks${i}`}
-																							id={`staffEditTasks${i}`}
-																							defaultChecked={list[
-																								index
-																							]?.tasks?.includes(task)}
+																							name={`staffEditTasks${task + i}`}
+																							value={li.id?.tasks[i]}
+																							id={`staffEditTasks${
+																								index + "-" + i
+																							}`}
+																							defaultChecked={li?.tasks?.includes(
+																								task
+																							)}
+																							onChange={(e) => {
+																								// Destructuring
+																								const { value, checked } =
+																									e.target;
+
+																								let newArr = [...list];
+																								console.log(
+																									`${value} is ${checked}`
+																								);
+
+																								// Case 1 : The user checks the box
+																								if (checked) {
+																									console.log("LIST:", newArr);
+																									console.log(
+																										"LIST with Index:",
+																										newArr[index]
+																									);
+																									console.log("LI:", li);
+																									// console.log("LI:", list)
+																									newArr[index].tasks = [
+																										...newArr[index]?.tasks,
+																										value,
+																									];
+																									setList(() => newArr);
+
+																									console.log(
+																										"CHECKED:",
+																										newArr[index].tasks
+																									);
+																								}
+
+																								// Case 2  : The user unchecks the box
+																								else {
+																									newArr[index].tasks = newArr[
+																										index
+																									].tasks.filter(
+																										(e) => e !== value
+																									);
+																									setList(() => newArr);
+
+																									console.log(
+																										"UNCHECKED:",
+																										newArr[index].tasks
+																									);
+																								}
+																							}}
 																						/>
 																						<label
-																							htmlFor={`staffEditTasks${i}`}>
+																							htmlFor={`staffEditTasks${
+																								index + "-" + i
+																							}`}>
 																							{task}
 																						</label>
 																					</span>
@@ -749,10 +817,11 @@ export default function AdminStaffEditModal({ ...props }) {
 													<button
 														onClick={() => {
 															let newArr = [...list];
-															newArr.push([]);
+															newArr.push({});
 															newArr[list.length].id = offices.find(
 																(o) => o?.region?._id === region?._id
 															);
+															newArr[list.length].tasks = []
 															setList(newArr);
 														}}>
 														Add
@@ -768,7 +837,7 @@ export default function AdminStaffEditModal({ ...props }) {
 									disabled={loading}
 									onClick={
 										props.modalType === "edit"
-											? handleSubmitEdit
+											? (e) => handleSubmitEdit(e,data)
 											: handleSubmitNew
 									}
 									className="primary">

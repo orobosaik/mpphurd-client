@@ -36,7 +36,7 @@ export default function AdminStaffView() {
 			console.log(state);
 			try {
 				let host = import.meta.env.VITE_SERVER;
-				const res = await axios.get(`${host}/admin/staff/${state.id}`);
+				const res = await axios.get(`${host}/admin/staff/${state.data._id}`);
 
 				setData(res.data);
 				setIsLoading(false);
@@ -64,13 +64,14 @@ export default function AdminStaffView() {
 			}
 		};
 
-		if (state.data) {
-			setData(state.data);
-			setIsLoading(false);
-			console.log(state.data);
-		} else {
-			getData();
-		}
+		// if (false) {
+		// 	setData(state.data);
+		// 	setIsLoading(false);
+		// 	console.log(state.data);
+		// } else {
+		// 	getData();
+		// }
+		getData();
 
 		// 	// return () => {
 		// 	// 	second
