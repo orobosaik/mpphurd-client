@@ -20,6 +20,7 @@ import { getThemeColor } from "../../../utilities/themeColor";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
+import LoadingIcon from "../../../utilities/LoadingIcon";
 import { getFullName } from "../../../utilities/getFullName";
 import AdminStaffView from "../adminStaffView/adminStaffView";
 import { CircularProgress } from "@mui/material";
@@ -109,16 +110,7 @@ export default function AdminOfficeList() {
 									/>
 								),
 							}}>
-							{isLoading && (
-								<div className="loading-container">
-									<CircularProgress
-										thickness={3}
-										size={55}
-										className="loading-icon"
-									/>
-								</div>
-							)}
-
+							{isLoading && <LoadingIcon />}
 							{data && (
 								<>
 									<div className="listQuery">

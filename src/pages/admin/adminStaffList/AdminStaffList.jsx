@@ -14,6 +14,7 @@ import { CircularProgress } from "@mui/material";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { getThemeColor } from "../../../utilities/themeColor";
+import LoadingIcon from "../../../utilities/LoadingIcon";
 
 export default function AdminStaffList() {
 	const [isLoading, setIsLoading] = useState(true);
@@ -95,15 +96,7 @@ export default function AdminStaffList() {
 								),
 							}}>
 							{/* <ListWrapper></ListWrapper> */}
-							{isLoading && (
-								<div className="loading-container">
-									<CircularProgress
-										thickness={3}
-										size={55}
-										className="loading-icon"
-									/>
-								</div>
-							)}
+							{isLoading && <LoadingIcon />}
 							{data && (
 								<>
 									<div className="listQuery">
@@ -113,9 +106,7 @@ export default function AdminStaffList() {
 												defaultValue="active"
 												name="listQueryOption"
 												id="listQueryOption">
-												<option value="active">
-													Active
-												</option>
+												<option value="active">Active</option>
 												<option value="inactive">Inactive</option>
 											</select>
 										</div>

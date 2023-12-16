@@ -14,6 +14,7 @@ import { CircularProgress } from "@mui/material";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { getThemeColor } from "../../../utilities/themeColor";
+import LoadingIcon from "../../../utilities/LoadingIcon";
 import AdminOfficeEditModal from "../../../components/adminOfficeEditModal/AdminOfficeEditModal";
 import AdminRegionEditModal from "../../../components/adminRegionEditModal/AdminRegionEditModal";
 
@@ -89,15 +90,7 @@ export default function AdminRegionList() {
 									/>
 								),
 							}}>
-							{isLoading && (
-								<div className="loading-container">
-									<CircularProgress
-										thickness={3}
-										size={55}
-										className="loading-icon"
-									/>
-								</div>
-							)}
+							{isLoading && <LoadingIcon/>}
 							{data && (
 								<>
 									{/* LIST QUERY */}
@@ -141,7 +134,11 @@ export default function AdminRegionList() {
 
 									{/* LIST CARD */}
 									<div className="adminStaffListCardWrapper">
-										{data.length < 1 ? <p className="nodatacurrently">No Data Currently</p>:""}
+										{data.length < 1 ? (
+											<p className="nodatacurrently">No Data Currently</p>
+										) : (
+											""
+										)}
 										{data.map((d) => {
 											return (
 												<div className=" adminOfficeListCard">

@@ -52,7 +52,6 @@ export default function AdminStaffEditModal({ ...props }) {
 	const theme = getThemeColor();
 
 	const handleOpen = async () => {
-		console.log(props.data);
 		setOpen(true);
 		setInitLoading(true);
 		setPhotoUrl(props?.data?.profilePicture || import.meta.env.VITE_NO_AVATAR);
@@ -95,8 +94,6 @@ export default function AdminStaffEditModal({ ...props }) {
 			}
 		};
 		await loadOffices();
-
-		console.log(offices);
 
 		if (props.modalType === "edit") {
 			const data = { ...props.data };
@@ -193,9 +190,6 @@ export default function AdminStaffEditModal({ ...props }) {
 		if (event.target.files && event.target.files[0]) {
 			setPhoto(event.target.files[0]);
 			setPhotoUrl(URL.createObjectURL(event.target.files[0]));
-			// console.log(event.target.files[0]);
-			// // setPhoto(URL.createObjectURL(event.target.files[0]));
-			// console.log(URL.createObjectURL(event.target.files[0]));
 
 			const formData = new FormData();
 			//FILE INFO NAME WILL BE "my-image-file"
@@ -294,16 +288,14 @@ export default function AdminStaffEditModal({ ...props }) {
 		newData.position = position;
 		newData.region = region;
 		newData.office = list;
-		console.log(newData);
-		console.log(data._id);
 
 		try {
 			let host = import.meta.env.VITE_SERVER;
 			let res = await axios.put(`${host}/admin/staff/${data._id}`, newData);
 
+			props.setReload(() => []);
 			setLoading(false);
 			setOpen(false);
-			props.setReload(() => []);
 
 			setTimeout(() => {
 				toast.success(res.data, {
@@ -438,7 +430,6 @@ export default function AdminStaffEditModal({ ...props }) {
 																let val = e.target.value;
 																let newWord = { ...name };
 																newWord.title = val;
-																console.log(newWord);
 																setName(newWord);
 															}}
 														/>
@@ -690,7 +681,6 @@ export default function AdminStaffEditModal({ ...props }) {
 
 												<div className="inputStaffOfficeWrapper">
 													<div className="inputStaffOfficeList">
-														{console.log(list)}
 														{list.map((li, index) => {
 															return (
 																<div
@@ -756,29 +746,14 @@ export default function AdminStaffEditModal({ ...props }) {
 																									e.target;
 
 																								let newArr = [...list];
-																								console.log(
-																									`${value} is ${checked}`
-																								);
 
 																								// Case 1 : The user checks the box
 																								if (checked) {
-																									console.log("LIST:", newArr);
-																									console.log(
-																										"LIST with Index:",
-																										newArr[index]
-																									);
-																									console.log("LI:", li);
-																									// console.log("LI:", list)
 																									newArr[index].tasks = [
 																										...newArr[index]?.tasks,
 																										value,
 																									];
 																									setList(() => newArr);
-
-																									console.log(
-																										"CHECKED:",
-																										newArr[index].tasks
-																									);
 																								}
 
 																								// Case 2  : The user unchecks the box
@@ -789,11 +764,6 @@ export default function AdminStaffEditModal({ ...props }) {
 																										(e) => e !== value
 																									);
 																									setList(() => newArr);
-
-																									console.log(
-																										"UNCHECKED:",
-																										newArr[index].tasks
-																									);
 																								}
 																							}}
 																						/>

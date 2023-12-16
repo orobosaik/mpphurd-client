@@ -18,6 +18,7 @@ import AdminStaffListCard from "../../../components/adminStaffListCard/AdminStaf
 import { Link, useLocation } from "react-router-dom";
 import AdminStaffEditModal from "../../../components/adminStaffEditModal/AdminStaffEditModal";
 import { getThemeColor } from "../../../utilities/themeColor";
+import LoadingIcon from "../../../utilities/LoadingIcon";
 import { getFullName } from "../../../utilities/getFullName";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -33,20 +34,16 @@ export default function AdminStaffView() {
 
 	useEffect(() => {
 		const getData = async () => {
-			console.log(state);
 			try {
 				let host = import.meta.env.VITE_SERVER;
 				const res = await axios.get(`${host}/admin/staff/${state.data._id}`);
 
-				setData(res.data);
+				setData(()=> res.data);
 				setIsLoading(false);
-				console.log(res.data);
 			} catch (error) {
 				let message = error.response
 					? error.response.data.message
 					: error.message;
-				console.log(error);
-				console.log(message);
 
 				setTimeout(() => {
 					toast.error(message, {
@@ -104,88 +101,93 @@ export default function AdminStaffView() {
 									/>
 								),
 							}}>
-							<div className="staffView">
-								<div className="staffViewHeader">
-									<div>
-										<h2>
-											{" "}
-											{[
-												data.title,
-												data.firstName,
-												data.middleName,
-												data.lastName,
-												data.prefix,
-											]
-												.filter(function (value) {
-													return (
-														value !== null &&
-														value !== "" &&
-														value !== undefined
-													);
-												})
-												.join(" ")}{" "}
-										</h2>
+							{isLoading && <LoadingIcon />}
 
-										<h4>{data.jobTitle?.fullName}</h4>
-
-										{data.office?.map((d, i) => {
-											console.log(d);
-											return <h4 key={i}> {d?.id?.name}</h4>;
-										})}
-
-										<p>Department of Development Control+</p>
-
+							{!isLoading && (
+								<div className="staffView">
+									<div className="staffViewHeader">
 										<div>
-											<span>Official Email:</span>
-											<span>{data.email}</span>
+											<h2>
+												{" "}
+												{[
+													data.title,
+													data.firstName,
+													data.middleName,
+													data.lastName,
+													data.prefix,
+												]
+													.filter(function (value) {
+														return (
+															value !== null &&
+															value !== "" &&
+															value !== undefined
+														);
+													})
+													.join(" ")}{" "}
+											</h2>
+
+											<h4>{data.jobTitle?.fullName}</h4>
+
+											{data.office?.map((d, i) => {
+												return <h4 key={i}> {d?.id?.name}</h4>;
+											})}
+
+											<p>Department of Development Control+</p>
+
+											<div>
+												<span>Official Email:</span>
+												<span>{data.email}</span>
+											</div>
+											<div>
+												<span>Alt Email:</span>
+												<span>{data.email1}</span>
+											</div>
+											<div>
+												<span>Phone:</span>
+												<span>{data.phone}</span>
+											</div>
+											<div>
+												<span>Gender:</span>
+												<span>{data.gender}</span>
+											</div>
 										</div>
-										<div>
-											<span>Alt Email:</span>
-											<span>{data.email1}</span>
-										</div>
-										<div>
-											<span>Phone:</span>
-											<span>{data.phone}</span>
-										</div>
-										<div>
-											<span>Gender:</span>
-											<span>{data.gender}</span>
+
+										<div className="staffImage">
+											<label
+												htmlFor={"staffMeansOfIdentification"}
+												className="uploadImageWrapper">
+												<img
+													src={
+														data.profilePicture ||
+														import.meta.env.VITE_NO_AVATAR
+													}
+													alt="photo"
+												/>
+											</label>
 										</div>
 									</div>
 
-									<div className="staffImage">
-										<label
-											htmlFor={"staffMeansOfIdentification"}
-											className="uploadImageWrapper">
-											<img
-												src={
-													data.profilePicture || import.meta.env.VITE_NO_AVATAR
-												}
-												alt="photo"
+									<div className="inputStaffHeaderRight">
+										<div>
+											<span>Active Status:</span>
+											<ToggleSwitch
+												toggled={data.isActive}
+												label={"isActive"}
+												onClick={setIsActive}
 											/>
-										</label>
-									</div>
-								</div>
+										</div>
+										<div>
+											<span>Management Staff:</span>
+											<ToggleSwitch
+												toggled={data.isManagement}
+												label={"isManagement"}
+												onClick={setIsManagement}
+												/>
 
-								<div className="inputStaffHeaderRight">
-									<div>
-										<span>Active Status:</span>
-										<ToggleSwitch
-											toggled={data.isActive}
-											label={"isActive"}
-											onClick={setIsActive}
-										/>
-									</div>
-									<div>
-										<span>Management Staff:</span>
-										<ToggleSwitch
-											toggled={data.isManagement}
-											label={"isManagement"}
-											onClick={setIsManagement}
-										/>
+										</div>
 									</div>
 								</div>
-							</div>
+							)}
 						</MiddleBar>
 					</div>
 				</div>
