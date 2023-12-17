@@ -11,6 +11,18 @@ export default function ApplicationForm() {
 	const [isCompany, setIsCompany] = useState(false);
 	const [isJoint, setIsJoint] = useState(true);
 
+	const [indivAppData, setIndivAppData] = useState({
+		name: "",
+		address: "",
+		email: "",
+		phone: "",
+		phone1: "",
+		photo: "",
+	})
+
+
+
+
 	const individualApplicationItems = (type) => {
 		return (
 			<div className="applicationItems">
