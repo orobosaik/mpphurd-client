@@ -19,6 +19,14 @@ export default function ApplicationForm() {
 		phone1: "",
 		photo: "",
 	})
+	const [repAppData, setRepAppData] = useState({
+		name: "",
+		address: "",
+		email: "",
+		phone: "",
+		phone1: "",
+		photo: "",
+	});
 
 
 
