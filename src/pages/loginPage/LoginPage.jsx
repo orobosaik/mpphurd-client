@@ -37,18 +37,26 @@ export default function LoginPage() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		console.log(email, password);
+		console.log(email.current.value, password.current.value);
 
 		dispatch(loginStart());
 
 		try {
 			let host = import.meta.env.VITE_SERVER;
-			const res = await axios.post(`${host}/staffs/auth/login`, {
-				email: email.current.value,
-				password: password.current.value,
-			});
+			const res = await axios.post(
+				`${host}/staffs/auth/login`,
+				{
+					email: email.current.value,
+					password: password.current.value,
+				},
+				{
+					credentials: true,
+				}
+			);
 			dispatch(loginSuccess(res.data));
 			console.log(res.data);
+			console.log(res);
+			// res.cookie("access_token", res.data.token)
 
 			setTimeout(() => {
 				toast.success("Login Successful", {

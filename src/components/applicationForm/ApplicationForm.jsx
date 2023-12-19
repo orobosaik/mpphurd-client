@@ -6,10 +6,15 @@ import {
 } from "@mui/icons-material";
 import "./applicationForm.css";
 import ToggleSwitch from "../toggleSwitch/ToggleSwitch";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { getThemeColor } from "../../utilities/themeColor";
 
 export default function ApplicationForm() {
 	const [isCompany, setIsCompany] = useState(false);
 	const [isJoint, setIsJoint] = useState(true);
+
+	const themeColor = getThemeColor()
 
 	const [appData, setAppData] = useState({
 		name: "",
@@ -46,7 +51,7 @@ export default function ApplicationForm() {
 		coordinates: "",
 	});
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		// console.log(buildingAppData);
 		console.log(e);
@@ -90,7 +95,44 @@ export default function ApplicationForm() {
 				coordinates: form.get("planCoordinates"),
 			},
 		};
+
 		console.log(newData);
+
+		try {
+			let host = import.meta.env.VITE_SERVER;
+			const res = await axios.post(`${host}/staffs/plan`, newData);
+			console.log(res.data);
+
+			setTimeout(() => {
+				toast.success("Login Successful", {
+					position: "top-right",
+					autoClose: 1000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: themeColor,
+				});
+			}, 200);
+		} catch (error) {
+			let message = error.response
+				? error.response.data.message
+				: error.message;
+			console.log(error);
+			console.log(message);
+
+			toast.error(message, {
+				position: "top-right",
+				autoClose: 2000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: themeColor,
+			});
+		}
 	};
 
 	const individualApplicationItems = (type) => {
@@ -308,7 +350,6 @@ export default function ApplicationForm() {
 								<option value="Company">Company</option>
 							</select>
 						</div>
-
 					</div>
 
 					<div className="applicationInputWrapper">
@@ -326,9 +367,7 @@ export default function ApplicationForm() {
 								</div>
 							</div>
 							{individualApplicationItems("applicant")}
-
 						</div>
-
 
 						{/* REP INFORMATION */}
 						<div className="applicationItemsWrapper">
