@@ -50,7 +50,7 @@ export default function LoginPage() {
 					password: password.current.value,
 				},
 				{
-					credentials: true,
+					withCredentials: true,
 				}
 			);
 			dispatch(loginSuccess(res.data));
