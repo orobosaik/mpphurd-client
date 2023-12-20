@@ -42,6 +42,10 @@ export default function LoginPage() {
 		dispatch(loginStart());
 
 		try {
+			var headers = new Headers();
+			headers.append("Content-Type", "application/json");
+			headers.append("Accept", "application/json");
+
 			let host = import.meta.env.VITE_SERVER;
 			const res = await axios.post(
 				`${host}/staffs/auth/login`,
@@ -51,6 +55,8 @@ export default function LoginPage() {
 				},
 				{
 					withCredentials: true,
+					credentials: "include",
+					headers: headers,
 				}
 			);
 			dispatch(loginSuccess(res.data));
