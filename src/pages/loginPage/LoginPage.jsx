@@ -3,6 +3,8 @@ import { useRef, useState } from "react";
 import "./loginPage.css";
 import { useDispatch, useSelector } from "react-redux";
 
+import { CookiesProvider, useCookies } from "react-cookie";
+
 import {
 	Facebook,
 	Instagram,
@@ -30,9 +32,9 @@ export default function LoginPage() {
 	const password = useRef();
 
 	const funFun = (e) => {
-		e.preventDefault()
-		alert("THIS IS WILD")
-	}
+		e.preventDefault();
+		alert("THIS IS WILD");
+	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -168,10 +170,14 @@ export default function LoginPage() {
 							</div>
 
 							<div className="btn password-reset">
-								<ChangePasswordModal name={"Forgot Password"} fun={funFun} onSubmit={e => {
-									e.preventDefault()
-									alert("WOWOWOWOWOWO")
-								}} />
+								<ChangePasswordModal
+									name={"Forgot Password"}
+									fun={funFun}
+									onSubmit={(e) => {
+										e.preventDefault();
+										alert("WOWOWOWOWOWO");
+									}}
+								/>
 							</div>
 							<button
 								type="submit"
