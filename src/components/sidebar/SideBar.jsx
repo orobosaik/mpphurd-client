@@ -20,10 +20,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { persistor } from "../../redux/store";
 import { getThemeColor } from "../../utilities/themeColor";
+import { useCookies } from "react-cookie";
 
 export default function SideBar({ selected }) {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
 
 	const { theme } = useSelector((state) => state.app);
 	const themeColor = getThemeColor(theme);
@@ -31,6 +33,7 @@ export default function SideBar({ selected }) {
 	const handleLogout = () => {
 		console.log("YAYAYAYAYAYA");
 		dispatch(logout());
+		removeCookie("access_token")
 		navigate("/login");
 		// persistor.purge();
 
