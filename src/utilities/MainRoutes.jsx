@@ -25,78 +25,79 @@ export default function MainRoutes() {
 	console.log(currentUser);
 
 	useEffect(() => {
-
-		setThemeColor(theme)
-
+		setThemeColor(theme);
 	}, [theme]);
 
 	useEffect(() => {
-		return () => {
-			if (!currentUser) {
-				navigate("/login");
-			}
-		};
-	}, []);
+		if (!currentUser) {
+			navigate("/login");
+		}
+		// return () => {};
+	}, [currentUser]);
 
 	return (
 		<>
-			<Routes>
-				{/* HOME PAGE */}
-				<Route path="/">
-					<Route
-						index
-						element={!currentUser ? <Navigate to="/login" /> : <Home />}
-					/>
-				</Route>
-
-				{/* LOGIN PAGE */}
-				<Route path="/login">
-					<Route
-						index
-						element={!currentUser ? <LoginPage /> : <Navigate to="/" />}
-					/>
-				</Route>
-
-				{/* PERMIT | APPROVAL */}
-				<Route path="/permit">
-					<Route index element={currentUser && <Approval />} />
-					<Route path="new" element={<CreateApplication />} />
-					<Route path="planId">
+			{currentUser ? (
+				<Routes>
+					{/* HOME PAGE */}
+					<Route path="/">
 						<Route
 							index
-							element={!currentUser ? <Navigate to="/login" /> : <Plan />}
+							element={!currentUser ? <Navigate to="/login" /> : <Home />}
 						/>
-						<Route path="bills" element={<ViewBill />} />
-						<Route path="createbill" element={<CreateBill />} />
-						<Route path="minute" element={<Minute />} />
-						<Route path="documents" element={<DocumentView />} />
 					</Route>
-				</Route>
 
-				{/* PETITION */}
-				<Route path="/petition">
-					<Route index element={<Petition />} />
-				</Route>
+					{/* LOGIN PAGE */}
+					<Route path="/login">
+						<Route
+							index
+							element={!currentUser ? <LoginPage /> : <Navigate to="/" />}
+						/>
+					</Route>
 
-				{/* BUILDING CONTROL */}
-				<Route path="/control">
-					<Route index element={<BuildingControl />} />
-				</Route>
+					{/* PERMIT | APPROVAL */}
+					<Route path="/permit">
+						<Route index element={currentUser && <Approval />} />
+						<Route path="new" element={<CreateApplication />} />
+						<Route path="planId">
+							<Route
+								index
+								element={!currentUser ? <Navigate to="/login" /> : <Plan />}
+							/>
+							<Route path="bills" element={<ViewBill />} />
+							<Route path="createbill" element={<CreateBill />} />
+							<Route path="minute" element={<Minute />} />
+							<Route path="documents" element={<DocumentView />} />
+						</Route>
+					</Route>
 
-				{/* OFFICE */}
-				<Route path="/office">
-					<Route index element={<Office />} />
-				</Route>
+					{/* PETITION */}
+					<Route path="/petition">
+						<Route index element={<Petition />} />
+					</Route>
 
-				{/* ACTIVITIES */}
-				<Route path="/activities">
-					<Route index element={<ActivitiesView />} />
-				</Route>
-				{/* ANALYSIS */}
-				<Route path="/analysis">
-					<Route index element={<Analysis />} />
-				</Route>
-			</Routes>
+					{/* BUILDING CONTROL */}
+					<Route path="/control">
+						<Route index element={<BuildingControl />} />
+					</Route>
+
+					{/* OFFICE */}
+					<Route path="/office">
+						<Route index element={<Office />} />
+					</Route>
+
+					{/* ACTIVITIES */}
+					<Route path="/activities">
+						<Route index element={<ActivitiesView />} />
+					</Route>
+					{/* ANALYSIS */}
+					<Route path="/analysis">
+						<Route index element={<Analysis />} />
+					</Route>
+				</Routes>
+			) : (
+				<LoginPage />
+			)}
 		</>
 	);
 }

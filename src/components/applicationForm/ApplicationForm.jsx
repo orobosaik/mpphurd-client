@@ -14,7 +14,7 @@ export default function ApplicationForm() {
 	const [isCompany, setIsCompany] = useState(false);
 	const [isJoint, setIsJoint] = useState(true);
 
-	const themeColor = getThemeColor()
+	const themeColor = getThemeColor();
 
 	const [appData, setAppData] = useState({
 		name: "",
@@ -100,7 +100,9 @@ export default function ApplicationForm() {
 
 		try {
 			let host = import.meta.env.VITE_SERVER;
-			const res = await axios.post(`${host}/staffs/plan`, newData);
+			const res = await axios.post(`${host}/staffs/plan`, newData, {
+				withCredentials: true,
+			});
 			console.log(res.data);
 
 			setTimeout(() => {

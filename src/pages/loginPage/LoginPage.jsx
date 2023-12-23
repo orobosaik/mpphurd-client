@@ -2,7 +2,6 @@ import axios from "axios";
 import { useRef, useState } from "react";
 import "./loginPage.css";
 import { useDispatch, useSelector } from "react-redux";
-
 import { CookiesProvider, useCookies } from "react-cookie";
 
 import {
@@ -23,6 +22,8 @@ import { getThemeColor } from "../../utilities/themeColor";
 
 export default function LoginPage() {
 	const [showPassword, setShowPassword] = useState(false);
+	const [cookies, setCookie] = useCookies(["access_token"]);
+
 	const { currentUser, loading } = useSelector((state) => state.user);
 	const themeColor = getThemeColor();
 
@@ -44,9 +45,9 @@ export default function LoginPage() {
 		dispatch(loginStart());
 
 		try {
-			var headers = new Headers();
-			headers.append("Content-Type", "application/json");
-			headers.append("Accept", "application/json");
+			// var headers = new Headers();
+			// headers.append("Content-Type", "application/json");
+			// headers.append("Accept", "application/json");
 
 			let host = import.meta.env.VITE_SERVER;
 			const res = await axios.post(
@@ -57,11 +58,12 @@ export default function LoginPage() {
 				},
 				{
 					withCredentials: true,
-					credentials: "include",
-					headers: headers,
+					// headers: headers,
 				}
 			);
-			dispatch(loginSuccess(res.data));
+
+			setCookie("access_token", res.data.token, { path: "/" });
+			dispatch(loginSuccess(res.data.user));
 			console.log(res.data);
 			console.log(res);
 			// res.cookie("access_token", res.data.token)
