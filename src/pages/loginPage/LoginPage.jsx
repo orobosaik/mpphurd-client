@@ -62,10 +62,12 @@ export default function LoginPage() {
 				}
 			);
 
-			setCookie("access_token", res.data.token, { path: "/" });
+			// setCookie("access_token", res.data.token, { path: "/" });
 			dispatch(loginSuccess(res.data.user));
 			console.log(res.data);
 			console.log(res);
+			console.log(res.headers.toJSON());
+			console.log(res.headers.toString());
 			// res.cookie("access_token", res.data.token)
 
 			setTimeout(() => {

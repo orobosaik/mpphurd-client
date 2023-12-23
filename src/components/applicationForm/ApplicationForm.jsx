@@ -98,11 +98,18 @@ export default function ApplicationForm() {
 
 		console.log(newData);
 
+		axios.defaults.withCredentials = true;
+
 		try {
 			let host = import.meta.env.VITE_SERVER;
-			const res = await axios.post(`${host}/staffs/plan`, newData, {
+			const res = await axios(`${host}/staffs/plan`, {
+				method: "post",
+				data: newData,
 				withCredentials: true,
 			});
+			// const res = await axios.post(`${host}/staffs/plan`, newData, {
+			// 	withCredentials: true,
+			// });
 			console.log(res.data);
 
 			setTimeout(() => {
