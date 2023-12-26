@@ -18,6 +18,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ChangePasswordModal from "../../components/changePasswordModal/ChangePasswordModal";
 import { getThemeColor } from "../../utilities/themeColor";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
 	const [showPassword, setShowPassword] = useState(false);
@@ -26,6 +27,7 @@ export default function LoginPage() {
 	const themeColor = getThemeColor();
 
 	const dispatch = useDispatch();
+	const navigate = useNavigate()
 
 	const email = useRef();
 	const password = useRef();
@@ -42,6 +44,7 @@ export default function LoginPage() {
 			});
 
 			dispatch(loginSuccess(res.data));
+			// navigate("/")
 
 			setTimeout(() => {
 				toast.success("Login Successful", {

@@ -1,33 +1,36 @@
 import "./planInfoCard.css";
-export default function PlanInfoCard({ type, title, AD2, R, BD }) {
-	const individual = () => {
+export default function PlanInfoCard({ type, AD2, R, BD, data }) {
+	const individual = (title) => {
 		return (
 			<div className="planInfoCard">
 				<div className="planInfoDetails">
-					<h2 className="planInfoCardTitle">{title} Information</h2>
+					<h2 className="planInfoCardTitle">{title}</h2>
 					<div className="planInfoItems">
 						<div className="planInfoItem">
 							<span className="planInfoTitle">Name:</span>
-							<span className="planInfoText">Chief Orobosa Ikponmwosa</span>
+							<span className="planInfoText">{data.name}</span>
 						</div>
 						<div className="planInfoItem">
 							<span className="planInfoTitle">Gender:</span>
-							<span className="planInfoText">Male</span>
+							<span className="planInfoText">{data.gender}</span>
 						</div>
 						<div className="planInfoItem">
 							<span className="planInfoTitle">Address:</span>
-							<span className="planInfoText">
-								20 Igun Street off sokponba road, Benin city. off Edo State,
-								Nigeria, Africa Azis
-							</span>
+							<span className="planInfoText">{data.address}</span>
 						</div>
 						<div className="planInfoItem">
 							<span className="planInfoTitle">Phone:</span>
-							<span className="planInfoText">0908438954</span>
+							<span className="planInfoText">
+								{data.phone}
+								{data.phone1 && ", " + data.phone1}
+							</span>
 						</div>
 						<div className="planInfoItem">
 							<span className="planInfoTitle">Email:</span>
-							<span className="planInfoText">applicant@email.com</span>
+							<span className="planInfoText">
+								{data.email}
+								{data.email1 && ", " + data.email1}
+							</span>
 						</div>
 					</div>
 				</div>
@@ -56,7 +59,8 @@ export default function PlanInfoCard({ type, title, AD2, R, BD }) {
 						<div className="planInfoItem">
 							<span className="planInfoTitle">Address:</span>
 							<span className="planInfoText">
-								20 Igun Street off sokponba road, Benin city. off Edo State, Nigeria, Africa Azis
+								20 Igun Street off sokponba road, Benin city. off Edo State,
+								Nigeria, Africa Azis
 							</span>
 						</div>
 						<div className="planInfoItem">
@@ -109,11 +113,13 @@ export default function PlanInfoCard({ type, title, AD2, R, BD }) {
 	return (
 		<>
 			{type === "individual"
-				? individual()
+				? individual("Applicant Details")
+				: type === "rep"
+				? individual("Representative Details")
 				: type === "company"
-				? company()
+				? company("Organization Details")
 				: type === "building"
-				? building()
+				? building("Building Details")
 				: ""}
 		</>
 	);

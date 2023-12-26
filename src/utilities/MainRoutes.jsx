@@ -18,7 +18,7 @@ import LoginPage from "../pages/loginPage/LoginPage";
 import { useSelector } from "react-redux";
 import { setThemeColor } from "./themeColor";
 
-export default function MainRoutes() {
+function MainRoutes() {
 	const navigate = useNavigate();
 	const { currentUser } = useSelector((state) => state.user);
 	const { theme } = useSelector((state) => state.app);
@@ -59,13 +59,13 @@ export default function MainRoutes() {
 					<Route path="/permit">
 						<Route index element={currentUser && <Approval />} />
 						<Route path="new" element={<CreateApplication />} />
-						<Route path="planId">
+						<Route path=":id">
 							<Route
 								index
 								element={!currentUser ? <Navigate to="/login" /> : <Plan />}
 							/>
 							<Route path="bills" element={<ViewBill />} />
-							<Route path="createbill" element={<CreateBill />} />
+							<Route path="create_bill" element={<CreateBill />} />
 							<Route path="minute" element={<Minute />} />
 							<Route path="documents" element={<DocumentView />} />
 						</Route>
@@ -102,4 +102,4 @@ export default function MainRoutes() {
 	);
 }
 
-// export default MainRoutes;
+export default MainRoutes;

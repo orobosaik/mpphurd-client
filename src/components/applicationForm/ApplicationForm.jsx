@@ -9,12 +9,16 @@ import ToggleSwitch from "../toggleSwitch/ToggleSwitch";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { getThemeColor } from "../../utilities/themeColor";
+import { useNavigate } from "react-router-dom";
+
 
 export default function ApplicationForm() {
 	const [isCompany, setIsCompany] = useState(false);
 	const [isJoint, setIsJoint] = useState(true);
 
 	const themeColor = getThemeColor();
+	const navigate = useNavigate();
+
 
 	const [appData, setAppData] = useState({
 		name: "",
@@ -111,6 +115,9 @@ export default function ApplicationForm() {
 			// 	withCredentials: true,
 			// });
 			console.log(res.data);
+
+			navigate(-1)
+
 
 			setTimeout(() => {
 				toast.success("New Application Created", {

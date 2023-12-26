@@ -5,22 +5,18 @@ import PlanInfoCard from "../planInfoCard/PlanInfoCard";
 import ViewBill from "../planBill/PlanBill";
 import PlanEditInfoModal from "../planEditInfoModal/PlanEditInfoModal";
 
-export default function PlanInfo({ setTopBarData, setViewBills }) {
-
+export default function PlanInfo({ setTopBarData, setViewBills, data }) {
 	return (
 		<div className="planInfo">
 			<div className="planInfoSummary">
 				<div className="planInfoSummaryDetails">
 					<div className="planInfoSummaryItem">
 						<span className="planInfoSummaryTitle">File Name:</span>
-						<span className="planInfoSummaryText">Abel Igbinedion</span>
+						<span className="planInfoSummaryText">{data.applicant.name}</span>
 					</div>
 					<div className="planInfoSummaryItem">
 						<span className="planInfoSummaryTitle">Site Location:</span>
-						<span className="planInfoSummaryText">
-							Plot 4, Amagba cresent off Sapele Road, Benin city Crescent by
-							Mobil Oil.
-						</span>
+						<span className="planInfoSummaryText">{data.dev.address}</span>
 					</div>
 					<div className="planInfoSummaryItem">
 						<span className="planInfoSummaryTitle">Current Stack:</span>
@@ -43,17 +39,14 @@ export default function PlanInfo({ setTopBarData, setViewBills }) {
 
 			<div className="planInfoWrapper">
 				<PlanInfoCard
-					type={"company"}
-					title={"Applicant Information"}
+					type={data.applicant.type}
 					BD={true}
+					data={data.applicant}
 				/>
-				<PlanInfoCard
-					type={"individual"}
-					title={"Representative Information"}
-					BD={true}
-				/>
-				<PlanInfoCard type={"building"} title={"Building Details"} />
+				<PlanInfoCard type={"rep"} BD={true} data={data.rep} />
+				<PlanInfoCard type={"building"} data={data.dev} />
 			</div>
+
 			<div className="planInfoButtons">
 				<Link to="./createbill">
 					<button className="primary">Generate Bill</button>
