@@ -2,7 +2,6 @@ import axios from "axios";
 import { useRef, useState } from "react";
 import "./loginPage.css";
 import { useDispatch, useSelector } from "react-redux";
-import { CookiesProvider, useCookies } from "react-cookie";
 
 import {
 	Facebook,
@@ -22,7 +21,6 @@ import { getThemeColor } from "../../utilities/themeColor";
 
 export default function LoginPage() {
 	const [showPassword, setShowPassword] = useState(false);
-	const [cookies, setCookie] = useCookies(["access_token"]);
 
 	const { currentUser, loading } = useSelector((state) => state.user);
 	const themeColor = getThemeColor();
@@ -32,43 +30,18 @@ export default function LoginPage() {
 	const email = useRef();
 	const password = useRef();
 
-	const funFun = (e) => {
-		e.preventDefault();
-		alert("THIS IS WILD");
-	};
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
-		console.log(email.current.value, password.current.value);
-
 		dispatch(loginStart());
 
 		try {
-			// var headers = new Headers();
-			// headers.append("Content-Type", "application/json");
-			// headers.append("Accept", "application/json");
-
 			let host = import.meta.env.VITE_SERVER;
-			const res = await axios.post(
-				`${host}/staffs/auth/login`,
-				{
-					email: email.current.value,
-					password: password.current.value,
-				},
-				{
-					withCredentials: true,
-					// headers: headers,
-				}
-			);
+			const res = await axios.post(`${host}/staffs/auth/login`, {
+				email: email.current.value,
+				password: password.current.value,
+			});
 
-			// setCookie("access_token", res.data.token, { path: "/" });
-			dispatch(loginSuccess(res.data.user));
-			console.log(res.data);
-			console.log(res);
-			console.log(res.headers.toJSON());
-			console.log(res.headers.toString());
-			// res.cookie("access_token", res.data.token)
+			dispatch(loginSuccess(res.data));
 
 			setTimeout(() => {
 				toast.success("Login Successful", {
@@ -174,14 +147,17 @@ export default function LoginPage() {
 							</div>
 
 							<div className="btn password-reset">
-								<ChangePasswordModal
-									name={"Forgot Password"}
-									fun={funFun}
-									onSubmit={(e) => {
-										e.preventDefault();
-										alert("WOWOWOWOWOWO");
-									}}
-								/>
+								{loading ? (
+									"Forgot Password"
+								) : (
+									<ChangePasswordModal
+										name={"Forgot Password"}
+										onSubmit={(e) => {
+											e.preventDefault();
+											alert("WOWOWOWOWOWO");
+										}}
+									/>
+								)}
 							</div>
 							<button
 								type="submit"
