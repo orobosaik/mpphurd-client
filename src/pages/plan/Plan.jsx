@@ -93,10 +93,8 @@ export default function Plan() {
 						<LoadingIcon />
 					)}
 				</MiddleBar>
-				<ToastContainer />
 
 				<RightBar>
-					
 					{rightBarView === 1 ? (
 						<Document setRightBarView={setRightBarView} />
 					) : (
@@ -104,6 +102,7 @@ export default function Plan() {
 					)}
 				</RightBar>
 			</div>
+			<ToastContainer />
 		</>
 	);
 }

@@ -1,14 +1,24 @@
 import { Link } from "react-router-dom";
 import "./feedCard.css";
 
-export default function FeedCard({ count, title, office, route }) {
+function FeedCard({
+	count = false,
+	priText = false,
+	secText = false,
+	route,
+	data,
+}) {
 	return (
-		<Link className="feedCard" to={route}>
-			<span className="feedCardBadge">{count}</span>
+		<Link className="feedCard" state={data} to={route}>
+			{console.log}
+			{count && <span className="feedCardBadge">{count}</span>}
+
 			<div className="feedCardWrapper">
-				<span className="feedCardText">{title}</span>
-				<span className="feedCardOffice">({office})</span>
+				{priText && <span className="feedCardText">{priText}</span>}
+				{secText && <span className="feedCardOffice">({secText})</span>}
 			</div>
 		</Link>
 	);
 }
+
+export default FeedCard;

@@ -17,6 +17,7 @@ import DocumentView from "../pages/documentView/DocumentView";
 import LoginPage from "../pages/loginPage/LoginPage";
 import { useSelector } from "react-redux";
 import { setThemeColor } from "./themeColor";
+import OfficeSelect from "../pages/officeSelect/OfficeSelect.jsx";
 
 function MainRoutes() {
 	const navigate = useNavigate();
@@ -83,7 +84,8 @@ function MainRoutes() {
 
 					{/* OFFICE */}
 					<Route path="/office">
-						<Route index element={<Office />} />
+						<Route index element={<OfficeSelect />} />
+						<Route path=":id" element={<Office />} />
 					</Route>
 
 					{/* ACTIVITIES */}

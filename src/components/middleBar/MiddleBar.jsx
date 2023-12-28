@@ -1,6 +1,5 @@
 import "./middleBar.css";
 import TopBar from "../topBar/TopBar";
-import FeedCard from "../feedCard/FeedCard";
 import { useState } from "react";
 import PlanInfo from "../planInfo/PlanInfo";
 

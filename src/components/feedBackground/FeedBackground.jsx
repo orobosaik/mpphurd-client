@@ -1,4 +1,4 @@
-import FeedCard from "../feedCard/FeedCard";
+
 import "./feedBackground.css";
 
 export default function FeedBackground({children}) {

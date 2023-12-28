@@ -5,44 +5,46 @@ import Header from "../../components/header/Header";
 import SideBar from "../../components/sidebar/SideBar";
 import { loginFailure, loginSuccess } from "../../redux/userSlice";
 import CreateApplication from "../createApplication/CreateApplication";
-import "./home.css";
+import "./officeSelect.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-export default function Home() {
+export default function OfficeSelect() {
 	const { currentUser, loading } = useSelector((state) => state.user);
 
 	const dispatch = useDispatch();
+
+	const navigate = useNavigate();
 
 	const [isLoading, setIsLoading] = useState(true);
 	const [data, setData] = useState(null);
 	const [reload, setReload] = useState();
 	const [err, setErr] = useState(false);
 
-	useEffect(() => {
-		const getData = async () => {
-			try {
-				let host = import.meta.env.VITE_SERVER;
-				const res = await axios.get(`${host}/staffs/staff`);
+	// useEffect(() => {
+	// 	const getData = async () => {
+	// 		try {
+	// 			let host = import.meta.env.VITE_SERVER;
+	// 			const res = await axios.get(`${host}/staffs/staff`);
 
-				setData(res.data);
-				setIsLoading(false);
-				console.log(res.data)
-				dispatch(loginSuccess(res.data));
+	// 			setData(res.data);
+	// 			setIsLoading(false);
+	// 			dispatch(loginSuccess(res.data));
 
-				console.log(res.data);
-			} catch (error) {
-				setIsLoading(false);
-				setErr(true);
-			}
-		};
+	// 			console.log(res.data);
+	// 		} catch (error) {
+	// 			setIsLoading(false);
+	// 			setErr(true);
+	// 		}
+	// 	};
 
-		getData();
+	// 	getData();
 
-		// return () => {
-		// 	second
-		// }
-	}, [reload]);
+	// 	// return () => {
+	// 	// 	second
+	// 	// }
+	// }, [reload]);
 
 	return (
 		<>
@@ -51,22 +53,19 @@ export default function Home() {
 			<div className="homeContainer">
 				<SideBar />
 				<FeedBackground>
-					<FeedCard
-						count={24}
-						priText={"Create New Application"}
-						secText={"Clearing"}
-						route={"/permit/new"}
-					/>
-					<FeedCard
-						count={44}
-						priText={"Payment made"}
-						secText={"Assessment"}
-					/>
-					<FeedCard
-						count={7}
-						priText={"Minuted Files"}
-						secText={"Assessment"}
-					/>
+					{console.log(currentUser.office[0].id.name)}
+					{currentUser.office.map((e) => {
+						{console.log(e)}
+						return (
+							<FeedCard
+								key={e.id._id}
+								route={`${e.id._id}`}
+								priText={e.id.name}
+								secText={"Office"}
+								data={e}
+							/>
+						);
+					})}
 				</FeedBackground>
 			</div>
 		</>

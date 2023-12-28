@@ -4,7 +4,6 @@ import SideBar from "../../components/sidebar/SideBar";
 import RightBar from "../../components/rightbar/RightBar";
 import MiddleBar from "../../components/middleBar/MiddleBar";
 import PlanInfo from "../../components/planInfo/PlanInfo";
-import FeedCard from "../../components/feedCard/FeedCard";
 import Activities from "../../components/activities/Activities";
 import Document from "../../components/document/Document";
 import { useState } from "react";
