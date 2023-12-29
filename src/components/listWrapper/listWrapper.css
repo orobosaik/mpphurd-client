@@ -45,6 +45,7 @@
 	gap: .5rem;
 	align-items: center;
 	font-weight: 700;
+	cursor: pointer;
 }
 
 
@@ -104,7 +105,12 @@
 	height: calc(100vh - 200px);
 	overflow-y: auto;
 }
-
+.listCardContainerWrapper .empty{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: auto 0;
+}
 
 .listFormat span:nth-child(1) {
 	flex: 1.5;
@@ -123,4 +129,9 @@
 }
 .listFormat span:nth-child(6) {
 	flex: 1;
+}
+
+
+.listWrapper .loading{
+	padding: 15rem 0;
 }

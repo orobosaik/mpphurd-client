@@ -80,7 +80,7 @@ export default function Office() {
 								// option: "Think of me"
 								// planNumber: "BC/1212/2023",
 							}}>
-							<ListWrapper data={data} />
+							<ListWrapper state={data} />
 						</MiddleBar>
 					</div>
 				</div>

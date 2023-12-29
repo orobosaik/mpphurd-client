@@ -8,12 +8,14 @@
   justify-content: space-between;
   margin-bottom: 2rem;
 }
-.planInfoSummaryItem{
-  display: flex;
-}
 .planInfoSummaryDetails{
   margin-right:5rem;
+  width: 100%;
 
+}
+.planInfoSummaryItem{
+  display: flex;
+  align-items: center;
 }
 .planInfoSummaryTitle{
   flex: 3;
@@ -26,6 +28,9 @@
   flex: 9;
   /* width: 30rem; */
 }
+.planInfoSummaryText.large{
+  font-size: 1.6rem;
+}
 .planInfoSummaryStack{
   font-weight: bold;
 }
@@ -34,8 +39,8 @@
   align-items: center;
   justify-content: center;
   color: var(--white);
-  font-weight: bold;
-  font-size: 1.2rem;
+  font-weight: 700;
+  font-size: 1.4rem;
   padding: 0 .6rem;
   border-radius: 30px;
   -webkit-border-radius: 30px;
@@ -44,7 +49,8 @@
   -o-border-radius: 30px;
 }
 .tag-fastTrack{
-  background-color: var(--accent-red);
+  /* background-color: var(--accent-red); */
+  background-color: #f73832;
 }
 .tag-oldFile{
   background-color: var(--accent-yellow);

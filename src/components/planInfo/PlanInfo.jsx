@@ -12,11 +12,16 @@ export default function PlanInfo({ setTopBarData, setViewBills, data }) {
 				<div className="planInfoSummaryDetails">
 					<div className="planInfoSummaryItem">
 						<span className="planInfoSummaryTitle">File Name:</span>
-						<span className="planInfoSummaryText">{data.applicant.name}</span>
+						<span className="planInfoSummaryText large">
+							{data.applicant.name}
+							{data.dev.name && ` (${data.dev.name})`}
+						</span>
 					</div>
 					<div className="planInfoSummaryItem">
 						<span className="planInfoSummaryTitle">Site Location:</span>
-						<span className="planInfoSummaryText">{data.dev.address}</span>
+						<span className="planInfoSummaryText large">
+							{data.dev.address}
+						</span>
 					</div>
 					<div className="planInfoSummaryItem">
 						<span className="planInfoSummaryTitle">Current Stack:</span>
@@ -25,11 +30,19 @@ export default function PlanInfo({ setTopBarData, setViewBills, data }) {
 						</span>
 					</div>
 					<div className="planInfoSummaryItem">
-						<span className="planInfoSummaryTitle">Tags:</span>
+						{(data.isFastTrack || data.isFileOfInterest || data.isOldFile) && (
+							<span className="planInfoSummaryTitle">Tags:</span>
+						)}
 						<span className="planInfoSummaryText">
-							<span className="tag tag-fastTrack">Fast Track</span>
-							<span className="tag tag-oldFile">Old File</span>
-							<span className="tag tag-fileOfInterest">File Of Interest</span>
+							{data.isFastTrack && (
+								<span className="tag tag-fastTrack">Fast Track</span>
+							)}
+							{data.isOldFile && (
+								<span className="tag tag-oldFile">Old File</span>
+							)}
+							{data.isFileOfInterest && (
+								<span className="tag tag-fileOfInterest">File Of Interest</span>
+							)}
 						</span>
 					</div>
 				</div>

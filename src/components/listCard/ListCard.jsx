@@ -1,19 +1,21 @@
-import { Link } from "react-router-dom";
-import "./listCard.css"
+import { Link, useLocation } from "react-router-dom";
+import "./listCard.css";
 
-function ListCard() {
-  return (
-		<Link className="listCard listFormat" to="/permit/658b247df36d74b62343f801">
-			<span>6898/2023</span>
-			<span>Osarodion Osawaru Igbinedion</span>
+function ListCard({data}) {
+	return (
+		<Link
+			className="listCard listFormat"
+			to={`/permit/${data?._id}`}>
+			<span>{data?.planNumber || data?.uniqueId}</span>
+			<span>{data.applicant.name}</span>
 			<span>
-				No 20 Igun Street, Off sokponba road, by Ring Road junction, benin city
+				{data.dev.plotNo+" "+data.dev.address}
 			</span>
-			<span>Commercial</span>
+			<span>{data.dev.use}</span>
 			<span>Yes</span>
 			<span>A5</span>
 		</Link>
 	);
 }
 
-export default ListCard
+export default ListCard;

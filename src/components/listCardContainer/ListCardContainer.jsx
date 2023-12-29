@@ -1,6 +1,10 @@
 import { useState } from "react";
 import "./listCardContainer.css";
-import { ExpandLessRounded, Height } from "@mui/icons-material";
+import {
+	ExpandLessRounded,
+	ExpandMoreRounded,
+	Height,
+} from "@mui/icons-material";
 
 export default function ListCardContainer({ date, count, children }) {
 	const [expanded, setExpanded] = useState(true);
@@ -13,7 +17,7 @@ export default function ListCardContainer({ date, count, children }) {
 					<span>{date}</span>
 					<span>{count}</span>
 				</div>
-				<ExpandLessRounded />
+				{expanded ? <ExpandLessRounded /> : <ExpandMoreRounded />}
 			</div>
 			<div
 				className={
