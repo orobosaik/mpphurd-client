@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import TopBar from "../../components/topBar/TopBar";
 import PlanBill from "../../components/planBill/PlanBill";
 import GenerateBill from "../../components/generateBill/GenerateBill";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import LoadingIcon from "../../utilities/LoadingIcon";
 import { getThemeColor } from "../../utilities/themeColor";
 import axios from "axios";
@@ -34,10 +34,12 @@ export default function Plan() {
 	const themeColor = getThemeColor();
 	const [reload, setReload] = useState();
 	const params = useParams();
+	const location = useLocation();
 
 	useEffect(() => {
 		const getData = async () => {
 			console.log(params);
+			// console.log(location.state);
 			try {
 				let host = import.meta.env.VITE_SERVER;
 				const res = await axios.get(`${host}/staffs/plan/${params.id}`);
@@ -68,7 +70,12 @@ export default function Plan() {
 			}
 		};
 
-		getData();
+		if (location.state) {
+			setData(location.state);
+			setIsLoading(false);
+		} else {
+			getData();
+		}
 
 		// return () => {
 		// 	second

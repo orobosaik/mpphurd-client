@@ -10,7 +10,8 @@
 	align-items: center;
 	gap: 1rem;
 }
-.listQueryDate {
+.listQueryDate input[type=date]{
+	width: 13rem;
 }
 .listCount{
 	display: flex;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./listWrapper.css";
 import ListCard from "../listCard/ListCard";
 import { ExpandLessRounded, ExpandMoreRounded } from "@mui/icons-material";
@@ -8,6 +8,8 @@ import { getThemeColor } from "../../utilities/themeColor";
 import axios from "axios";
 import { toast } from "react-toastify";
 import LoadingIcon from "../../utilities/LoadingIcon";
+import { useDispatch, useSelector } from "react-redux";
+import appSlice, { setOfficeData } from "../../redux/appSlice";
 
 export default function ListWrapper({ children }) {
 	const [showQueryDate, setShowQueryDate] = useState(true);
@@ -16,8 +18,13 @@ export default function ListWrapper({ children }) {
 			? setShowQueryDate(false)
 			: setShowQueryDate(true);
 	};
-	const todayDate = new Date().toISOString().slice(0, 10);
-	const prevDate = new Date().toISOString().slice(0, 10) - 7;
+
+	const { officeData } = useSelector((state) => state.app);
+
+	const [listArray, setListArray] = useState([]);
+	const [startDate, setStartDate] = useState("");
+	const [endDate, setEndDate] = useState("");
+	const [searchQuery, setSearchQuery] = useState("");
 
 	const location = useLocation();
 	const state = location.state;
@@ -26,9 +33,23 @@ export default function ListWrapper({ children }) {
 	const [data, setData] = useState();
 	const [sortReverse, setSortReverse] = useState(false);
 	const [staff, setStaff] = useState([]);
-	const [listArray, setListArray] = useState([]);
 	const themeColor = getThemeColor();
-	const [reload, setReload] = useState();
+	// const [reload, setReload] = useState();
+
+	const scrollSection = useRef();
+	const getScroll = () => {
+		return scrollSection;
+	};
+	const [scroll, setScroll] = useState();
+
+	const handleScroll = (e) => {
+		const { offsetHeight, scrollTop, scrollHeight } = e.target;
+		console.log(offsetHeight, scrollTop, scrollHeight);
+
+		// if (offsetHeight + scrollTop === scrollHeight) {
+		// 	setSkip(todos.length);
+		// }
+	};
 
 	const categorizeListByDate = (data, ascending) => {
 		let newArray = {};
@@ -64,14 +85,18 @@ export default function ListWrapper({ children }) {
 				const res = await axios.get(
 					`${host}/staffs/office/${state.id._id}/current`
 				);
-
-				setData(res.data);
-				setListArray(categorizeListByDate(res.data));
 				setIsLoading(false);
 
-				// setData(res.data);
+				setData(res.data);
+				console.log(res.data);
 
-				// console.log(newArray);
+				const newData = categorizeListByDate(res.data);
+				setListArray(newData);
+
+				console.log(listArray);
+				// const size =
+				// 	encodeURI(JSON.stringify(listArray)).split(/%..|./).length - 1;
+				// console.log(size / 1024);
 			} catch (error) {
 				let message = error.response
 					? error.response.data.message
@@ -97,12 +122,22 @@ export default function ListWrapper({ children }) {
 			}
 		};
 
-		getData();
+		console.log(officeData);
+		console.log(officeData.active);
+		if (officeData.active) {
+			setListArray(officeData.listArray);
+			setStartDate(officeData.startDate);
+			setEndDate(officeData.endDate);
+			setSearchQuery(officeData.searchQuery);
+			setIsLoading(false);
+		} else {
+			getData();
+		}
 
 		// return () => {
 		// 	second
 		// }
-	}, [reload]);
+	}, []);
 
 	return (
 		<div className="listWrapper">
@@ -126,7 +161,7 @@ export default function ListWrapper({ children }) {
 								type="date"
 								name="listQueryDateStart"
 								id="listQueryDateStart"
-								defaultValue={prevDate}
+								defaultValue={startDate}
 							/>
 						</div>
 						<div className="listQueryDateWrapper">
@@ -135,7 +170,7 @@ export default function ListWrapper({ children }) {
 								type="date"
 								name="listQueryDateEnd"
 								id="listQueryDateEnd"
-								defaultValue={todayDate}
+								defaultValue={endDate}
 							/>
 						</div>
 					</div>
@@ -156,7 +191,7 @@ export default function ListWrapper({ children }) {
 						setSortReverse(!sortReverse);
 						setListArray(categorizeListByDate(data, !sortReverse));
 					}}>
-					<span>{!sortReverse ? "Latest to Oldest" : "Oldest to Latest"}</span>
+					<span>{!sortReverse ? "New to Old" : "Old to New"}</span>
 					{!sortReverse ? <ExpandMoreRounded /> : <ExpandLessRounded />}
 				</div>
 			</div>
@@ -177,7 +212,10 @@ export default function ListWrapper({ children }) {
 					</div>
 				</div>
 			) : (
-				<div className="listCardContainerWrapper">
+				<div
+					className="listCardContainerWrapper"
+					ref={scrollSection}
+					onScroll={handleScroll}>
 					{listArray.length === 0 && <p className="empty">No Data Found...</p>}
 					{listArray.map((arr, index) => {
 						return (
@@ -186,8 +224,22 @@ export default function ListWrapper({ children }) {
 								date={arr.date}
 								count={arr.items.length}>
 								{arr.items.map((item, i) => {
-									console.log(item);
-									return <ListCard key={i} data={item} />;
+									return (
+										<ListCard
+											key={i}
+											data={item}
+											officeState={{
+												active: true,
+												listArray,
+												startDate,
+												endDate,
+												searchQuery,
+												sort: sortReverse,
+												scroll: "",
+											}}
+											scrollPosition={getScroll}
+										/>
+									);
 								})}
 							</ListCardContainer>
 						);
