@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./listWrapper.css";
 import ListCard from "../listCard/ListCard";
-import { ExpandLessRounded, ExpandMoreRounded } from "@mui/icons-material";
+import { CloseRounded, ExpandLessRounded, ExpandMoreRounded } from "@mui/icons-material";
 import ListCardContainer from "../listCardContainer/ListCardContainer";
 import { useLocation } from "react-router-dom";
 import { getThemeColor } from "../../utilities/themeColor";
@@ -212,7 +212,7 @@ function ListWrapper({ children }) {
 					</div>
 				)}
 
-				<div>
+				<div className="querySearchBar">
 					<input
 						value={searchQuery}
 						onChange={(e) => {
@@ -221,6 +221,14 @@ function ListWrapper({ children }) {
 						type="text"
 						placeholder="Search record..."
 					/>
+					{searchQuery && (
+						<div
+							className="searchBarCloseButton"
+							onClick={() => setSearchQuery("")}>
+							{" "}
+							<CloseRounded />
+						</div>
+					)}
 				</div>
 
 				<div className="listCount">
