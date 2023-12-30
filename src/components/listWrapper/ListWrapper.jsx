@@ -10,25 +10,23 @@ import { toast } from "react-toastify";
 import LoadingIcon from "../../utilities/LoadingIcon";
 import { useDispatch, useSelector } from "react-redux";
 import appSlice, { setOfficeData } from "../../redux/appSlice";
+import Fuse from "fuse.js";
 
 function ListWrapper({ children }) {
 	const [showQueryDate, setShowQueryDate] = useState(true);
-	const showQueryHandler = (e) => {
-		e.target.value === "current"
-			? setShowQueryDate(false)
-			: setShowQueryDate(true);
-	};
+
+	const [type, setType] = useState("current");
 
 	const { officeData } = useSelector((state) => state.app);
 
 	const [listArray, setListArray] = useState([]);
-	const [endDate, setEndDate] = useState(
-	new Date().toISOString().slice(0, 10)
-	);
+	const [endDate, setEndDate] = useState(new Date().toISOString().slice(0, 10));
 	const [startDate, setStartDate] = useState(
 		new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)
 	);
 	const [searchQuery, setSearchQuery] = useState("");
+	const [searchResult, setSearchResult] = useState([]);
+	const [searchData, setSearchData] = useState([]);
 
 	const location = useLocation();
 	const state = location.state;
@@ -125,6 +123,7 @@ function ListWrapper({ children }) {
 			setStartDate(officeData.startDate);
 			setEndDate(officeData.endDate);
 			setSearchQuery(officeData.searchQuery);
+			setSearchResult(officeData.searchResult);
 			setReload(() => []);
 		} else {
 			getData();
@@ -144,6 +143,37 @@ function ListWrapper({ children }) {
 		}
 	}, [reload]);
 
+	// CREATE SEARCH FUNCTIONALITY WITH FUSE JS
+	const options = {
+		includeScore: true,
+		includeMatches: true,
+		threshold: 0.2,
+		keys: [
+			"uniqueId",
+			"applicant.name",
+			"applicant.email",
+			"applicant.phone",
+			"dev.address",
+			"dev.plotNo",
+			"dev.name",
+			"dev.use",
+			"dev.lga",
+		],
+	};
+	useEffect(() => {
+		const fuse = new Fuse(data, options);
+		// If the user searched for an empty string,
+		// display all data.
+		if (searchQuery.length === 0) {
+			setSearchResult(null);
+			return;
+		}
+		const results = fuse.search(searchQuery);
+		const items = results.map((result) => result.item);
+		setSearchData(items);
+		setSearchResult(categorizeListByDate(items));
+	}, [searchQuery]);
+
 	return (
 		<div className="listWrapper">
 			<div className="listQuery">
@@ -151,14 +181,15 @@ function ListWrapper({ children }) {
 					<select
 						name="listQueryOption"
 						id="listQueryOption"
-						onChange={showQueryHandler}>
+						defaultValue={type}
+						onChange={(e) => setType(e.target.value)}>
 						<option value="current">Current</option>
 						<option value="incoming">Incoming</option>
 						<option value="Outgoing">Outgoing</option>
 					</select>
 				</div>
 
-				{showQueryDate && (
+				{type !== "current" && (
 					<div className="listQueryDate">
 						<div className="listQueryDateWrapper">
 							<label htmlFor="listQueryDateStart">From:</label>
@@ -182,12 +213,20 @@ function ListWrapper({ children }) {
 				)}
 
 				<div>
-					<input type="text" placeholder="Search record..." />
+					<input
+						value={searchQuery}
+						onChange={(e) => {
+							setSearchQuery(e.target.value);
+						}}
+						type="text"
+						placeholder="Search record..."
+					/>
 				</div>
 
 				<div className="listCount">
 					<span>Count:</span>
-					<span>{data?.length || "0"}</span>
+					{!searchQuery && <span>{data?.length || "0"}</span>}
+					{searchQuery && <span>{searchData?.length || "0"}</span>}
 				</div>
 
 				<div
@@ -201,6 +240,13 @@ function ListWrapper({ children }) {
 				</div>
 			</div>
 
+			{searchQuery && (
+				<div className="searchHeader">
+					<p>Search Results</p>
+				</div>
+			)}
+			{console.log(searchResult)}
+
 			<div className="listHeader listFormat">
 				<span>PlanNo</span>
 				<span>File Name</span>
@@ -210,44 +256,84 @@ function ListWrapper({ children }) {
 				<span>Stack</span>
 			</div>
 
-			<div className="listCardContainerWrapper" ref={scrollSection}>
+			<div
+				className={
+					!searchQuery
+						? "listCardContainerWrapper"
+						: "listCardContainerWrapper Search"
+				}
+				ref={scrollSection}>
 				{isLoading ? (
 					<div className="loading">
 						<LoadingIcon />
 					</div>
 				) : (
 					<>
-						{listArray.length === 0 && (
+						{(listArray?.length === 0 ||
+							(searchQuery && searchResult?.length === 0)) && (
 							<p className="empty">No Data Found...</p>
 						)}
 
-						{listArray.map((arr, index) => {
-							return (
-								<ListCardContainer
-									key={index}
-									date={arr.date}
-									count={arr.items.length}>
-									{arr.items.map((item, i) => {
-										return (
-											<ListCard
-												key={i}
-												data={item}
-												officeState={{
-													active: true,
-													data,
-													listArray,
-													startDate,
-													endDate,
-													searchQuery,
-													sort: sortReverse,
-												}}
-												scrollSection={scrollSection}
-											/>
-										);
-									})}
-								</ListCardContainer>
-							);
-						})}
+						{!searchQuery &&
+							listArray.map((arr, index) => {
+								return (
+									<ListCardContainer
+										key={index}
+										date={arr.date}
+										count={arr.items.length}>
+										{arr.items.map((item, i) => {
+											return (
+												<ListCard
+													key={i}
+													data={item}
+													officeState={{
+														active: true,
+														data,
+														listArray,
+														startDate,
+														endDate,
+														searchQuery,
+														sort: sortReverse,
+													}}
+													scrollSection={scrollSection}
+												/>
+											);
+										})}
+									</ListCardContainer>
+								);
+							})}
+
+						{searchQuery &&
+							searchResult?.map((arr, index) => {
+								return (
+									<ListCardContainer
+										key={index}
+										date={arr.date}
+										count={arr.items.length}>
+										{arr.items.map((item, i) => {
+											return (
+												<ListCard
+													key={i}
+													data={item}
+													officeState={{
+														active: true,
+														type,
+														data,
+														listArray,
+														startDate,
+														endDate,
+														searchQuery,
+														searchResult,
+														searchData,
+														sort: sortReverse,
+													}}
+													scrollSection={scrollSection}
+												/>
+											);
+										})}
+									</ListCardContainer>
+								);
+							})}
 					</>
 				)}
 			</div>
