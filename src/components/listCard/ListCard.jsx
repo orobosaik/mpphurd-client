@@ -4,19 +4,26 @@ import { useDispatch } from "react-redux";
 import { setOfficeData } from "../../redux/appSlice";
 import { useRef } from "react";
 
-function ListCard({ data, officeState, scrollPosition }) {
+function ListCard({ data, officeState, scrollSection }) {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const scrollPos = useRef();
 	return (
 		<div
-			ref={scrollPos}
 			className="listCard listFormat"
 			onClick={() => {
-				// console.log(scrollPosition())
-				console.log(scrollPos.current.offsetHeight);
-				// const getSP = scrollPosition.current
-				dispatch(setOfficeData(officeState));
+				// console.log(scrollSection())
+				console.log(scrollSection);
+				console.log(scrollSection.current.scrollTop);
+				console.log(scrollSection.current.clientHeight);
+
+				{
+				}
+				dispatch(
+					setOfficeData({
+						...officeState,
+						scroll: scrollSection.current.scrollTop,
+					})
+				);
 				navigate(`/permit/${data?._id}`, { state: data });
 			}}>
 			<span>{data?.planNumber || data?.uniqueId}</span>

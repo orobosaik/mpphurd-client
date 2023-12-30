@@ -5,14 +5,13 @@ const initialState = {
 	theme: "system",
 	officeData: {
 		active: false,
+		data: [],
 		listArray: [],
-		startDate: new Date().toISOString().slice(0, 10),
-		endDate: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)
-			.toISOString()
-			.slice(0, 10),
+		startDate: "",
+		endDate: "",
 		searchQuery: "",
 		sort: "",
-		scroll: "",
+		scroll: 0,
 	},
 };
 

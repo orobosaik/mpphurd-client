@@ -11,7 +11,7 @@ import LoadingIcon from "../../utilities/LoadingIcon";
 import { useDispatch, useSelector } from "react-redux";
 import appSlice, { setOfficeData } from "../../redux/appSlice";
 
-export default function ListWrapper({ children }) {
+function ListWrapper({ children }) {
 	const [showQueryDate, setShowQueryDate] = useState(true);
 	const showQueryHandler = (e) => {
 		e.target.value === "current"
@@ -22,8 +22,12 @@ export default function ListWrapper({ children }) {
 	const { officeData } = useSelector((state) => state.app);
 
 	const [listArray, setListArray] = useState([]);
-	const [startDate, setStartDate] = useState("");
-	const [endDate, setEndDate] = useState("");
+	const [endDate, setEndDate] = useState(
+	new Date().toISOString().slice(0, 10)
+	);
+	const [startDate, setStartDate] = useState(
+		new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)
+	);
 	const [searchQuery, setSearchQuery] = useState("");
 
 	const location = useLocation();
@@ -34,22 +38,10 @@ export default function ListWrapper({ children }) {
 	const [sortReverse, setSortReverse] = useState(false);
 	const [staff, setStaff] = useState([]);
 	const themeColor = getThemeColor();
-	// const [reload, setReload] = useState();
-
-	const scrollSection = useRef();
-	const getScroll = () => {
-		return scrollSection;
-	};
+	const [reload, setReload] = useState();
 	const [scroll, setScroll] = useState();
 
-	const handleScroll = (e) => {
-		const { offsetHeight, scrollTop, scrollHeight } = e.target;
-		console.log(offsetHeight, scrollTop, scrollHeight);
-
-		// if (offsetHeight + scrollTop === scrollHeight) {
-		// 	setSkip(todos.length);
-		// }
-	};
+	const scrollSection = useRef();
 
 	const categorizeListByDate = (data, ascending) => {
 		let newArray = {};
@@ -125,11 +117,15 @@ export default function ListWrapper({ children }) {
 		console.log(officeData);
 		console.log(officeData.active);
 		if (officeData.active) {
+			setIsLoading(false);
+			console.log(officeData);
+			console.log(scrollSection);
+			setData(officeData.data);
 			setListArray(officeData.listArray);
 			setStartDate(officeData.startDate);
 			setEndDate(officeData.endDate);
 			setSearchQuery(officeData.searchQuery);
-			setIsLoading(false);
+			setReload(() => []);
 		} else {
 			getData();
 		}
@@ -138,6 +134,15 @@ export default function ListWrapper({ children }) {
 		// 	second
 		// }
 	}, []);
+
+	useEffect(() => {
+		if (officeData.active) {
+			scrollSection.current.scrollTo({
+				top: officeData.scroll,
+				// behavior: "smooth",
+			});
+		}
+	}, [reload]);
 
 	return (
 		<div className="listWrapper">
@@ -205,47 +210,49 @@ export default function ListWrapper({ children }) {
 				<span>Stack</span>
 			</div>
 
-			{isLoading ? (
-				<div className="listCardContainerWrapper">
+			<div className="listCardContainerWrapper" ref={scrollSection}>
+				{isLoading ? (
 					<div className="loading">
 						<LoadingIcon />
 					</div>
-				</div>
-			) : (
-				<div
-					className="listCardContainerWrapper"
-					ref={scrollSection}
-					onScroll={handleScroll}>
-					{listArray.length === 0 && <p className="empty">No Data Found...</p>}
-					{listArray.map((arr, index) => {
-						return (
-							<ListCardContainer
-								key={index}
-								date={arr.date}
-								count={arr.items.length}>
-								{arr.items.map((item, i) => {
-									return (
-										<ListCard
-											key={i}
-											data={item}
-											officeState={{
-												active: true,
-												listArray,
-												startDate,
-												endDate,
-												searchQuery,
-												sort: sortReverse,
-												scroll: "",
-											}}
-											scrollPosition={getScroll}
-										/>
-									);
-								})}
-							</ListCardContainer>
-						);
-					})}
-				</div>
-			)}
+				) : (
+					<>
+						{listArray.length === 0 && (
+							<p className="empty">No Data Found...</p>
+						)}
+
+						{listArray.map((arr, index) => {
+							return (
+								<ListCardContainer
+									key={index}
+									date={arr.date}
+									count={arr.items.length}>
+									{arr.items.map((item, i) => {
+										return (
+											<ListCard
+												key={i}
+												data={item}
+												officeState={{
+													active: true,
+													data,
+													listArray,
+													startDate,
+													endDate,
+													searchQuery,
+													sort: sortReverse,
+												}}
+												scrollSection={scrollSection}
+											/>
+										);
+									})}
+								</ListCardContainer>
+							);
+						})}
+					</>
+				)}
+			</div>
 		</div>
 	);
 }
+
+export default ListWrapper;
