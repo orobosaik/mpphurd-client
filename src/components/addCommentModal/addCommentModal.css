@@ -46,9 +46,6 @@ html[data-theme="dark"] dialog{
   align-items: center;
   justify-content: end;
 }
-.modalView footer button{
-	width: 12rem;
-}
 
 .modalViewCloseButton{
   display: flex;

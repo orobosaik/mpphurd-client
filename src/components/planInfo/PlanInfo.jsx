@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import PlanInfoCard from "../planInfoCard/PlanInfoCard";
 import ViewBill from "../planBill/PlanBill";
 import PlanEditInfoModal from "../planEditInfoModal/PlanEditInfoModal";
+import AddCommentModal from "../addCommentModal/AddCommentModal";
 
 export default function PlanInfo({ setTopBarData, setViewBills, data }) {
 	return (
@@ -61,7 +62,7 @@ export default function PlanInfo({ setTopBarData, setViewBills, data }) {
 			</div>
 
 			<div className="planInfoButtons">
-				<Link to="./createbill">
+				<Link to="./create_bill">
 					<button className="primary">Generate Bill</button>
 				</Link>
 				<Link to="./bills">
@@ -70,6 +71,10 @@ export default function PlanInfo({ setTopBarData, setViewBills, data }) {
 				<Link to="./minute">
 					<button className="secondary">Minute Plan</button>
 				</Link>
+				<AddCommentModal data={data}/>
+				<div onClick={() => <AddCommentModal data={data} />}>
+					<button className="secondary">Add Comments</button>
+				</div>
 			</div>
 		</div>
 	);
