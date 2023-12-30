@@ -1,12 +1,13 @@
 import { EditRounded } from "@mui/icons-material";
 import "./planInfo.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PlanInfoCard from "../planInfoCard/PlanInfoCard";
 import ViewBill from "../planBill/PlanBill";
 import PlanEditInfoModal from "../planEditInfoModal/PlanEditInfoModal";
 import AddCommentModal from "../addCommentModal/AddCommentModal";
 
 export default function PlanInfo({ setTopBarData, setViewBills, data }) {
+	const navigate = useNavigate();
 	return (
 		<div className="planInfo">
 			<div className="planInfoSummary">
@@ -68,10 +69,13 @@ export default function PlanInfo({ setTopBarData, setViewBills, data }) {
 				<Link to="./bills">
 					<button className="secondary">View Bills</button>
 				</Link>
-				<Link to="./minute">
+				<div
+					onClick={() => {
+						navigate("./minute", { state: data });
+					}}>
 					<button className="secondary">Minute Plan</button>
-				</Link>
-				<AddCommentModal data={data}/>
+				</div>
+				<AddCommentModal data={data} />
 				<div onClick={() => <AddCommentModal data={data} />}>
 					<button className="secondary">Add Comments</button>
 				</div>

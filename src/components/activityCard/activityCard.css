@@ -14,14 +14,37 @@
 html[data-theme="dark"] .activityCard{
 	box-shadow: 0px 0px 11px -4px rgba(255, 255, 255, 0.5);
 }
+
+.activityCardTypeTag{
+	position: absolute;
+	top: 0;
+	background-color: var(--pc-green);
+	color: var(--white);
+
+	padding: .2rem .8rem;
+
+
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+.activityCard .activityCardHead{
+	margin-top: 1rem;
+	font-size: 1.6rem;
+}
 .activityCard * {
 	font-size: .95em;
 }
 .activityCard div {
 	display: flex;
 }
-.activityCardDate {
+.activityCardHead{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.activityCardHead .date {
 	color: var(--pc-green);
+	font-size: .8em;
 	font-weight: 600;
 }
 .activityCardTitle {

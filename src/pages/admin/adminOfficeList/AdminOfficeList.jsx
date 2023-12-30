@@ -159,39 +159,36 @@ export default function AdminOfficeList() {
 													</div>
 
 													<div className="adminOfficeListCard__staff">
-														{staff.map((s, i) => {
-															if (
-																s.office[0]?.id?._id === d?._id ||
-																s.office[1]?.id?._id === d?._id ||
-																s.office[2]?.id?._id === d?._id
-															) {
-																return (
-																	<span
-																		key={i}
-																		onClick={() => {
-																			navigate("/staffs/staff", {
-																				state: { data: s },
-																			});
-																		}}>
-																		{[
-																			s.title,
-																			s.firstName,
-																			s.middleName,
-																			s.lastName,
-																			s.prefix,
-																		]
-																			.filter(function (value) {
-																				return (
-																					value !== null &&
-																					value !== "" &&
-																					value !== undefined
-																				);
-																			})
-																			.join(" ")}
-																	</span>
-																);
-															}
-														})}
+														{staff
+															.filter((s) =>
+																s.office.some(
+																	(office) => office?.id?._id === d?._id
+																)
+															)
+															.map((s, i) => (
+																<span
+																	key={i}
+																	onClick={() => {
+																		navigate("/staffs/staff", {
+																			state: { data: s },
+																		});
+																	}}>
+																	{[
+																		s.title,
+																		s.firstName,
+																		s.middleName,
+																		s.lastName,
+																		s.prefix,
+																	]
+																		.filter(
+																			(value) =>
+																				value != null &&
+																				value !== "" &&
+																				value !== undefined
+																		)
+																		.join(" ")}
+																</span>
+															))}
 													</div>
 													<div className="adminOfficeListCard__tasks">
 														{d.tasks.map((word) => {

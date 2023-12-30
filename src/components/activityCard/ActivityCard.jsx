@@ -7,12 +7,20 @@ export default function ActivityCard({ comment }) {
 	return (
 		<div className="activityCard">
 			<div className="activityCardArrow"></div>
-			<h2>Orobosa Ikponmwosa (TPOII)</h2>
+			<h1>
+				{" "}
+				<span className="activityCardTypeTag">Minute</span>
+			</h1>
 
-			<div className="activityCardDate">68 Days Ago</div>
+			<div className="activityCardHead">
+				<h2 className="title">Vetting Office</h2>
+				<div className="date">68 Days Ago</div>
+			</div>
+			<p>Multiple Staff</p>
+
 			<div>
 				<span className="activityCardTitle">From:</span>
-				<span className="activityCardText">Enabulele Henry (Dir. DDC)</span>
+				<span className="activityCardText">Dir. DDC (Enabulele Henry)</span>
 			</div>
 			<div>
 				<span className="activityCardTitle">DIO:</span>{" "}

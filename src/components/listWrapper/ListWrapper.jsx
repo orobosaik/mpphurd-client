@@ -1,7 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import "./listWrapper.css";
 import ListCard from "../listCard/ListCard";
-import { CloseRounded, ExpandLessRounded, ExpandMoreRounded } from "@mui/icons-material";
+import {
+	CloseRounded,
+	ExpandLessRounded,
+	ExpandMoreRounded,
+} from "@mui/icons-material";
 import ListCardContainer from "../listCardContainer/ListCardContainer";
 import { useLocation } from "react-router-dom";
 import { getThemeColor } from "../../utilities/themeColor";
@@ -69,11 +73,15 @@ function ListWrapper({ children }) {
 	useEffect(() => {
 		console.log(state);
 		const getData = async () => {
+			axios.defaults.withCredentials = true;
 			try {
 				let host = import.meta.env.VITE_SERVER;
 
 				const res = await axios.get(
-					`${host}/staffs/office/${state.id._id}/current`
+					`${host}/staffs/office/${state.id._id}/current`,
+					{
+						withCredentials: true,
+					}
 				);
 				setIsLoading(false);
 
