@@ -40,6 +40,7 @@ function ListWrapper({ children }) {
 	const [sortReverse, setSortReverse] = useState(false);
 	const [staff, setStaff] = useState([]);
 	const themeColor = getThemeColor();
+	const [scrollToView, setScrollToView] = useState();
 	const [reload, setReload] = useState();
 	const [scroll, setScroll] = useState();
 
@@ -132,7 +133,8 @@ function ListWrapper({ children }) {
 			setEndDate(officeData.endDate);
 			setSearchQuery(officeData.searchQuery);
 			setSearchResult(officeData.searchResult);
-			setReload(() => []);
+			setScrollToView(() => []);
+
 		} else {
 			getData();
 		}
@@ -140,6 +142,7 @@ function ListWrapper({ children }) {
 		// return () => {
 		// 	second
 		// }
+
 	}, []);
 
 	useEffect(() => {
@@ -149,7 +152,7 @@ function ListWrapper({ children }) {
 				// behavior: "smooth",
 			});
 		}
-	}, [reload]);
+	}, [scrollToView]);
 
 	// CREATE SEARCH FUNCTIONALITY WITH FUSE JS
 	const options = {

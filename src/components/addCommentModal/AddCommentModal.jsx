@@ -5,6 +5,10 @@ import {
 	EditRounded,
 	FileUploadRounded,
 } from "@mui/icons-material";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { getThemeColor } from "../../utilities/themeColor";
+import { CircularProgress } from "@mui/material";
 
 export default function AddCommentModal({
 	buttonIcon,
@@ -13,16 +17,9 @@ export default function AddCommentModal({
 	data,
 }) {
 	const [open, setOpen] = useState(false);
-	const [assessment, setAssessment] = useState(false);
-	const [clearing, setClearing] = useState(true);
-	const [archive, setArchive] = useState(false);
+	const [loading, setLoading] = useState(false);
 
-	const [collectedApproval, setCollectedApproval] = useState(false);
-
-	const handleSubmit = (e) => {
-		e.preventDefault()
-		console.log(e)
-	}
+	const themeColor = getThemeColor();
 
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
@@ -50,6 +47,67 @@ export default function AddCommentModal({
 			};
 		}, [handleEscKey]);
 	}
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		setLoading(true)
+		const form = new FormData(e.target);
+		console.log(form);
+
+		const newData = {
+			status: form.get("minuteStatus"),
+			comment: form.get("minuteText"),
+		};
+		console.log(newData);
+
+		axios.defaults.withCredentials = true;
+
+		try {
+			let host = import.meta.env.VITE_SERVER;
+			const res = await axios.post(
+				`${host}/staffs/plan/${data._id}/comment`,
+				newData,
+				{
+					withCredentials: true,
+				}
+			);
+			console.log(res.data);
+
+			// dispatch(resetOfficeData());
+			// navigate(-2);
+			handleClose();
+
+			setTimeout(() => {
+				toast.success(res.data, {
+					position: "top-right",
+					autoClose: 1000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: themeColor,
+				});
+			}, 200);
+		} catch (error) {
+			let message = error.response
+				? error.response.data.message
+				: error.message;
+			console.log(error);
+			console.log(message);
+
+			toast.error(message, {
+				position: "top-right",
+				autoClose: 2000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: themeColor,
+			});
+		}
+	};
 
 	useEffect(() => {
 		const modal = document.querySelector(".modalView");
@@ -87,9 +145,10 @@ export default function AddCommentModal({
 										<label htmlFor="minuteStatus">Status:</label>
 										<select name="minuteStatus" id="minuteStatus">
 											<option value="">...</option>
-											<option value="clear">Action Taken</option>
-											<option value="issue">Issue Raised</option>
-											<option value="reject">Pending Action</option>
+											<option value="Action Taken">Action Taken</option>
+											<option value="Issue Raised">Issue Raised</option>
+											<option value="Observation">Observation</option>
+											<option value="Pending Action">Pending Action</option>
 										</select>
 									</div>
 
@@ -106,7 +165,13 @@ export default function AddCommentModal({
 						</div>
 						<footer>
 							<button type="submit" className="primary">
-								Save
+								{loading ? (
+								<CircularProgress
+									thickness={5}
+									size={20}
+									sx={{ color: "white" }}
+								/>
+							): "Save" }
 							</button>
 						</footer>
 					</form>

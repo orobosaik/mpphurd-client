@@ -20,6 +20,9 @@
   gap: 1rem;
   align-items: center;
 }
+.minuteItem button[type="submit"]{
+	min-width: 15rem;
+}
 
 .minuteItem textarea:focus{
   outline: none;

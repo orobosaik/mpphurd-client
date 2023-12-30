@@ -19,21 +19,27 @@ import uuid from "react-uuid";
 import { ToastContainer, toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getThemeColor } from "../../utilities/themeColor";
+import { useDispatch } from "react-redux";
+import { resetOfficeData } from "../../redux/appSlice";
+import { CircularProgress } from "@mui/material";
 
 export default function Minute() {
 	const [rightBarView, setRightBarView] = useState(0);
 	const [officeList, setOfficeList] = useState([]);
+	const [loading, setLoading] = useState();
 
 	const [proposedActions, setProposedActions] = useState([]);
 
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 	const location = useLocation();
 	const data = location.state;
 
 	const themeColor = getThemeColor();
+	const dispatch = useDispatch();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setLoading(true)
 		const form = new FormData(e.target);
 		// console.log(form.get("plan.PlotNo"));
 		console.log(form);
@@ -44,7 +50,7 @@ export default function Minute() {
 			proposedActions: form.get("proposedActions"),
 			newOfficeId: form.get("minuteToOfficer"),
 		};
-		console.log(newData)
+		console.log(newData);
 
 		axios.defaults.withCredentials = true;
 
@@ -59,7 +65,8 @@ export default function Minute() {
 			);
 			console.log(res.data);
 
-			navigate(-1)
+			dispatch(resetOfficeData());
+			navigate(-2);
 
 			setTimeout(() => {
 				toast.success(res.data, {
@@ -252,7 +259,15 @@ export default function Minute() {
 									</select>
 								</div>
 								<button type="submit" className="primary">
-									Minute File
+									{loading ? (
+										<CircularProgress
+											thickness={5}
+											size={20}
+											sx={{ color: "white" }}
+										/>
+									) : (
+										"Minute Plan"
+									)}
 								</button>
 							</form>
 						</div>
