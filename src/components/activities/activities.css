@@ -56,3 +56,9 @@
   overflow-y: auto;
 	padding: 2rem;
 }
+
+.activitiesWrapper .empty{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

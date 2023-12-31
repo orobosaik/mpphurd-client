@@ -2,7 +2,8 @@
 	position: relative;
 	padding: 1rem 2rem;
 	/*background: lightgoldenrodyellow;
-	*/box-shadow: 0px 0px 11px -4px rgba(0,0,0,0.5);
+	*/
+	box-shadow: 0px 0px 11px -4px rgba(0, 0, 0, 0.5);
 	margin-left: 1rem;
 	border-radius: 8px;
 	-webkit-border-radius: 8px;
@@ -11,40 +12,60 @@
 	-o-border-radius: 8px;
 }
 
-html[data-theme="dark"] .activityCard{
+html[data-theme="dark"] .activityCard {
 	box-shadow: 0px 0px 11px -4px rgba(255, 255, 255, 0.5);
 }
 
-.activityCardTypeTag{
+.activityCardTypeTag {
 	position: absolute;
 	top: 0;
 	background-color: var(--pc-green);
 	color: var(--white);
 
-	padding: .2rem .8rem;
-
+	padding: 0.2rem 0.8rem;
 
 	border-bottom-right-radius: 5px;
 	border-bottom-left-radius: 5px;
 }
-.activityCard .activityCardHead{
+
+.activityCardViewMoreIcon {
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	top: 6px;
+	right: 6px;
+	color: var(--black);
+	padding: 2px;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-o-border-radius: 4px;
+}
+.activityCardViewMoreIcon:hover {
+	background-color: var(--light-grey);
+}
+
+.activityCard .activityCardHead {
 	margin-top: 1rem;
 	font-size: 1.6rem;
 }
 .activityCard * {
-	font-size: .95em;
+	font-size: 0.95em;
 }
 .activityCard div {
 	display: flex;
 }
-.activityCardHead{
+.activityCardHead {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 }
 .activityCardHead .date {
 	color: var(--pc-green);
-	font-size: .8em;
+	font-size: 0.8em;
 	font-weight: 600;
 }
 .activityCardTitle {
@@ -57,7 +78,7 @@ html[data-theme="dark"] .activityCard{
 	/* justify-self: flex-start; */
 }
 
-.activityCardComment{
+.activityCardComment {
 	flex-direction: column;
 	background-color: var(--light-grey);
 	border-radius: 8px;
@@ -67,16 +88,16 @@ html[data-theme="dark"] .activityCard{
 	-o-border-radius: 8px;
 }
 
-.activityCardCommentButton{
+.activityCardCommentButton {
 	display: flex;
 	justify-content: space-between;
 	cursor: pointer;
 
 	font-weight: 700;
-	padding: .5rem;
+	padding: 0.5rem;
 }
 
-.activityCardCommentButtonIcon{
+.activityCardCommentButtonIcon {
 	font-size: 2rem !important;
 }
 
@@ -100,7 +121,7 @@ html[data-theme="dark"] .activityCard{
 	font-size: 1.2rem;
 	top: -10px;
 	left: -4px;
-color: var(--pc-green);
+	color: var(--pc-green);
 }
 .activityCardArrow::after {
 	position: absolute;
@@ -125,7 +146,7 @@ color: var(--pc-green);
 	margin-bottom: 1rem;
 }
 .activityCardArrow:not(:last-of-type) {
-	height: calc(100% - .8rem);
+	height: calc(100% - 0.8rem);
 }
 .activityCard:last-of-type .activityCardArrow {
 	height: calc(100% - 5rem);
@@ -144,7 +165,6 @@ color: var(--pc-green);
 	-moz-border-radius: 50%;
 	-ms-border-radius: 50%;
 	-o-border-radius: 50%;
-
 }
 .activityCard:first-of-type::after {
 	content: "";
@@ -171,7 +191,7 @@ color: var(--pc-green);
 		-moz-transform: scale(1.7);
 		-ms-transform: scale(1.7);
 		-o-transform: scale(1.7);
-}
+	}
 	100% {
 		opacity: 0;
 		transform: scale(1.5);
@@ -179,5 +199,5 @@ color: var(--pc-green);
 		-moz-transform: scale(1.5);
 		-ms-transform: scale(1.5);
 		-o-transform: scale(1.5);
-}
+	}
 }

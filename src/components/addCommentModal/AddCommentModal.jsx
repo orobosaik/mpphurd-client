@@ -56,7 +56,7 @@ export default function AddCommentModal({
 
 		const newData = {
 			status: form.get("minuteStatus"),
-			comment: form.get("minuteText"),
+			text: form.get("minuteText"),
 		};
 		console.log(newData);
 

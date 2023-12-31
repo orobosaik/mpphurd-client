@@ -1,0 +1,7 @@
+.modalView.activityCardModal {
+	font-size: 1.5em;
+	display: block;
+}
+.activityCardModal .applicationItemsWrapper > div{
+	display: block;
+}

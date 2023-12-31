@@ -34,10 +34,10 @@ export default function DocumentView() {
 				</MiddleBar>
 
 				<RightBar>
-					{rightBarView === 1 ? (
-						<Document setRightBarView={setRightBarView} />
-					) : (
+					{rightBarView !== 1 ? (
 						<Activities setRightBarView={setRightBarView} />
+						) : (
+						<Document setRightBarView={setRightBarView} />
 					)}
 				</RightBar>
 			</div>

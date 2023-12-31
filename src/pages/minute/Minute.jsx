@@ -39,14 +39,14 @@ export default function Minute() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		setLoading(true)
+		setLoading(true);
 		const form = new FormData(e.target);
 		// console.log(form.get("plan.PlotNo"));
 		console.log(form);
 
 		const newData = {
 			status: form.get("minuteStatus"),
-			comment: form.get("minuteText"),
+			text: form.get("minuteText"),
 			proposedActions: form.get("proposedActions"),
 			newOfficeId: form.get("minuteToOfficer"),
 		};
@@ -276,10 +276,10 @@ export default function Minute() {
 				</MiddleBar>
 
 				<RightBar>
-					{rightBarView === 1 ? (
-						<Document setRightBarView={setRightBarView} />
-					) : (
+					{rightBarView !== 1 ? (
 						<Activities setRightBarView={setRightBarView} />
+					) : (
+						<Document setRightBarView={setRightBarView} />
 					)}
 				</RightBar>
 			</div>

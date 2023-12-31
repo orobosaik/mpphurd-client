@@ -76,9 +76,9 @@ export default function PlanInfo({ setTopBarData, setViewBills, data }) {
 					<button className="secondary">Minute Plan</button>
 				</div>
 				<AddCommentModal data={data} />
-				<div onClick={() => <AddCommentModal data={data} />}>
+				{/* <div onClick={() => <AddCommentModal data={data} />}>
 					<button className="secondary">Add Comments</button>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);
