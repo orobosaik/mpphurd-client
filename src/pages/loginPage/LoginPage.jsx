@@ -27,7 +27,7 @@ export default function LoginPage() {
 	const themeColor = getThemeColor();
 
 	const dispatch = useDispatch();
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 
 	const email = useRef();
 	const password = useRef();
@@ -36,12 +36,18 @@ export default function LoginPage() {
 		e.preventDefault();
 		dispatch(loginStart());
 
+		axios.defaults.withCredentials = true;
+
 		try {
 			let host = import.meta.env.VITE_SERVER;
-			const res = await axios.post(`${host}/staffs/auth/login`, {
-				email: email.current.value,
-				password: password.current.value,
-			});
+			const res = await axios.post(
+				`${host}/staffs/auth/login`,
+				{
+					email: email.current.value,
+					password: password.current.value,
+				},
+				{ withCredentials: true }
+			);
 
 			dispatch(loginSuccess(res.data));
 			// navigate("/")
