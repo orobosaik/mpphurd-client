@@ -4,35 +4,43 @@ import { useDispatch } from "react-redux";
 import { setOfficeData } from "../../redux/appSlice";
 import { useRef } from "react";
 
-function ListCard({ data, officeState, scrollSection }) {
+function ListCard({ data, officeState, scrollSection, reload }) {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	return (
-		<div
-			className="listCard listFormat"
-			onClick={() => {
-				// console.log(scrollSection())
-				console.log(scrollSection);
-				console.log(scrollSection.current.scrollTop);
-				console.log(scrollSection.current.clientHeight);
+		<>
+			<div
+				className="listCard listFormat"
+				onClick={() => {
+					// console.log(scrollSection())
+					console.log(scrollSection);
+					console.log(scrollSection.current.scrollTop);
+					console.log(scrollSection.current.clientHeight);
 
-				{
-				}
-				dispatch(
-					setOfficeData({
-						...officeState,
-						scroll: scrollSection.current.scrollTop,
-					})
-				);
-				navigate(`/permit/${data?._id}`, { state: data });
-			}}>
-			<span>{data?.planNumber || data?.uniqueId}</span>
-			<span>{data.applicant.name}</span>
-			<span>{data.dev.plotNo + " " + data.dev.address}</span>
-			<span>{data.dev.use}</span>
-			<span>Yes</span>
-			<span>A5</span>
-		</div>
+					{
+					}
+					dispatch(
+						setOfficeData({
+							...officeState,
+							scroll: scrollSection.current.scrollTop,
+						})
+					);
+					navigate(`/permit/${data?._id}`, { state: data });
+				}}>
+				<span>
+					{data?.planNumber
+						? `${data?.planNumber.value} / ${new Date(
+								data?.planNumber.date
+						  ).getFullYear()}`
+						: data?.uniqueId}
+				</span>
+				<span>{data.applicant.name}</span>
+				<span>{data.dev.plotNo + " " + data.dev.address}</span>
+				<span>{data.dev.use}</span>
+				<span>Yes</span>
+				<span>A5</span>
+			</div>
+		</>
 	);
 }
 

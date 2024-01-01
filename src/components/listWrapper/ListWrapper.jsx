@@ -71,55 +71,56 @@ function ListWrapper({ children }) {
 		return sortedArray;
 	};
 
+	const getData = async () => {
+		axios.defaults.withCredentials = true;
+		try {
+			let host = import.meta.env.VITE_SERVER;
+
+			const res = await axios.get(
+				`${host}/staffs/office/${state.id._id}/current`,
+				{
+					withCredentials: true,
+				}
+			);
+			setIsLoading(false);
+
+			setData(res.data);
+			console.log(res.data);
+
+			const newData = categorizeListByDate(res.data);
+			setListArray(newData);
+
+			console.log(listArray);
+			// const size =
+			// 	encodeURI(JSON.stringify(listArray)).split(/%..|./).length - 1;
+			// console.log(size / 1024);
+		} catch (error) {
+			let message = error.response
+				? error.response.data.message
+				: error.message;
+			console.log(error);
+			console.log(message);
+
+			setTimeout(() => {
+				toast.error(message, {
+					position: "top-right",
+					autoClose: 2000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: themeColor,
+				});
+			}, 0);
+			setTimeout(() => {
+				setIsLoading(false);
+			}, 4000);
+		}
+	};
+
 	useEffect(() => {
 		console.log(state);
-		const getData = async () => {
-			axios.defaults.withCredentials = true;
-			try {
-				let host = import.meta.env.VITE_SERVER;
-
-				const res = await axios.get(
-					`${host}/staffs/office/${state.id._id}/current`,
-					{
-						withCredentials: true,
-					}
-				);
-				setIsLoading(false);
-
-				setData(res.data);
-				console.log(res.data);
-
-				const newData = categorizeListByDate(res.data);
-				setListArray(newData);
-
-				console.log(listArray);
-				// const size =
-				// 	encodeURI(JSON.stringify(listArray)).split(/%..|./).length - 1;
-				// console.log(size / 1024);
-			} catch (error) {
-				let message = error.response
-					? error.response.data.message
-					: error.message;
-				console.log(error);
-				console.log(message);
-
-				setTimeout(() => {
-					toast.error(message, {
-						position: "top-right",
-						autoClose: 2000,
-						hideProgressBar: false,
-						closeOnClick: true,
-						pauseOnHover: true,
-						draggable: true,
-						progress: undefined,
-						theme: themeColor,
-					});
-				}, 0);
-				setTimeout(() => {
-					setIsLoading(false);
-				}, 4000);
-			}
-		};
 
 		console.log(officeData);
 		console.log(officeData.active);
@@ -146,7 +147,7 @@ function ListWrapper({ children }) {
 	}, []);
 
 	useEffect(() => {
-		if (officeData.active) {
+		if (officeData.scroll) {
 			scrollSection.current.scrollTo({
 				top: officeData.scroll,
 				// behavior: "smooth",
@@ -303,7 +304,7 @@ function ListWrapper({ children }) {
 										{arr.items.map((item, i) => {
 											return (
 												<ListCard
-													key={i}
+													key={item._id}
 													data={item}
 													officeState={{
 														active: true,

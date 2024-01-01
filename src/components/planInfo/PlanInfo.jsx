@@ -1,23 +1,30 @@
 import { EditRounded } from "@mui/icons-material";
 import "./planInfo.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import PlanInfoCard from "../planInfoCard/PlanInfoCard";
 import ViewBill from "../planBill/PlanBill";
 import PlanEditInfoModal from "../planEditInfoModal/PlanEditInfoModal";
 import AddCommentModal from "../addCommentModal/AddCommentModal";
 import ConfirmationModal from "../confirmationModal/ConfirmationModal";
 import { useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
+import { useState } from "react";
+import { getThemeColor } from "../../utilities/themeColor";
+import GeneratePlanNoModal from "../generatePlanNoModal/GeneratePlanNoModal";
 
-export default function PlanInfo({ setTopBarData, setViewBills, data }) {
+function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 	const navigate = useNavigate();
+	const [data, setData] = useState(state);
 	const { currentUser, loading } = useSelector((state) => state.user);
-	const generatePlanNumber = () => {
-		alert("YAYYY");
-	};
+	const themeColor = getThemeColor();
+
+	console.log(data);
+	// console.log(state);
 
 	// Check if Plan is in User Office(s)
 	const isInUserOffice = currentUser.office.some((e) => {
-		return data.currentOffice.id._id.toString() === e.id._id.toString();
+		return data.currentOffice.id._id === e.id._id;
 	});
 
 	return (
@@ -85,19 +92,19 @@ export default function PlanInfo({ setTopBarData, setViewBills, data }) {
 						// Check if User has authorization to generate plan number
 						currentUser.office.some((e) => {
 							return (
-								data.currentOffice.id._id.toString() === e.id._id.toString() &&
+								data.currentOffice.id._id === e.id._id &&
 								e.tasks.includes("GENERATE PLAN NUMBER")
 							);
 						}) &&
 							!data.planNumber && (
-								<ConfirmationModal
+								<GeneratePlanNoModal
 									headerText={`${data.uniqueId} - ${data.dev.use}`}
 									buttonText={"Generate PN"}
 									title={"Generate Plan Number"}
 									body={
 										"Clicking Okay will generate the next plan number available. Please ensure all criteria are met."
 									}
-									onSubmitFunction={generatePlanNumber}
+									reload={reload}
 								/>
 							)
 					}
@@ -119,7 +126,7 @@ export default function PlanInfo({ setTopBarData, setViewBills, data }) {
 					// Check if User has authorization to create bill
 					currentUser.office.some((e) => {
 						return (
-							data.currentOffice.id._id.toString() === e.id._id.toString() &&
+							data.currentOffice.id._id === e.id._id &&
 							e.tasks.includes("CREATE BILL")
 						);
 					}) && (
@@ -139,8 +146,8 @@ export default function PlanInfo({ setTopBarData, setViewBills, data }) {
 					// Check if User has authorization to comment on plan
 					currentUser.office.some((e) => {
 						return (
-							data.currentOffice.id._id.toString() === e.id._id.toString() &&
-							e.tasks.includes("COMMENT PLAN")
+							data.currentOffice.id._id === e.id._id &&
+							e.tasks.includes("COMMENT ON PLAN")
 						);
 					}) && (
 						<>
@@ -153,22 +160,25 @@ export default function PlanInfo({ setTopBarData, setViewBills, data }) {
 					// Check if User has authorization to minute plan
 					currentUser.office.some((e) => {
 						return (
-							data.currentOffice.id._id.toString() === e.id._id.toString() &&
+							data.currentOffice.id._id === e.id._id &&
 							e.tasks.includes("MINUTE PLAN")
 						);
-					}) && (
-						<>
-							<div
-								onClick={() => {
-									navigate("./minute", { state: data });
-								}}>
-								<button className="secondary">Minute Plan</button>
-							</div>
-							<AddCommentModal data={data} />
-						</>
-					)
+					}) &&
+						data.planNumber?.value && (
+							<>
+								<div
+									onClick={() => {
+										navigate("./minute", { state: data });
+									}}>
+									<button className="secondary">Minute Plan</button>
+								</div>
+								{/* <AddCommentModal data={data} /> */}
+							</>
+						)
 				}
 			</div>
+			<ToastContainer />
 		</div>
 	);
 }
+export default PlanInfo;

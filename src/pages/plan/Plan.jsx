@@ -18,7 +18,7 @@ import { getThemeColor } from "../../utilities/themeColor";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 
-export default function Plan() {
+function Plan() {
 	const [rightBarView, setRightBarView] = useState(0);
 	const [viewBills, setViewBills] = useState("");
 
@@ -36,40 +36,39 @@ export default function Plan() {
 	const params = useParams();
 	const location = useLocation();
 
+	const getData = async () => {
+		console.log(params);
+		// console.log(location.state);
+		try {
+			let host = import.meta.env.VITE_SERVER;
+			const res = await axios.get(`${host}/staffs/plan/${params.id}`);
+
+			setData(() => res.data);
+			setIsLoading(false);
+			console.log(res.data);
+		} catch (error) {
+			let message = error.response
+				? error.response.data.message
+				: error.message;
+			console.log(error);
+			console.log(message);
+
+			setTimeout(() => {
+				toast.error(message, {
+					position: "top-right",
+					autoClose: 2000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: themeColor,
+				});
+			}, 0);
+			setIsLoading(false);
+		}
+	};
 	useEffect(() => {
-		const getData = async () => {
-			console.log(params);
-			// console.log(location.state);
-			try {
-				let host = import.meta.env.VITE_SERVER;
-				const res = await axios.get(`${host}/staffs/plan/${params.id}`);
-
-				setData(res.data);
-				setIsLoading(false);
-				console.log(res.data);
-			} catch (error) {
-				let message = error.response
-					? error.response.data.message
-					: error.message;
-				console.log(error);
-				console.log(message);
-
-				setTimeout(() => {
-					toast.error(message, {
-						position: "top-right",
-						autoClose: 2000,
-						hideProgressBar: false,
-						closeOnClick: true,
-						pauseOnHover: true,
-						draggable: true,
-						progress: undefined,
-						theme: themeColor,
-					});
-				}, 0);
-				setIsLoading(false);
-			}
-		};
-
 		if (location.state) {
 			setData(location.state);
 			setIsLoading(false);
@@ -77,9 +76,12 @@ export default function Plan() {
 			getData();
 		}
 
-		// return () => {
-		// 	second
-		// }
+		// 	// return () => {
+		// 	// 	second
+		// 	// }
+	}, []);
+	useEffect(() => {
+		getData();
 	}, [reload]);
 
 	return (
@@ -92,10 +94,18 @@ export default function Plan() {
 				<MiddleBar
 					topBarData={{
 						action: topBarAction,
-						planNumber: data?.planNumber ? data?.planNumber : data?.uniqueId,
+						planNumber: data?.planNumber
+							? `${data?.dev.region.substring(0, 3).toUpperCase()}/${
+									data?.planNumber.value
+							  }/${new Date(data?.planNumber.date).getFullYear()}`
+							: data?.uniqueId,
 					}}>
 					{!isLoading ? (
-						<PlanInfo setViewBills={setViewBills} data={data} />
+						<PlanInfo
+							setViewBills={setViewBills}
+							state={() => data}
+							reload={setReload}
+						/>
 					) : (
 						<LoadingIcon />
 					)}
@@ -104,7 +114,7 @@ export default function Plan() {
 				<RightBar>
 					{rightBarView !== 1 ? (
 						<Activities setRightBarView={setRightBarView} />
-						) : (
+					) : (
 						<Document setRightBarView={setRightBarView} />
 					)}
 				</RightBar>
@@ -113,3 +123,4 @@ export default function Plan() {
 		</>
 	);
 }
+export default Plan;

@@ -32,7 +32,6 @@ export default function ActivityCardModal({
 	const KEY_EVENT_TYPE = "keyup";
 
 	useEscapeKey(handleClose);
-	console.log(data);
 
 	function useEscapeKey(handleClose) {
 		const handleEscKey = useCallback(
