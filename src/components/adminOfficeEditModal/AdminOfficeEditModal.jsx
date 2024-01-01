@@ -237,7 +237,7 @@ export default function AdminOfficeEditModal({ ...props }) {
 											name={"adminEditOfficeName"}
 											id={"adminEditOfficeName"}
 											value={name}
-											onChange={(e) => setName(e.target.value)}
+											onChange={(e) => setName(e.target.value.toUpperCase())}
 										/>
 									</div>
 
@@ -315,7 +315,7 @@ export default function AdminOfficeEditModal({ ...props }) {
 													// onChange={(e)=>setTasks(tasks[i] = e.target.value)}
 													onChange={(e) => {
 														let newArr = [...tasks];
-														newArr[i] = e.target.value;
+														newArr[i] = e.target.value.toUpperCase();
 														setTasks(newArr);
 													}}
 												/>

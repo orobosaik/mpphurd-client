@@ -1,82 +1,85 @@
-.planInfo{
-  width: 100%;
-  /* background: #ececec; */
+.planInfo {
+	width: 100%;
+	/* background: #ececec; */
 }
-.planInfoSummary{
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: 2rem;
+.planInfoSummary {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	margin-bottom: 2rem;
 }
-.planInfoSummaryDetails{
-  margin-right:5rem;
-  width: 100%;
-
+.planInfoSummaryDetails {
+	margin-right: 5rem;
+	width: 100%;
 }
-.planInfoSummaryItem{
-  display: flex;
-  align-items: center;
+.planInfoSummaryDetails2 {
+	display: flex;
+	flex-direction: column;
+  align-items: flex-end;
+	gap: 1rem;
 }
-.planInfoSummaryTitle{
-  flex: 3;
-  font-weight: 600;
-  /* width: 15rem; */
+.planInfoSummaryItem {
+	display: flex;
+	align-items: center;
 }
-.planInfoSummaryText{
-  display: flex;
-  gap: 1rem;
-  flex: 9;
-  /* width: 30rem; */
+.planInfoSummaryTitle {
+	flex: 3;
+	font-weight: 600;
+	/* width: 15rem; */
 }
-.planInfoSummaryText.large{
-  font-size: 1.6rem;
+.planInfoSummaryText {
+	display: flex;
+	gap: 1rem;
+	flex: 9;
+	/* width: 30rem; */
 }
-.planInfoSummaryStack{
-  font-weight: bold;
+.planInfoSummaryText.large {
+	font-size: 1.6rem;
 }
-.tag{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--white);
-  font-weight: 700;
-  font-size: 1.4rem;
-  padding: 0 .6rem;
-  border-radius: 30px;
-  -webkit-border-radius: 30px;
-  -moz-border-radius: 30px;
-  -ms-border-radius: 30px;
-  -o-border-radius: 30px;
+.planInfoSummaryStack {
+	font-weight: bold;
 }
-.tag-fastTrack{
-  /* background-color: var(--accent-red); */
-  background-color: #f73832;
+.tag {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--white);
+	font-weight: 700;
+	font-size: 1.4rem;
+	padding: 0 0.6rem;
+	border-radius: 30px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	-ms-border-radius: 30px;
+	-o-border-radius: 30px;
 }
-.tag-oldFile{
-  background-color: var(--accent-yellow);
+.tag-fastTrack {
+	/* background-color: var(--accent-red); */
+	background-color: #f73832;
 }
-.tag-fileOfInterest{
-  background-color: var(--accent-4);
+.tag-oldFile {
+	background-color: var(--accent-yellow);
 }
-
-.planInfoWrapper{
-  background-color:var(--green-background);
-  padding: 2rem 3rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  margin-bottom: 1rem;
-
-
-
-  border-radius: 8px;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  -ms-border-radius: 8px;
-  -o-border-radius: 8px;
+.tag-fileOfInterest {
+	background-color: var(--accent-4);
 }
 
-.planInfoButtons{
-  display: flex;
-  gap: 1rem;
+.planInfoWrapper {
+	background-color: var(--green-background);
+	padding: 2rem 3rem;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	margin-bottom: 1rem;
+
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	-ms-border-radius: 8px;
+	-o-border-radius: 8px;
+}
+
+.planInfoButtons {
+	display: flex;
+	gap: 1rem;
 }

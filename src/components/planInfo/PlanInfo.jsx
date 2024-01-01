@@ -5,9 +5,21 @@ import PlanInfoCard from "../planInfoCard/PlanInfoCard";
 import ViewBill from "../planBill/PlanBill";
 import PlanEditInfoModal from "../planEditInfoModal/PlanEditInfoModal";
 import AddCommentModal from "../addCommentModal/AddCommentModal";
+import ConfirmationModal from "../confirmationModal/ConfirmationModal";
+import { useSelector } from "react-redux";
 
 export default function PlanInfo({ setTopBarData, setViewBills, data }) {
 	const navigate = useNavigate();
+	const { currentUser, loading } = useSelector((state) => state.user);
+	const generatePlanNumber = () => {
+		alert("YAYYY");
+	};
+
+	// Check if Plan is in User Office(s)
+	const isInUserOffice = currentUser.office.some((e) => {
+		return data.currentOffice.id._id.toString() === e.id._id.toString();
+	});
+
 	return (
 		<div className="planInfo">
 			<div className="planInfoSummary">
@@ -26,11 +38,24 @@ export default function PlanInfo({ setTopBarData, setViewBills, data }) {
 						</span>
 					</div>
 					<div className="planInfoSummaryItem">
-						<span className="planInfoSummaryTitle">Current Stack:</span>
+						<span className="planInfoSummaryTitle">Current Office:</span>
 						<span className="planInfoSummaryText">
-							<span className="planInfoSummaryStack">Stack A7</span>.
+							<span className="planInfoSummaryStack">
+								{data.currentOffice.id.name} Office
+							</span>
+							.
 						</span>
 					</div>
+
+					{isInUserOffice && (
+						<div className="planInfoSummaryItem">
+							<span className="planInfoSummaryTitle">Current Stack:</span>
+							<span className="planInfoSummaryText">
+								<span className="planInfoSummaryStack">Stack A7</span>.
+							</span>
+						</div>
+					)}
+
 					<div className="planInfoSummaryItem">
 						{(data.isFastTrack || data.isFileOfInterest || data.isOldFile) && (
 							<span className="planInfoSummaryTitle">Tags:</span>
@@ -49,7 +74,34 @@ export default function PlanInfo({ setTopBarData, setViewBills, data }) {
 					</div>
 				</div>
 
-				<PlanEditInfoModal />
+				<div className="planInfoSummaryDetails2">
+					{isInUserOffice && (
+						<>
+							<PlanEditInfoModal state={data} />
+						</>
+					)}
+
+					{
+						// Check if User has authorization to generate plan number
+						currentUser.office.some((e) => {
+							return (
+								data.currentOffice.id._id.toString() === e.id._id.toString() &&
+								e.tasks.includes("GENERATE PLAN NUMBER")
+							);
+						}) &&
+							!data.planNumber && (
+								<ConfirmationModal
+									headerText={`${data.uniqueId} - ${data.dev.use}`}
+									buttonText={"Generate PN"}
+									title={"Generate Plan Number"}
+									body={
+										"Clicking Okay will generate the next plan number available. Please ensure all criteria are met."
+									}
+									onSubmitFunction={generatePlanNumber}
+								/>
+							)
+					}
+				</div>
 			</div>
 
 			<div className="planInfoWrapper">
@@ -63,22 +115,59 @@ export default function PlanInfo({ setTopBarData, setViewBills, data }) {
 			</div>
 
 			<div className="planInfoButtons">
-				<Link to="./create_bill">
-					<button className="primary">Generate Bill</button>
-				</Link>
+				{
+					// Check if User has authorization to create bill
+					currentUser.office.some((e) => {
+						return (
+							data.currentOffice.id._id.toString() === e.id._id.toString() &&
+							e.tasks.includes("CREATE BILL")
+						);
+					}) && (
+						<>
+							<Link to="./create_bill">
+								<button className="primary">Generate Bill</button>
+							</Link>
+						</>
+					)
+				}
+
 				<Link to="./bills">
 					<button className="secondary">View Bills</button>
 				</Link>
-				<div
-					onClick={() => {
-						navigate("./minute", { state: data });
-					}}>
-					<button className="secondary">Minute Plan</button>
-				</div>
-				<AddCommentModal data={data} />
-				{/* <div onClick={() => <AddCommentModal data={data} />}>
-					<button className="secondary">Add Comments</button>
-				</div> */}
+
+				{
+					// Check if User has authorization to comment on plan
+					currentUser.office.some((e) => {
+						return (
+							data.currentOffice.id._id.toString() === e.id._id.toString() &&
+							e.tasks.includes("COMMENT PLAN")
+						);
+					}) && (
+						<>
+							<AddCommentModal data={data} />
+						</>
+					)
+				}
+
+				{
+					// Check if User has authorization to minute plan
+					currentUser.office.some((e) => {
+						return (
+							data.currentOffice.id._id.toString() === e.id._id.toString() &&
+							e.tasks.includes("MINUTE PLAN")
+						);
+					}) && (
+						<>
+							<div
+								onClick={() => {
+									navigate("./minute", { state: data });
+								}}>
+								<button className="secondary">Minute Plan</button>
+							</div>
+							<AddCommentModal data={data} />
+						</>
+					)
+				}
 			</div>
 		</div>
 	);

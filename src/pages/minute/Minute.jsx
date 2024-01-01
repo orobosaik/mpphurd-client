@@ -65,6 +65,8 @@ export default function Minute() {
 			);
 			console.log(res.data);
 
+			setLoading(false);
+
 			dispatch(resetOfficeData());
 			navigate(-2);
 
@@ -81,6 +83,8 @@ export default function Minute() {
 				});
 			}, 200);
 		} catch (error) {
+			setLoading(false);
+
 			let message = error.response
 				? error.response.data.message
 				: error.message;

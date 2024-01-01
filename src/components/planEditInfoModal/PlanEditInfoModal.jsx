@@ -10,11 +10,19 @@ export default function PlanEditInfoModal({
 	buttonIcon,
 	buttonText,
 	children,
+	state,
 }) {
+	console.log(state);
 	const [open, setOpen] = useState(false);
-	const [assessment, setAssessment] = useState(false);
-	const [clearing, setClearing] = useState(true);
-	const [archive, setArchive] = useState(false);
+	const [assessment, setAssessment] = useState(
+		state?.currentOffice?.id?.name === "ASSESSMENT"
+	);
+	const [clearing, setClearing] = useState(
+		state?.currentOffice?.id?.name === "CLEARING HOUSE"
+	);
+	const [archive, setArchive] = useState(
+		state?.currentOffice?.id?.name === "ARCHIVE"
+	);
 
 	const [collectedApproval, setCollectedApproval] = useState(false);
 
@@ -153,29 +161,29 @@ export default function PlanEditInfoModal({
 		);
 	};
 
-		const KEY_NAME_ESC = "Escape";
-		const KEY_EVENT_TYPE = "keyup";
+	const KEY_NAME_ESC = "Escape";
+	const KEY_EVENT_TYPE = "keyup";
 
-		useEscapeKey(handleClose);
+	useEscapeKey(handleClose);
 
-		function useEscapeKey(handleClose) {
-			const handleEscKey = useCallback(
-				(event) => {
-					if (event.key === KEY_NAME_ESC) {
-						handleClose();
-					}
-				},
-				[handleClose]
-			);
+	function useEscapeKey(handleClose) {
+		const handleEscKey = useCallback(
+			(event) => {
+				if (event.key === KEY_NAME_ESC) {
+					handleClose();
+				}
+			},
+			[handleClose]
+		);
 
-			useEffect(() => {
-				document.addEventListener(KEY_EVENT_TYPE, handleEscKey, false);
+		useEffect(() => {
+			document.addEventListener(KEY_EVENT_TYPE, handleEscKey, false);
 
-				return () => {
-					document.removeEventListener(KEY_EVENT_TYPE, handleEscKey, false);
-				};
-			}, [handleEscKey]);
-		}
+			return () => {
+				document.removeEventListener(KEY_EVENT_TYPE, handleEscKey, false);
+			};
+		}, [handleEscKey]);
+	}
 
 	useEffect(() => {
 		const modal = document.querySelector(".modalView");
@@ -199,6 +207,9 @@ export default function PlanEditInfoModal({
 							<CloseRounded className="closeButton" />
 						</div>
 					</header>
+
+
+
 					{!clearing && (
 						<div className="currentStackEdit">
 							<label htmlFor="planBuildingStatus">Current Stack:</label>
@@ -209,6 +220,9 @@ export default function PlanEditInfoModal({
 							</select>
 						</div>
 					)}
+
+
+
 					{archive && (
 						<>
 							<div className="minuteItem">
@@ -254,6 +268,8 @@ export default function PlanEditInfoModal({
 							)}
 						</>
 					)}
+
+
 					{assessment && (
 						<div className="planEditInfoTags">
 							<h4>Tags:</h4>
@@ -280,8 +296,12 @@ export default function PlanEditInfoModal({
 							</div>
 						</div>
 					)}
+
+
 					{/* APPLICANT INFORMATION */}
 					{clearing && individualApplicationItems("applicant")}
+
+
 					{/* BUILDING APPLICATION INFORMATION */}
 					{clearing || assessment ? (
 						<div className="applicationItemsWrapper">

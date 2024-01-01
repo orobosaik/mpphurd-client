@@ -1,0 +1,6 @@
+.modalView.confirmationModal footer {
+	gap: 1rem;
+}
+.modalView.confirmationModal footer button {
+	width: 10rem;
+}
