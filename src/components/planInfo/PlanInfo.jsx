@@ -155,7 +155,7 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 						);
 					}) && (
 						<>
-							<AddCommentModal data={data} />
+							<AddCommentModal data={data} reload={reload} />
 						</>
 					)
 				}

@@ -19,20 +19,44 @@ import {
 
 export default function ActivityCard({ data }) {
 	const [showComment, setShowComment] = useState(false);
-const displayDate = (originalDate) => {
-	if (isToday(originalDate)) {
-		return `Today at ${format(originalDate, "HH:mm")}`;
-	} else if (isYesterday(originalDate)) {
-		return `Yesterday at ${format(originalDate, "HH:mm")}`;
-	} else if (isTomorrow(originalDate)) {
-		return `Tomorrow at ${format(originalDate, "HH:mm")}`;
-	} else {
-		return `${format(originalDate, "dd/MM/yyyy")} at ${format(
-			originalDate,
-			"HH:mm"
-		)}`;
-	}
-};
+	const displayDate = (originalDate) => {
+		if (isToday(originalDate)) {
+			return (
+				<>
+					<span>{format(originalDate, "dd/MM/yy")}</span>
+					<span>{format(originalDate, "HH:mm")}</span>
+				</>
+			);
+		} else if (isYesterday(originalDate)) {
+			return (
+				<>
+					<span>Yesterday</span>
+					<span>{format(originalDate, "HH:mm")}</span>
+				</>
+			);
+		} else {
+			return (
+				<>
+					<span>{format(originalDate, "dd/MM/yyyy")}</span>
+					<span>{format(originalDate, "HH:mm")}</span>
+				</>
+			);
+		}
+	};
+	// const displayDate = (originalDate) => {
+	// 	if (isToday(originalDate)) {
+	// 		return `Today at ${format(originalDate, "HH:mm")}`;
+	// 	} else if (isYesterday(originalDate)) {
+	// 		return `Yesterday at ${format(originalDate, "HH:mm")}`;
+	// 	} else if (isTomorrow(originalDate)) {
+	// 		return `Tomorrow at ${format(originalDate, "HH:mm")}`;
+	// 	} else {
+	// 		return `${format(originalDate, "dd/MM/yyyy")} at ${format(
+	// 			originalDate,
+	// 			"HH:mm"
+	// 		)}`;
+	// 	}
+	// };
 	return (
 		<div className="activityCard">
 			<div className="activityCardArrow"></div>

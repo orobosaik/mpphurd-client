@@ -64,14 +64,22 @@ html[data-theme="dark"] .activityCard {
 	justify-content: space-between;
 }
 .activityCardHead .date {
+	display: flex;
+	flex-direction: column;
+	align-items: end;
 	color: var(--pc-green);
+	/* color: green; */
 	font-size: 0.8em;
-	font-weight: 600;
+	font-weight: 400;
+}
+.activityCardHead .date span {
+	padding: 0;
+	height: 1.2rem;
 }
 .activityCardTitle {
 	/* flex: 1; */
 	font-weight: 700;
-	width: 6rem;
+	width: 5rem;
 }
 .activityCardText {
 	/* flex: 2; */

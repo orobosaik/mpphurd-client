@@ -15,6 +15,7 @@ export default function AddCommentModal({
 	buttonText,
 	children,
 	data,
+	reload,
 }) {
 	const [open, setOpen] = useState(false);
 	const [loading, setLoading] = useState(false);
@@ -50,7 +51,7 @@ export default function AddCommentModal({
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		setLoading(true)
+		setLoading(true);
 		const form = new FormData(e.target);
 		console.log(form);
 
@@ -75,6 +76,7 @@ export default function AddCommentModal({
 
 			// dispatch(resetOfficeData());
 			// navigate(-2);
+			reload(() => []);
 			handleClose();
 
 			setTimeout(() => {
@@ -166,12 +168,14 @@ export default function AddCommentModal({
 						<footer>
 							<button type="submit" className="primary">
 								{loading ? (
-								<CircularProgress
-									thickness={5}
-									size={20}
-									sx={{ color: "white" }}
-								/>
-							): "Save" }
+									<CircularProgress
+										thickness={5}
+										size={20}
+										sx={{ color: "white" }}
+									/>
+								) : (
+									"Save"
+								)}
 							</button>
 						</footer>
 					</form>
