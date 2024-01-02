@@ -113,7 +113,7 @@ function Plan() {
 
 				<RightBar>
 					{rightBarView !== 1 ? (
-						<Activities setRightBarView={setRightBarView} />
+						<Activities reload={reload} setRightBarView={setRightBarView} />
 					) : (
 						<Document setRightBarView={setRightBarView} />
 					)}

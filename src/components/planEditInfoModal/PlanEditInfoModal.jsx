@@ -15,13 +15,13 @@ export default function PlanEditInfoModal({
 	console.log(state);
 	const [open, setOpen] = useState(false);
 	const [assessment, setAssessment] = useState(
-		state?.currentOffice?.id?.name === "ASSESSMENT"
+		state?.currentOffice?.id?.name.includes("ASSESSMENT")
 	);
 	const [clearing, setClearing] = useState(
-		state?.currentOffice?.id?.name === "CLEARING HOUSE"
+		state?.currentOffice?.id?.name.includes("CLEARING HOUSE")
 	);
 	const [archive, setArchive] = useState(
-		state?.currentOffice?.id?.name === "ARCHIVE"
+		state?.currentOffice?.id?.name.includes("ARCHIVE")
 	);
 
 	const [collectedApproval, setCollectedApproval] = useState(false);

@@ -6,7 +6,7 @@ import axios from "axios";
 import LoadingIcon from "../../utilities/LoadingIcon";
 import ActivityCardModal from "../activityCardModal/ActivityCardModal";
 
-function Activities({ setRightBarView }) {
+function Activities({ setRightBarView, reload }) {
 	const [isLoading, setIsLoading] = useState(true);
 	const [data, setData] = useState([]);
 	const [dataList, setDataList] = useState([]);
@@ -53,7 +53,7 @@ function Activities({ setRightBarView }) {
 		// return () => {
 		// 	second
 		// }
-	}, []);
+	}, [reload]);
 
 	return (
 		<div className="activities">

@@ -123,6 +123,8 @@ export default function Minute() {
 				const staff = res[1].data;
 
 				let presentStaff = office.map((o) => {
+					// Prevent showing current staff office
+					if (o._id === data.currentOffice.id._id) return;
 					let staffList = staff.filter((s) =>
 						s.office.some((so) => so.id === o._id)
 					);
@@ -179,7 +181,11 @@ export default function Minute() {
 				<MiddleBar
 					topBarData={{
 						action: "Minute Plan",
-						planNumber: `${data.planNumber ? data.planNumber : data.uniqueId}`,
+						planNumber: data?.planNumber
+							? `${data?.dev.region.substring(0, 3).toUpperCase()}/${
+									data?.planNumber.value
+							  }/${new Date(data?.planNumber.date).getFullYear()}`
+							: data?.uniqueId,
 					}}>
 					<div>
 						<div className="minuteItems">
@@ -254,11 +260,13 @@ export default function Minute() {
 
 									<select name="minuteToOfficer" id="minuteToOfficer">
 										{officeList.map((o) => {
-											return (
-												<option key={o.officeId} value={o.officeId}>
-													{o.text}
-												</option>
-											);
+											if (o?.officeId) {
+												return (
+													<option key={o.officeId} value={o.officeId}>
+														{o.text}
+													</option>
+												);
+											}
 										})}
 									</select>
 								</div>

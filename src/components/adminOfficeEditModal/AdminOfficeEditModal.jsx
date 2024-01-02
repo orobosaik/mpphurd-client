@@ -315,7 +315,7 @@ export default function AdminOfficeEditModal({ ...props }) {
 													// onChange={(e)=>setTasks(tasks[i] = e.target.value)}
 													onChange={(e) => {
 														let newArr = [...tasks];
-														newArr[i] = e.target.value.toUpperCase();
+														newArr[i] = e.target.value.toUpperCase().trim();
 														setTasks(newArr);
 													}}
 												/>

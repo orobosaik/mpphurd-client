@@ -1,14 +1,40 @@
 import { useState } from "react";
 import "./activityCard.css";
-import { ExpandLessRounded, ExpandMoreRounded, LaunchRounded } from "@mui/icons-material";
+import {
+	ExpandLessRounded,
+	ExpandMoreRounded,
+	LaunchRounded,
+} from "@mui/icons-material";
 import AddCommentModal from "../addCommentModal/AddCommentModal";
 import ActivityCardModal from "../activityCardModal/ActivityCardModal";
+import {
+	format,
+	isToday,
+	isYesterday,
+	isTomorrow,
+	formatDistance,
+	formatRelative,
+	subDays,
+} from "date-fns";
 
 export default function ActivityCard({ data }) {
 	const [showComment, setShowComment] = useState(false);
+const displayDate = (originalDate) => {
+	if (isToday(originalDate)) {
+		return `Today at ${format(originalDate, "HH:mm")}`;
+	} else if (isYesterday(originalDate)) {
+		return `Yesterday at ${format(originalDate, "HH:mm")}`;
+	} else if (isTomorrow(originalDate)) {
+		return `Tomorrow at ${format(originalDate, "HH:mm")}`;
+	} else {
+		return `${format(originalDate, "dd/MM/yyyy")} at ${format(
+			originalDate,
+			"HH:mm"
+		)}`;
+	}
+};
 	return (
 		<div className="activityCard">
-
 			<div className="activityCardArrow"></div>
 			<h1>
 				{" "}
@@ -18,13 +44,19 @@ export default function ActivityCard({ data }) {
 			{/* <div className="activityCardViewMoreIcon">
 				<LaunchRounded/>
 			</div> */}
-			{<ActivityCardModal stateData={data}/>}
+			{<ActivityCardModal stateData={data} />}
 
 			<div className="activityCardHead">
 				<h2 className="title">
 					{data.type === "Action" ? data.title : data.to?.office}
 				</h2>
-				<div className="date">15 Days Ago</div>
+				<div className="date">
+					{/* {formatDistance(subDays(new Date(data.createdAt)), new Date(), {
+						addSuffix: true,
+					})} */}
+					{/* {formatDistance(new Date(data.createdAt), new Date())} */}
+					{displayDate(data.createdAt)}
+				</div>
 			</div>
 
 			{data?.to?.staff && <p>{data.to.staff}</p>}

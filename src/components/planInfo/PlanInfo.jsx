@@ -26,6 +26,8 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 	const isInUserOffice = currentUser.office.some((e) => {
 		return data.currentOffice.id._id === e.id._id;
 	});
+	// Check if User is a management staff
+	const isManagementStaff = currentUser.isManagement;
 
 	return (
 		<div className="planInfo">
@@ -82,7 +84,7 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 				</div>
 
 				<div className="planInfoSummaryDetails2">
-					{isInUserOffice && (
+					{(isInUserOffice || isManagementStaff) && (
 						<>
 							<PlanEditInfoModal state={data} />
 						</>
@@ -138,9 +140,11 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 					)
 				}
 
-				<Link to="./bills">
-					<button className="secondary">View Bills</button>
-				</Link>
+				{isInUserOffice && (
+					<Link to="./bills">
+						<button className="secondary">View Bills</button>
+					</Link>
+				)}
 
 				{
 					// Check if User has authorization to comment on plan
@@ -163,18 +167,17 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 							data.currentOffice.id._id === e.id._id &&
 							e.tasks.includes("MINUTE PLAN")
 						);
-					}) &&
-						data.planNumber?.value && (
-							<>
-								<div
-									onClick={() => {
-										navigate("./minute", { state: data });
-									}}>
-									<button className="secondary">Minute Plan</button>
-								</div>
-								{/* <AddCommentModal data={data} /> */}
-							</>
-						)
+					}) && (
+						<>
+							<div
+								onClick={() => {
+									navigate("./minute", { state: data });
+								}}>
+								<button className="secondary">Minute Plan</button>
+							</div>
+							{/* <AddCommentModal data={data} /> */}
+						</>
+					)
 				}
 			</div>
 			<ToastContainer />
