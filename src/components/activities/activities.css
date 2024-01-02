@@ -20,10 +20,10 @@
 	background-color: var(--white);
 }
 .activitiesLabels {
-	height: 50px;
+	height: 40px;
 	display: flex;
 	background-color: var(--white);
-	border-bottom: var(--sc-grey) solid 3px;
+	border-bottom: var(--sc-grey) solid 1px;
 }
 .activitiesLabels span {
 	flex: 1;
@@ -41,7 +41,7 @@
 	content: "";
 	position: absolute;
 	display: block;
-	bottom: -3px;
+	bottom: 0px;
 	left: 5%;
 	background-color: var(--pc-green);
 	font-weight: 800;
@@ -50,7 +50,7 @@
 }
 .activitiesWrapper {
 	background-color: var(--white);
-	height: calc(100vh - 156px);
+	height: calc(100vh - 146px);
 	border-bottom-left-radius: 8px;
 	border-bottom-right-radius: 8px;
   overflow-y: auto;
