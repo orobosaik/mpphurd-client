@@ -34,7 +34,7 @@ function ListCard({ data, officeState, scrollSection, reload }) {
 						  ).getFullYear()}`
 						: data?.uniqueId}
 				</span>
-				<span>{data.applicant.name}</span>
+				<span>{data?.applicant?.name}</span>
 				<span>{data.dev.plotNo + " " + data.dev.address}</span>
 				<span>{data.dev.use}</span>
 				<span>Yes</span>

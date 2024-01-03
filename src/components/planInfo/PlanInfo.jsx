@@ -19,9 +19,6 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 	const { currentUser, loading } = useSelector((state) => state.user);
 	const themeColor = getThemeColor();
 
-	console.log(data);
-	// console.log(state);
-
 	// Check if Plan is in User Office(s)
 	const isInUserOffice = currentUser.office.some((e) => {
 		return data.currentOffice.id._id === e.id._id;

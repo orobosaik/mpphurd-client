@@ -12,7 +12,6 @@ export default function PlanEditInfoModal({
 	children,
 	state,
 }) {
-	console.log(state);
 	const [open, setOpen] = useState(false);
 	const [assessment, setAssessment] = useState(
 		state?.currentOffice?.id?.name.includes("ASSESSMENT")

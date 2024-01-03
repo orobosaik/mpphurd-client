@@ -5,11 +5,13 @@ const initialState = {
 	theme: "system",
 	officeData: {
 		active: false,
-		type: "",
+		type: "current",
 		data: [],
 		listArray: [],
-		startDate: "",
-		endDate: "",
+		startDate: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)
+			.toISOString()
+			.slice(0, 10),
+		endDate: new Date().toISOString().slice(0, 10),
 		searchQuery: null,
 		searchResult: [],
 		searchData: [],
@@ -30,12 +32,19 @@ const appSlice = createSlice({
 		},
 		resetOfficeData: (state) => {
 			state.officeData = {
+				active: false,
+				type: "current",
+				data: [],
 				listArray: [],
-				startDate: "",
-				endDate: "",
-				searchQuery: "",
+				startDate: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)
+					.toISOString()
+					.slice(0, 10),
+				endDate: new Date().toISOString().slice(0, 10),
+				searchQuery: null,
+				searchResult: [],
+				searchData: [],
 				sort: "",
-				scroll: "",
+				scroll: 0,
 			};
 		},
 	},
