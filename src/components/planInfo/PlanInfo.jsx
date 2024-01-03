@@ -81,7 +81,7 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 				</div>
 
 				<div className="planInfoSummaryDetails2">
-					{(isInUserOffice || isManagementStaff) && (
+					{isInUserOffice && (
 						<>
 							<PlanEditInfoModal state={data} />
 						</>
@@ -137,7 +137,7 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 					)
 				}
 
-				{isInUserOffice && (
+				{(isInUserOffice || isManagementStaff) && (
 					<Link to="./bills">
 						<button className="secondary">View Bills</button>
 					</Link>

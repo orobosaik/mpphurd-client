@@ -17,11 +17,14 @@ import LoadingIcon from "../../utilities/LoadingIcon";
 import { getThemeColor } from "../../utilities/themeColor";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 function Plan() {
 	const [rightBarView, setRightBarView] = useState(0);
 	const [viewBills, setViewBills] = useState("");
 
+	const { currentUser, loading } = useSelector((state) => state.user);
+	
 	const topBarAction =
 		viewBills === "viewBills"
 			? "View Bills"
@@ -33,6 +36,7 @@ function Plan() {
 	const [data, setData] = useState(null);
 	const themeColor = getThemeColor();
 	const [reload, setReload] = useState();
+	const [isInUserOffice, setIsInUserOffice] = useState()
 	const params = useParams();
 	const location = useLocation();
 
@@ -45,6 +49,12 @@ function Plan() {
 
 			setData(() => res.data);
 			setIsLoading(false);
+
+			// Check if Plan is in User Office(s)
+			setIsInUserOffice(currentUser.office.some((e) => {
+				return res.data.currentOffice.id._id === e.id._id;
+			}))
+
 			console.log(res.data);
 		} catch (error) {
 			let message = error.response
@@ -113,7 +123,11 @@ function Plan() {
 
 				<RightBar>
 					{rightBarView !== 1 ? (
-						<Activities reload={reload} setRightBarView={setRightBarView} />
+						<Activities
+							isInUserOffice={isInUserOffice}
+							reload={reload}
+							setRightBarView={setRightBarView}
+						/>
 					) : (
 						<Document setRightBarView={setRightBarView} />
 					)}

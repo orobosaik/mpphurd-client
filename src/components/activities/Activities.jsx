@@ -6,11 +6,12 @@ import axios from "axios";
 import LoadingIcon from "../../utilities/LoadingIcon";
 import ActivityCardModal from "../activityCardModal/ActivityCardModal";
 
-function Activities({ setRightBarView, reload }) {
+function Activities({ setRightBarView, reload, isInUserOffice }) {
 	const [isLoading, setIsLoading] = useState(true);
 	const [data, setData] = useState([]);
 	const [dataList, setDataList] = useState([]);
 	const [activityType, setActivityType] = useState(1);
+	const [fileInStaffOffice, setFileInStaffOffice] = useState(isInUserOffice);
 
 	const params = useParams();
 
@@ -24,13 +25,17 @@ function Activities({ setRightBarView, reload }) {
 			Minute: 2,
 			Action: 3,
 		};
-		setDataList(categorizeActivities(clicked));
+
+		// Send only 3 items if file is not in user's office
+		!fileInStaffOffice
+			? setDataList([...categorizeActivities(clicked)].slice(0,2))
+			: setDataList(categorizeActivities(clicked)); // Else send everything
+
 		setActivityType(clickMap[clicked] || 4);
 	};
 
 	useEffect(() => {
 		const getData = async () => {
-			console.log(params);
 			axios.defaults.withCredentials = true;
 			try {
 				let host = import.meta.env.VITE_SERVER;
@@ -40,9 +45,12 @@ function Activities({ setRightBarView, reload }) {
 				);
 
 				setData(res.data);
-				setDataList(res.data);
+				// Send only 3 items if file is not in user's office
+				!fileInStaffOffice
+					? setDataList([...res.data].slice(0,2))
+					: setDataList(res.data); // Else send everything
+
 				setIsLoading(false);
-				console.log(res.data);
 			} catch (error) {
 				setIsLoading(false);
 			}
