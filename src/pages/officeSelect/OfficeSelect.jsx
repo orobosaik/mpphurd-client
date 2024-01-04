@@ -59,7 +59,7 @@ export default function OfficeSelect() {
 						return (
 							<FeedCard
 								key={e.id._id}
-								route={`${e.id._id}`}
+								route={`office/${e.id._id}`}
 								priText={e.id.name}
 								secText={"Office"}
 								data={e}

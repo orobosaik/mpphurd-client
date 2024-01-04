@@ -14,15 +14,24 @@
 }
 
 .headerLeft {
-	flex: 2;
+	/* flex: 2; */
+	/* width: fit-content; */
+	display: flex;
+	gap: 15rem;
+	/* justify-content: space-between; */
+
 	height: 100%;
 	/* background-color: green; */
 }
+/* .headerLeft a{
+	width: 1rem;
+} */
 .headerLogo {
 	display: flex;
 	align-items: center;
 	height: 100%;
-	gap: 2%;
+	width: fit-content;
+	gap: .5rem;
 	/* padding: 5px 10px; */
 }
 .headerLogo img {
@@ -39,7 +48,7 @@
 	font-weight: 700;
 }
 
-.headerCenter {
+.headerSearch {
 	flex: 3;
 	height: 100%;
 	/* background-color: red; */

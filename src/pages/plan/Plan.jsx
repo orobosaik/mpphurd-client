@@ -58,20 +58,6 @@ function Plan() {
 				}) || currentUser.isManagement === true
 			);
 
-			console.log("IS MANAGEMENT", currentUser.isManagement);
-			console.log(
-				"IN OFFICE",
-				currentUser.office.some((e) => {
-					return res.data.currentOffice.id._id === e.id._id;
-				})
-			);
-			console.log(
-				"COMBINED",
-				currentUser.office.some((e) => {
-					return res.data.currentOffice.id._id === e.id._id;
-				}) || currentUser.isManagement === true
-			);
-
 			console.log(res.data);
 		} catch (error) {
 			let message = error.response
@@ -118,6 +104,7 @@ function Plan() {
 			<Header />
 			<div className="planContainer">
 				<SideBar />
+
 				<MiddleBar
 					topBarData={{
 						action: topBarAction,

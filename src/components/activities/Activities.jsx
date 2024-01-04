@@ -6,15 +6,16 @@ import axios from "axios";
 import LoadingIcon from "../../utilities/LoadingIcon";
 import ActivityCardModal from "../activityCardModal/ActivityCardModal";
 
-function Activities({ setRightBarView, reload, isInUserOffice }) {
+function Activities({ setRightBarView, reload, isInUserOffice, admin }) {
 	const [isLoading, setIsLoading] = useState(true);
 	const [data, setData] = useState([]);
+	const [isAdmin, setIsAdmin] = useState(admin);
 	const [dataList, setDataList] = useState([]);
 	const [activityType, setActivityType] = useState(1);
 	// const [fileInStaffOffice, setFileInStaffOffice] = useState(isInUserOffice);
 
 	const params = useParams();
-	console.log(isInUserOffice)
+	console.log(isInUserOffice);
 
 	const categorizeActivities = (type) => {
 		return type === "All" ? data : data.filter((e) => e.type === type);
@@ -29,28 +30,35 @@ function Activities({ setRightBarView, reload, isInUserOffice }) {
 
 		// Send only 3 items if file is not in user's office
 		!isInUserOffice
-			? setDataList([...categorizeActivities(clicked)].slice(0,2))
+			? setDataList([...categorizeActivities(clicked)].slice(0, 2))
 			: setDataList(categorizeActivities(clicked)); // Else send everything
 
 		setActivityType(clickMap[clicked] || 4);
 	};
 
 	useEffect(() => {
-		setDataList([])
-		setIsLoading(true)
+		setDataList([]);
+		setIsLoading(true);
 		const getData = async () => {
 			axios.defaults.withCredentials = true;
 			try {
 				let host = import.meta.env.VITE_SERVER;
-				const res = await axios.get(
-					`${host}/staffs/plan/${params.id}/activities`,
-					{ withCredentials: true }
-				);
+
+				let res;
+				if (!isAdmin) {
+					res = await axios.get(`${host}/staffs/plan/${params.id}/activities`, {
+						withCredentials: true,
+					});
+				} else {
+					res = await axios.get(`${host}/admin/plan/${params.id}/activities`, {
+						withCredentials: true,
+					});
+				}
 
 				setData(res.data);
 				// Send only 3 items if file is not in user's office
 				!isInUserOffice
-					? setDataList([...res.data].slice(0,2))
+					? setDataList([...res.data].slice(0, 2))
 					: setDataList(res.data); // Else send everything
 
 				setIsLoading(false);

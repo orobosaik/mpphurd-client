@@ -22,6 +22,8 @@ import AdminOfficeList from "../pages/admin/adminOfficeList/AdminOfficeList";
 import AdminOfficeView from "../pages/admin/adminOfficeView/AdminOfficeView";
 import { setThemeColor } from "./themeColor";
 import AdminRegionList from "../pages/admin/adminRegionList/AdminRegionList.jsx";
+import DocumentView from "../pages/documentView/DocumentView.jsx";
+import AdminPlan from "../pages/admin/adminPlan/AdminPlan.jsx";
 
 function AdminRoutes() {
 	const { currentAdmin } = useSelector((state) => state.admin);
@@ -60,6 +62,20 @@ function AdminRoutes() {
 						index
 						element={!currentAdmin ? <AdminLogin /> : <Navigate to="/" />}
 					/>
+				</Route>
+
+				{/* PERMIT | APPROVAL */}
+				<Route path="/permit">
+					<Route path="new" element={<CreateApplication />} />
+					<Route path=":id">
+						<Route index element={<AdminPlan />} />
+						<Route path="bills" element={<ViewBill />} />
+						{/* <Route path="minute" element={<Minute />} /> */}
+						<Route path="documents" element={<DocumentView />} />
+					</Route>
+					<Route path="office">
+						<Route path=":id" element={<Office />} />
+					</Route>
 				</Route>
 
 				{/* STAFF */}

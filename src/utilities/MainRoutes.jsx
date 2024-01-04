@@ -58,7 +58,9 @@ function MainRoutes() {
 
 					{/* PERMIT | APPROVAL */}
 					<Route path="/permit">
-						<Route index element={currentUser && <Approval />} />
+						{/* <Route index element={currentUser && <Approval />} /> */}
+						<Route index element={<OfficeSelect />} />
+
 						<Route path="new" element={<CreateApplication />} />
 						<Route path=":id">
 							<Route
@@ -70,6 +72,9 @@ function MainRoutes() {
 							<Route path="minute" element={<Minute />} />
 							<Route path="documents" element={<DocumentView />} />
 						</Route>
+						<Route path="office">
+							<Route path=":id" element={<Office />} />
+						</Route>
 					</Route>
 
 					{/* PETITION */}
@@ -78,12 +83,12 @@ function MainRoutes() {
 					</Route>
 
 					{/* BUILDING CONTROL */}
-					<Route path="/control">
+					<Route path="/b_control">
 						<Route index element={<BuildingControl />} />
 					</Route>
 
-					{/* OFFICE */}
-					<Route path="/office">
+					{/* DEVELOPMENT CONTROL */}
+					<Route path="/d_control">
 						<Route index element={<OfficeSelect />} />
 						<Route path=":id" element={<Office />} />
 					</Route>

@@ -83,6 +83,12 @@ export default function AdminSideBar({ selected }) {
 						</NavLink>
 					</li>
 					<li>
+						<NavLink className="sideBarListItem" to="/permit">
+							<TaskRounded className="sideBarIcon" />
+							<span className="sideBarListItemText">Permit</span>
+						</NavLink>
+					</li>
+					<li>
 						<NavLink className="sideBarListItem" to="/public">
 							<PeopleRounded className="sideBarIcon" />
 							<span className="sideBarListItemText">Public Users</span>

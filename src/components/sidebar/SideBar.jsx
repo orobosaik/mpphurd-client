@@ -74,15 +74,15 @@ export default function SideBar({ selected }) {
 						</NavLink>
 					</li>
 					<li>
-						<NavLink className="sideBarListItem" to="/control">
+						<NavLink className="sideBarListItem" to="/b_control">
 							<PolicyRounded className="sideBarIcon" />
 							<span className="sideBarListItemText">B.Control</span>
 						</NavLink>
 					</li>
 					<li>
-						<NavLink className="sideBarListItem" to="/office">
+						<NavLink className="sideBarListItem" to="/d_control">
 							<CorporateFareRounded className="sideBarIcon" />
-							<span className="sideBarListItemText">Office</span>
+							<span className="sideBarListItemText">D.Control</span>
 						</NavLink>
 					</li>
 					<li>

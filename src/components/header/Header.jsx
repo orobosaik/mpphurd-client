@@ -101,63 +101,61 @@ export default function Header() {
 						<p>MPPHURD</p>
 					</span>
 				</Link>
-			</div>
-			<div className="headerCenter">
-				<ClickAwayListener onClickAway={handleClickedAway}>
-					<div className="searchBar">
-						<label htmlFor="headerSearchInput">
-							<Search className="searchIcon" />
-						</label>
-						<input
-							id="headerSearchInput"
-							type="text"
-							placeholder="Start typing to search"
-							className="searchInput"
-							onChange={(e) => handleSearchInput(e)}
-							onFocus={() => setOpen(true)}
-							value={searchQuery}
-						/>
-						{searchQuery && (
-							<div
-								className="searchBarCloseButton"
-								onClick={() => setSearchQuery("")}>
-								{" "}
-								<CloseRounded />
-							</div>
-						)}
-						{searchQuery && open && (
-							<div className="searchResult">
-								<header>
-									{isFetching && <LinearProgress />}
-									<div className="searchResultTitle">
-										<h2>Search Results</h2>
+				<div className="headerSearch">
+					<ClickAwayListener onClickAway={handleClickedAway}>
+						<div className="searchBar">
+							<label htmlFor="headerSearchInput">
+								<Search className="searchIcon" />
+							</label>
+							<input
+								id="headerSearchInput"
+								type="text"
+								placeholder="Start typing to search"
+								className="searchInput"
+								onChange={(e) => handleSearchInput(e)}
+								onFocus={() => setOpen(true)}
+								value={searchQuery}
+							/>
+							{searchQuery && (
+								<div
+									className="searchBarCloseButton"
+									onClick={() => setSearchQuery("")}>
+									{" "}
+									<CloseRounded />
+								</div>
+							)}
+							{searchQuery && open && (
+								<div className="searchResult">
+									<header>
+										{isFetching && <LinearProgress />}
+										<div className="searchResultTitle">
+											<h2>Search Results</h2>
 
-										<div>
-											<span>{searchData.length || 0}</span>
-											<span>Found</span>
+											<div>
+												<span>{searchData.length || 0}</span>
+												<span>Found</span>
+											</div>
 										</div>
-									</div>
-								</header>
+									</header>
 
-								<section>
-									{/* console.log(searchData) */}
-									{searchData?.map((d) => {
-										return (
-											<SearchResultCard
-												key={d._id}
-												data={d}
-												changeOpen={setOpen}
-											/>
-										);
-									})}
-									{searchData.length < 1 && (
-										<div>No Result Found</div>
-									)}
-								</section>
-							</div>
-						)}
-					</div>
-				</ClickAwayListener>
+									<section>
+										{/* console.log(searchData) */}
+										{searchData?.map((d) => {
+											return (
+												<SearchResultCard
+													key={d._id}
+													data={d}
+													changeOpen={setOpen}
+												/>
+											);
+										})}
+										{searchData.length < 1 && <div>No Result Found</div>}
+									</section>
+								</div>
+							)}
+						</div>
+					</ClickAwayListener>
+				</div>
 			</div>
 			<div className="headerRight">
 				<div className="headerLinks">
