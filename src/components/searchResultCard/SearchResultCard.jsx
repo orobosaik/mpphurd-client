@@ -1,20 +1,24 @@
+import { useNavigate } from "react-router-dom";
 import "./searchResultCard.css";
 import React from "react";
 
-export default function searchResultCard() {
+export default function searchResultCard({ data, changeOpen }) {
+	const navigate = useNavigate();
 	return (
-		<div className="searchResultCard">
-			{/* <div> */}
-
-			<span>3422/2023</span>
-			<span>Mr Orobosa Ikponmwosa</span>
+		<div
+			className="searchResultCard"
+			onClick={() => {
+				changeOpen(false);
+				navigate(`/permit/${data?._id}`, { state: data });
+			}}>
+			<span>{data?.planNumber?.value || data.uniqueId}</span>
 			<span>
-				20 Erie Street off sokponba Road, Benin City, Edo State, Nigeria, off
-				sokponba Road, Benin City, Edo State, Nigeria
+				{data.applicant.name} ({data.dev.name})
 			</span>
-			<span>Comm</span>
-
-			{/* </div> */}
+			<span>
+				{data.dev.plotNo} {data.dev.address}
+			</span>
+			<span>{data.dev.use}</span>
 		</div>
 	);
 }

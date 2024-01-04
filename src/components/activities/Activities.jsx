@@ -35,6 +35,8 @@ function Activities({ setRightBarView, reload, isInUserOffice }) {
 	};
 
 	useEffect(() => {
+		setDataList([])
+		setIsLoading(true)
 		const getData = async () => {
 			axios.defaults.withCredentials = true;
 			try {
@@ -61,7 +63,7 @@ function Activities({ setRightBarView, reload, isInUserOffice }) {
 		// return () => {
 		// 	second
 		// }
-	}, [reload]);
+	}, [reload, params.id]);
 
 	return (
 		<div className="activities">

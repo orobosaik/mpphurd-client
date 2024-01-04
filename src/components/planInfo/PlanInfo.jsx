@@ -9,7 +9,7 @@ import ConfirmationModal from "../confirmationModal/ConfirmationModal";
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getThemeColor } from "../../utilities/themeColor";
 import GeneratePlanNoModal from "../generatePlanNoModal/GeneratePlanNoModal";
 
@@ -25,6 +25,11 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 	});
 	// Check if User is a management staff
 	const isManagementStaff = currentUser.isManagement;
+
+	useEffect(() => {
+		setData(state)
+	}, [state])
+
 
 	return (
 		<div className="planInfo">

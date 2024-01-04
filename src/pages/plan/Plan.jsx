@@ -24,7 +24,7 @@ function Plan() {
 	const [viewBills, setViewBills] = useState("");
 
 	const { currentUser, loading } = useSelector((state) => state.user);
-	
+
 	const topBarAction =
 		viewBills === "viewBills"
 			? "View Bills"
@@ -36,13 +36,14 @@ function Plan() {
 	const [data, setData] = useState(null);
 	const themeColor = getThemeColor();
 	const [reload, setReload] = useState();
-	const [isInUserOffice, setIsInUserOffice] = useState()
+	const [isInUserOffice, setIsInUserOffice] = useState();
 	const params = useParams();
 	const location = useLocation();
 
 	const getData = async () => {
 		console.log(params);
 		// console.log(location.state);
+		setIsLoading(true);
 		try {
 			let host = import.meta.env.VITE_SERVER;
 			const res = await axios.get(`${host}/staffs/plan/${params.id}`);
@@ -51,9 +52,12 @@ function Plan() {
 			setIsLoading(false);
 
 			// Check if Plan is in User Office(s)
-			setIsInUserOffice(currentUser.office.some((e) => {
-				return res.data.currentOffice.id._id === e.id._id;
-			}))
+			setIsInUserOffice(
+				currentUser.isManagement ||
+					currentUser.office.some((e) => {
+						return res.data.currentOffice.id._id === e.id._id;
+					})
+			);
 
 			console.log(res.data);
 		} catch (error) {
@@ -92,7 +96,7 @@ function Plan() {
 	}, []);
 	useEffect(() => {
 		getData();
-	}, [reload]);
+	}, [reload, params.id]);
 
 	return (
 		<>
@@ -113,7 +117,7 @@ function Plan() {
 					{!isLoading ? (
 						<PlanInfo
 							setViewBills={setViewBills}
-							state={() => data}
+							state={data}
 							reload={setReload}
 						/>
 					) : (
