@@ -53,10 +53,23 @@ function Plan() {
 
 			// Check if Plan is in User Office(s)
 			setIsInUserOffice(
-				currentUser.isManagement ||
-					currentUser.office.some((e) => {
-						return res.data.currentOffice.id._id === e.id._id;
-					})
+				currentUser.office.some((e) => {
+					return res.data.currentOffice.id._id === e.id._id;
+				}) || currentUser.isManagement === true
+			);
+
+			console.log("IS MANAGEMENT", currentUser.isManagement);
+			console.log(
+				"IN OFFICE",
+				currentUser.office.some((e) => {
+					return res.data.currentOffice.id._id === e.id._id;
+				})
+			);
+			console.log(
+				"COMBINED",
+				currentUser.office.some((e) => {
+					return res.data.currentOffice.id._id === e.id._id;
+				}) || currentUser.isManagement === true
 			);
 
 			console.log(res.data);

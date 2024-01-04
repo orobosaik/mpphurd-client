@@ -11,9 +11,10 @@ function Activities({ setRightBarView, reload, isInUserOffice }) {
 	const [data, setData] = useState([]);
 	const [dataList, setDataList] = useState([]);
 	const [activityType, setActivityType] = useState(1);
-	const [fileInStaffOffice, setFileInStaffOffice] = useState(isInUserOffice);
+	// const [fileInStaffOffice, setFileInStaffOffice] = useState(isInUserOffice);
 
 	const params = useParams();
+	console.log(isInUserOffice)
 
 	const categorizeActivities = (type) => {
 		return type === "All" ? data : data.filter((e) => e.type === type);
@@ -27,7 +28,7 @@ function Activities({ setRightBarView, reload, isInUserOffice }) {
 		};
 
 		// Send only 3 items if file is not in user's office
-		!fileInStaffOffice
+		!isInUserOffice
 			? setDataList([...categorizeActivities(clicked)].slice(0,2))
 			: setDataList(categorizeActivities(clicked)); // Else send everything
 
@@ -48,7 +49,7 @@ function Activities({ setRightBarView, reload, isInUserOffice }) {
 
 				setData(res.data);
 				// Send only 3 items if file is not in user's office
-				!fileInStaffOffice
+				!isInUserOffice
 					? setDataList([...res.data].slice(0,2))
 					: setDataList(res.data); // Else send everything
 

@@ -11,7 +11,7 @@ export default function searchResultCard({ data, changeOpen }) {
 				changeOpen(false);
 				navigate(`/permit/${data?._id}`, { state: data });
 			}}>
-			<span>{data?.planNumber?.value || data.uniqueId}</span>
+			<span>{data?.planNumber?.fullValue || data.uniqueId}</span>
 			<span>
 				{data.applicant.name} ({data.dev.name})
 			</span>
