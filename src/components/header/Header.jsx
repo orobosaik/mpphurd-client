@@ -181,7 +181,7 @@ export default function Header() {
 				<div className="headerUser">
 					<div className="headerDetails">
 						<span className="headerName">{`${staff.firstName} ${staff.lastName}`}</span>
-						{/* <span className="headerOffice">{`${staff.office[0].fullName}`}</span> */}
+						<span className="headerOffice">{`${staff.jobTitle}`}</span>
 					</div>
 
 					<img
