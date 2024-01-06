@@ -25,7 +25,7 @@
 .feedCardWrapper::after {
 	position: absolute;
 	content: "";
-	left: 0;
+	/* left: 0; */
 	bottom: 0;
 	height: 8px;
 	width: 0;

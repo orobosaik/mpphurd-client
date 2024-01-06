@@ -27,7 +27,7 @@ export default function Home() {
 
 				setData(res.data);
 				setIsLoading(false);
-				console.log(res.data)
+				console.log(res.data);
 				dispatch(loginSuccess(res.data));
 
 				console.log(res.data);
@@ -50,24 +50,136 @@ export default function Home() {
 			<Header />
 			<div className="homeContainer">
 				<SideBar />
-				<FeedBackground>
-					<FeedCard
-						count={24}
-						priText={"Create New Application"}
-						secText={"Clearing"}
-						route={"/permit/new"}
-					/>
-					<FeedCard
-						count={44}
-						priText={"Payment made"}
-						secText={"Assessment"}
-					/>
-					<FeedCard
-						count={7}
-						priText={"Minuted Files"}
-						secText={"Assessment"}
-					/>
-				</FeedBackground>
+				<div>
+					<div className="home__greetings">Good Morning || John Doe</div>
+
+					<FeedBackground>
+						<div className="feedCard__container">
+							<h2 className="feedCard__title">CLEARING HOUSE</h2>
+							<div className="feedCard__list">
+								<FeedCard
+									count={24}
+									priText={"Create New Application"}
+									secText={"Clearing"}
+									route={"/permit/new"}
+								/>
+								<FeedCard
+									count={44}
+									priText={"Payment made"}
+									secText={"Assessment"}
+								/>
+								<FeedCard
+									count={7}
+									priText={"Minuted Files"}
+									secText={"Assessment"}
+								/>
+								<FeedCard
+									count={7}
+									priText={"Minuted Files"}
+									secText={"Assessment"}
+								/>
+								<FeedCard
+									count={7}
+									priText={"Minuted Files"}
+									secText={"Assessment"}
+								/>
+							</div>
+							<hr />
+						</div>
+
+						<div className="feedCard__container">
+							<h2 className="feedCard__title">CLEARING HOUSE</h2>
+							<div className="feedCard__list">
+								<FeedCard
+									count={24}
+									priText={"Create New Application"}
+									secText={"Clearing"}
+									route={"/permit/new"}
+								/>
+								<FeedCard
+									count={44}
+									priText={"Payment made"}
+									secText={"Assessment"}
+								/>
+								<FeedCard
+									count={7}
+									priText={"Minuted Files"}
+									secText={"Assessment"}
+								/>
+								<FeedCard
+									count={7}
+									priText={"Minuted Files"}
+									secText={"Assessment"}
+								/>
+							</div>
+						</div>
+						<hr />
+
+						<div className="feedCard__container">
+							<h2 className="feedCard__title">CLEARING HOUSE</h2>
+							<div className="feedCard__list">
+								<FeedCard
+									count={24}
+									priText={"Create New Application"}
+									secText={"Clearing"}
+									route={"/permit/new"}
+								/>
+								<FeedCard
+									count={44}
+									priText={"Payment made"}
+									secText={"Assessment"}
+								/>
+								<FeedCard
+									count={7}
+									priText={"Minuted Files"}
+									secText={"Assessment"}
+								/>
+							</div>
+						</div>
+						<div className="feedCard__container">
+							<h2 className="feedCard__title">CLEARING HOUSE</h2>
+							<div className="feedCard__list">
+								<FeedCard
+									count={24}
+									priText={"Create New Application"}
+									secText={"Clearing"}
+									route={"/permit/new"}
+								/>
+								<FeedCard
+									count={44}
+									priText={"Payment made"}
+									secText={"Assessment"}
+								/>
+								<FeedCard
+									count={7}
+									priText={"Minuted Files"}
+									secText={"Assessment"}
+								/>
+							</div>
+						</div>
+						<div className="feedCard__container">
+							<h2 className="feedCard__title">CLEARING HOUSE</h2>
+							<div className="feedCard__list">
+								<FeedCard
+									count={24}
+									priText={"Create New Application"}
+									secText={"Clearing"}
+									route={"/permit/new"}
+								/>
+								<FeedCard
+									count={44}
+									priText={"Payment made"}
+									secText={"Assessment"}
+								/>
+								<FeedCard
+									count={7}
+									priText={"Minuted Files"}
+									secText={"Assessment"}
+								/>
+							</div>
+						</div>
+					</FeedBackground>
+				</div>
 			</div>
 		</>
 	);

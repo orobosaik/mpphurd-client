@@ -54,18 +54,25 @@ export default function OfficeSelect() {
 				<SideBar />
 				<FeedBackground>
 					{console.log(currentUser.office[0].id.name)}
-					{currentUser.office.map((e) => {
-						{console.log(e)}
-						return (
-							<FeedCard
-								key={e.id._id}
-								route={`office/${e.id._id}`}
-								priText={e.id.name}
-								secText={"Office"}
-								data={e}
-							/>
-						);
-					})}
+					<div className="feedCard__container">
+						<h2 className="feedCard__title">OFFICE(S)</h2>
+						<div className="feedCard__list">
+							{currentUser.office.map((e) => {
+								{
+									console.log(e);
+								}
+								return (
+									<FeedCard
+										key={e.id._id}
+										route={`office/${e.id._id}`}
+										priText={e.id.name}
+										secText={"Office"}
+										data={e}
+									/>
+								);
+							})}
+						</div>
+					</div>
 				</FeedBackground>
 			</div>
 		</>

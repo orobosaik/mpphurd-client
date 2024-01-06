@@ -11,14 +11,12 @@ import { toast } from "react-toastify";
 import { getThemeColor } from "../../utilities/themeColor";
 import { useNavigate } from "react-router-dom";
 
-
 export default function ApplicationForm() {
 	const [isCompany, setIsCompany] = useState(false);
 	const [isJoint, setIsJoint] = useState(true);
 
 	const themeColor = getThemeColor();
 	const navigate = useNavigate();
-
 
 	const [appData, setAppData] = useState({
 		name: "",
@@ -61,6 +59,8 @@ export default function ApplicationForm() {
 		console.log(e);
 		const form = new FormData(e.target);
 		// console.log(form.get("plan.PlotNo"));
+		console.log(form)
+		console.log(form.getAll())
 
 		const newData = {
 			applicant: {
@@ -104,51 +104,50 @@ export default function ApplicationForm() {
 
 		axios.defaults.withCredentials = true;
 
-		try {
-			let host = import.meta.env.VITE_SERVER;
-			const res = await axios(`${host}/staffs/plan`, {
-				method: "post",
-				data: newData,
-				withCredentials: true,
-			});
-			// const res = await axios.post(`${host}/staffs/plan`, newData, {
-			// 	withCredentials: true,
-			// });
-			console.log(res.data);
+		// try {
+		// 	let host = import.meta.env.VITE_SERVER;
+		// 	const res = await axios(`${host}/staffs/plan`, {
+		// 		method: "post",
+		// 		data: newData,
+		// 		withCredentials: true,
+		// 	});
+		// 	// const res = await axios.post(`${host}/staffs/plan`, newData, {
+		// 	// 	withCredentials: true,
+		// 	// });
+		// 	console.log(res.data);
 
-			navigate(-1)
+		// 	navigate(-1);
 
+		// 	setTimeout(() => {
+		// 		toast.success("New Application Created", {
+		// 			position: "top-right",
+		// 			autoClose: 1000,
+		// 			hideProgressBar: false,
+		// 			closeOnClick: true,
+		// 			pauseOnHover: true,
+		// 			draggable: true,
+		// 			progress: undefined,
+		// 			theme: themeColor,
+		// 		});
+		// 	}, 200);
+		// } catch (error) {
+		// 	let message = error.response
+		// 		? error.response.data.message
+		// 		: error.message;
+		// 	console.log(error);
+		// 	console.log(message);
 
-			setTimeout(() => {
-				toast.success("New Application Created", {
-					position: "top-right",
-					autoClose: 1000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-					theme: themeColor,
-				});
-			}, 200);
-		} catch (error) {
-			let message = error.response
-				? error.response.data.message
-				: error.message;
-			console.log(error);
-			console.log(message);
-
-			toast.error(message, {
-				position: "top-right",
-				autoClose: 2000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-				theme: themeColor,
-			});
-		}
+		// 	toast.error(message, {
+		// 		position: "top-right",
+		// 		autoClose: 2000,
+		// 		hideProgressBar: false,
+		// 		closeOnClick: true,
+		// 		pauseOnHover: true,
+		// 		draggable: true,
+		// 		progress: undefined,
+		// 		theme: themeColor,
+		// 	});
+		// }
 	};
 
 	const individualApplicationItems = (type) => {
@@ -160,7 +159,12 @@ export default function ApplicationForm() {
 						<label htmlFor={type + "Name"}>
 							{isCompany && type !== "rep" ? "Company Name:" : "Full Name:"}
 						</label>
-						<input type="text" name={type + "Name"} id={type + "Name"} />
+						<input
+							type="text"
+							name={type + "Name"}
+							id={type + "Name"}
+							required
+						/>
 					</div>
 
 					{/* </div> */}
@@ -177,6 +181,7 @@ export default function ApplicationForm() {
 									name={type + "Gender"}
 									value="female"
 									id={type + "Gender1"}
+									required
 								/>
 							</label>
 
@@ -187,6 +192,7 @@ export default function ApplicationForm() {
 									name={type + "Gender"}
 									value="male"
 									id={type + "Gender2"}
+									required
 								/>
 							</label>
 						</div>
@@ -196,13 +202,23 @@ export default function ApplicationForm() {
 					<label htmlFor={type + "Address"}>
 						{isCompany && type !== "rep" ? "Company Address:" : "Address:"}
 					</label>
-					<input type="text" name={type + "Address"} id={type + "Address"} />
+					<input
+						type="text"
+						name={type + "Address"}
+						id={type + "Address"}
+						required
+					/>
 				</div>
 				<div className="applicationItem">
 					<div className="applicationItemPhone">
 						<div>
 							<label htmlFor={type + "Phone"}>Phone 1:</label>
-							<input type="tel" name={type + "Phone"} id={type + "Phone"} />
+							<input
+								type="tel"
+								name={type + "Phone"}
+								id={type + "Phone"}
+								required
+							/>
 						</div>
 						<div>
 							<label htmlFor={type + "Phone1"}>Phone 2:</label>
@@ -282,19 +298,34 @@ export default function ApplicationForm() {
 				<div className="applicationItem">
 					<div>
 						<label htmlFor={type + "Name"}>Company Name:</label>
-						<input type="apl1Text" name={type + "Name"} id={type + "Name"} />
+						<input
+							type="apl1Text"
+							name={type + "Name"}
+							id={type + "Name"}
+							required
+						/>
 					</div>
 				</div>
 
 				<div className="applicationItem">
 					<label htmlFor={type + "Address"}>Company Address:</label>
-					<input type="text" name={type + "Address"} id={type + "Address"} />
+					<input
+						type="text"
+						name={type + "Address"}
+						id={type + "Address"}
+						required
+					/>
 				</div>
 				<div className="applicationItem">
 					<div className="applicationItemPhone">
 						<div>
 							<label htmlFor={type + "Phone1"}>Phone 1:</label>
-							<input type="tel" name={type + "Phone1"} id={type + "Phone1"} />
+							<input
+								type="tel"
+								name={type + "Phone1"}
+								id={type + "Phone1"}
+								required
+							/>
 						</div>
 						<div>
 							<label htmlFor={type + "Phone2"}>Phone 2:</label>
@@ -445,6 +476,7 @@ export default function ApplicationForm() {
 												name="planAddress"
 												id="planAddress"
 												value={buildingAppData.address}
+												required
 												onChange={(e) => {
 													let val = e.target.value;
 													let newData = {
@@ -562,7 +594,7 @@ export default function ApplicationForm() {
 							</div>
 						</div>
 					</div>
-					<button type="sumbit" className="save-application primary">
+					<button type="submit" className="save-application primary">
 						Save Application
 					</button>
 				</div>

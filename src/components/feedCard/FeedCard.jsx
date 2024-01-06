@@ -21,8 +21,8 @@ function FeedCard({
 				dispatch(resetOfficeData());
 				navigate(route, { state: data });
 			}}>
-			{count && <span className="feedCardBadge">{count}</span>}
 
+			{count && <span className="feedCardBadge">{count}</span>}
 			<div className="feedCardWrapper">
 				{priText && <span className="feedCardText">{priText}</span>}
 				{secText && <span className="feedCardOffice">({secText})</span>}

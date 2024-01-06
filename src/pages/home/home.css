@@ -1,6 +1,13 @@
 .homeContainer{
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
   width: 100%;
   padding: 0 6px;
   gap: 6px;
+}
+
+.home__greetings{
+  background-color: #fff;
+  width: 100%;
+  color: black;
 }
