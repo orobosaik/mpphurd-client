@@ -5,9 +5,24 @@
   padding: 0 6px;
   gap: 6px;
 }
+.homeContainer .feedBackground{
+	height: calc(100vh - 112px);
+}
 
 .home__greetings{
-  background-color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 0 4rem;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  background-color: var(--white);
   width: 100%;
-  color: black;
+  color: var(--pc-green);
+  height: 5rem;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
 }

@@ -11,7 +11,7 @@
 }
 
 .feedCard__container {
-  gap: 3rem;
+  gap: 2.3rem;
   display: flex;
   flex-direction: column;
   /* gap: 10rem; */
@@ -33,4 +33,10 @@
   gap: 3rem;
   justify-items: center;
   grid-template-columns: repeat(3, 1fr); */
+}
+.feedCard__container:not(:last-of-type)::after{
+  position: relative;
+  top: 4rem;
+  content: "";
+  border-bottom: var(--white) dashed 2px;
 }

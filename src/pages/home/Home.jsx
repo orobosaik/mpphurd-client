@@ -19,6 +19,42 @@ export default function Home() {
 	const [reload, setReload] = useState();
 	const [err, setErr] = useState(false);
 
+	const assessmentActions = () => {
+		return (
+			<>
+				<div className="feedCard__container">
+					<div className="feedCard__list">
+						<FeedCard
+							priText={"Create New Application"}
+							secText={"Clearing"}
+							route={"/permit/new"}
+						/>
+						<FeedCard
+							count={44}
+							priText={"Payment made"}
+							secText={"Clearing"}
+						/>
+						<FeedCard
+							count={7}
+							priText={"Minuted Files"}
+							secText={"Clearing"}
+						/>
+						<FeedCard
+							count={7}
+							priText={"Minuted Files"}
+							secText={"Clearing"}
+						/>
+						<FeedCard
+							count={7}
+							priText={"Minuted Files"}
+							secText={"Assessment"}
+						/>
+					</div>
+				</div>
+			</>
+		);
+	}
+
 	useEffect(() => {
 		const getData = async () => {
 			try {
@@ -51,11 +87,12 @@ export default function Home() {
 			<div className="homeContainer">
 				<SideBar />
 				<div>
-					<div className="home__greetings">Good Morning || John Doe</div>
+					<div className="home__greetings">Good Morning Orobosa</div>
 
 					<FeedBackground>
+		{assessmentActions()}
+
 						<div className="feedCard__container">
-							<h2 className="feedCard__title">CLEARING HOUSE</h2>
 							<div className="feedCard__list">
 								<FeedCard
 									count={24}
@@ -78,45 +115,10 @@ export default function Home() {
 									priText={"Minuted Files"}
 									secText={"Assessment"}
 								/>
-								<FeedCard
-									count={7}
-									priText={"Minuted Files"}
-									secText={"Assessment"}
-								/>
 							</div>
-							<hr />
 						</div>
 
 						<div className="feedCard__container">
-							<h2 className="feedCard__title">CLEARING HOUSE</h2>
-							<div className="feedCard__list">
-								<FeedCard
-									count={24}
-									priText={"Create New Application"}
-									secText={"Clearing"}
-									route={"/permit/new"}
-								/>
-								<FeedCard
-									count={44}
-									priText={"Payment made"}
-									secText={"Assessment"}
-								/>
-								<FeedCard
-									count={7}
-									priText={"Minuted Files"}
-									secText={"Assessment"}
-								/>
-								<FeedCard
-									count={7}
-									priText={"Minuted Files"}
-									secText={"Assessment"}
-								/>
-							</div>
-						</div>
-						<hr />
-
-						<div className="feedCard__container">
-							<h2 className="feedCard__title">CLEARING HOUSE</h2>
 							<div className="feedCard__list">
 								<FeedCard
 									count={24}
@@ -137,7 +139,6 @@ export default function Home() {
 							</div>
 						</div>
 						<div className="feedCard__container">
-							<h2 className="feedCard__title">CLEARING HOUSE</h2>
 							<div className="feedCard__list">
 								<FeedCard
 									count={24}
@@ -158,7 +159,6 @@ export default function Home() {
 							</div>
 						</div>
 						<div className="feedCard__container">
-							<h2 className="feedCard__title">CLEARING HOUSE</h2>
 							<div className="feedCard__list">
 								<FeedCard
 									count={24}
