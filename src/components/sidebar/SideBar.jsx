@@ -33,7 +33,7 @@ export default function SideBar({ selected }) {
 		console.log("YAYAYAYAYAYA");
 		dispatch(logout());
 		dispatch(resetOfficeData())
-		navigate("/login");
+		// navigate("/login");
 		// persistor.purge();
 
 		setTimeout(() => {
