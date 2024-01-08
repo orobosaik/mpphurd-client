@@ -19,7 +19,6 @@ import "react-toastify/dist/ReactToastify.css";
 import ChangePasswordModal from "../../components/changePasswordModal/ChangePasswordModal";
 import { getThemeColor } from "../../utilities/themeColor";
 import { useNavigate } from "react-router-dom";
-import AppLogout from "../../components/appLogout/AppLogout";
 
 export default function LoginPage() {
 	const [showPassword, setShowPassword] = useState(false);
@@ -55,7 +54,6 @@ export default function LoginPage() {
 			// navigate("/")
 
 			setTimeout(() => {
-				// <AppLogout></AppLogout>;
 				toast.success("Login Successful", {
 					position: "top-right",
 					autoClose: 1000,

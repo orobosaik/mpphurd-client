@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { resetOfficeData } from "../../redux/appSlice";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { getThemeColor } from "../../utilities/themeColor";
 
 const events = [
@@ -33,6 +33,8 @@ export default function Home() {
 	const [data, setData] = useState(null);
 	const [reload, setReload] = useState();
 	const [err, setErr] = useState(false);
+
+	const [isLogout, setIsLogout] = useState(0);
 
 	// // Check if Plan is in User Office(s)
 	// const isInUserOffice = currentUser.office.some((e) => {
@@ -67,6 +69,7 @@ export default function Home() {
 	// this resets the timer if it exists.
 	const resetTimer = () => {
 		if (timer) clearTimeout(timer);
+		setIsLogout(0)
 	};
 
 	// when component mounts, it adds an event listeners to the window
@@ -86,31 +89,37 @@ export default function Home() {
 	// 	localStorage.clear();
 	// 	window.location.pathname = "/signin";
 	// };
+
+
 	const logoutAction = () => {
 		console.log("YAYAYAYAYAYA");
 		dispatch(resetOfficeData());
 		dispatch(logout());
+		// isLogout === 1 ? showLogoutToast() : "";
+
+		if (isLogout === 1) {
+			setTimeout(() => {
+				toast.success("Logged out after Timeout", {
+					position: "top-right",
+					autoClose: 2500,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: themeColor,
+				});
+
+				console.log("LOGEDOUT");
+			}, 0);
+		}
 		// navigate("/login");
 		// persistor.purge();
-
-		setTimeout(() => {
-			toast.success("Logged out after Timeout", {
-				position: "top-right",
-				autoClose: 2500,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-				theme: themeColor,
-			});
-
-			console.log("LOGEDOUT");
-		}, 0);
 	};
 
 	// this function sets the timer that logs out the user after 10 secs
 	const handleLogoutTimer = () => {
+
 		timer = setTimeout(() => {
 			// clears any pending timer.
 			resetTimer();
@@ -119,6 +128,8 @@ export default function Home() {
 			Object.values(events).forEach((item) => {
 				window.removeEventListener(item, resetTimer);
 			});
+			setIsLogout(() => isLogout + 1);
+			console.log("NUMBER: ",isLogout)
 			// logs out user
 			logoutAction();
 		}, 10000); // 10000ms = 10secs. You can change the time.
@@ -271,6 +282,7 @@ export default function Home() {
 					</FeedBackground>
 				</div>
 			</div>
+			<ToastContainer />
 		</>
 	);
 }
