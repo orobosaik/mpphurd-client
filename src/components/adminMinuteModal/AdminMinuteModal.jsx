@@ -53,7 +53,7 @@ export default function AdminMinuteModal({
 		}, [handleEscKey]);
 	}
 
-	const handleSubmit = async (e) => {
+	const handleSubmitee = async (e) => {
 		e.preventDefault();
 		setLoading(true);
 		const form = new FormData(e.target);
@@ -115,8 +115,22 @@ export default function AdminMinuteModal({
 				theme: themeColor,
 			});
 		}
-		setLoading(false)
+		setLoading(false);
 	};
+	const handleSubmit = (e) => {
+		e.preventDefault()
+		const form = new FormData(e.target);
+		console.log(form);
+
+		const newData = {
+			newOfficeId: form.get("minuteToOfficer"),
+			fromOfficerId: form.get("minuteFromOfficer"),
+			status: form.get("minuteStatus"),
+			text: form.get("minuteText"),
+			date: form.get("minuteItemData"),
+		};
+		console.log(newData);
+	}
 
 	useEffect(() => {
 		const modal = document.querySelector(".modalView");
@@ -227,6 +241,15 @@ export default function AdminMinuteModal({
 
 							<div>
 								<div className="minuteItems">
+									<div className="minuteItem">
+										<label htmlFor="minuteItemData">Date</label>
+										<input
+											type="date"
+											name="minuteItemData"
+											id="minuteItemData"
+										/>
+									</div>
+
 									<div className="minuteItem">
 										<label htmlFor="minuteFromOfficer">From Officer:</label>
 										<select name="minuteFromOfficer" id="minuteFromOfficer">
