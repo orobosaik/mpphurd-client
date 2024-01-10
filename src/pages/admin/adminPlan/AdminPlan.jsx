@@ -213,8 +213,7 @@ export default function AdminPlan() {
 									data?.planNumber.value
 							  }/${new Date(data?.planNumber.date).getFullYear()}`
 							: data?.uniqueId,
-						// options: <button className="primary">Hello</button>,
-						options: <AdminMinuteModal data={data} reload={setReload} />
+						// options: <AdminMinuteModal data={data} reload={setReload} />
 					}}>
 					{isLoading ? (
 						<LoadingIcon />
