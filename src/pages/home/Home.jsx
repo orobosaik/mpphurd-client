@@ -127,7 +127,7 @@ export default function Home() {
 				dispatch(resetOfficeData());
 				dispatch(logout());
 				window.location.reload();
-			}, 10000); // 10000ms = 10secs. You can change the time.
+			}, 1000 * 60 * 10); // 1000ms = 1secs. You can change the time.
 		} else {
 			resetTimer(); // Clear the timer
 			Object.values(events).forEach((item) => {
