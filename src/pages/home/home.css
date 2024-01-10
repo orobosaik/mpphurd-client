@@ -18,7 +18,7 @@
   margin-bottom: 6px;
   background-color: var(--white);
   width: 100%;
-  color: var(--pc-green);
+  /* color: var(--pc-green); */
   height: 5rem;
   border-radius: 8px;
   -webkit-border-radius: 8px;

@@ -51,7 +51,7 @@ export default function LoginPage() {
 
 
 			dispatch(loginSuccess(res.data));
-			// navigate("/")
+			navigate("/")
 
 			setTimeout(() => {
 				toast.success("Login Successful", {

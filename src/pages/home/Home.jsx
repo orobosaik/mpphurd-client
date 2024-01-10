@@ -12,6 +12,8 @@ import { useNavigate } from "react-router-dom";
 import { resetOfficeData } from "../../redux/appSlice";
 import { ToastContainer, toast } from "react-toastify";
 import { getThemeColor } from "../../utilities/themeColor";
+// const { format, getHours } = require("date-fns");
+import { format, getHours } from "date-fns";
 
 const events = [
 	"load",
@@ -21,6 +23,7 @@ const events = [
 	"scroll",
 	"keypress",
 ];
+let logoutCount = 0;
 
 export default function Home() {
 	const { currentUser, loading } = useSelector((state) => state.user);
@@ -61,17 +64,7 @@ export default function Home() {
 		})
 	);
 
-	// AUTO LOGOUT FUNCTION
-	// const events = [
-	// 	"load",
-	// 	"mousemove",
-	// 	"mousedown",
-	// 	"click",
-	// 	"scroll",
-	// 	"keypress",
-	// ];
-
-	let logoutCount = 0;
+	// AUTO LOG OUT FUNCTIONALITY
 	let timer;
 
 	// this resets the timer if it exists.
@@ -110,7 +103,7 @@ export default function Home() {
 				// logs out user
 				// logoutAction();
 
-				if (logoutCount === 0) {
+				if (logoutCount === 1) {
 					toast.error("Session Timeout", {
 						position: "top-right",
 						autoClose: 2500,
@@ -133,6 +126,7 @@ export default function Home() {
 
 				dispatch(resetOfficeData());
 				dispatch(logout());
+				window.location.reload();
 			}, 10000); // 10000ms = 10secs. You can change the time.
 		} else {
 			resetTimer(); // Clear the timer
@@ -142,33 +136,30 @@ export default function Home() {
 		}
 	};
 
-	const logoutAction = () => {
-		if (currentUser) {
-			// Listener clean up. Removes the existing event listener from the window
-			Object.values(events).forEach((item) => {
-				window.removeEventListener(item, resetTimer);
-			});
-			resetTimer(); // Clear the timer
+	// FORMAT GREETING
+	const getGreeting = () => {
+		// Get the current time
+		const currentTime = new Date();
 
-			dispatch(resetOfficeData());
-			dispatch(logout());
+		// Get the hour from the current time
+		const currentHour = getHours(currentTime);
 
-			if (logoutCount === 1) {
-				toast.success("Logged out after Timeout", {
-					position: "top-right",
-					autoClose: 2500,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-					theme: themeColor,
-				});
-			}
-
-			// Reset the logout count
-			logoutCount = 0;
+		// Display the appropriate greeting based on the current time
+		let greeting;
+		if (currentHour >= 5 && currentHour < 12) {
+			greeting = "Good Morning";
+		} else if (currentHour >= 12 && currentHour < 18) {
+			greeting = "Good Afternoon";
+		} else {
+			greeting = "Good Evening";
 		}
+
+		// Format the current date
+		const formattedDate = format(currentTime, "EEEE, MMMM do, yyyy");
+
+		// Display the greeting with the formatted date
+		console.log(`${greeting} ${currentUser.firstName}, it's ${formattedDate}`);
+		return `${greeting} ${currentUser.firstName}. It's ${formattedDate}`;
 	};
 
 	const assessmentActions = () => {
@@ -224,7 +215,7 @@ export default function Home() {
 			<div className="homeContainer">
 				<SideBar />
 				<div>
-					<div className="home__greetings">Good Morning Orobosa</div>
+					<div className="home__greetings">{getGreeting()}</div>
 
 					<FeedBackground>
 						{assessment && assessmentActions()}

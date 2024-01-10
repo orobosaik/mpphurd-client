@@ -44,7 +44,8 @@ function MainRoutes() {
 					<Route path="/">
 						<Route
 							index
-							element={!currentUser ? <Navigate to="/login" /> : <Home />}
+							// element={!currentUser ? <Navigate to="/login" /> : <Home />}
+							element={<Home />}
 						/>
 					</Route>
 
@@ -52,7 +53,8 @@ function MainRoutes() {
 					<Route path="/login">
 						<Route
 							index
-							element={!currentUser ? <LoginPage /> : <Navigate to="/" />}
+							// element={!currentUser ? <LoginPage /> : <Navigate to="/" />}
+							element={<LoginPage />}
 						/>
 					</Route>
 
