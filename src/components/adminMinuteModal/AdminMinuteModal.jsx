@@ -53,7 +53,7 @@ export default function AdminMinuteModal({
 		}, [handleEscKey]);
 	}
 
-	const handleSubmitee = async (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setLoading(true);
 		const form = new FormData(e.target);
@@ -64,6 +64,7 @@ export default function AdminMinuteModal({
 			fromOfficerId: form.get("minuteFromOfficer"),
 			status: form.get("minuteStatus"),
 			text: form.get("minuteText"),
+			date: form.get("minuteItemData"),
 		};
 		console.log(newData);
 
@@ -117,20 +118,6 @@ export default function AdminMinuteModal({
 		}
 		setLoading(false);
 	};
-	const handleSubmit = (e) => {
-		e.preventDefault()
-		const form = new FormData(e.target);
-		console.log(form);
-
-		const newData = {
-			newOfficeId: form.get("minuteToOfficer"),
-			fromOfficerId: form.get("minuteFromOfficer"),
-			status: form.get("minuteStatus"),
-			text: form.get("minuteText"),
-			date: form.get("minuteItemData"),
-		};
-		console.log(newData);
-	}
 
 	useEffect(() => {
 		const modal = document.querySelector(".modalView");
