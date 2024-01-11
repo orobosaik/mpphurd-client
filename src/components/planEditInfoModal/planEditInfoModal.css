@@ -329,3 +329,30 @@ input[type="file"]::file-selector {
 .uploadFileWrapper:hover span {
 	background-color: var(--light-grey);
 }
+
+.modalAssessedAmount{
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+.modalAssessedAmount label{
+	font-weight: 600;
+}
+.modalAssessedAmount input{
+	width: max-content;
+	background-color: inherit;
+	font-weight: 600;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-o-border-radius: 4px;
+}
+.modalAssessedAmount input:active,
+.modalAssessedAmount input:focus,
+.modalAssessedAmount input{
+	padding: .5rem 1rem;
+	font-size: 1.6rem;
+	/* font-weight: 600; */
+	outline: 1px var(--sc-grey) solid;
+}

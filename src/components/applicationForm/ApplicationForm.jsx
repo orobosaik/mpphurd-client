@@ -155,7 +155,7 @@ export default function ApplicationForm() {
 			<div className="applicationItems">
 				<div className="applicationItem">
 					{/* <div className="applicationItemName"> */}
-					<div>
+					<div >
 						<label htmlFor={type + "Name"}>
 							{isCompany && type !== "rep" ? "Company Name:" : "Full Name:"}
 						</label>
@@ -230,6 +230,7 @@ export default function ApplicationForm() {
 					<label htmlFor={type + "Email"}>Email:</label>
 					<input type="email" name={type + "Email"} id={type + "Email"} />
 				</div>
+
 				{(!isCompany || type === "rep") && (
 					<div className="applicationItem">
 						<label htmlFor={type + "IdCard"}>
@@ -390,11 +391,11 @@ export default function ApplicationForm() {
 							<select
 								name="applicantType"
 								id="applicantType"
-								onClick={(e) =>
+								onChange={(e) =>
 									setIsCompany(e.target.value === "individual" ? false : true)
 								}>
 								<option value="individual">Individual</option>
-								<option value="Company">Company</option>
+								<option value="company">Company</option>
 							</select>
 						</div>
 					</div>

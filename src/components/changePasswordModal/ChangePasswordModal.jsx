@@ -33,6 +33,7 @@ export default function ChangePasswordModal({ ...props }) {
 
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => {
+		setEmailUpdate("")
 		setReset(true);
 		setOpen(false);
 	};
