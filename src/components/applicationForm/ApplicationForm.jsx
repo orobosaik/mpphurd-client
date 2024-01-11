@@ -10,144 +10,104 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { getThemeColor } from "../../utilities/themeColor";
 import { useNavigate } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
 
 export default function ApplicationForm() {
+	const [loading, setLoading] = useState(false);
 	const [isCompany, setIsCompany] = useState(false);
 	const [isJoint, setIsJoint] = useState(true);
 
 	const themeColor = getThemeColor();
 	const navigate = useNavigate();
 
-	const [appData, setAppData] = useState({
-		name: "",
-		gender: "",
-		address: "",
-		email: "",
-		phone: "",
-		phone1: "",
-		passport: "",
-		cacCertificate: "",
-		idCard: "",
-	});
-	const [repAppData, setRepAppData] = useState({
-		name: "",
-		gender: "",
-		address: "",
-		email: "",
-		phone: "",
-		phone1: "",
-		photo: "",
-		idPhoto: "",
-	});
-	const [buildingAppData, setBuildingAppData] = useState({
-		name: "",
-		plotNo: "",
-		address: "",
-		region: "",
-		lga: "",
-		zone: "",
-		type: "",
-		use: "",
-		status: "",
-		noOfFloor: "",
-		coordinates: "",
-	});
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		// console.log(buildingAppData);
 		console.log(e);
 		const form = new FormData(e.target);
-		// console.log(form.get("plan.PlotNo"));
-		console.log(form)
-		console.log(form.getAll())
+		console.log(form);
+		setLoading(true)
 
-		const newData = {
-			applicant: {
-				type: form.get("applicantType") || "",
-				name: form.get("applicantName") || "",
-				gender: form.get("applicantGender") || "",
-				phone: form.get("applicantPhone") || "",
-				phone1: form.get("applicantPhone1") || "",
-				// email: form.get("applicantEmail") || "",
-				// address: form.get("applicantAddress") || "",
-				// photo: form.get("applicantPassport") || {},
-				// idCard: form.get("applicantIdCard") || {},
-				// cacCertificate: form.get("applicantCacCertificate") || {},
-			},
-			rep: {
-				name: form.get("repName") || "",
-				gender: form.get("repGender") || "",
-				// phone: form.get("repPhone") || "",
-				// phone1: form.get("repPhone1") || "",
-				// email: form.get("repEmail") || "",
-				// address: form.get("repAddress") || "",
-				// photo: form.get("repPassport") || {},
-				// idCard: form.get("repIdCard") || {},
-			},
-			dev: {
-				name: form.get("planBuildingName") || "",
-				// plotNo: form.get("planPlotNo") || "",
-				// address: form.get("planAddress") || "",
-				// region: form.get("planRegion") || "",
-				// lga: form.get("planLga") || "",
-				// zone: form.get("planZone") || "",
-				// type: form.get("planBuildingType") || "",
-				// use: form.get("planBuildingUse") || "",
-				// status: form.get("planBuildingStatus") || "",
-				// noOfFloor: form.get("planFloors") || "",
-				// coordinates: form.get("planCoordinates") || "",
-			},
+		let newData = {
+			// applicant information
+			"applicant.type": form.get("applicantType"),
+			"applicant.name": form.get("applicantName"),
+			"applicant.gender": form.get("applicantGender"),
+			"applicant.address": form.get("applicantAddress"),
+			"applicant.email": form.get("applicantEmail"),
+			"applicant.phone": form.get("applicantPhone"),
+			"applicant.phone1": form.get("applicantPhone1") || "",
+			"applicant.photo": form.get("applicantPassport") || "",
+			"applicant.cacCertificate": form.get("applicantCacCertificate") || "",
+			"applicant.idCard": form.get("applicantIdCard") || "",
+			// rep information
+			"rep.name": form.get("repName"),
+			"rep.gender": form.get("repGender"),
+			"rep.address": form.get("repAddress"),
+			"rep.email": form.get("repEmail"),
+			"rep.phone": form.get("repPhone"),
+			"rep.phone1": form.get("repPhone1") || "",
+			"rep.photo": form.get("repPassport") || "",
+			"rep.idCard": form.get("repIdCard") || "",
+			// building information
+			"dev.name": form.get("planBuildingName") || "",
+			"dev.plotNo": form.get("planPlotNo"),
+			"dev.address": form.get("planAddress"),
+			"dev.region": form.get("planRegion") || "",
+			"dev.lga": form.get("planLga") || "",
+			"dev.zone": form.get("planZone") || "",
+			"dev.type": form.get("planBuildingType") || "",
+			"dev.use": form.get("planBuildingUse") || "",
+			"dev.status": form.get("planBuildingStatus") || "",
+			"dev.noOfFloor": form.get("planFloors") || "",
+			"dev.coordinates": form.get("planCoordinates") || "",
 		};
 
 		console.log(newData);
 
 		axios.defaults.withCredentials = true;
 
-		// try {
-		// 	let host = import.meta.env.VITE_SERVER;
-		// 	const res = await axios(`${host}/staffs/plan`, {
-		// 		method: "post",
-		// 		data: newData,
-		// 		withCredentials: true,
-		// 	});
-		// 	// const res = await axios.post(`${host}/staffs/plan`, newData, {
-		// 	// 	withCredentials: true,
-		// 	// });
-		// 	console.log(res.data);
+		try {
+			let host = import.meta.env.VITE_SERVER;
+			const res = await axios.post(`${host}/staffs/plan`, newData, {
+				withCredentials: true,
+			});
+			console.log(res.data);
 
-		// 	navigate(-1);
+			navigate(`/permit/${res.data._id}`);
 
-		// 	setTimeout(() => {
-		// 		toast.success("New Application Created", {
-		// 			position: "top-right",
-		// 			autoClose: 1000,
-		// 			hideProgressBar: false,
-		// 			closeOnClick: true,
-		// 			pauseOnHover: true,
-		// 			draggable: true,
-		// 			progress: undefined,
-		// 			theme: themeColor,
-		// 		});
-		// 	}, 200);
-		// } catch (error) {
-		// 	let message = error.response
-		// 		? error.response.data.message
-		// 		: error.message;
-		// 	console.log(error);
-		// 	console.log(message);
+			setTimeout(() => {
+				toast.success("New Application Created", {
+					position: "top-right",
+					autoClose: 1000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: themeColor,
+				});
+			}, 200);
+		} catch (error) {
+			let message = error.response
+				? error.response.data.message
+				: error.message;
+			console.log(error);
+			console.log(message);
 
-		// 	toast.error(message, {
-		// 		position: "top-right",
-		// 		autoClose: 2000,
-		// 		hideProgressBar: false,
-		// 		closeOnClick: true,
-		// 		pauseOnHover: true,
-		// 		draggable: true,
-		// 		progress: undefined,
-		// 		theme: themeColor,
-		// 	});
-		// }
+			setLoading(false);
+
+
+			toast.error(message, {
+				position: "top-right",
+				autoClose: 2000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: themeColor,
+			});
+		}
 	};
 
 	const individualApplicationItems = (type) => {
@@ -155,7 +115,7 @@ export default function ApplicationForm() {
 			<div className="applicationItems">
 				<div className="applicationItem">
 					{/* <div className="applicationItemName"> */}
-					<div >
+					<div>
 						<label htmlFor={type + "Name"}>
 							{isCompany && type !== "rep" ? "Company Name:" : "Full Name:"}
 						</label>
@@ -409,10 +369,10 @@ export default function ApplicationForm() {
 										? "Applicant Personal Information"
 										: "Company Information"}
 								</h3>
-								<div className="applicantCode">
+								{/* <div className="applicantCode">
 									<span>Uni Code:</span>
 									<input type="text" />
-								</div>
+								</div> */}
 							</div>
 							{individualApplicationItems("applicant")}
 						</div>
@@ -438,15 +398,6 @@ export default function ApplicationForm() {
 											type="text"
 											name="planBuildingName"
 											id="planBuildingName"
-											value={buildingAppData.name}
-											onChange={(e) => {
-												let val = e.target.value;
-												let newData = {
-													...buildingAppData,
-												};
-												newData.name = val;
-												setBuildingAppData(newData);
-											}}
 										/>
 									</div>
 								</div>
@@ -459,15 +410,6 @@ export default function ApplicationForm() {
 												name="planPlotNo"
 												required
 												id="planPlotNo"
-												value={buildingAppData.plotNo}
-												onChange={(e) => {
-													let val = e.target.value;
-													let newData = {
-														...buildingAppData,
-													};
-													newData.plotNo = val;
-													setBuildingAppData(newData);
-												}}
 											/>
 										</div>
 										<div>
@@ -476,16 +418,7 @@ export default function ApplicationForm() {
 												type="text"
 												name="planAddress"
 												id="planAddress"
-												value={buildingAppData.address}
 												required
-												onChange={(e) => {
-													let val = e.target.value;
-													let newData = {
-														...buildingAppData,
-													};
-													newData.address = val;
-													setBuildingAppData(newData);
-												}}
 											/>
 										</div>
 									</div>
@@ -542,20 +475,7 @@ export default function ApplicationForm() {
 									<div className="applicationItemType">
 										<div>
 											<label htmlFor="planFloors">No of Floors:</label>
-											<input
-												type="text"
-												name="planFloors"
-												id="planFloors"
-												value={buildingAppData.noOfFloor}
-												onChange={(e) => {
-													let val = e.target.value;
-													let newData = {
-														...buildingAppData,
-													};
-													newData.noOfFloor = val;
-													setBuildingAppData(newData);
-												}}
-											/>
+											<input type="text" name="planFloors" id="planFloors" />
 										</div>
 										<div>
 											<label htmlFor="planCoordinates">
@@ -595,8 +515,19 @@ export default function ApplicationForm() {
 							</div>
 						</div>
 					</div>
-					<button type="submit" className="save-application primary">
-						Save Application
+					<button
+						type="submit"
+						className="btn  save-application primary"
+						disabled={loading}>
+						{loading ? (
+							<CircularProgress
+								thickness={5}
+								size={25}
+								sx={{ color: "white" }}
+							/>
+						) : (
+							"Save Application"
+						)}
 					</button>
 				</div>
 			</form>
