@@ -108,6 +108,11 @@ function Plan() {
 				<MiddleBar
 					topBarData={{
 						action: topBarAction,
+						// planNumber: data?.planNumber
+						// 	? `${data?.region?.code}/${data?.planNumber.value}/${new Date(
+						// 			data?.planNumber.date
+						// 	  ).getFullYear()}`
+						// 	: data?.uniqueId,
 						planNumber: data?.planNumber
 							? `${data?.dev.region.substring(0, 3).toUpperCase()}/${
 									data?.planNumber.value

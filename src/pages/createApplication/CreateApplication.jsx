@@ -20,7 +20,7 @@ export default function CreateApplication() {
 						<MiddleBar
 							topBarData={{
 								action: "Create New Application",
-								planNumber: "BC/1212/2023",
+								// planNumber: "BC/1212/2023",
 							}}>
 							<ApplicationForm />
 						</MiddleBar>

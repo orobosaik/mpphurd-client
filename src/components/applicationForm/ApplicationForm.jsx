@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
 	FileUploadRounded,
 	Image,
@@ -11,11 +11,45 @@ import { toast } from "react-toastify";
 import { getThemeColor } from "../../utilities/themeColor";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
+import { useSelector } from "react-redux";
+import uuid from "react-uuid";
+
+const LGA_LIST = [
+	"Akoko-Edo",
+	"Egor",
+	"Esan Central",
+	"Esan North-East",
+	"Esan South-East",
+	"Esan West",
+	"Etsako Central",
+	"Etsako East",
+	"Etsako West",
+	"Igueben",
+	"Ikpoba-Okha",
+	"Oredo",
+	"Orhionmwon",
+	"Ovia North-East",
+	"Ovia South-West",
+	"Owan East",
+	"Owan West",
+	"Uhunmwonde",
+];
+const BUILDING_STATUS = ["Proposed", "Under Construction", "Built"];
+const BUILDING_TYPE = [
+	"Commercial",
+	"Residential",
+	"Mixed",
+	"Religious",
+	"Educational",
+	"Industrial",
+];
 
 export default function ApplicationForm() {
-	const [loading, setLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 	const [isCompany, setIsCompany] = useState(false);
 	const [isJoint, setIsJoint] = useState(true);
+
+	const { currentUser, loading } = useSelector((state) => state.user);
 
 	const themeColor = getThemeColor();
 	const navigate = useNavigate();
@@ -25,7 +59,7 @@ export default function ApplicationForm() {
 		console.log(e);
 		const form = new FormData(e.target);
 		console.log(form);
-		setLoading(true)
+		setIsLoading(true);
 
 		let newData = {
 			// applicant information
@@ -94,8 +128,7 @@ export default function ApplicationForm() {
 			console.log(error);
 			console.log(message);
 
-			setLoading(false);
-
+			setIsLoading(false);
 
 			toast.error(message, {
 				position: "top-right",
@@ -427,15 +460,39 @@ export default function ApplicationForm() {
 									<div className="applicationItemLocation">
 										<div>
 											<label htmlFor="planRegion">Region:</label>
-											<input type="text" name="planRegion" id="planRegion" />
+											<input
+												type="text"
+												readOnly
+												name="planRegion"
+												value={currentUser.region.name}
+												id="planRegion"
+											/>
 										</div>
 										<div>
 											<label htmlFor="planLga">LGA:</label>
-											<input type="text" name="planLga" id="planLga" />
+											<select name="planLga" id="planLga">
+												<option value=""></option>
+												{LGA_LIST.map((e) => {
+													return (
+														<option key={uuid()} value={e}>
+															{e}
+														</option>
+													);
+												})}
+											</select>
 										</div>
 										<div>
 											<label htmlFor="planZone">Zone:</label>
-											<input type="text" name="planZone" id="planZone" />
+											<select name="planZone" id="planZone">
+												<option value=""></option>
+												{currentUser.region.zones.map((e) => {
+													return (
+														<option key={uuid()} value={e}>
+															{e}
+														</option>
+													);
+												})}
+											</select>
 										</div>
 									</div>
 								</div>
@@ -443,11 +500,16 @@ export default function ApplicationForm() {
 									<div className="applicationItemType">
 										<div>
 											<label htmlFor="planBuildingType">Building Type:</label>
-											<input
-												type="text"
-												name="planBuildingType"
-												id="planBuildingType"
-											/>
+											<select name="planBuildingType" id="planBuildingType">
+												<option value=""></option>
+												{BUILDING_TYPE.map((e) => {
+													return (
+														<option key={uuid()} value={e}>
+															{e}
+														</option>
+													);
+												})}
+											</select>
 										</div>
 										<div>
 											<label htmlFor="planBuildingUse">Building Use:</label>
@@ -462,11 +524,14 @@ export default function ApplicationForm() {
 												Building Status:
 											</label>
 											<select name="planBuildingStatus" id="planBuildingStatus">
-												<option value="proposed">Proposed</option>
-												<option value="underConstruction">
-													Under Construction
-												</option>
-												<option value="built">Built</option>
+												<option value=""></option>
+												{BUILDING_STATUS.map((e) => {
+													return (
+														<option key={uuid()} value={e}>
+															{e}
+														</option>
+													);
+												})}
 											</select>
 										</div>
 									</div>
@@ -518,11 +583,11 @@ export default function ApplicationForm() {
 					<button
 						type="submit"
 						className="btn  save-application primary"
-						disabled={loading}>
-						{loading ? (
+						disabled={isLoading}>
+						{isLoading ? (
 							<CircularProgress
 								thickness={5}
-								size={25}
+								size={20}
 								sx={{ color: "white" }}
 							/>
 						) : (

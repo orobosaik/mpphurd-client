@@ -89,19 +89,28 @@ export default function PlanInfoCard({ type, AD2, R, BD, data }) {
 						</div>
 						<div className="planInfoItem">
 							<span className="planInfoTitle">Location:</span>
-							<span className="planInfoText">{data.address}</span>
+							<span className="planInfoText">{`${data.plotNo}, ${data.address}`}</span>
 						</div>
 						<div className="planInfoItem">
 							<span className="planInfoTitle">No of Floor:</span>
 							<span className="planInfoText">{data.noOfFloors}</span>
 						</div>
 						<div className="planInfoItem">
-							<span className="planInfoTitle">Building Use:</span>
+							<span className="planInfoTitle">Building Type:</span>
+							<span className="planInfoText">{data.type}</span>
+						</div>
+						<div className="planInfoItem">
+							<span className="planInfoTitle">Use:</span>
 							<span className="planInfoText">{data.use}</span>
 						</div>
 						<div className="planInfoItem">
-							<span className="planInfoTitle">Purpose:</span>
-							<span className="planInfoText">Hotel</span>
+							<span className="planInfoTitle">Assessment:</span>
+							<span className="planInfoText">
+								{Intl.NumberFormat("en-NG", {
+									style: "currency",
+									currency: "NGN",
+								}).format(data.assessedAmount || 0)}
+							</span>
 						</div>
 					</div>
 				</div>

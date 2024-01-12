@@ -7,6 +7,36 @@ import {
 } from "@mui/icons-material";
 import { CircularProgress } from "@mui/material";
 
+const LGA_LIST = [
+	"Akoko-Edo",
+	"Egor",
+	"Esan Central",
+	"Esan North-East",
+	"Esan South-East",
+	"Esan West",
+	"Etsako Central",
+	"Etsako East",
+	"Etsako West",
+	"Igueben",
+	"Ikpoba-Okha",
+	"Oredo",
+	"Orhionmwon",
+	"Ovia North-East",
+	"Ovia South-West",
+	"Owan East",
+	"Owan West",
+	"Uhunmwonde",
+];
+const BUILDING_STATUS = ["Proposed", "Under Construction", "Built"];
+const BUILDING_TYPE = [
+	"Commercial",
+	"Residential",
+	"Mixed",
+	"Religious",
+	"Educational",
+	"Industrial",
+];
+
 export default function PlanEditInfoModal({
 	buttonIcon,
 	buttonText,
@@ -68,9 +98,8 @@ export default function PlanEditInfoModal({
 		const newData = {
 			status: form.get("minuteStatus"),
 			text: form.get("minuteText"),
-			if (submitting) {
-
-				text: form.get("minuteText")
+			if(submitting) {
+				text: form.get("minuteText");
 			},
 		};
 		console.log(newData);

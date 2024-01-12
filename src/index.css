@@ -99,7 +99,11 @@ img {
 .btn {
 	cursor: pointer;
 }
-
+button{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 button,
 select {
 	border-radius: 8px;

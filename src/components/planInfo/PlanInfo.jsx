@@ -45,7 +45,7 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 					<div className="planInfoSummaryItem">
 						<span className="planInfoSummaryTitle">Site Location:</span>
 						<span className="planInfoSummaryText large">
-							{data.dev.address}
+							{`${data.dev.plotNo}, ${data.dev.address}`}
 						</span>
 					</div>
 					<div className="planInfoSummaryItem">
@@ -62,7 +62,7 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 						<div className="planInfoSummaryItem">
 							<span className="planInfoSummaryTitle">Current Stack:</span>
 							<span className="planInfoSummaryText">
-								<span className="planInfoSummaryStack">Stack A7</span>.
+								<span className="planInfoSummaryStack">{data.stack}</span>.
 							</span>
 						</div>
 					)}

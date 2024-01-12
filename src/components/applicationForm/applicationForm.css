@@ -184,6 +184,7 @@ input[type="file"]::file-selector {
 
 .save-application {
 	margin-top: 3rem;
+	width: 16rem;
 }
 
 .uploadFileWrapper {
