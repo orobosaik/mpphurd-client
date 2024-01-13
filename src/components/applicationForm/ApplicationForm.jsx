@@ -13,36 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import { useSelector } from "react-redux";
 import uuid from "react-uuid";
-
-const LGA_LIST = [
-	"Akoko-Edo",
-	"Egor",
-	"Esan Central",
-	"Esan North-East",
-	"Esan South-East",
-	"Esan West",
-	"Etsako Central",
-	"Etsako East",
-	"Etsako West",
-	"Igueben",
-	"Ikpoba-Okha",
-	"Oredo",
-	"Orhionmwon",
-	"Ovia North-East",
-	"Ovia South-West",
-	"Owan East",
-	"Owan West",
-	"Uhunmwonde",
-];
-const BUILDING_STATUS = ["Proposed", "Under Construction", "Built"];
-const BUILDING_TYPE = [
-	"Commercial",
-	"Residential",
-	"Mixed",
-	"Religious",
-	"Educational",
-	"Industrial",
-];
+import { BUILDING_STATUS, BUILDING_TYPE, LGA_LIST } from "../../utilities/appData";
 
 export default function ApplicationForm() {
 	const [isLoading, setIsLoading] = useState(false);
