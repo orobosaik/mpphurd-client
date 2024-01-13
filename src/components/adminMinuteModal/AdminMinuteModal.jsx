@@ -229,7 +229,12 @@ export default function AdminMinuteModal({
 							<div>
 								<div className="minuteItems">
 									<div className="minuteItem">
-										<label htmlFor="minuteItemData">Date</label>
+										<label htmlFor="minuteItemData">
+											Date:{" "}
+											<span className="optionIssueTag">
+												Do not select a date except for backlog
+											</span>
+										</label>
 										<input
 											type="date"
 											name="minuteItemData"
@@ -287,7 +292,7 @@ export default function AdminMinuteModal({
 											name="minuteText"
 											id="minuteText"
 											cols="30"
-											rows="10"></textarea>
+											rows="7"></textarea>
 									</div>
 								</div>
 							</div>

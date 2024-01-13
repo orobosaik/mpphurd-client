@@ -189,7 +189,7 @@ export default function LoginPage() {
 				</section>
 				<footer className="login__footer">
 					<div className="login__footer--copyright">
-						© 2023 Copyright MPPHURD
+						© {new Date().getFullYear()} Copyright MPPHURD
 					</div>
 					<div className="login__footer--mda">
 						<div className="login__footer--logos">

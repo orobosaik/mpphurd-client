@@ -171,8 +171,6 @@ align-items: center;
 
 .uploadFileWrapper {
 	display: flex;
-	/* padding: none; */
-	/* width: 100%; */
 	align-items: center;
 
 	gap: 2rem;
@@ -183,18 +181,4 @@ align-items: center;
 	-moz-border-radius: 4px;
 	-ms-border-radius: 4px;
 	-o-border-radius: 4px;
-}
-
-.uploadFileWrapper span {
-	padding: 0.4rem 0.7rem;
-	background-color: var(--light-grey);
-	display: flex;
-	align-items: center;
-	min-width: fit-content;
-	border-top-left-radius: 4px;
-	border-bottom-left-radius: 4px;
-}
-
-.uploadFileWrapper:hover span {
-	background-color: var(--sc-grey);
 }

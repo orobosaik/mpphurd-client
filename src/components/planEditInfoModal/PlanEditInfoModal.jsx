@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { getThemeColor } from "../../utilities/themeColor";
+import { format } from "date-fns";
 
 const STACK_LIST = [
 	"Stack A1",
@@ -139,6 +140,10 @@ export default function PlanEditInfoModal({
 		state.approval.status || "processing"
 	); // For Archive Office & Commissioner Office
 
+	// Approval Status editing option
+	const [approvalStatusEdit, setApprovalStatusEdit] = useState(false);
+	const [collectedApprovalEdit, setCollectedApprovalEdit] = useState(false);
+
 	const { currentUser, loading } = useSelector((state) => state.user);
 	const themeColor = getThemeColor();
 
@@ -152,6 +157,10 @@ export default function PlanEditInfoModal({
 			}).format(data.dev.assessedAmount || 0)
 		);
 		setSubmitting(false);
+		setPlanApprovalStatus(data.approval.status || "processing");
+		setCollectedApproval(data.approval.isCollected);
+		setApprovalStatusEdit(false);
+		setCollectedApprovalEdit(false);
 		setOpen(false);
 	};
 
@@ -235,19 +244,33 @@ export default function PlanEditInfoModal({
 			newData = {
 				stack: form.get("planStack") || "",
 				hasTax: form.get("planHasTax") === "yes" ? true : false,
-				"approval.status": form.get("planApprovalStatus"),
-				"approval.statusDate": form.get("planApprovalStatusDate") || "",
-				"approval.isCollected":
-					form.get("collectedApproval") === "yes" ? true : false,
-				"approval.isCollectedDate": form.get("collectedApprovalDate") || "",
+				"dev.description": form.get("devDescription") || "",
 			};
+
+			if (approvalStatusEdit) {
+				(newData["approval.status"] = form.get("planApprovalStatus")),
+					(newData["approval.statusDate"] =
+						form.get("planApprovalStatusDate") || new Date());
+			}
+
+			if (collectedApprovalEdit) {
+				(newData["approval.isCollected"] =
+					form.get("collectedApproval") === "yes" ? true : false),
+					(newData["approval.isCollectedDate"] =
+						form.get("collectedApprovalDate") || new Date());
+			}
 		} else if (commissioner) {
 			newData = {
 				stack: form.get("planStack") || "",
 				hasTax: form.get("planHasTax") === "yes" ? true : false,
-				"approval.status": form.get("planApprovalStatus"),
-				"approval.statusDate": form.get("planApprovalStatusDate") || "",
+				"dev.description": form.get("devDescription") || "",
 			};
+
+			if (approvalStatusEdit) {
+				(newData["approval.status"] = form.get("planApprovalStatus")),
+					(newData["approval.statusDate"] =
+						form.get("planApprovalStatusDate") || new Date());
+			}
 		} else {
 			newData = {
 				stack: form.get("planStack") || "",
@@ -624,7 +647,9 @@ export default function PlanEditInfoModal({
 			{open && (
 				<dialog className="modalView">
 					<header>
-						<span>Edit Plan Info</span>
+						<span>
+							Edit Plan Info - {data?.planNumber?.fullValue || data?.uniqueId}
+						</span>
 						<div className="modalViewCloseButton" onClick={handleClose}>
 							<CloseRounded className="closeButton" />
 						</div>
@@ -645,7 +670,7 @@ export default function PlanEditInfoModal({
 									name="planStack"
 									id="planStack"
 									value={controlledOptions.stack}>
-									<option value=""></option>
+									<option value="Not Stacked"></option>
 									{STACK_LIST.map((e) => {
 										return (
 											<option key={uuid()} value={e}>
@@ -664,36 +689,77 @@ export default function PlanEditInfoModal({
 									<select
 										name="planHasTax"
 										id="planHasTax"
-										defaultValue={data?.hasTax}>
+										defaultValue={data?.hasTax ? "yes" : "no"}>
 										<option value="no">No</option>
 										<option value="yes">Yes</option>
 									</select>
 								</div>
-								<div className="applicationItem">
-									<label htmlFor="planApprovalStatus">
-										Plan Approval Status:
-									</label>
-									<select
-										defaultValue={data?.approval?.status}
-										name="planApprovalStatus"
-										id="planApprovalStatus"
-										onChange={(e) => {
-											setPlanApprovalStatus(e.target.value);
-										}}>
-										<option value="processing">Processing</option>
-										<option value="rejected">Rejected</option>
-										<option value="kiv">KIV</option>
-										<option value="approved">Approved</option>
-									</select>
+
+								<div className="applicationItem ">
+									<div className="planApprovalStatus">
+										<label htmlFor="planApprovalStatus">
+											Plan Approval Status:
+										</label>
+										<div
+											className="editBtn"
+											onClick={() => {
+												setApprovalStatusEdit(!approvalStatusEdit);
+												setPlanApprovalStatus(data.approval?.status);
+											}}>
+											<span>
+												{approvalStatusEdit ? "Cancel Update" : "Update"}
+											</span>
+										</div>
+									</div>
+									{!approvalStatusEdit && (
+										<div className="approvalStatusDisplay">
+											<span className="status">{data?.approval?.status}</span>
+											||
+											<span className="date">
+												{data?.approval?.statusDate
+													? format(
+															new Date(data?.approval?.statusDate),
+															"EEEE, MMMM do, yyyy"
+													  )
+													: "Pending"}
+											</span>
+										</div>
+									)}
+
+									{approvalStatusEdit && (
+										<select
+											defaultValue={data?.approval?.status}
+											name="planApprovalStatus"
+											id="planApprovalStatus"
+											onChange={(e) => {
+												setPlanApprovalStatus(e.target.value);
+											}}>
+											<option value="processing">Processing</option>
+											<option value="rejected">Rejected</option>
+											<option value="kiv">KIV</option>
+											<option value="approved">Approved</option>
+										</select>
+									)}
 								</div>
-								{!(planApprovalStatus === "processing") ? (
+
+								{!(planApprovalStatus === "processing") &&
+								approvalStatusEdit ? (
 									<div className="applicationItem">
 										<label htmlFor="planApprovalStatusDate">
-											Approval Status Date:
+											Approval Status Date:{" "}
+											<span className="optionIssueTag">
+												Do not select a date except for backlog
+											</span>
 										</label>
 										<input
-											defaultValue={data?.approval?.isApprovedDate}
-											type="date"
+											defaultValue={
+												data.approval.statusDate
+													? new Date(data?.approval?.statusDate)
+															.toISOString()
+															.slice(0, 19)
+													: ""
+											}
+											type="datetime-local"
 											name="planApprovalStatusDate"
 											id="planApprovalStatusDate"
 										/>
@@ -708,28 +774,70 @@ export default function PlanEditInfoModal({
 						{archive && (
 							<div className="applicationItems">
 								<div className="applicationItem">
-									<label htmlFor="collectedApproval">Collected Approval:</label>
-									<select
-										defaultValue={data?.approval?.isCollected}
-										name="collectedApproval"
-										id="collectedApproval"
-										onChange={(e) => {
-											setCollectedApproval(
-												e.target.value == "yes" ? true : false
-											);
-										}}>
-										<option value="no">No</option>
-										<option value="yes">Yes</option>
-									</select>
+									<div className="planApprovalStatus">
+										<label htmlFor="collectedApproval">
+											Collected Approval:
+										</label>
+										<div
+											className="editBtn"
+											onClick={() => {
+												setCollectedApprovalEdit(!collectedApprovalEdit);
+												setCollectedApproval(data.approval?.isCollected);
+											}}>
+											<span>
+												{collectedApprovalEdit ? "Cancel Update" : "Update"}
+											</span>
+										</div>
+									</div>
+									{!collectedApprovalEdit && (
+										<div className="approvalStatusDisplay">
+											<span className="status">
+												{data?.approval?.isCollected ? "Yes" : "No"}
+											</span>
+											||
+											<span className="date">
+												{data?.approval?.isCollectedDate
+													? format(
+															new Date(data?.approval?.isCollectedDate),
+															"EEEE, MMMM do, yyyy"
+													  )
+													: "Pending"}
+											</span>
+										</div>
+									)}
+
+									{collectedApprovalEdit && (
+										<select
+											defaultValue={data?.approval?.isCollected ? "yes" : "no"}
+											name="collectedApproval"
+											id="collectedApproval"
+											onChange={(e) => {
+												setCollectedApproval(
+													e.target.value == "yes" ? true : false
+												);
+											}}>
+											<option value="no">No</option>
+											<option value="yes">Yes</option>
+										</select>
+									)}
 								</div>
-								{collectedApproval && (
+								{collectedApproval && collectedApprovalEdit && (
 									<div className="applicationItem">
 										<label htmlFor="collectedApprovalDate">
 											Collection Date:
+											<span className="optionIssueTag">
+												Do not select a date except for backlog
+											</span>
 										</label>
 										<input
-											defaultValue={data?.approval?.isCollectedDate}
-											type="date"
+											defaultValue={
+												data?.approval?.isCollectedDate
+													? new Date(data?.approval?.isCollectedDate)
+															.toISOString()
+															.slice(0, 23)
+													: ""
+											}
+											type="datetime-local"
 											name="collectedApprovalDate"
 											id="collectedApprovalDate"
 										/>
@@ -1038,7 +1146,7 @@ export default function PlanEditInfoModal({
 									name="devDescription"
 									id="devDescription"
 									cols="30"
-									rows="5"></textarea>
+									rows="7"></textarea>
 							</div>
 						)}
 

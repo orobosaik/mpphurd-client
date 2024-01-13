@@ -129,7 +129,7 @@ export default function AddCommentModal({
 			{open && (
 				<dialog className="modalView">
 					<header>
-						<span>Plan Info - {data?.planNo || data?.uniqueId}</span>
+						<span>Plan - {data?.planNumber?.fullValue || data?.uniqueId}</span>
 						<div className="modalViewCloseButton" onClick={handleClose}>
 							<CloseRounded className="closeButton" />
 						</div>
@@ -160,7 +160,7 @@ export default function AddCommentModal({
 											name="minuteText"
 											id="minuteText"
 											cols="30"
-											rows="10"></textarea>
+											rows="8"></textarea>
 									</div>
 								</div>
 							</div>

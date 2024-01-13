@@ -9,7 +9,6 @@
 }
 
 dialog {
-
 	max-height: 90%;
 	max-width: 60rem;
 	margin: auto;
@@ -24,64 +23,62 @@ dialog {
 	-o-border-radius: 0.8rem;
 }
 
-html[data-theme="dark"] dialog{
-  background-color: var(--white);
-	box-shadow: 0 0 0.5rem 0.25rem rgba(255, 255, 255, .2);
+html[data-theme="dark"] dialog {
+	background-color: var(--white);
+	box-shadow: 0 0 0.5rem 0.25rem rgba(255, 255, 255, 0.2);
 }
 
-
-.modalView header{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid grey;
-  font-size: 1.8rem;
+.modalView header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-bottom: 1px solid grey;
+	font-size: 1.8rem;
 	padding-bottom: 1rem;
 }
 
-.modalView footer{
+.modalView footer {
 	align-self: end;
 	margin-top: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: end;
+	display: flex;
+	align-items: center;
+	justify-content: end;
 }
-.modalView footer button{
+.modalView footer button {
 	width: 12rem;
 }
 
-.modalViewCloseButton{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+.modalViewCloseButton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
 
-  color: var(--black);
-  padding: .5rem;
-  /* outline: 2px solid grey; */
-  border-radius: 50%;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
-  -o-border-radius: 50%;
+	color: var(--black);
+	padding: 0.5rem;
+	/* outline: 2px solid grey; */
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-ms-border-radius: 50%;
+	-o-border-radius: 50%;
 }
-.modalViewCloseButton:hover{
-  background-color: var(--light-grey);
+.modalViewCloseButton:hover {
+	background-color: var(--light-grey);
 }
-.closeButton{
-  font-size: 2.5rem !important;
+.closeButton {
+	font-size: 2.5rem !important;
 	font-weight: bold;
 }
 
-.currentStackEdit{
+.currentStackEdit {
 	margin: 1rem 0;
 	margin-bottom: 2rem;
 	display: flex;
 	gap: 2rem;
 	align-items: center;
-
 }
-.currentStackEdit label{
+.currentStackEdit label {
 	font-weight: bold;
 	font-size: 1.6rem;
 }
@@ -89,47 +86,28 @@ html[data-theme="dark"] dialog{
 .planEditInfoModal {
 }
 
-.planEditInfoTags{
+.planEditInfoTags {
 	display: flex;
 	align-items: center;
 	gap: 2rem;
 }
-.planEditInfoTagsOptions{
+.planEditInfoTagsOptions {
 	font-weight: 600;
-display: flex;
-gap: 2rem;
-align-items: center;
+	display: flex;
+	gap: 2rem;
+	align-items: center;
 }
-.planEditInfoTagsOptions div{
+.planEditInfoTagsOptions div {
 	display: flex;
 	/* align-items: center; */
 	/* justify-content: center; */
-	gap: .5rem;
+	gap: 0.5rem;
 }
 
-.planEditInfoTagsOptions input[type="checkbox"]{
+.planEditInfoTagsOptions input[type="checkbox"] {
 	cursor: pointer;
 }
 
-
-.applicationHeader {
-	display: flex;
-	justify-content: space-between;
-	font-size: 1.6rem;
-	max-width: 70rem;
-	margin-bottom: 2rem;
-}
-.applicationHeader div {
-	display: flex;
-	gap: 1rem;
-	align-items: center;
-}
-
-.applicationInputWrapper {
-	display: flex;
-	flex-direction: column;
-	gap: 3rem;
-}
 .modalView .applicationItemsWrapper {
 	display: flex;
 	flex-direction: column;
@@ -137,85 +115,6 @@ align-items: center;
 	margin: 2rem 0;
 }
 
-.applicationTitle {
-	display: flex;
-	justify-content: space-between;
-	font-size: 1.6rem;
-	max-width: 70rem;
-}
-.applicationTitle h3 {
-	color: var(--pc-green);
-}
-.applicationTitle div {
-	display: flex;
-	gap: 1rem;
-	align-items: center;
-}
-.applicantCode input {
-	text-align: center;
-	max-width: 9rem;
-	background-color: var(--light-grey);
-}
-
-.applicationItems {
-	display: flex;
-	flex-direction: column;
-	gap: 0.8rem;
-}
-
-.applicationItem {
-	display: flex;
-	flex-direction: column;
-	max-width: 70rem;
-}
-
-.applicationItem label {
-	display: flex;
-	justify-content: start;
-	text-transform: capitalize;
-	font-weight: 600;
-}
-
-.applicationItem input,
-.applicantCode input,
-.applicationItem select {
-	width: 100%;
-	display: flex;
-	background-color: transparent;
-	border: var(--sc-grey) solid 1px;
-	height: 2.9rem;
-	padding: 0.2rem 0.7rem;
-	transition: box-shadow 0.3s;
-	border-radius: 4px;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	-ms-border-radius: 4px;
-	-o-border-radius: 4px;
-	-webkit-transition: box-shadow 0.3s;
-	-moz-transition: box-shadow 0.3s;
-	-ms-transition: box-shadow 0.3s;
-	-o-transition: box-shadow 0.3s;
-}
-
-.applicationItem input:active,
-.applicationItem input:focus {
-	border: var(--sc-grey) solid 1px;
-	box-shadow: 0px 0px 7px 0px rgb(0, 200, 83, 0.4);
-	border-bottom: 2px solid var(--pc-green);
-}
-.applicationItem input[type="radio"]:focus,
-.applicationItem input[type="file"]:focus {
-	box-shadow: none;
-}
-
-.applicationItemName {
-	display: flex;
-	width: 100%;
-	gap: 1rem;
-}
-.applicationItemPhone div {
-	flex: 1;
-}
 .modalView .applicationItemName div:first-child,
 .modalView .applicationItemName div:last-child {
 	max-width: 5rem;
@@ -225,120 +124,16 @@ align-items: center;
 	width: 100%;
 	gap: 2rem;
 }
-.radioBoxWrapper {
-	display: flex;
-	gap: 2rem;
-}
-.radioBoxWrapper label {
-	flex: 1;
-	display: flex;
-	justify-content: space-between;
-	width: 100%;
-	align-items: center;
-	padding: 0.2rem 0.7rem;
-	cursor: pointer;
-	border: var(--sc-grey) solid 1px;
-	border-radius: 4px;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	-ms-border-radius: 4px;
-	-o-border-radius: 4px;
-}
-.radioBoxWrapper input[type="radio"] {
-	width: 1.5rem;
-	accent-color: green;
-}
 
-input[type="file"],
-input[type="file"]:focus {
-	display: flex;
-	justify-content: center;
-	text-align: center;
-	align-items: center;
-	padding: 0.4rem 0.7rem;
-	border: none;
-	cursor: pointer;
-}
-
-input[type="file"]::file-selector-button {
-	display: none;
-}
-input[type="file"]::file-selector {
-	display: none;
-}
-
-.applicationItemAddressModal {
-	display: flex;
-	width: 100%;
-	gap: 1rem;
-}
-.applicationItemAddressModal div:nth-child(1) {
-	flex: 2;
-}
-.applicationItemAddressModal div:nth-child(2) {
-	flex: 10;
-}
-
-.applicationItemLocation {
-	display: flex;
-	width: 100%;
-	gap: 1rem;
-}
-.applicationItemLocation div {
-	flex: 1;
-}
-
-.applicationItemType {
-	display: flex;
-	width: 100%;
-	gap: 1rem;
-}
-.applicationItemType div {
-	flex: 1;
-}
-
-.save-application {
-	margin-top: 3rem;
-}
-
-.uploadFileWrapper {
-	display: flex;
-	padding: none;
-	width: 100%;
-	align-items: center;
-	gap: 2rem;
-	cursor: pointer;
-	border: var(--sc-grey) solid 1px;
-	border-radius: 4px;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	-ms-border-radius: 4px;
-	-o-border-radius: 4px;
-}
-
-.uploadFileWrapper span {
-	padding: 0.4rem 0.7rem;
-	background-color: var(--light-grey);
-	display: flex;
-	align-items: center;
-	min-width: fit-content;
-	border-top-left-radius: 4px;
-	border-bottom-left-radius: 4px;
-}
-
-.uploadFileWrapper:hover span {
-	background-color: var(--light-grey);
-}
-
-.modalAssessedAmount{
+.modalAssessedAmount {
 	display: flex;
 	align-items: center;
 	gap: 1rem;
 }
-.modalAssessedAmount label{
+.modalAssessedAmount label {
 	font-weight: 600;
 }
-.modalAssessedAmount input{
+.modalAssessedAmount input {
 	width: max-content;
 	background-color: inherit;
 	font-weight: 600;
@@ -350,9 +145,64 @@ input[type="file"]::file-selector {
 }
 .modalAssessedAmount input:active,
 .modalAssessedAmount input:focus,
-.modalAssessedAmount input{
-	padding: .5rem 1rem;
+.modalAssessedAmount input {
+	padding: 0.5rem 1rem;
 	font-size: 1.6rem;
 	/* font-weight: 600; */
 	outline: 1px var(--sc-grey) solid;
+}
+
+.optionIssueTag {
+	color: var(--accent-red);
+	font-size: 0.8em;
+}
+.planApprovalStatus{
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+.planApprovalStatus label{
+	color: var(--pc-green);
+	font-weight: 700;
+}
+.planApprovalStatus .title{
+	font-size: 1.1em;
+	font-weight: 600;
+}
+.planApprovalStatus .editBtn{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 4rem;
+
+	font-size: .8em;
+	border: var(--pc-green) 1px solid;
+	padding: 0px 4px;
+	padding-top: 1px;
+	cursor: pointer;
+
+		border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	-ms-border-radius: 8px;
+	-o-border-radius: 8px;
+}
+
+.planApprovalStatus .editBtn:hover{
+	font-weight: 700;
+	color: var(--white);
+	background-color: var(--pc-green);
+
+}
+.planApprovalStatus .items{
+	font-size: 1.3em;
+}
+.approvalStatusDisplay{
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+}
+.approvalStatusDisplay .status{
+	font-size: 1.2em;
+	text-transform: uppercase;
 }
