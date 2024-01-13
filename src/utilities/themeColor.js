@@ -2,12 +2,12 @@ import { useSelector } from "react-redux";
 
 
 export const getThemeColor = () => {
-	const { t } = useSelector((state) => state.app);
+	const { theme } = useSelector((state) => state.app);
 	const isDark = window.matchMedia("(prefers-color-scheme: dark)");
 
-	if (t === "light") {
+	if (theme === "light") {
 		return "light";
-	} else if (t === "dark") {
+	} else if (theme === "dark") {
 		return "dark";
 	} else {
 		if (!isDark) {
