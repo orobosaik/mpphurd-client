@@ -38,7 +38,7 @@ export default function AdminStaffView() {
 				let host = import.meta.env.VITE_SERVER;
 				const res = await axios.get(`${host}/admin/staff/${state.data._id}`);
 
-				setData(()=> res.data);
+				setData(() => res.data);
 				setIsLoading(false);
 			} catch (error) {
 				let message = error.response
@@ -159,7 +159,7 @@ export default function AdminStaffView() {
 												<img
 													src={
 														data.profilePicture ||
-														import.meta.env.VITE_NO_AVATAR
+														"/assets/persons/no_avatar.png"
 													}
 													alt="photo"
 												/>
@@ -182,8 +182,7 @@ export default function AdminStaffView() {
 												toggled={data.isManagement}
 												label={"isManagement"}
 												onClick={setIsManagement}
-												/>
-
+											/>
 										</div>
 									</div>
 								</div>

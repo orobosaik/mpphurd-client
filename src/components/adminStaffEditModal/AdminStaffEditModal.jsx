@@ -54,7 +54,7 @@ export default function AdminStaffEditModal({ ...props }) {
 	const handleOpen = async () => {
 		setOpen(true);
 		setInitLoading(true);
-		setPhotoUrl(props?.data?.profilePicture || import.meta.env.VITE_NO_AVATAR);
+		setPhotoUrl(props?.data?.profilePicture || "/assets/persons/no_avatar.png");
 
 		const loadOffices = async () => {
 			try {

@@ -37,7 +37,7 @@ export default function PlanInfoCard({ type, AD2, R, BD, data }) {
 				{BD && (
 					<img
 						className="planInfoImg"
-						src={data.photo || import.meta.env.VITE_NO_AVATAR}
+						src={data.photo || "/assets/persons/no_avatar.png"}
 						alt="Passport"
 					/>
 				)}

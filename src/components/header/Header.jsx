@@ -185,7 +185,7 @@ export default function Header() {
 					</div>
 
 					<img
-						src={staff.profilePicture || import.meta.env.VITE_NO_AVATAR}
+						src={staff.profilePicture || "/assets/persons/no_avatar.png"}
 						alt=""
 						className="headerImg"
 					/>
