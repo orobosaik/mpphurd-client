@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import "./planEditInfoModal.css";
 import {
 	CloseRounded,
@@ -6,7 +6,54 @@ import {
 	FileUploadRounded,
 } from "@mui/icons-material";
 import { CircularProgress } from "@mui/material";
+import uuid from "react-uuid";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { getThemeColor } from "../../utilities/themeColor";
 
+const STACK_LIST = [
+	"Stack A1",
+	"Stack A2",
+	"Stack A3",
+	"Stack A4",
+	"Stack A5",
+	"Stack A6",
+	"Stack A7",
+	"Stack A8",
+	"Stack A9",
+	"Stack A10",
+	"Stack B1",
+	"Stack B2",
+	"Stack B3",
+	"Stack B4",
+	"Stack B5",
+	"Stack B6",
+	"Stack B7",
+	"Stack B8",
+	"Stack B9",
+	"Stack B10",
+	"Stack C1",
+	"Stack C2",
+	"Stack C3",
+	"Stack C4",
+	"Stack C5",
+	"Stack C6",
+	"Stack C7",
+	"Stack C8",
+	"Stack C9",
+	"Stack C10",
+	"Stack D1",
+	"Stack D2",
+	"Stack D3",
+	"Stack D4",
+	"Stack D5",
+	"Stack D6",
+	"Stack D7",
+	"Stack D8",
+	"Stack D9",
+	"Stack D10",
+];
 const LGA_LIST = [
 	"Akoko-Edo",
 	"Egor",
@@ -42,10 +89,24 @@ export default function PlanEditInfoModal({
 	buttonText,
 	children,
 	state,
+	reload,
 }) {
 	const [submitting, setSubmitting] = useState(false);
 	const [open, setOpen] = useState(false);
 	const [data, setData] = useState(state);
+
+	const isFastTrack = useRef();
+	const isOldFile = useRef();
+	const isFileOfInterest = useRef();
+
+	const [controlledOptions, setControlledOptions] = useState({
+		stack: state.stack,
+		type: state.dev.type,
+		lga: state.dev.lga,
+		zone: state.dev.zone,
+		status: state.dev.status,
+	});
+
 	const [assessment, setAssessment] = useState(
 		state?.currentOffice?.id?.name.includes("ASSESSMENT")
 	);
@@ -55,33 +116,46 @@ export default function PlanEditInfoModal({
 	const [archive, setArchive] = useState(
 		state?.currentOffice?.id?.name.includes("ARCHIVE")
 	);
+	const [commissioner, setCommissioner] = useState(
+		state?.currentOffice?.id?.name.includes("COMMISSIONER")
+	);
 
 	const [isCompany, setIsCompany] = useState(
 		state.applicant.type === "company" ? true : false
 	);
-	const [isEditingAmount, setIsEditingAmount] = useState(false);
-	const [rawAmount, setRawAmount] = useState(Number(state.assessedAmount) || 0);
+	let [isEditingAmount, setIsEditingAmount] = useState(false);
+
+	const [rawAmount, setRawAmount] = useState(Number(state.dev.assessedAmount));
 	const [formattedAmount, setFormattedAmount] = useState(
 		Intl.NumberFormat("en-NG", {
 			style: "currency",
 			currency: "NGN",
-		}).format(state.assessedAmount || 0)
+		}).format(state.dev.assessedAmount || 0)
 	);
-	const [collectedApproval, setCollectedApproval] = useState(false);
+	const [collectedApproval, setCollectedApproval] = useState(
+		state.approval.isCollected
+	); // For Archive Office
+	const [planApprovalStatus, setPlanApprovalStatus] = useState(
+		state.approval.status || "processing"
+	); // For Archive Office & Commissioner Office
+
+	const { currentUser, loading } = useSelector((state) => state.user);
+	const themeColor = getThemeColor();
 
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => {
-		setRawAmount(Number(data.assessedAmount) || 0);
+		setRawAmount(Number(data.dev.assessedAmount));
 		setFormattedAmount(
 			Intl.NumberFormat("en-NG", {
 				style: "currency",
 				currency: "NGN",
-			}).format(data.assessedAmount || 0)
+			}).format(data.dev.assessedAmount || 0)
 		);
+		setSubmitting(false);
 		setOpen(false);
 	};
 
-	const handleEditSubmit = (e) => {
+	const handleEditSubmiteee = (e) => {
 		e.preventDefault();
 		setSubmitting(true);
 		const form = new FormData(e.target);
@@ -89,32 +163,109 @@ export default function PlanEditInfoModal({
 		console.log(form);
 	};
 
-	const handleSubmit = async (e) => {
+	const handleEditSubmit = async (e) => {
 		e.preventDefault();
-		setLoading(true);
+		setSubmitting(true);
+		console.log(e);
 		const form = new FormData(e.target);
 		console.log(form);
 
-		const newData = {
-			status: form.get("minuteStatus"),
-			text: form.get("minuteText"),
-			if(submitting) {
-				text: form.get("minuteText");
-			},
-		};
+		let newData;
+
+		if (clearing) {
+			newData = {
+				// applicant information
+				"applicant.type": form.get("applicantType"),
+				"applicant.name": form.get("applicantName"),
+				"applicant.gender": form.get("applicantGender"),
+				"applicant.address": form.get("applicantAddress"),
+				"applicant.email": form.get("applicantEmail"),
+				"applicant.phone": form.get("applicantPhone"),
+				"applicant.phone1": form.get("applicantPhone1") || "",
+				"applicant.photo": form.get("applicantPassport") || "",
+				// "applicant.cacCertificate": form.get("applicantCacCertificate") || "",
+				// "applicant.idCard": form.get("applicantIdCard") || "",
+
+				// rep information
+				"rep.name": form.get("repName"),
+				"rep.gender": form.get("repGender"),
+				"rep.address": form.get("repAddress"),
+				"rep.email": form.get("repEmail"),
+				"rep.phone": form.get("repPhone"),
+				"rep.phone1": form.get("repPhone1") || "",
+				// "rep.photo": form.get("repPassport") || "",
+				// "rep.idCard": form.get("repIdCard") || "",
+
+				// building information
+				"dev.name": form.get("planBuildingName") || "",
+				"dev.plotNo": form.get("planPlotNo"),
+				"dev.address": form.get("planAddress"),
+				"dev.region": form.get("planRegion") || "",
+				"dev.lga": form.get("planLga") || "",
+				"dev.zone": form.get("planZone") || "",
+				"dev.type": form.get("planBuildingType") || "",
+				"dev.use": form.get("planBuildingUse") || "",
+				"dev.status": form.get("planBuildingStatus") || "",
+				"dev.noOfFloor": form.get("planFloors") || "",
+				"dev.coordinates": form.get("planCoordinates") || "",
+			};
+		} else if (assessment) {
+			newData = {
+				stack: form.get("planStack") || "",
+				isFastTrack: isFastTrack.current.checked,
+				isOldFile: isOldFile.current.checked,
+				isFileOfInterest: isFileOfInterest.current.checked,
+
+				// building information
+				"dev.name": form.get("planBuildingName") || "",
+				"dev.plotNo": form.get("planPlotNo"),
+				"dev.address": form.get("planAddress"),
+				"dev.region": form.get("planRegion") || "",
+				"dev.lga": form.get("planLga") || "",
+				"dev.zone": form.get("planZone") || "",
+				"dev.type": form.get("planBuildingType") || "",
+				"dev.use": form.get("planBuildingUse") || "",
+				"dev.status": form.get("planBuildingStatus") || "",
+				"dev.noOfFloor": form.get("planFloors") || "",
+				"dev.coordinates": form.get("planCoordinates") || "",
+				"dev.description": form.get("devDescription") || "",
+				"dev.assessedAmount": rawAmount,
+			};
+		} else if (archive) {
+			newData = {
+				stack: form.get("planStack") || "",
+				hasTax: form.get("planHasTax") === "yes" ? true : false,
+				"approval.status": form.get("planApprovalStatus"),
+				"approval.statusDate": form.get("planApprovalStatusDate") || "",
+				"approval.isCollected":
+					form.get("collectedApproval") === "yes" ? true : false,
+				"approval.isCollectedDate": form.get("collectedApprovalDate") || "",
+			};
+		} else if (commissioner) {
+			newData = {
+				stack: form.get("planStack") || "",
+				hasTax: form.get("planHasTax") === "yes" ? true : false,
+				"approval.status": form.get("planApprovalStatus"),
+				"approval.statusDate": form.get("planApprovalStatusDate") || "",
+			};
+		} else {
+			newData = {
+				stack: form.get("planStack") || "",
+				// building information
+				"dev.description": form.get("devDescription") || "",
+			};
+		}
+
 		console.log(newData);
+		console.log(isOldFile);
 
 		axios.defaults.withCredentials = true;
 
 		try {
 			let host = import.meta.env.VITE_SERVER;
-			const res = await axios.post(
-				`${host}/staffs/plan/${data._id}/comment`,
-				newData,
-				{
-					withCredentials: true,
-				}
-			);
+			const res = await axios.put(`${host}/staffs/plan/${data._id}`, newData, {
+				withCredentials: true,
+			});
 			console.log(res.data);
 
 			// dispatch(resetOfficeData());
@@ -140,6 +291,7 @@ export default function PlanEditInfoModal({
 				: error.message;
 			console.log(error);
 			console.log(message);
+			handleClose();
 
 			toast.error(message, {
 				position: "top-right",
@@ -154,11 +306,15 @@ export default function PlanEditInfoModal({
 		}
 	};
 
-	const individualApplicationItems = (type) => {
+	const individualApplicationItems = (type, data) => {
 		return (
 			<div className="applicationItemsWrapper">
 				<div className="applicationTitle">
-					<h3>Applicant Information</h3>
+					<h3>
+						{type === "applicant"
+							? "Applicant Information"
+							: "Representative Information"}
+					</h3>
 				</div>
 
 				<div className="applicationItems">
@@ -213,7 +369,7 @@ export default function PlanEditInfoModal({
 								{isCompany && type !== "rep" ? "Company Name:" : "Full Name:"}
 							</label>
 							<input
-								defaultValue={data.applicant.name}
+								defaultValue={data.name}
 								type="text"
 								name={type + "Name"}
 								id={type + "Name"}
@@ -254,7 +410,7 @@ export default function PlanEditInfoModal({
 								<label htmlFor={type + "Gender1"}>
 									<span>Female</span>
 									<input
-										defaultChecked={data.applicant?.gender === "female"}
+										defaultChecked={data?.gender === "female"}
 										type="radio"
 										name={type + "Gender"}
 										value="female"
@@ -266,7 +422,7 @@ export default function PlanEditInfoModal({
 								<label htmlFor={type + "Gender2"}>
 									<span>Male</span>
 									<input
-										defaultChecked={data.applicant?.gender === "male"}
+										defaultChecked={data?.gender === "male"}
 										type="radio"
 										name={type + "Gender"}
 										value="male"
@@ -288,7 +444,7 @@ export default function PlanEditInfoModal({
 							{isCompany && type !== "rep" ? "Company Address:" : "Address:"}
 						</label>
 						<input
-							defaultValue={data.applicant?.address}
+							defaultValue={data?.address}
 							type="text"
 							name={type + "Address"}
 							id={type + "Address"}
@@ -301,7 +457,7 @@ export default function PlanEditInfoModal({
 							<div>
 								<label htmlFor={type + "Phone1"}>Phone 1:</label>
 								<input
-									defaultValue={data.applicant?.phone}
+									defaultValue={data?.phone}
 									type="tel"
 									name={type + "Phone1"}
 									id={type + "Phone1"}
@@ -310,7 +466,7 @@ export default function PlanEditInfoModal({
 							<div>
 								<label htmlFor={type + "Phone2"}>Phone 2:</label>
 								<input
-									defaultValue={data.applicant?.phone1}
+									defaultValue={data?.phone1}
 									type="tel"
 									name={type + "Phone1"}
 									id={type + "Phone2"}
@@ -321,7 +477,7 @@ export default function PlanEditInfoModal({
 					<div className="applicationItem">
 						<label htmlFor={type + "Email"}>Email:</label>
 						<input
-							defaultValue={data.applicant?.email}
+							defaultValue={data?.email}
 							type={type + "Email"}
 							id={type + "Email"}
 						/>
@@ -477,31 +633,81 @@ export default function PlanEditInfoModal({
 					<form action="" onSubmit={handleEditSubmit}>
 						{!clearing && (
 							<div className="currentStackEdit">
-								<label htmlFor="planBuildingStatus">Current Stack:</label>
+								<label htmlFor="planStack">Current Stack:</label>
 								<select
-									name="planBuildingStatus"
-									id="planBuildingStatus"
-									defaultValue={data?.stack}>
-									<option value="a1">Stack A1</option>
-									<option value="a2">Stack A2</option>
-									<option value="a3">Stack A3</option>
+									onChange={(e) => {
+										let obj = {
+											...controlledOptions,
+											stack: e.target.value,
+										};
+										setControlledOptions(obj);
+									}}
+									name="planStack"
+									id="planStack"
+									value={controlledOptions.stack}>
+									<option value=""></option>
+									{STACK_LIST.map((e) => {
+										return (
+											<option key={uuid()} value={e}>
+												{e}
+											</option>
+										);
+									})}
 								</select>
 							</div>
 						)}
 
-						{archive && (
-							<>
-								<div className="currentStackEdit">
-									<label htmlFor="planBuildingStatus">Has Tax:</label>
+						{(commissioner || archive) && (
+							<div className="applicationItems">
+								<div className="applicationItem">
+									<label htmlFor="planHasTax">Has Tax:</label>
 									<select
-										name="planBuildingStatus"
-										id="planBuildingStatus"
+										name="planHasTax"
+										id="planHasTax"
 										defaultValue={data?.hasTax}>
 										<option value="no">No</option>
 										<option value="yes">Yes</option>
 									</select>
 								</div>
-								<div className="currentStackEdit">
+								<div className="applicationItem">
+									<label htmlFor="planApprovalStatus">
+										Plan Approval Status:
+									</label>
+									<select
+										defaultValue={data?.approval?.status}
+										name="planApprovalStatus"
+										id="planApprovalStatus"
+										onChange={(e) => {
+											setPlanApprovalStatus(e.target.value);
+										}}>
+										<option value="processing">Processing</option>
+										<option value="rejected">Rejected</option>
+										<option value="kiv">KIV</option>
+										<option value="approved">Approved</option>
+									</select>
+								</div>
+								{!(planApprovalStatus === "processing") ? (
+									<div className="applicationItem">
+										<label htmlFor="planApprovalStatusDate">
+											Approval Status Date:
+										</label>
+										<input
+											defaultValue={data?.approval?.isApprovedDate}
+											type="date"
+											name="planApprovalStatusDate"
+											id="planApprovalStatusDate"
+										/>
+									</div>
+								) : (
+									""
+								)}
+								<br />
+							</div>
+						)}
+
+						{archive && (
+							<div className="applicationItems">
+								<div className="applicationItem">
 									<label htmlFor="collectedApproval">Collected Approval:</label>
 									<select
 										defaultValue={data?.approval?.isCollected}
@@ -517,7 +723,7 @@ export default function PlanEditInfoModal({
 									</select>
 								</div>
 								{collectedApproval && (
-									<div className="currentStackEdit">
+									<div className="applicationItem">
 										<label htmlFor="collectedApprovalDate">
 											Collection Date:
 										</label>
@@ -529,7 +735,8 @@ export default function PlanEditInfoModal({
 										/>
 									</div>
 								)}
-							</>
+								<br />
+							</div>
 						)}
 
 						{assessment && (
@@ -545,6 +752,7 @@ export default function PlanEditInfoModal({
 												type="checkbox"
 												name="fastTrack"
 												id="fastTrack"
+												ref={isFastTrack}
 											/>
 										</div>
 
@@ -555,6 +763,7 @@ export default function PlanEditInfoModal({
 												type="checkbox"
 												name="oldFile"
 												id="oldFile"
+												ref={isOldFile}
 											/>
 										</div>
 
@@ -565,6 +774,7 @@ export default function PlanEditInfoModal({
 												type="checkbox"
 												name="fileOfInterest"
 												id="fileOfInterest"
+												ref={isFileOfInterest}
 											/>
 										</div>
 									</div>
@@ -583,7 +793,7 @@ export default function PlanEditInfoModal({
 										}}
 										onChange={(e) => {
 											const val = e.target.value;
-											setRawAmount(val);
+											setRawAmount(Number(val));
 											setFormattedAmount(
 												Intl.NumberFormat("en-NG", {
 													style: "currency",
@@ -621,7 +831,11 @@ export default function PlanEditInfoModal({
 						)}
 
 						{/* APPLICANT INFORMATION */}
-						{clearing && individualApplicationItems("applicant")}
+						{clearing &&
+							individualApplicationItems("applicant", data.applicant)}
+
+						{/* REP INFORMATION */}
+						{clearing && individualApplicationItems("rep", data.rep)}
 
 						{/* BUILDING APPLICATION INFORMATION */}
 						{clearing || assessment ? (
@@ -632,12 +846,12 @@ export default function PlanEditInfoModal({
 								<div className="applicationItems">
 									<div className="applicationItem">
 										<div>
-											<label htmlFor="planBusinessName">Building Name:</label>
+											<label htmlFor="planBuildingName">Building Name:</label>
 											<input
-												defaultValue={data.dev?.name}
+												defaultValue={data.dev.name}
 												type="text"
-												name="planBusinessName"
-												id="planBusinessName"
+												name="planBuildingName"
+												id="planBuildingName"
 											/>
 										</div>
 									</div>
@@ -646,19 +860,21 @@ export default function PlanEditInfoModal({
 											<div>
 												<label htmlFor="planPlotNo">Plot No:</label>
 												<input
-													defaultValue={data.dev?.plotNo}
+													defaultValue={data.dev.plotNo}
 													type="text"
 													name="planPlotNo"
+													required
 													id="planPlotNo"
 												/>
 											</div>
 											<div>
 												<label htmlFor="planAddress">Address:</label>
 												<input
-													defaultValue={data.dev?.address}
+													defaultValue={data.dev.address}
 													type="text"
 													name="planAddress"
 													id="planAddress"
+													required
 												/>
 											</div>
 										</div>
@@ -668,29 +884,58 @@ export default function PlanEditInfoModal({
 											<div>
 												<label htmlFor="planRegion">Region:</label>
 												<input
-													defaultValue={data.dev?.region}
 													type="text"
+													readOnly
 													name="planRegion"
+													value={data.dev.region}
 													id="planRegion"
 												/>
 											</div>
 											<div>
 												<label htmlFor="planLga">LGA:</label>
-												<input
-													defaultValue={data.dev?.lga}
-													type="text"
+												<select
+													onChange={(e) => {
+														let obj = {
+															...controlledOptions,
+															lga: e.target.value,
+														};
+														setControlledOptions(obj);
+													}}
 													name="planLga"
 													id="planLga"
-												/>
+													value={controlledOptions.lga}>
+													<option value=""></option>
+													{LGA_LIST.map((e) => {
+														return (
+															<option key={uuid()} value={e}>
+																{e}
+															</option>
+														);
+													})}
+												</select>
 											</div>
 											<div>
 												<label htmlFor="planZone">Zone:</label>
-												<input
-													defaultValue={data.dev?.zone}
-													type="text"
+												<select
+													onChange={(e) => {
+														let obj = {
+															...controlledOptions,
+															zone: e.target.value,
+														};
+														setControlledOptions(obj);
+													}}
 													name="planZone"
 													id="planZone"
-												/>
+													value={controlledOptions.zone}>
+													<option value=""></option>
+													{currentUser.region.zones.map((e) => {
+														return (
+															<option key={uuid()} value={e}>
+																{e}
+															</option>
+														);
+													})}
+												</select>
 											</div>
 										</div>
 									</div>
@@ -698,20 +943,34 @@ export default function PlanEditInfoModal({
 										<div className="applicationItemType">
 											<div>
 												<label htmlFor="planBuildingType">Building Type:</label>
-												<input
-													defaultValue={data.dev?.type}
-													type="text"
+												<select
+													onChange={(e) => {
+														let obj = {
+															...controlledOptions,
+															type: e.target.value,
+														};
+														setControlledOptions(obj);
+													}}
 													name="planBuildingType"
 													id="planBuildingType"
-												/>
+													value={controlledOptions.type}>
+													<option value=""></option>
+													{BUILDING_TYPE.map((e) => {
+														return (
+															<option key={uuid()} value={e}>
+																{e}
+															</option>
+														);
+													})}
+												</select>
 											</div>
 											<div>
 												<label htmlFor="planBuildingUse">Building Use:</label>
 												<input
-													defaultValue={data.dev?.use}
 													type="text"
 													name="planBuildingUse"
 													id="planBuildingUse"
+													defaultValue={data.dev.use}
 												/>
 											</div>
 											<div>
@@ -719,14 +978,24 @@ export default function PlanEditInfoModal({
 													Building Status:
 												</label>
 												<select
-													defaultValue={data.dev?.status}
+													onChange={(e) => {
+														let obj = {
+															...controlledOptions,
+															status: e.target.value,
+														};
+														setControlledOptions(obj);
+													}}
 													name="planBuildingStatus"
-													id="planBuildingStatus">
-													<option value="proposed">Proposed</option>
-													<option value="underConstruction">
-														Under Construction
-													</option>
-													<option value="built">Built</option>
+													id="planBuildingStatus"
+													value={controlledOptions.status}>
+													<option value=""></option>
+													{BUILDING_STATUS.map((e) => {
+														return (
+															<option key={uuid()} value={e}>
+																{e}
+															</option>
+														);
+													})}
 												</select>
 											</div>
 										</div>
@@ -736,21 +1005,21 @@ export default function PlanEditInfoModal({
 											<div>
 												<label htmlFor="planFloors">No of Floors:</label>
 												<input
-													defaultValue={data.dev?.noOfFloors}
 													type="text"
 													name="planFloors"
 													id="planFloors"
+													defaultValue={data.dev.noOfFloors}
 												/>
 											</div>
 											<div>
-												<label htmlFor="planCoordinate">
+												<label htmlFor="planCoordinates">
 													Survey Coordinates:
 												</label>
 												<input
-													defaultValue={data.dev?.coordinates}
+													defaultValue={data.dev.coordinates}
 													type="text"
-													name="planCoordinate"
-													id="planCoordinate"
+													name="planCoordinates"
+													id="planCoordinates"
 												/>
 											</div>
 										</div>
@@ -760,21 +1029,23 @@ export default function PlanEditInfoModal({
 						) : (
 							""
 						)}
+
 						{!clearing && (
 							<div className="minuteItem">
-								<label htmlFor="minuteText">Development Description:</label>
+								<label htmlFor="devDescription">Development Description:</label>
 								<textarea
 									defaultValue={data?.dev?.description}
-									name="minuteText"
-									id="minuteText"
+									name="devDescription"
+									id="devDescription"
 									cols="30"
 									rows="5"></textarea>
 							</div>
 						)}
+
 						<br />
 						<footer>
 							{" "}
-							<button type="submit" className="primary">
+							<button type="submit" className="primary" disabled={submitting}>
 								{submitting ? (
 									<CircularProgress
 										thickness={5}

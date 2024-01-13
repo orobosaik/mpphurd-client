@@ -92,6 +92,14 @@ export default function PlanInfoCard({ type, AD2, R, BD, data }) {
 							<span className="planInfoText">{`${data.plotNo}, ${data.address}`}</span>
 						</div>
 						<div className="planInfoItem">
+							<span className="planInfoTitle">LGA:</span>
+							<span className="planInfoText">{data.lga}</span>
+						</div>
+						<div className="planInfoItem">
+							<span className="planInfoTitle">Zone:</span>
+							<span className="planInfoText">{data.zone}</span>
+						</div>
+						<div className="planInfoItem">
 							<span className="planInfoTitle">No of Floor:</span>
 							<span className="planInfoText">{data.noOfFloors}</span>
 						</div>

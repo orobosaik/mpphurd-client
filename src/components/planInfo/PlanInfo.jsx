@@ -27,12 +27,31 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 	const isManagementStaff = currentUser.isManagement;
 
 	useEffect(() => {
-		setData(state)
-	}, [state])
-
+		setData(state);
+	}, [state]);
 
 	return (
 		<div className="planInfo">
+			<div
+				className={
+					data.approval.status === "approved"
+						? "watermark approved"
+						: data.approval.status === "kiv"
+						? "watermark kiv"
+						: data.approval.status === "rejected"
+						? "watermark rejected"
+						: "watermark processing"
+				}>
+				<span>
+					{data.approval.status === "approved"
+						? "APPROVED"
+						: data.approval.status === "kiv"
+						? "KIV"
+						: data.approval.status === "rejected"
+						? "REJECTED"
+						: ""}
+				</span>
+			</div>
 			<div className="planInfoSummary">
 				<div className="planInfoSummaryDetails">
 					<div className="planInfoSummaryItem">
@@ -88,7 +107,7 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 				<div className="planInfoSummaryDetails2">
 					{isInUserOffice && (
 						<>
-							<PlanEditInfoModal state={data} />
+							<PlanEditInfoModal reload={reload} state={data} />
 						</>
 					)}
 
