@@ -68,4 +68,5 @@ export const BUILDING_TYPE = [
 	"Religious",
 	"Educational",
 	"Industrial",
+	"Recreational",
 ];
