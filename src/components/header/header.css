@@ -69,6 +69,11 @@
 	-moz-border-radius: 8px;
 	-ms-border-radius: 8px;
 	-o-border-radius: 8px;
+	transition: background .4s;
+	-webkit-transition: background .4s;
+	-moz-transition: background .4s;
+	-ms-transition: background .4s;
+	-o-transition: background .4s;
 }
 .searchBar:hover {
 	background-color: var(--white);

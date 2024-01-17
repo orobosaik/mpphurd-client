@@ -1,21 +1,39 @@
 .listCard {
 	position: relative;
 	width: 100%;
-	/* background-color: lightgray; */
-
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2rem;
+	padding: 1rem 1.5rem;
 	cursor: pointer;
-	/* border: 1px solid rgba(0, 0, 0, 0.2); */
-	/* border: 1px solid var(--sc-grey); */
-	/* box-shadow: 0px 0px 11px -4px rgba(0, 0, 0, 0.5); */
+	border: 1px solid var(--light-grey);
 	border-radius: 8px;
 	-webkit-border-radius: 8px;
 	-moz-border-radius: 8px;
 	-ms-border-radius: 8px;
 	-o-border-radius: 8px;
 }
+/* .listCard {
+	position: relative;
+	width: 100%;
+	/* background-color: lightgray; */
+
+	/* cursor: pointer; */
+	/* border: 1px solid rgba(0, 0, 0, 0.2); */
+	/* border: 1px solid var(--sc-grey); */
+	/* box-shadow: 0px 0px 11px -4px rgba(0, 0, 0, 0.5); */
+	/* border-radius: 8px; */
+	/* -webkit-border-radius: 8px; */
+	/* -moz-border-radius: 8px; */
+	/* -ms-border-radius: 8px; */
+	/* -o-border-radius: 8px; */
+/* } */
+
+
 
 .listCard:not(:last-of-type){
-	/* border-bottom: 1px solid var(--sc-grey); */
+	border-bottom: 1px solid var(--light-grey);
+	margin-bottom: .5rem;
 
 }
 
@@ -29,6 +47,7 @@
 
 .listCard span {
 	position: relative;
+	text-transform: capitalize;
 }
 
 .listCard span:not(:nth-child(1)):before {
@@ -39,3 +58,34 @@
 	height: 100%;
 	border-left: dashed grey 1px;
 }
+
+.listCard .tags{
+	display: flex;
+	gap: 2px;
+	align-items: end;
+	flex-direction: column;
+	position: absolute;
+	right: 0;
+	top: 50%;
+	transform:  translateY(-50%);
+
+}
+.listCard .fast_track,
+.listCard .file_of_interest,
+.listCard .old_file{
+	background-color: red;
+	text-transform: uppercase;
+	font-weight: 1000;
+	color: var(--white);
+	font-size: 1rem;
+	padding: 0 3px;
+	margin: 0;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-o-border-radius: 4px;
+}
+.listCard .fast_track{background-color: red;}
+.listCard .file_of_interest{background-color: purple;}
+.listCard .old_file{background-color: gold;}

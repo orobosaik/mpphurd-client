@@ -17,7 +17,7 @@
 }
 .planInfoItem{
   display: flex;
-  align-items: center;
+  /* align-items: center; */
 }
 .planInfoTitle{
   flex: 3;

@@ -12,6 +12,7 @@ import { CircularProgress } from "@mui/material";
 import { toast } from "react-toastify";
 import { getThemeColor } from "../../utilities/themeColor";
 import axios from "axios";
+import { TASK_LIST } from "../../utilities/appData";
 
 export default function AdminOfficeEditModal({ ...props }) {
 	const [open, setOpen] = useState(false);
@@ -41,7 +42,7 @@ export default function AdminOfficeEditModal({ ...props }) {
 			setTasks(props.data.tasks);
 			setIsActive(props.data.isActive);
 		} else {
-			setRegion(props.region[0])
+			setRegion(props.region[0]);
 		}
 		setOpen(true);
 	};
@@ -94,7 +95,6 @@ export default function AdminOfficeEditModal({ ...props }) {
 		region && (newData.region = region._id);
 		zone && (newData.zone = zone);
 		tasks && (newData.tasks = tasks.filter((str) => str !== ""));
-
 
 		try {
 			let host = import.meta.env.VITE_SERVER;
@@ -307,7 +307,23 @@ export default function AdminOfficeEditModal({ ...props }) {
 												<label htmlFor={"adminEditOfficeTaskCount"}>
 													{i + 1} :
 												</label>
-												<input
+
+												<select
+													name={"adminEditOfficeTaskCount"}
+													id={"adminEditOfficeTaskCount"}
+													defaultValue={tasks[i]}
+													onChange={(e) => {
+														let newArr = [...tasks];
+														newArr[i] = e.target.value.toUpperCase().trim();
+														setTasks(newArr);
+													}}>
+													<option value=""></option>
+													{TASK_LIST.map((e) => {
+														return <option value={e}>{e}</option>;
+													})}
+												</select>
+
+												{/* <input
 													type="text"
 													name={"adminEditOfficeTaskCount"}
 													id={"adminEditOfficeTaskCount"}
@@ -318,7 +334,7 @@ export default function AdminOfficeEditModal({ ...props }) {
 														newArr[i] = e.target.value.toUpperCase().trim();
 														setTasks(newArr);
 													}}
-												/>
+												/> */}
 											</div>
 										);
 									})}

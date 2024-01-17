@@ -13,12 +13,17 @@ import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import { useSelector } from "react-redux";
 import uuid from "react-uuid";
-import { BUILDING_STATUS, BUILDING_TYPE, LGA_LIST } from "../../utilities/appData";
+import {
+	BUILDING_STATUS,
+	BUILDING_TYPE,
+	LGA_LIST,
+} from "../../utilities/appData";
 
 export default function ApplicationForm() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [isCompany, setIsCompany] = useState(false);
 	const [isJoint, setIsJoint] = useState(true);
+	const [hasRep, setHasRep] = useState(true);
 
 	const { currentUser, loading } = useSelector((state) => state.user);
 
@@ -34,28 +39,28 @@ export default function ApplicationForm() {
 
 		let newData = {
 			// applicant information
-			"applicant.type": form.get("applicantType"),
-			"applicant.name": form.get("applicantName"),
-			"applicant.gender": form.get("applicantGender"),
-			"applicant.address": form.get("applicantAddress"),
-			"applicant.email": form.get("applicantEmail"),
-			"applicant.phone": form.get("applicantPhone"),
+			"applicant.type": form.get("applicantType") || "",
+			"applicant.name": form.get("applicantName") || "",
+			"applicant.gender": form.get("applicantGender") || "",
+			"applicant.address": form.get("applicantAddress") || "",
+			"applicant.email": form.get("applicantEmail") || "",
+			"applicant.phone": form.get("applicantPhone") || "",
 			"applicant.phone1": form.get("applicantPhone1") || "",
 			"applicant.photo": form.get("applicantPassport") || "",
 			"applicant.cacCertificate": form.get("applicantCacCertificate") || "",
 			"applicant.idCard": form.get("applicantIdCard") || "",
 			// rep information
-			"rep.name": form.get("repName"),
-			"rep.gender": form.get("repGender"),
-			"rep.address": form.get("repAddress"),
-			"rep.email": form.get("repEmail"),
-			"rep.phone": form.get("repPhone"),
+			"rep.name": form.get("repName") || "",
+			"rep.gender": form.get("repGender") || "",
+			"rep.address": form.get("repAddress") || "",
+			"rep.email": form.get("repEmail") || "",
+			"rep.phone": form.get("repPhone") || "",
 			"rep.phone1": form.get("repPhone1") || "",
 			"rep.photo": form.get("repPassport") || "",
 			"rep.idCard": form.get("repIdCard") || "",
 			// building information
 			"dev.name": form.get("planBuildingName") || "",
-			"dev.plotNo": form.get("planPlotNo"),
+			"dev.plotNo": form.get("planPlotNo") || "",
 			"dev.address": form.get("planAddress"),
 			"dev.region": form.get("planRegion") || "",
 			"dev.lga": form.get("planLga") || "",
@@ -377,17 +382,29 @@ export default function ApplicationForm() {
 									<span>Uni Code:</span>
 									<input type="text" />
 								</div> */}
+								{
+									<>
+										{/* <span>Has Rep</span> */}
+										<ToggleSwitch
+											label={"Rep:"}
+											toggled={hasRep}
+											onClick={() => setHasRep(!hasRep)}
+										/>
+									</>
+								}
 							</div>
 							{individualApplicationItems("applicant")}
 						</div>
 
 						{/* REP INFORMATION */}
-						<div className="applicationItemsWrapper">
-							<div className="applicationTitle">
-								<h3>Representative Information</h3>
+						{hasRep && (
+							<div className="applicationItemsWrapper">
+								<div className="applicationTitle">
+									<h3>Representative Information</h3>
+								</div>
+								{individualApplicationItems("rep")}
 							</div>
-							{individualApplicationItems("rep")}
-						</div>
+						)}
 
 						{/* BUILDING APPLICATION INFORMATION */}
 						<div className="applicationItemsWrapper">

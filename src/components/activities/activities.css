@@ -32,6 +32,9 @@
 	justify-content: center;
 	cursor: pointer;
 }
+.activitiesLabels span:hover {
+	color: var(--pc-green);
+}
 .activitiesLabelActive {
 	color: var(--pc-green);
 	font-weight: 700;

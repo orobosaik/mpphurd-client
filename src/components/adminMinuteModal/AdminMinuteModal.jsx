@@ -59,13 +59,20 @@ export default function AdminMinuteModal({
 		const form = new FormData(e.target);
 		console.log(form);
 
-		const newData = {
+		let newData = {
 			newOfficeId: form.get("minuteToOfficer"),
-			fromOfficerId: form.get("minuteFromOfficer"),
+
 			status: form.get("minuteStatus"),
 			text: form.get("minuteText"),
 			date: form.get("minuteItemData"),
 		};
+
+		if (data?.currentOffice?.id) {
+			newData.fromOfficerId = form.get("minuteFromOfficer");
+		} else {
+			newData.fromOfficeId = form.get("minuteFromOffice");
+		}
+
 		console.log(newData);
 
 		axios.defaults.withCredentials = true;
@@ -144,16 +151,17 @@ export default function AdminMinuteModal({
 
 				const office = res[0].data;
 				const staff = res[1].data;
+				console.log(staff);
 
 				let currentStaffList = staff.filter((s) =>
-					s.office.some((so) => so?.id?._id === data.currentOffice.id._id)
+					s?.office?.some((so) => so?.id?._id === data?.currentOffice?.id?._id)
 				);
 
 				setStaffList(currentStaffList);
 
 				let presentOfficeList = office.map((o) => {
 					// Prevent showing current plan office
-					if (o._id === data.currentOffice.id._id) return;
+					if (o._id === data.currentOffice?.id?._id) return;
 
 					let officeStaff = staff.filter((s) =>
 						s.office.some((so) => so?.id?._id === o._id)
@@ -242,23 +250,45 @@ export default function AdminMinuteModal({
 										/>
 									</div>
 
-									<div className="minuteItem">
-										<label htmlFor="minuteFromOfficer">From Officer:</label>
-										<select name="minuteFromOfficer" id="minuteFromOfficer">
-											{staffList.map((o) => {
-												console.log(o);
-												if (o?._id) {
-													return (
-														<option key={o._id} value={o._id}>
-															{o?.region?.code.toUpperCase()} -{" "}
-															{data.currentOffice.id.name} ({o?.fullName})
-														</option>
-													);
-												}
-											})}
-										</select>
-									</div>
+									{/* Show from staff if plan office is captured */}
+									{data?.currentOffice?.id && (
+										<div className="minuteItem">
+											<label htmlFor="minuteFromOfficer">From Officer:</label>
+											<select name="minuteFromOfficer" id="minuteFromOfficer">
+												{staffList.map((o) => {
+													console.log(o);
+													if (o?._id) {
+														return (
+															<option key={o._id} value={o._id}>
+																{o?.region?.code.toUpperCase()} -{" "}
+																{data.currentOffice?.id?.name} ({o?.fullName})
+															</option>
+														);
+													}
+												})}
+											</select>
+										</div>
+									)}
 
+									{/* Show from office if plan current office is not yet captured */}
+									{!data?.currentOffice?.id && (
+										<div className="minuteItem">
+											<label htmlFor="minuteToOfficer">From Office:</label>
+
+											<select name="minuteFromOffice" id="minuteFromOffice">
+												<option value=""></option>
+												{officeList.map((o) => {
+													if (o?.officeId) {
+														return (
+															<option key={o.officeId} value={o.officeId}>
+																{o.text}
+															</option>
+														);
+													}
+												})}
+											</select>
+										</div>
+									)}
 									<div className="minuteItem">
 										<label htmlFor="minuteToOfficer">To Office:</label>
 

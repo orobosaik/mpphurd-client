@@ -70,3 +70,11 @@ export const BUILDING_TYPE = [
 	"Industrial",
 	"Recreational",
 ];
+export const TASK_LIST = [
+	"MINUTE PLAN",
+	"UPDATE PLAN",
+	"COMMENT ON PLAN",
+	"CREATE PLAN",
+	"GENERATE PLAN NUMBER",
+	"VET PLAN",
+]

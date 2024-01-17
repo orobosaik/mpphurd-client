@@ -21,7 +21,7 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 
 	// Check if Plan is in User Office(s)
 	const isInUserOffice = currentUser.office.some((e) => {
-		return data.currentOffice.id._id === e.id._id;
+		return data.currentOffice?.id?._id === e?.id?._id;
 	});
 	// Check if User is a management staff
 	const isManagementStaff = currentUser.isManagement;
@@ -57,21 +57,22 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 					<div className="planInfoSummaryItem">
 						<span className="planInfoSummaryTitle">File Name:</span>
 						<span className="planInfoSummaryText large">
-							{data.applicant.name}
-							{data.dev.name && ` (${data.dev.name})`}
+							{data.applicant?.name?.toLowerCase()}
+							{data.dev?.name && ` (${data.dev?.name?.toLowerCase()})`}
 						</span>
 					</div>
 					<div className="planInfoSummaryItem">
 						<span className="planInfoSummaryTitle">Site Location:</span>
 						<span className="planInfoSummaryText large">
-							{`${data.dev.plotNo}, ${data.dev.address}`}
+							{data.dev?.plotNo && data.dev?.plotNo+","}{" "}
+							{data.dev?.address && data.dev?.address?.toLowerCase()}
 						</span>
 					</div>
 					<div className="planInfoSummaryItem">
 						<span className="planInfoSummaryTitle">Current Office:</span>
 						<span className="planInfoSummaryText">
 							<span className="planInfoSummaryStack">
-								{data.currentOffice.id.name} Office
+								{data.currentOffice?.id?.name} Office
 							</span>
 							.
 						</span>
@@ -115,13 +116,13 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 						// Check if User has authorization to generate plan number
 						currentUser.office.some((e) => {
 							return (
-								data.currentOffice.id._id === e.id._id &&
+								data.currentOffice?.id?._id === e?.id?._id &&
 								e.tasks.includes("GENERATE PLAN NUMBER")
 							);
 						}) &&
 							!data.planNumber && (
 								<GeneratePlanNoModal
-									headerText={`${data.uniqueId} - ${data.dev.use}`}
+									headerText={`${data.uniqueId} - ${data.dev?.use}`}
 									buttonText={"Generate PN"}
 									title={"Generate Plan Number"}
 									body={
@@ -149,7 +150,7 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 					// Check if User has authorization to create bill
 					currentUser.office.some((e) => {
 						return (
-							data.currentOffice.id._id === e.id._id &&
+							data.currentOffice?.id?._id === e?.id?._id &&
 							e.tasks.includes("CREATE BILL")
 						);
 					}) && (
@@ -171,7 +172,7 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 					// Check if User has authorization to comment on plan
 					currentUser.office.some((e) => {
 						return (
-							data.currentOffice.id._id === e.id._id &&
+							data.currentOffice?.id?._id === e?.id?._id &&
 							e.tasks.includes("COMMENT ON PLAN")
 						);
 					}) && (
@@ -185,7 +186,7 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 					// Check if User has authorization to minute plan
 					currentUser.office.some((e) => {
 						return (
-							data.currentOffice.id._id === e.id._id &&
+							data.currentOffice?.id?._id === e?.id?._id &&
 							e.tasks.includes("MINUTE PLAN")
 						);
 					}) && (

@@ -50,6 +50,11 @@ function ListWrapper({ children }) {
 
 	const scrollSection = useRef();
 
+	// // Check if Plan is in User Office(s)
+	// const isInUserOffice = currentUser.office.some((e) => {
+	// 	return data.currentOffice?.id?._id === e?.id?._id;
+	// });
+
 	const categorizeListByDate = (data, ascending, isCurrent) => {
 		if (!data) return [];
 
@@ -317,7 +322,7 @@ function ListWrapper({ children }) {
 				<span>Location</span>
 				<span>Property Type</span>
 				<span>Has Rep</span>
-				<span>Stack</span>
+				<span>Zone / stk</span>
 			</div>
 
 			<div
@@ -350,6 +355,7 @@ function ListWrapper({ children }) {
 												<ListCard
 													key={uuid()}
 													data={item}
+													type = {type}
 													officeState={{
 														active: true,
 														type,
@@ -382,6 +388,7 @@ function ListWrapper({ children }) {
 												<ListCard
 													key={uuid()}
 													data={item}
+													type={type}
 													officeState={{
 														active: true,
 														type,

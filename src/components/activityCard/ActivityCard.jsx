@@ -23,15 +23,15 @@ export default function ActivityCard({ data }) {
 		if (isToday(originalDate)) {
 			return (
 				<>
-					<span>{format(originalDate, "dd/MM/yy")}</span>
-					<span>{format(originalDate, "HH:mm")}</span>
+					<span>Today</span>
+					{/* <span>{format(originalDate, "HH:mm")}</span> */}
 				</>
 			);
 		} else if (isYesterday(originalDate)) {
 			return (
 				<>
 					<span>Yesterday</span>
-					<span>{format(originalDate, "HH:mm")}</span>
+					{/* <span>{format(originalDate, "HH:mm")}</span> */}
 				</>
 			);
 		} else {
@@ -83,26 +83,22 @@ export default function ActivityCard({ data }) {
 				</div>
 			</div>
 
-			{data?.to?.staff && <p>{data.to.staff}</p>}
+			{/* {data?.to?.staff && <p>{data.to.staff}</p>} */}
 
 			{data?.from?.staff && (
 				<div>
 					<span className="activityCardTitle">From:</span>
-					<span className="activityCardText">{`${data.from.office} (${data.from.staff})`}</span>
+					<span className="activityCardText">{`${data.from.office}`}</span>
+					{/* <span className="activityCardText">{`${data.from.office} (${data.from.staff})`}</span> */}
 				</div>
 			)}
 			{data?.by?.staff && (
 				<div>
 					<span className="activityCardTitle">By:</span>
-					<span className="activityCardText">{`${data.by.office} (${data.by.staff})`}</span>
+					<span className="activityCardText">{`${data.by.office} `}</span>
+					{/* <span className="activityCardText">{`${data.by.office} (${data.by.staff})`}</span> */}
 				</div>
 			)}
-			{/* {data?.from?.staff && (
-				<div>
-					<span className="activityCardTitle">DIO:</span>{" "}
-					<span className="activityCardText">45 Days</span>
-				</div>
-			)} */}
 
 			{data?.comment?.status && (
 				<div>

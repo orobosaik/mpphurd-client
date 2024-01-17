@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { setOfficeData } from "../../redux/appSlice";
 import { useRef } from "react";
 
-function ListCard({ data, officeState, scrollSection, reload }) {
+function ListCard({ data, officeState, scrollSection, type, reload }) {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	return (
@@ -29,16 +29,31 @@ function ListCard({ data, officeState, scrollSection, reload }) {
 				}}>
 				<span>
 					{data?.planNumber
-						? `${data?.planNumber.value} / ${new Date(
-								data?.planNumber.date
+						? `${data?.planNumber?.value} / ${new Date(
+								data?.planNumber?.date
 						  ).getFullYear()}`
 						: data?.uniqueId}
 				</span>
 				<span>{data?.applicant?.name}</span>
-				<span>{data.dev.plotNo + " " + data.dev.address}</span>
-				<span>{data.dev.use}</span>
-				<span>Yes</span>
-				<span>A5</span>
+				<span>
+					{" "}
+					{data.dev?.plotNo && data.dev?.plotNo + ","}{" "}
+					{data.dev?.address && data.dev?.address?.toLowerCase()}
+				</span>
+				<span>{data.dev?.type}</span>
+				<span>{data.rep?.phone && data.rep?.phone !== "" ? "yes" : "no"}</span>
+
+				{type === "current" ? (
+					<span>{data?.stack || "Not Stacked"}</span>
+				) : (
+					<span>Zone {data?.dev?.zone}</span>
+				)}
+
+				<div className="tags">
+					<div className="fast_track">ftr</div>
+					{/* <div className="file_of_interest">foi</div> */}
+					{/* <div className="old_file">old</div> */}
+				</div>
 			</div>
 		</>
 	);

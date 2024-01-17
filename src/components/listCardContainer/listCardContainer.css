@@ -2,13 +2,25 @@
 .listCardContainerCards {
 	display: flex;
 	flex-direction: column;
+	height: auto;
 	/* gap: 1rem; */
-	padding: 0 1rem;
+	/* padding: 0 1rem; */
+
+		transition: height 5s;
+	-webkit-transition: height 5s;
+	-moz-transition: height 5s;
+	-ms-transition: height 5s;
+	-o-transition: height 5s;
 }
 
 .listCardContainerCards.collapsed {
 	height: 0;
 	overflow: hidden;
+	transition: height 5s;
+	-webkit-transition: height 5s;
+	-moz-transition: height 5s;
+	-ms-transition: height 5s;
+	-o-transition: height 5s;
 }
 
 .listCardContainerTop {
@@ -33,6 +45,18 @@
 	gap: 1rem;
 }
 
+.listCardContainerCount span:nth-child(1) {
+	padding: 0 5px;
+	font-weight: 700;
+	color: #2c2c2c;
+	/* background-color: var(--accent-yellow); */
+	background-color: lightgoldenrodyellow;
+	border-radius: 0.8rem;
+	-webkit-border-radius: 0.8rem;
+	-moz-border-radius: 0.8rem;
+	-ms-border-radius: 0.8rem;
+	-o-border-radius: 0.8rem;
+}
 .listCardContainerCount span:nth-child(2) {
 	padding: 0 5px;
 	font-weight: 700;

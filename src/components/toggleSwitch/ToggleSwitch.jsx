@@ -3,11 +3,11 @@ import { useState } from "react";
 import "./toggleSwitch.css";
 
 export default function ToggleSwitch({ label, toggled, onClick }) {
-  const [isToggled, setIsToggled] = useState(toggled)
-  const handleClick = () => {
-    setIsToggled(!isToggled)
-    onClick(!isToggled)
-  }
+	const [isToggled, setIsToggled] = useState(toggled);
+	const handleClick = () => {
+		setIsToggled(!isToggled);
+		onClick(!isToggled);
+	};
 	return (
 		<div className="container">
 			{/* <div className="toggle-switch">
@@ -25,8 +25,13 @@ export default function ToggleSwitch({ label, toggled, onClick }) {
 				</label>
 			</div> */}
 
+			<span>{label}</span>
 			<label className="toggle-switch">
-				<input type="checkbox" defaultChecked={isToggled} onClick={handleClick} />
+				<input
+					type="checkbox"
+					defaultChecked={isToggled}
+					onClick={handleClick}
+				/>
 				<span />
 				{/* <strong>{label}</strong> */}
 			</label>

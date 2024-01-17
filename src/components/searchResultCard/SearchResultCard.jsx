@@ -11,14 +11,16 @@ export default function searchResultCard({ data, changeOpen }) {
 				changeOpen(false);
 				navigate(`/permit/${data?._id}`, { state: data });
 			}}>
-			<span>{data?.planNumber?.fullValue || data.uniqueId}</span>
+			<span>{data?.planNumber?.fullValue || data?.uniqueId}</span>
 			<span>
-				{data.applicant.name} ({data.dev.name})
+				{data.applicant?.name?.toLowerCase()}
+				{data.dev?.name && ` (${data.dev?.name?.toLowerCase()})`}
 			</span>
 			<span>
-				{data.dev.plotNo} {data.dev.address}
+				{data.dev?.plotNo && data.dev?.plotNo + ","}{" "}
+				{data.dev?.address && data.dev?.address?.toLowerCase()}
 			</span>
-			<span>{data.dev.use}</span>
+			<span>{data.dev?.type}</span>
 		</div>
 	);
 }

@@ -20,7 +20,7 @@
 }
 .planInfoSummaryItem {
 	display: flex;
-	align-items: center;
+	/* align-items: center; */
 }
 .planInfoSummaryTitle {
 	flex: 3;
@@ -31,6 +31,7 @@
 	display: flex;
 	gap: 1rem;
 	flex: 9;
+	text-transform: capitalize;
 	/* width: 30rem; */
 }
 .planInfoSummaryText.large {

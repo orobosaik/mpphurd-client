@@ -7,6 +7,7 @@ import {
 } from "@mui/icons-material";
 
 import uuid from "react-uuid";
+import { format } from "date-fns";
 
 export default function ListCardContainer({ date, count, children }) {
 	const [expanded, setExpanded] = useState(true);
@@ -17,7 +18,7 @@ export default function ListCardContainer({ date, count, children }) {
 				className="listCardContainerTop"
 				onClick={() => setExpanded(!expanded)}>
 				<div className="listCardContainerCount">
-					<span>{date}</span>
+					<span>{format(date, 'dd MMM yyyy')}</span>
 					<span>{count}</span>
 				</div>
 				{expanded ? <ExpandLessRounded /> : <ExpandMoreRounded />}

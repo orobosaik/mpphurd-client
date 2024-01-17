@@ -209,9 +209,9 @@ export default function AdminPlan() {
 					topBarData={{
 						action: "Plan Info",
 						planNumber: data?.planNumber
-							? `${data?.dev.region.substring(0, 3).toUpperCase()}/${
-									data?.planNumber.value
-							  }/${new Date(data?.planNumber.date).getFullYear()}`
+							? `${data?.dev?.region?.substring(0, 3)?.toUpperCase()}/${
+									data?.planNumber?.value
+							  }/${new Date(data?.planNumber?.date)?.getFullYear()}`
 							: data?.uniqueId,
 						// options: <AdminMinuteModal data={data} reload={setReload} />
 					}}>
@@ -220,13 +220,34 @@ export default function AdminPlan() {
 					) : (
 						data && (
 							<div className="planInfo">
+								<div
+									className={
+										data.approval.status === "approved"
+											? "watermark approved"
+											: data.approval.status === "kiv"
+											? "watermark kiv"
+											: data.approval.status === "rejected"
+											? "watermark rejected"
+											: "watermark processing"
+									}>
+									<span>
+										{data.approval.status === "approved"
+											? "APPROVED"
+											: data.approval.status === "kiv"
+											? "KIV"
+											: data.approval.status === "rejected"
+											? "REJECTED"
+											: ""}
+									</span>
+								</div>
 								<div className="planInfoSummary">
 									<div className="planInfoSummaryDetails">
 										<div className="planInfoSummaryItem">
 											<span className="planInfoSummaryTitle">File Name:</span>
 											<span className="planInfoSummaryText large">
-												{data.applicant.name}
-												{data.dev.name && ` (${data.dev.name})`}
+												{data.applicant?.name?.toLowerCase()}
+												{data.dev?.name &&
+													` (${data.dev?.name?.toLowerCase()})`}
 											</span>
 										</div>
 										<div className="planInfoSummaryItem">
@@ -234,7 +255,8 @@ export default function AdminPlan() {
 												Site Location:
 											</span>
 											<span className="planInfoSummaryText large">
-												{data.dev.address}
+												{data.dev?.plotNo && data.dev?.plotNo + ","}{" "}
+												{data.dev?.address && data.dev?.address?.toLowerCase()}
 											</span>
 										</div>
 										<div className="planInfoSummaryItem">
@@ -243,7 +265,7 @@ export default function AdminPlan() {
 											</span>
 											<span className="planInfoSummaryText">
 												<span className="planInfoSummaryStack">
-													{data.currentOffice.id.name} Office
+													{data.currentOffice?.id?.name} Office
 												</span>
 												.
 											</span>
@@ -276,7 +298,7 @@ export default function AdminPlan() {
 
 								<div className="planInfoWrapper">
 									<PlanInfoCard
-										type={data.applicant.type}
+										type={data.applicant?.type}
 										BD={true}
 										data={data.applicant}
 									/>
