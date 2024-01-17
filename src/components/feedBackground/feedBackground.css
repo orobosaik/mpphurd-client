@@ -1,7 +1,7 @@
 .feedBackground {
 	flex: 10;
 	overflow-y: auto;
-	height: calc(100vh - 56px);
+	/* height: calc(100vh - 56px); */
 	padding: 5rem 10rem;
   padding-bottom: 10rem;
   display: flex;
@@ -9,7 +9,14 @@
   gap: 10rem;
 
 }
+.officeSelect .feedBackground{
+	height: calc(100vh - 56px);
 
+}
+.homePage .feedBackground{
+	height: calc(100vh - 112px);
+
+}
 .feedCard__container {
   gap: 2.3rem;
   display: flex;

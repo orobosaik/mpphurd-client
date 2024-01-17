@@ -214,10 +214,10 @@ export default function Home() {
 			<Header />
 			<div className="homeContainer">
 				<SideBar />
-				<div>
+				<div className="homePage">
 					<div className="home__greetings">{getGreeting()}</div>
 
-					<FeedBackground>
+					<FeedBackground >
 						{assessment && assessmentActions()}
 
 						{/* <div className="feedCard__container">

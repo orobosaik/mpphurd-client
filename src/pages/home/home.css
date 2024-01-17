@@ -5,9 +5,6 @@
   padding: 0 6px;
   gap: 6px;
 }
-.homeContainer .feedBackground{
-	height: calc(100vh - 112px);
-}
 
 .home__greetings{
   display: flex;
