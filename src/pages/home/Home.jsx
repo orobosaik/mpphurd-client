@@ -154,12 +154,16 @@ export default function Home() {
 			greeting = "Good Evening";
 		}
 
+		// Display the greeting with the formatted date
+		console.log(`${greeting} ${currentUser.firstName}`);
+		return `${greeting} ${currentUser.firstName}`;
+	};
+	const getGreetingDate = () => {
+		// Get the current time
+		const currentTime = new Date();
 		// Format the current date
 		const formattedDate = format(currentTime, "EEEE, MMMM do, yyyy");
-
-		// Display the greeting with the formatted date
-		console.log(`${greeting} ${currentUser.firstName}, it's ${formattedDate}`);
-		return `${greeting} ${currentUser.firstName}. It's ${formattedDate}`;
+		return `${formattedDate}`;
 	};
 
 	const assessmentActions = () => {
@@ -215,9 +219,12 @@ export default function Home() {
 			<div className="homeContainer">
 				<SideBar />
 				<div className="homePage">
-					<div className="home__greetings">{getGreeting()}</div>
+					<div className="home__greetings">
+						<span>{getGreeting()}</span>
+						<span>{getGreetingDate()}</span>
+					</div>
 
-					<FeedBackground >
+					<FeedBackground>
 						{assessment && assessmentActions()}
 
 						{/* <div className="feedCard__container">

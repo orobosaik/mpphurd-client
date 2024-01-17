@@ -9,6 +9,7 @@
 .home__greetings{
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0 4rem;
   font-size: 2rem;
   font-weight: 600;
@@ -22,4 +23,13 @@
   -moz-border-radius: 8px;
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
+}
+.home__greetings span:last-of-type{
+  color: var(--pc-green);
+  font-size: 1.3rem;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
 }
