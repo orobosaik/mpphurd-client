@@ -64,7 +64,7 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 					<div className="planInfoSummaryItem">
 						<span className="planInfoSummaryTitle">Site Location:</span>
 						<span className="planInfoSummaryText large">
-							{data.dev?.plotNo && data.dev?.plotNo+","}{" "}
+							{data.dev?.plotNo && data.dev?.plotNo + ","}{" "}
 							{data.dev?.address && data.dev?.address?.toLowerCase()}
 						</span>
 					</div>
@@ -122,7 +122,11 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 						}) &&
 							!data.planNumber && (
 								<GeneratePlanNoModal
-									headerText={`${data.uniqueId} - ${data.dev?.use}`}
+									headerText={
+										data.dev?.type
+											? `${data.uniqueId} - ${data.dev?.type}`
+											: data.uniqueId
+									}
 									buttonText={"Generate PN"}
 									title={"Generate Plan Number"}
 									body={

@@ -144,7 +144,7 @@ export default function AdminMinuteModal({
 					axios.get(`${host}/admin/office`, {
 						withCredentials: true,
 					}),
-					axios.get(`${host}/admin/staff`, {
+					axios.get(`${host}/admin/staff/active`, {
 						withCredentials: true,
 					}),
 				]);
@@ -158,6 +158,8 @@ export default function AdminMinuteModal({
 				);
 
 				setStaffList(currentStaffList);
+
+				console.log(staff)
 
 				let presentOfficeList = office.map((o) => {
 					// Prevent showing current plan office
