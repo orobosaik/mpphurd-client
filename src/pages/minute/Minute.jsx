@@ -17,9 +17,9 @@ import axios from "axios";
 
 import uuid from "react-uuid";
 import { ToastContainer, toast } from "react-toastify";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { getThemeColor } from "../../utilities/themeColor";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { resetOfficeData } from "../../redux/appSlice";
 import { CircularProgress } from "@mui/material";
 
@@ -27,6 +27,10 @@ export default function Minute() {
 	const [rightBarView, setRightBarView] = useState(0);
 	const [officeList, setOfficeList] = useState([]);
 	const [loading, setLoading] = useState();
+
+	const [isInUserOffice, setIsInUserOffice] = useState();
+	const { currentUser } = useSelector((state) => state.user);
+	const params = useParams();
 
 	const [proposedActions, setProposedActions] = useState([]);
 
@@ -118,9 +122,20 @@ export default function Minute() {
 					axios.get(`${host}/staffs/staff/all`, {
 						withCredentials: true,
 					}),
+					axios.get(`${host}/staffs/plan/${params.id}`),
 				]);
+
+
 				const office = res[0].data;
 				const staff = res[1].data;
+				const planData = res[2].data;
+
+				// Check if Plan is in User Office(s)
+				setIsInUserOffice(
+					currentUser.office.some((e) => {
+						return planData.currentOffice?.id?._id === e?.id?._id;
+					}) || currentUser?.isManagement === true
+				);
 
 				let presentStaff = office.map((o) => {
 					// Prevent showing current staff office
@@ -289,7 +304,11 @@ export default function Minute() {
 
 				<RightBar>
 					{rightBarView !== 1 ? (
-						<Activities setRightBarView={setRightBarView} />
+						<Activities
+							isInUserOffice={isInUserOffice}
+							// reload={reload}
+							setRightBarView={setRightBarView}
+						/>
 					) : (
 						<Document setRightBarView={setRightBarView} />
 					)}

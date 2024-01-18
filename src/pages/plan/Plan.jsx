@@ -47,16 +47,16 @@ function Plan() {
 		try {
 			let host = import.meta.env.VITE_SERVER;
 			const res = await axios.get(`${host}/staffs/plan/${params.id}`);
-
-			setData(() => res.data);
-			setIsLoading(false);
-
 			// Check if Plan is in User Office(s)
 			setIsInUserOffice(
 				currentUser.office.some((e) => {
 					return res.data.currentOffice?.id?._id === e?.id?._id;
 				}) || currentUser?.isManagement === true
 			);
+
+			setData(() => res.data);
+			setIsLoading(false);
+
 
 			console.log(res.data);
 		} catch (error) {

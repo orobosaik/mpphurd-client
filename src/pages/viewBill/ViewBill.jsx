@@ -8,13 +8,95 @@ import PlanInfo from "../../components/planInfo/PlanInfo";
 import FeedCard from "../../components/feedCard/FeedCard";
 import Activities from "../../components/activities/Activities";
 import Document from "../../components/document/Document";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TopBar from "../../components/topBar/TopBar";
 import PlanBill from "../../components/planBill/PlanBill";
 import GenerateBill from "../../components/generateBill/GenerateBill";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 export default function ViewBill() {
 	const [rightBarView, setRightBarView] = useState(0);
+
+		const [isInUserOffice, setIsInUserOffice] = useState();
+		const { currentUser } = useSelector((state) => state.user);
+	const params = useParams();
+
+
+	useEffect(() => {
+		axios.defaults.withCredentials = true;
+
+		const getData = async () => {
+			try {
+				let host = import.meta.env.VITE_SERVER;
+
+				// const res = await Promise.all([
+				// 	axios.get(`${host}/staffs/office/all`, {
+				// 		withCredentials: true,
+				// 	}),
+				// 	axios.get(`${host}/staffs/staff/all`, {
+				// 		withCredentials: true,
+				// 	}),
+				// 	axios.get(`${host}/staffs/plan/${params.id}`),
+				// ]);
+				const res = await axios.get(`${host}/staffs/plan/${params.id}`);
+
+				// Check if Plan is in User Office(s)
+				setIsInUserOffice(
+					currentUser.office.some((e) => {
+						return res.data.currentOffice?.id?._id === e?.id?._id;
+					}) || currentUser?.isManagement === true
+				);
+
+				// let presentStaff = office.map((o) => {
+				// 	// Prevent showing current staff office
+				// 	if (o._id === data.currentOffice.id._id) return;
+				// 	let staffList = staff.filter((s) =>
+				// 		s.office.some((so) => so.id === o._id)
+				// 	);
+				// 	let text;
+				// 	if (staffList.length === 0) {
+				// 		text = `${o.region.code.toUpperCase()} - ${o.name} (Unavailable)`;
+				// 	} else if (staffList.length > 1) {
+				// 		text = `${o.region.code.toUpperCase()} - ${o.name} (Multiple)`;
+				// 	} else {
+				// 		text = `${o.region.code.toUpperCase()} - ${o.name} (${
+				// 			staffList[0].fullName
+				// 		})`;
+				// 	}
+				// 	return {
+				// 		office: o,
+				// 		officeId: o._id,
+				// 		text,
+				// 	};
+				// });
+
+				// // Sort list and set as office list
+				// setOfficeList(
+				// 	presentStaff.sort((a, b) => {
+				// 		const nameA = a.text.toUpperCase(); // ignore upper and lowercase
+				// 		const nameB = b.text.toUpperCase(); // ignore upper and lowercase
+				// 		if (nameA < nameB) {
+				// 			return -1;
+				// 		}
+				// 		if (nameA > nameB) {
+				// 			return 1;
+				// 		}
+				// 		// names must be equal
+				// 		return 0;
+				// 	})
+				// );
+			} catch (error) {
+				let message = error.response
+					? error.response.data.message
+					: error.message;
+				console.log(error);
+				console.log(message);
+			}
+		};
+		getData();
+	}, []);
 
 	return (
 		<>
@@ -33,9 +115,13 @@ export default function ViewBill() {
 
 				<RightBar>
 					{rightBarView !== 1 ? (
-						<Activities setRightBarView={setRightBarView} />
-						) : (
-							<Document setRightBarView={setRightBarView} />
+						<Activities
+							isInUserOffice={isInUserOffice}
+							// reload={reload}
+							setRightBarView={setRightBarView}
+						/>
+					) : (
+						<Document setRightBarView={setRightBarView} />
 					)}
 				</RightBar>
 			</div>

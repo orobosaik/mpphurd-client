@@ -12,10 +12,9 @@ function Activities({ setRightBarView, reload, isInUserOffice, admin }) {
 	const [isAdmin, setIsAdmin] = useState(admin);
 	const [dataList, setDataList] = useState([]);
 	const [activityType, setActivityType] = useState(1);
-	// const [fileInStaffOffice, setFileInStaffOffice] = useState(isInUserOffice);
+	// const [fileInStaffOffice, setFileInStaffOffice] = useState(inUserOffice);
 
 	const params = useParams();
-	console.log(isInUserOffice);
 
 	const categorizeActivities = (type) => {
 		return type === "All" ? data : data.filter((e) => e.type === type);
@@ -37,7 +36,6 @@ function Activities({ setRightBarView, reload, isInUserOffice, admin }) {
 	};
 
 	useEffect(() => {
-		setDataList([]);
 		setIsLoading(true);
 		const getData = async () => {
 			axios.defaults.withCredentials = true;
@@ -55,11 +53,12 @@ function Activities({ setRightBarView, reload, isInUserOffice, admin }) {
 					});
 				}
 
-				setData(res.data);
 				// Send only 3 items if file is not in user's office
 				!isInUserOffice
 					? setDataList([...res.data].slice(0, 2))
 					: setDataList(res.data); // Else send everything
+
+				setData(res.data);
 
 				setIsLoading(false);
 			} catch (error) {
@@ -67,12 +66,12 @@ function Activities({ setRightBarView, reload, isInUserOffice, admin }) {
 			}
 		};
 
-		getData();
+		isInUserOffice !== undefined && getData();
 
 		// return () => {
 		// 	second
 		// }
-	}, [reload, params.id]);
+	}, [reload, params.id, isInUserOffice]);
 
 	return (
 		<div className="activities">
@@ -113,16 +112,17 @@ function Activities({ setRightBarView, reload, isInUserOffice, admin }) {
 			<div className="activitiesWrapper">
 				{isLoading && <LoadingIcon />}
 
-				{dataList.length < 1 && !isLoading ? (
-					<div className="empty">
-						<p>No Record...</p>
-					</div>
-				) : (
-					dataList.map((d) => {
-						return <ActivityCard key={d._id} data={d} />;
-						// return  <ActivityCardModal key={d._id} data={d}/>;
-					})
-				)}
+				{!isLoading &&
+					(dataList.length < 1 && !isLoading ? (
+						<div className="empty">
+							<p>No Record...</p>
+						</div>
+					) : (
+						dataList.map((d) => {
+							return <ActivityCard key={d._id} data={d} />;
+							// return  <ActivityCardModal key={d._id} data={d}/>;
+						})
+					))}
 			</div>
 		</div>
 	);

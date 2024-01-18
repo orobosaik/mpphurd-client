@@ -50,9 +50,11 @@ function ListCard({ data, officeState, scrollSection, type, reload }) {
 				)}
 
 				<div className="tags">
-					<div className="fast_track">ftr</div>
-					{/* <div className="file_of_interest">foi</div> */}
-					{/* <div className="old_file">old</div> */}
+					{data?.isFastTrack && <div className="fast_track">ftr</div>}
+					{data?.isFileOfInterest && (
+						<div className="file_of_interest">foi</div>
+					)}
+					{data?.isOldFile && <div className="old_file">old</div>}
 				</div>
 			</div>
 		</>

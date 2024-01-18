@@ -1,32 +1,35 @@
-.minuteItems{
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* gap: 1rem; */
+.minuteItems {
+	/* display: flex; */
+	/* flex-direction: column; */
+	/* gap: 1rem; */
 }
 
-.minuteItem{
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 2rem;
-  font-weight: 600;
+.minuteItem {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 2rem;
+	font-weight: 600;
 }
-.minuteItemActions{
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.minuteItemActions {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
 }
-.minuteItemAction{
-  display: flex;
-  gap: 1rem;
-  align-items: center;
+.minuteItemAction {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
 }
-.minuteItem button[type="submit"]{
+.minuteItem button[type="submit"] {
 	min-width: 15rem;
 }
 
-.minuteItem textarea:focus{
-  outline: none;
-  padding: 2rem;
+.minuteItem textarea {
+	white-space: pre-wrap;
+}
+.minuteItem textarea:focus {
+	outline: none;
+	padding: 2rem;
 }
 
 .minuteItem input,
