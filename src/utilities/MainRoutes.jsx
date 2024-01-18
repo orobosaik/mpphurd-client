@@ -18,6 +18,7 @@ import LoginPage from "../pages/loginPage/LoginPage";
 import { useSelector } from "react-redux";
 import { setThemeColor } from "./themeColor";
 import OfficeSelect from "../pages/officeSelect/OfficeSelect.jsx";
+import DevelopmentControl from "../pages/buildingControl/BuildingControl";
 
 function MainRoutes() {
 	const navigate = useNavigate();
@@ -65,10 +66,7 @@ function MainRoutes() {
 
 						<Route path="new" element={<CreateApplication />} />
 						<Route path=":id">
-							<Route
-								index
-								element={!currentUser ? <Navigate to="/login" /> : <Plan />}
-							/>
+							<Route index element={<Plan />} />
 							<Route path="bills" element={<ViewBill />} />
 							<Route path="create_bill" element={<CreateBill />} />
 							<Route path="minute" element={<Minute />} />
@@ -91,8 +89,7 @@ function MainRoutes() {
 
 					{/* DEVELOPMENT CONTROL */}
 					<Route path="/d_control">
-						<Route index element={<OfficeSelect />} />
-						<Route path=":id" element={<Office />} />
+						<Route index element={<DevelopmentControl />} />
 					</Route>
 
 					{/* ACTIVITIES */}

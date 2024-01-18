@@ -2,7 +2,7 @@ import FeedBackground from "../../components/feedBackground/FeedBackground";
 import Header from "../../components/header/Header";
 import SideBar from "../../components/sidebar/SideBar";
 
-export default function BuildingControl() {
+export default function DevelopmentControl() {
 	return (
 		<>
 			<div className="pageWrapper"></div>
@@ -10,7 +10,7 @@ export default function BuildingControl() {
 			<Header />
 			<div className="homeContainer">
 				<SideBar />
-				<FeedBackground>DEVEE</FeedBackground>
+				<FeedBackground>GGGG</FeedBackground>
 			</div>
 		</>
 	);
