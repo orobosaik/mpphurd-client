@@ -46,7 +46,7 @@ function ListCard({ data, officeState, scrollSection, type, reload }) {
 				{type === "current" ? (
 					<span>{data?.stack || "Not Stacked"}</span>
 				) : (
-					<span>Zone {data?.dev?.zone}</span>
+					<span>{data?.dev?.zone}</span>
 				)}
 
 				<div className="tags">
