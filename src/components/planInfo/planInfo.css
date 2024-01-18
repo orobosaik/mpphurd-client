@@ -55,11 +55,10 @@
 	-o-border-radius: 30px;
 }
 .tag-fastTrack {
-	/* background-color: var(--accent-red); */
-	background-color: #f73832;
+	background-color: var(--accent-red);
 }
 .tag-oldFile {
-	background-color: var(--accent-yellow);
+	background-color: var(--accent-3);
 }
 .tag-fileOfInterest {
 	background-color: var(--accent-4);

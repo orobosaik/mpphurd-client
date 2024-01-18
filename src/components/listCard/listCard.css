@@ -73,7 +73,6 @@
 .listCard .fast_track,
 .listCard .file_of_interest,
 .listCard .old_file{
-	background-color: red;
 	text-transform: uppercase;
 	font-weight: 1000;
 	color: var(--white);
@@ -86,6 +85,6 @@
 	-ms-border-radius: 4px;
 	-o-border-radius: 4px;
 }
-.listCard .fast_track{background-color: red;}
-.listCard .file_of_interest{background-color: purple;}
+.listCard .fast_track{background-color: var(--accent-red);}
+.listCard .file_of_interest{background-color: var(--accent-4);}
 .listCard .old_file{background-color: gold;}

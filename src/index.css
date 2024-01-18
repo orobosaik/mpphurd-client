@@ -37,9 +37,10 @@
 	/* --pc-green: #0d9f4f; */
 
 	/* --accent-yellow: #ffcc00; */
-	--accent-yellow: gold;
-	--accent-red: #f70000;
-	--green-background: #eef8f3;
+	/* --accent-yellow: gold; */
+	/* --accent-red: #f70000; */
+	/* --accent-red: #f73832; */
+	/* --green-background: #eef8f3; */
 
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
