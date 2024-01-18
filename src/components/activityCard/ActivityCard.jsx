@@ -62,7 +62,7 @@ export default function ActivityCard({ data }) {
 			<div className="activityCardArrow"></div>
 			<h1>
 				{" "}
-				<span className="activityCardTypeTag">{data.type}</span>
+				<span className={`activityCardTypeTag ${data.type}`}>{data.type}</span>
 			</h1>
 
 			{/* <div className="activityCardViewMoreIcon">

@@ -4,12 +4,26 @@
 	align-items: flex-start;
 	justify-content: center;
 	padding: 0px;
+	margin-top: -4rem;
 
-	gap: 25px;
+	gap: 2rem;
+}
+.app-cover__info-top{
+	width: 100%;
+	display: flex;
+	align-items: end;
+	justify-content: start;
+	/* flex-direction: column; */
+	gap: 1.5rem;
+}
+.app-cover__info__logo {
+	width: 12rem;
+	height: 12rem;
+	object-fit: cover;
 }
 .app-cover__info h1 {
 	font-weight: 700;
-	font-size: 4rem;
+	font-size: 3.6rem;
 
 	/* color: #0d9f4f; */
 	color: var(--pc-green);
@@ -23,7 +37,7 @@
 	/* font-family: "Candara"; */
 	font-style: normal;
 	font-weight: 700;
-	font-size: 2.2rem;
+	font-size: 2.1rem;
 	/* line-height: 49px; */
 	text-transform: uppercase;
 	color: var(--black);
@@ -42,9 +56,9 @@
 	font-family: "Nunito";
 	font-style: normal;
 	font-weight: 400;
-	font-size: 1.8rem;
+	font-size: 1.7rem;
 	/* font-size: 2rem; */
-	line-height: 27px;
+	line-height: 22px;
 
 	/* Black */
 
@@ -294,18 +308,36 @@ button:disabled{
 /* FOOTER */
 
 .login__footer {
-	width: 100%;
+	/* width: 100%; */
 	position: static;
 	bottom: 0;
-	padding: 2rem 10rem;
+	padding: 2rem 0;
+
 	/* background-color: #ffffff; */
 	background-color: var(--white);
-	display: flex;
-	align-items: center;
-	flex-wrap: wrap;
-	gap: 1rem;
-	justify-content: space-between;
+	/* display: flex; */
+	/* align-items: center; */
+	/* flex-wrap: wrap; */
 	z-index: 100;
+
+	display: grid;
+	justify-content: center;
+	align-content: center;
+	/* grid-template-columns: 1fr 1fr 1fr; */
+	/* grid-template-columns: repeat(3, minmax(20rem, 1fr)); */
+	grid-template-columns: repeat(auto-fit, minmax(2rem, 1fr));
+	grid-template-rows: auto;
+
+
+	gap: 1rem;
+
+  grid-auto-flow: column;
+}
+.login__footer--copyright {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 .login__footer--mda {
 	display: flex;

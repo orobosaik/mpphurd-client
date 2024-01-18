@@ -49,9 +49,8 @@ export default function LoginPage() {
 				{ withCredentials: true }
 			);
 
-
 			dispatch(loginSuccess(res.data));
-			navigate("/")
+			navigate("/");
 
 			setTimeout(() => {
 				toast.success("Login Successful", {
@@ -95,7 +94,15 @@ export default function LoginPage() {
 				<section className="login__header">
 					<div className="login__formBackground">
 						<section className="app-cover__info">
-							<h1>M-FLOW</h1>
+							<div className="app-cover__info-top">
+								<div className="app-cover__info__logo">
+									<img
+										src="/assets/logos/Logo-Mpphurd.png"
+										alt="MPPHURD Logo"
+									/>
+								</div>
+								<h1>M-FLOW</h1>
+							</div>
 							<h2>
 								ministry of physical planning, housing, urban and regional
 								development app
@@ -103,7 +110,7 @@ export default function LoginPage() {
 							<p>
 								An Application to automate the internal{" "}
 								<span className="app-cover__info--highlight">
-									Work Flows <span className="app-cover__info--svg" />
+									Workflow <span className="app-cover__info--svg" />
 								</span>
 								of the Ministry
 							</p>
@@ -189,7 +196,7 @@ export default function LoginPage() {
 				</section>
 				<footer className="login__footer">
 					<div className="login__footer--copyright">
-						© {new Date().getFullYear()} Copyright MPPHURD
+						<div>© {new Date().getFullYear()} Copyright MPPHURD</div>
 					</div>
 					<div className="login__footer--mda">
 						<div className="login__footer--logos">

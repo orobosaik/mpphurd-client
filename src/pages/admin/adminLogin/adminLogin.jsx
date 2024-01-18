@@ -104,7 +104,15 @@ export default function AdminLogin() {
 				<section className="login__header">
 					<div className="login__formBackground">
 						<section className="app-cover__info">
-							<h1>M-FLOW / ADMIN</h1>
+							<div className="app-cover__info-top">
+								<div className="app-cover__info__logo">
+									<img
+										src="/assets/logos/Logo-Mpphurd.png"
+										alt="MPPHURD Logo"
+									/>
+								</div>
+								<h1>M-FLOW / ADMIN</h1>
+							</div>
 							<h2>
 								ministry of physical planning, housing, urban and regional
 								development app
@@ -112,7 +120,7 @@ export default function AdminLogin() {
 							<p>
 								An Application to automate the internal{" "}
 								<span className="app-cover__info--highlight">
-									Work Flows <span className="app-cover__info--svg" />
+									Workflow <span className="app-cover__info--svg" />
 								</span>
 								of the Ministry
 							</p>
