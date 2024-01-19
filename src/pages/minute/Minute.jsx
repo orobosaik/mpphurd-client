@@ -22,6 +22,7 @@ import { getThemeColor } from "../../utilities/themeColor";
 import { useDispatch, useSelector } from "react-redux";
 import { resetOfficeData } from "../../redux/appSlice";
 import { CircularProgress } from "@mui/material";
+import { MINUTE_STATUS_LIST } from "../../utilities/appData";
 
 export default function Minute() {
 	const [rightBarView, setRightBarView] = useState(0);
@@ -125,7 +126,6 @@ export default function Minute() {
 					axios.get(`${host}/staffs/plan/${params.id}`),
 				]);
 
-
 				const office = res[0].data;
 				const staff = res[1].data;
 				const planData = res[2].data;
@@ -209,11 +209,9 @@ export default function Minute() {
 									<label htmlFor="minuteStatus">Status:</label>
 									<select name="minuteStatus" id="minuteStatus">
 										<option value="">...</option>
-										<option value="Process Further">Process Further</option>
-										<option value="Issue Raised">Issue Raised</option>
-										<option value="Recommended For Rejection">
-											Recommended for Rejection
-										</option>
+										{MINUTE_STATUS_LIST.map((e) => {
+											return <option value={e}>{e}</option>;
+										})}
 									</select>
 								</div>
 

@@ -12,6 +12,7 @@ import axios from "axios";
 import { getThemeColor } from "../../utilities/themeColor";
 import { CircularProgress } from "@mui/material";
 import ActivityCard from "../activityCard/ActivityCard";
+import { format } from "date-fns";
 
 export default function ActivityCardModal({
 	buttonIcon,
@@ -59,6 +60,14 @@ export default function ActivityCardModal({
 		}
 	}, [open]);
 
+	const getGreetingDate = () => {
+		// Get the current time
+		const currentTime = new Date();
+		// Format the current date
+		const formattedDate = format(currentTime, "EEEE, MMMM do, yyyy");
+		return `${formattedDate}`;
+	};
+
 	return (
 		<div>
 			<div
@@ -70,73 +79,86 @@ export default function ActivityCardModal({
 			{open && (
 				<dialog className="modalView activityCardModal">
 					<header>
-						<span>Activities View - {data?.type}</span>
+						<span>Activities View</span>
 						<div className="modalViewCloseButton" onClick={handleClose}>
 							<CloseRounded className="closeButton" />
 						</div>
 					</header>
 
-					<div className="applicationItemsWrapper">
-						<div className="applicationTitle">
-							<h3></h3>
+					<div className="activityCardModalWrapper">
+						<div className="head">
+							<h3 className={`${data.type} minuteType`}>{data.type}</h3>
+							<div className="date">
+								{format(data.createdAt, "EEEE, MMMM do, yyyy")}
+								{` at ${format(data.createdAt, "HH:mm")}`}
+							</div>
 						</div>
 
-						<div>
-							<div className="activityCardArrow"></div>
-							<h1>
-								{" "}
-								<span className="activityCardTypeTag">{data.type}</span>
-							</h1>
+						{/*  */}
 
-							<div className="activityCardHead">
-								<h2 className="title">
-									{data.type === "Action" ? data.title : data.to?.office}
-								</h2>
-								<div className="date">15 Days Ago</div>
-							</div>
+						<div className="activityCardHead">
+							<h2 className="action">
+								{data.type === "Action" ? data.title : "File Minuted"}
+							</h2>
+						</div>
 
-							{data?.to?.staff && <p>{data.to.staff}</p>}
-
-							{data?.from?.staff && (
-								<div>
-									<span className="activityCardTitle">From:</span>
-									<span className="activityCardText">{`${data.from.office} (${data.from.staff})`}</span>
-								</div>
-							)}
-							{data?.by?.staff && (
-								<div>
-									<span className="activityCardTitle">By:</span>
-									<span className="activityCardText">{`${data.by.office} (${data.by.staff})`}</span>
-								</div>
-							)}
-							{data?.from?.staff && (
-								<div>
-									<span className="activityCardTitle">DIO:</span>{" "}
-									<span className="activityCardText">45 Days</span>
-								</div>
-							)}
-
-							{data?.comment?.status && (
-								<div>
-									<span className="activityCardTitle">Status:</span>{" "}
-									<span className="activityCardText">
-										{data?.comment?.status}
+						{data?.to?.office && (
+							<>
+								<div className="title">To:</div>
+								<div className="card">
+									<span className="text">{`${data.to.office}`}</span>
+									<span className="text">
+										{(data.to.staff !== "Unavailable" ||
+											data.to.staff !== "Multiple staff") &&
+											`${data.to.staff}`}
 									</span>
 								</div>
-							)}
-
-							{/* Show comment if available */}
-							<div className="activityCardComment">
-								{data?.comment?.text && (
-									<div className="activityCardCommentButton">
-										<span>Comment</span>
-										<p className="activityCardCommentText">
-											{data?.comment?.text}
-										</p>
-									</div>
-								)}
-							</div>
-						</div>
+							</>
+						)}
+						{data?.from?.office && (
+							<>
+								<div className="title">From:</div>
+								<div className="card">
+									<span className="text">{`${data.from.office}`}</span>
+									<span className="text">
+										{data.from.staff && `${data.from.staff}`}
+									</span>
+								</div>
+							</>
+						)}
+						{data?.by?.office && (
+							<>
+								<div className="title">By:</div>
+								<div className="card">
+									<span className="text">{`${data.by.office}`}</span>
+									<span className="text">
+										{data.by.staff && `${data.by.staff}`}
+									</span>
+								</div>
+							</>
+						)}
+						{data?.comment?.status && (
+							<>
+								<div className="title">Status:</div>
+								<div className="card">
+									<span className="text">{`${data.comment.status}`}</span>
+								</div>
+							</>
+						)}
+						{/* Show comment if available */}
+						{data?.comment?.text && (
+							<>
+								<div className="title">Comment:</div>
+								<div className="card comment">
+									<span className="text ">{`${data.comment.text}`}</span>
+								</div>
+							</>
+						)}
+						{data?.type === "Minute" && (
+							<>
+								<div className="title dio">{`DIO: 45 days`}</div>
+							</>
+						)}
 					</div>
 				</dialog>
 			)}

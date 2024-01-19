@@ -10,7 +10,7 @@ export default function DevelopmentControl() {
 			<Header />
 			<div className="homeContainer">
 				<SideBar />
-				<FeedBackground>GGGG</FeedBackground>
+				<FeedBackground></FeedBackground>
 			</div>
 		</>
 	);

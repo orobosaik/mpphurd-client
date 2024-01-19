@@ -77,4 +77,18 @@ export const TASK_LIST = [
 	"CREATE PLAN",
 	"GENERATE PLAN NUMBER",
 	"VET PLAN",
-]
+];
+
+export const COMMENT_STATUS_LIST = [
+	"Action Taken",
+	"Observation",
+	"Issue Raised",
+	"Pending Action",
+];
+
+export const MINUTE_STATUS_LIST = [
+	"Process Further",
+	"Plan In Order",
+	"Issue Raised",
+	"Recommended for Rejection",
+];

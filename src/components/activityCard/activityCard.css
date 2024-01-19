@@ -34,7 +34,7 @@ html[data-theme="dark"] .activityCard {
 }
 .activityCardTypeTag.Action{
 	color: var(--white);
-	background-color: rgb(59, 152, 184);
+	background-color: var(--accent-action);
 }
 /* .activityCardTypeTag.Action{
 	color: #3e3e3e;

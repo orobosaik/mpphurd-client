@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { getThemeColor } from "../../utilities/themeColor";
 import { CircularProgress } from "@mui/material";
+import { COMMENT_STATUS_LIST } from "../../utilities/appData";
 
 export default function AddCommentModal({
 	buttonIcon,
@@ -147,10 +148,10 @@ export default function AddCommentModal({
 										<label htmlFor="minuteStatus">Status:</label>
 										<select name="minuteStatus" id="minuteStatus">
 											<option value="">...</option>
-											<option value="Action Taken">Action Taken</option>
-											<option value="Issue Raised">Issue Raised</option>
-											<option value="Observation">Observation</option>
-											<option value="Pending Action">Pending Action</option>
+
+											{COMMENT_STATUS_LIST.map((e) => {
+												return <option value={e}>{e}</option>;
+											})}
 										</select>
 									</div>
 

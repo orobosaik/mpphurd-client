@@ -1,7 +1,100 @@
 .modalView.activityCardModal {
-	font-size: 1.5em;
+	font-size: 1.8rem;
 	display: block;
 }
-.activityCardModal .applicationItemsWrapper > div{
-	display: block;
+.activityCardModal {
+}
+
+.activityCardModal .applicationTitle {
+	background-color: var(--pc-green);
+	color: var(--white);
+	width: fit-content;
+}
+.activityCardModal .minuteType {
+	background-color: var(--pc-green);
+	color: var(--white);
+	width: fit-content;
+	padding: 0 1rem;
+	border-radius: 1rem;
+	-webkit-border-radius: 1rem;
+	-moz-border-radius: 1rem;
+	-ms-border-radius: 1rem;
+	-o-border-radius: 1rem;
+}
+.activityCardModal .minuteType.Minute {
+	background-color: var(--pc-green);
+	color: var(--white);
+}
+.activityCardModal .minuteType.Action {
+	background-color: var(--accent-action);
+	color: var(--white);
+}
+
+.activityCardModalWrapper {
+	display: flex;
+	justify-content: space-between;
+	/* gap: 1rem; */
+}
+.activityCardModalWrapper .head {
+	display: flex;
+	justify-content: space-between;
+}
+.activityCardModalWrapper .date {
+	/* background-color: red; */
+	color: var(--pc-green);
+	font-weight: 600;
+}
+.activityCardModalWrapper {
+	/* background-color: blue; */
+	display: flex;
+	flex-direction: column;
+	margin-top: 1.5rem;
+	margin-bottom: 2rem;
+	/* gap: 4rem; */
+}
+.activityCardModalWrapper .action {
+	font-size: 1.7rem;
+}
+.activityCardModalWrapper .title {
+	margin-top: 1rem;
+	font-weight: 600;
+}
+.activityCardModalWrapper .text {
+	/* margin-top: 1.5rem; */
+	font-size: 1.4rem;
+}
+.activityCardModalWrapper .card {
+	/*margin-top: 1.5rem;
+	*/
+	display: flex;
+	flex-direction: column;
+	padding: 1rem 1.5rem;
+	border-radius: 1rem;
+	-webkit-border-radius: 1rem;
+	-moz-border-radius: 1rem;
+	-ms-border-radius: 1rem;
+	-o-border-radius: 1rem;
+}
+
+.activityCardModalWrapper .dio {
+	margin-top: 3rem;
+	color: var(--accent-3);
+}
+.activityCardModalWrapper .card {
+	box-shadow: 0px 0px 11px -4px rgba(0, 0, 0, 0.5);
+}
+
+html[data-theme="dark"] .activityCardModalWrapper .card {
+	box-shadow: 0px 0px 11px -4px rgba(255, 255, 255, 0.5);
+}
+
+.activityCardModalWrapper .comment {
+	box-shadow: none;
+	/* margin-top: 1.5rem; */
+	font-weight: 600;
+	white-space: pre-wrap;
+	background-color: var(--light-grey);
+}
+html[data-theme="dark"] .activityCardModalWrapper .comment {
+	box-shadow: none;
 }

@@ -10,7 +10,7 @@ export default function BuildingControl() {
 			<Header />
 			<div className="homeContainer">
 				<SideBar />
-				<FeedBackground>DEVEE</FeedBackground>
+				<FeedBackground></FeedBackground>
 			</div>
 		</>
 	);

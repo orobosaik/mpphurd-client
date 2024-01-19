@@ -68,6 +68,12 @@ function Activities({ setRightBarView, reload, isInUserOffice, admin }) {
 
 		isInUserOffice !== undefined && getData();
 
+		setTimeout(() => {
+			if (isLoading) {
+				setIsLoading(false);
+			}
+		}, 15000);
+
 		// return () => {
 		// 	second
 		// }
