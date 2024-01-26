@@ -113,21 +113,21 @@ export default function AdminStaffList() {
 										<div className="listQueryOptions">
 											<span>REGION: </span>
 											<select name="listQueryOption" id="listQueryOption">
-												<option value="incoming">Incoming</option>
-												<option value="Outgoing">Outgoing</option>
-												<option value="current">Current</option>
+												<option value="incoming">Benin</option>
+												{/* <option value="Outgoing">Outgoing</option>
+												<option value="current">Current</option> */}
 											</select>
 										</div>
 										<div className="listQueryOptions">
 											<span>DESIGNATION: </span>
 											<select name="listQueryOption" id="listQueryOption">
-												<option value="incoming">Incoming</option>
+												{/* <option value="incoming">Incoming</option>
 												<option value="Outgoing">Outgoing</option>
 												<option value="current">Current</option>
 												<option value="current">Current</option>
 												<option value="current">Current</option>
 												<option value="current">Current</option>
-												<option value="current">Current</option>
+												<option value="current">Current</option> */}
 											</select>
 										</div>
 

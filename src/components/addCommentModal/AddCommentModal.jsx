@@ -122,7 +122,7 @@ export default function AddCommentModal({
 	return (
 		<div>
 			<div>
-				<button className="modalTrigger" onClick={handleOpen}>
+				<button className="modalTrigger secondary" onClick={handleOpen}>
 					Add Comment
 				</button>
 			</div>

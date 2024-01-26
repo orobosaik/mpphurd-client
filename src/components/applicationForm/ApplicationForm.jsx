@@ -383,14 +383,14 @@ export default function ApplicationForm() {
 									<input type="text" />
 								</div> */}
 								{
-									<>
-										{/* <span>Has Rep</span> */}
+									<div>
+										<span>Has Rep</span>
 										<ToggleSwitch
 											label={"Rep:"}
 											toggled={hasRep}
 											onClick={() => setHasRep(!hasRep)}
 										/>
-									</>
+									</div>
 								}
 							</div>
 							{individualApplicationItems("applicant")}

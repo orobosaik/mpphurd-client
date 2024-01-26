@@ -25,7 +25,7 @@ export default function ToggleSwitch({ label, toggled, onClick }) {
 				</label>
 			</div> */}
 
-			<span>{label}</span>
+			{/* <span>{label}</span> */}
 			<label className="toggle-switch">
 				<input
 					type="checkbox"

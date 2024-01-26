@@ -117,9 +117,9 @@ export default function AdminOfficeList() {
 										<div className="listQueryOptions">
 											<span>REGION: </span>
 											<select name="listQueryOption" id="listQueryOption">
-												<option value="incoming">Incoming</option>
-												<option value="Outgoing">Outgoing</option>
-												<option value="current">Current</option>
+												<option value="incoming">Benin</option>
+												{/* <option value="Outgoing">Outgoing</option> */}
+												{/* <option value="current">Current</option> */}
 											</select>
 										</div>
 
