@@ -19,8 +19,8 @@ export default function AdminHeader() {
 	const [searchData, setSearchData] = useState([]);
 	const [open, setOpen] = useState(false);
 	const [isFetching, setIsFetching] = useState(false);
-	const { currentUser, loading } = useSelector((state) => state.user);
-	const staff = currentUser;
+	const { currentAdmin, loading } = useSelector((state) => state.admin);
+	const staff = currentAdmin;
 
 	const dispatch = useDispatch();
 
@@ -90,7 +90,7 @@ export default function AdminHeader() {
 		return () => clearTimeout(timer);
 	}, [searchQuery]);
 	return (
-		<div className="headerContainer">
+		<div className="admin headerContainer">
 			<div className="headerLeft">
 				<Link to="/">
 					<span className="headerLogo">
@@ -175,15 +175,14 @@ export default function AdminHeader() {
 						<span className="headerIconBadge">5</span>
 					</div>
 				</div>
-
 				<div className="headerUser">
 					<div className="headerDetails">
-						<span className="headerName">Orobosa</span>
-						<span className="headerOffice">(Records)</span>
+						<span className="headerName">{`${staff.firstName} ${staff.lastName}`}</span>
+						<span className="headerOffice">{`${staff.jobTitle}`}</span>
 					</div>
 
 					<img
-						src="/assets/persons/headshot1.jpg"
+						src={staff.profilePicture || "/assets/persons/no_avatar.png"}
 						alt=""
 						className="headerImg"
 					/>

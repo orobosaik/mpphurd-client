@@ -39,29 +39,7 @@ export default function AdminLogin() {
 		console.log(email, password);
 
 		dispatch(adminLoginStart());
-		dispatch(adminLoginSuccess(true));
-
-			setTimeout(() => {
-				toast.success("Login Successful", {
-					position: "top-right",
-					autoClose: 1000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-					theme: themeColor,
-				});
-			}, 200);
-
-		// try {
-		// 	let host = import.meta.env.VITE_SERVER;
-		// 	const res = await axios.post(`${host}/admin/auth/login`, {
-		// 		email: email.current.value,
-		// 		password: password.current.value,
-		// 	});
-		// 	dispatch(adminLoginSuccess(res.data));
-		// 	console.log(res.data);
+		// dispatch(adminLoginSuccess(true));
 
 		// 	setTimeout(() => {
 		// 		toast.success("Login Successful", {
@@ -75,26 +53,54 @@ export default function AdminLogin() {
 		// 			theme: themeColor,
 		// 		});
 		// 	}, 200);
-		// } catch (error) {
-		// 	let message = error.response
-		// 		? error.response.data.message
-		// 		: error.message;
-		// 	console.log(error);
-		// 	console.log(message);
 
-		// 	toast.error(message, {
-		// 		position: "top-right",
-		// 		autoClose: 2000,
-		// 		hideProgressBar: false,
-		// 		closeOnClick: true,
-		// 		pauseOnHover: true,
-		// 		draggable: true,
-		// 		progress: undefined,
-		// 		theme: themeColor,
-		// 	});
+		axios.defaults.withCredentials = true;
 
-		// 	dispatch(adminLoginFailure());
-		// }
+		try {
+			let host = import.meta.env.VITE_SERVER;
+			const res = await axios.post(
+				`${host}/staffs/auth/admin_login`,
+				{
+					email: email.current.value,
+					password: password.current.value,
+				},
+				{ withCredentials: true }
+			);
+			dispatch(adminLoginSuccess(res.data));
+			console.log(res.data);
+
+			setTimeout(() => {
+				toast.success("Login Successful", {
+					position: "top-right",
+					autoClose: 1000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: themeColor,
+				});
+			}, 200);
+		} catch (error) {
+			let message = error.response
+				? error.response.data.message
+				: error.message;
+			console.log(error);
+			console.log(message);
+
+			toast.error(message, {
+				position: "top-right",
+				autoClose: 2000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: themeColor,
+			});
+
+			dispatch(adminLoginFailure());
+		}
 	};
 
 	return (
@@ -196,7 +202,7 @@ export default function AdminLogin() {
 				</section>
 				<footer className="login__footer">
 					<div className="login__footer--copyright">
-						© 2023 Copyright MPPHURD
+						<div>© {new Date().getFullYear()} Copyright MPPHURD</div>
 					</div>
 					<div className="login__footer--mda">
 						<div className="login__footer--logos">
