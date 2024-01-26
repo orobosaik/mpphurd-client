@@ -1,4 +1,8 @@
 .admin.headerContainer {
 	background-color: var(--pc-green);
-  color: var(--white);
+	color: var(--white);
+}
+
+.admin .headerSearch {
+	color: var(--black);
 }

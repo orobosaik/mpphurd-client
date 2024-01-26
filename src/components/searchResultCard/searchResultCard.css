@@ -27,12 +27,14 @@
 
 }
 .searchResultCard:not(:last-of-type){
-  border-bottom: 1px solid #7882a4;
-}
-.searchResultCard:not(:first-of-type){
-  border-top: 1px solid var(--green-background);
+  /* border-bottom: 1px solid #7882a4; */
+  border-bottom: 1px solid var(--sc-grey);
 
 }
+/* .searchResultCard:not(:first-of-type){
+  border-top: 1px solid var(--green-background);
+
+} */
 .searchResultCard:hover{
   background-color: var(--light-grey);
 }
