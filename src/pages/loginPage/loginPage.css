@@ -117,7 +117,7 @@ html[data-theme="dark"] .login .pageWrapper{
 
 .login__header {
 	z-index: inherit;
-	/* height: 80rem; */
+	min-height: 80vh;
 	width: 100%;
 	display: flex;
 	justify-content: center;
