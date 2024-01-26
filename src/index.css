@@ -113,7 +113,7 @@ select {
 	font-size: 1em;
 	font-weight: 500;
 	font-family: inherit;
-	/* background-color: #1a1a1a; */
+	background-color: var(--light-grey);
 	cursor: pointer;
 	transition: border-color 0.25s;
 }
@@ -140,6 +140,7 @@ select:focus-visible {
 	background-color: transparent;
 	color: var(--black);
 	outline: var(--pc-green) 1.5px solid;
+	padding: .4rem 1rem;
 }
 .secondary:hover {
 	outline: var(--pc-green) 2px solid;
