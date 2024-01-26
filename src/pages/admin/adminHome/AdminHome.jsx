@@ -14,6 +14,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { logout } from "../../../redux/userSlice";
 import { resetOfficeData } from "../../../redux/appSlice";
+import { adminLogout } from "../../../redux/adminSlice";
+import { toast } from "react-toastify";
 
 const events = [
 	"load",
@@ -68,6 +70,8 @@ export default function AdminHome() {
 
 	// this function sets the timer that logs out the user after 10 secs
 	const handleLogoutTimer = () => {
+		const time = import.meta.env.VITE_ADMIN_LOGOUT_TIMER;
+		console.log(Number(time))
 		if (currentAdmin) {
 			// Add this check to ensure the user is still authenticated
 			timer = setTimeout(() => {
@@ -99,10 +103,10 @@ export default function AdminHome() {
 				// increase logoutCount on every call.
 				logoutCount++;
 
-				dispatch(resetOfficeData());
-				dispatch(logout());
+				// dispatch(resetOfficeData());
+				dispatch(adminLogout());
 				window.location.reload();
-			}, 1000 * 60 * 10); // 1000ms = 1secs. You can change the time.
+			}, 1000 * 60 * time); // 1000ms = 1secs. You can change the time in .env file.
 		} else {
 			resetTimer(); // Clear the timer
 			Object.values(events).forEach((item) => {
@@ -130,8 +134,8 @@ export default function AdminHome() {
 		}
 
 		// Display the greeting with the formatted date
-		console.log(`${greeting} ${currentAdmin.firstName}`);
-		return `${greeting} ${currentAdmin.firstName} (Admin)`;
+		console.log(`${greeting} ${currentAdmin?.firstName}`);
+		return `${greeting} ${currentAdmin?.firstName} (Admin)`;
 	};
 	const getGreetingDate = () => {
 		// Get the current time

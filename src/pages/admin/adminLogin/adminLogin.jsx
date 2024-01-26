@@ -21,14 +21,16 @@ import { CircularProgress } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getThemeColor } from "../../../utilities/themeColor";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminLogin() {
 	const [showPassword, setShowPassword] = useState(false);
 	const { currentAdmin, loading } = useSelector((state) => state.admin);
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
-		const { theme } = useSelector((state) => state.app);
-		const themeColor = getThemeColor(theme);
+	const { theme } = useSelector((state) => state.app);
+	const themeColor = getThemeColor(theme);
 
 	const email = useRef();
 	const password = useRef();
@@ -66,8 +68,9 @@ export default function AdminLogin() {
 				},
 				{ withCredentials: true }
 			);
-			dispatch(adminLoginSuccess(res.data));
 			console.log(res.data);
+			dispatch(adminLoginSuccess(res.data));
+			navigate("/");
 
 			setTimeout(() => {
 				toast.success("Login Successful", {

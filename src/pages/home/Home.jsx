@@ -93,6 +93,7 @@ export default function Home() {
 
 	// this function sets the timer that logs out the user after 10 secs
 	const handleLogoutTimer = () => {
+		const time = import.meta.env.VITE_LOGOUT_TIMER;
 		if (currentUser) {
 			// Add this check to ensure the user is still authenticated
 			timer = setTimeout(() => {
@@ -127,7 +128,7 @@ export default function Home() {
 				dispatch(resetOfficeData());
 				dispatch(logout());
 				window.location.reload();
-			}, 1000 * 60 * 10); // 1000ms = 1secs. You can change the time.
+			}, 1000 * 60 * time); // 1000ms = 1secs. You can change the time in .env file.
 		} else {
 			resetTimer(); // Clear the timer
 			Object.values(events).forEach((item) => {
@@ -166,7 +167,7 @@ export default function Home() {
 		return `${formattedDate}`;
 	};
 
-	const assessmentActions = () => {
+	const clearingHouseActions = () => {
 		return (
 			<>
 				<div className="feedCard__container">
@@ -225,7 +226,7 @@ export default function Home() {
 					</div>
 
 					<FeedBackground>
-						{assessment && assessmentActions()}
+						{clearing && clearingHouseActions()}
 
 						{/* <div className="feedCard__container">
 							<div className="feedCard__list">

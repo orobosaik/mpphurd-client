@@ -38,94 +38,98 @@ function AdminRoutes() {
 	}, [theme]);
 
 	useEffect(() => {
-		return () => {
 			if (!currentAdmin) {
 				navigate("/login");
 			}
-		};
-	}, []);
+	}, [currentAdmin]);
 
 	return (
 		<>
-			<Routes>
-				{/* HOME PAGE */}
-				<Route path="/">
-					<Route
-						index
-						element={!currentAdmin ? <Navigate to="/login" /> : <AdminHome />}
-					/>
-				</Route>
-
-				{/* LOGIN PAGE */}
-				<Route path="/login">
-					<Route
-						index
-						element={!currentAdmin ? <AdminLogin /> : <Navigate to="/" />}
-					/>
-				</Route>
-
-				{/* PERMIT | APPROVAL */}
-				<Route path="/permit">
-					<Route path="new" element={<CreateApplication />} />
-					<Route path=":id">
-						<Route index element={<AdminPlan />} />
-						<Route path="bills" element={<ViewBill />} />
-						{/* <Route path="minute" element={<Minute />} /> */}
-						<Route path="documents" element={<DocumentView />} />
+			{currentAdmin ? (
+				<Routes>
+					{/* HOME PAGE */}
+					<Route path="/">
+						<Route
+							index
+							// element={!currentAdmin ? <Navigate to="/login" /> : <AdminHome />}
+							element={<AdminHome />}
+						/>
 					</Route>
-					<Route path="office">
-						<Route path=":id" element={<Office />} />
+
+					{/* LOGIN PAGE */}
+					<Route path="/login">
+						<Route
+							index
+							// element={!currentAdmin ? <AdminLogin /> : <Navigate to="/" />}
+							element={<AdminLogin />}
+						/>
 					</Route>
-				</Route>
 
-				{/* STAFF */}
-				<Route path="/staffs">
-					<Route index element={<AdminStaffList />} />
-					{/* <Route path="new" element={<AdminStaffUpdate />} /> */}
-					<Route path="staff">
-						<Route index element={<AdminStaffView />} />
-						<Route path="bills" element={<ViewBill />} />
-						<Route path="createbill" element={<CreateBill />} />
-						<Route path="minute" element={<Minute />} />
+					{/* PERMIT | APPROVAL */}
+					<Route path="/permit">
+						<Route path="new" element={<CreateApplication />} />
+						<Route path=":id">
+							<Route index element={<AdminPlan />} />
+							<Route path="bills" element={<ViewBill />} />
+							{/* <Route path="minute" element={<Minute />} /> */}
+							<Route path="documents" element={<DocumentView />} />
+						</Route>
+						<Route path="office">
+							<Route path=":id" element={<Office />} />
+						</Route>
 					</Route>
-				</Route>
 
-				{/* OFFICE */}
-				<Route path="/offices">
-					<Route index element={<AdminOfficeList />} />
-					{/* <Route path="new" element={<AdminStaffUpdate />} /> */}
-					<Route path="office">
-						<Route index element={<AdminOfficeView />} />
-						<Route path="bills" element={<ViewBill />} />
-						<Route path="createbill" element={<CreateBill />} />
-						<Route path="minute" element={<Minute />} />
+					{/* STAFF */}
+					<Route path="/staffs">
+						<Route index element={<AdminStaffList />} />
+						{/* <Route path="new" element={<AdminStaffUpdate />} /> */}
+						<Route path="staff">
+							<Route index element={<AdminStaffView />} />
+							<Route path="bills" element={<ViewBill />} />
+							<Route path="createbill" element={<CreateBill />} />
+							<Route path="minute" element={<Minute />} />
+						</Route>
 					</Route>
-				</Route>
 
-				{/* PETITION */}
-				<Route path="/regions">
-					<Route index element={<AdminRegionList />} />
-				</Route>
+					{/* OFFICE */}
+					<Route path="/offices">
+						<Route index element={<AdminOfficeList />} />
+						{/* <Route path="new" element={<AdminStaffUpdate />} /> */}
+						<Route path="office">
+							<Route index element={<AdminOfficeView />} />
+							<Route path="bills" element={<ViewBill />} />
+							<Route path="createbill" element={<CreateBill />} />
+							<Route path="minute" element={<Minute />} />
+						</Route>
+					</Route>
 
-				{/* BUILDING CONTROL */}
-				<Route path="/control">
-					<Route index element={<BuildingControl />} />
-				</Route>
+					{/* PETITION */}
+					<Route path="/regions">
+						<Route index element={<AdminRegionList />} />
+					</Route>
 
-				{/* OFFICE */}
-				<Route path="/offices">
-					<Route index element={<Office />} />
-				</Route>
+					{/* BUILDING CONTROL */}
+					<Route path="/control">
+						<Route index element={<BuildingControl />} />
+					</Route>
 
-				{/* ACTIVITIES */}
-				<Route path="/activities">
-					<Route index element={<ActivitiesView />} />
-				</Route>
-				{/* ANALYSIS */}
-				<Route path="/analysis">
-					<Route index element={<Analysis />} />
-				</Route>
-			</Routes>
+					{/* OFFICE */}
+					<Route path="/offices">
+						<Route index element={<Office />} />
+					</Route>
+
+					{/* ACTIVITIES */}
+					<Route path="/activities">
+						<Route index element={<ActivitiesView />} />
+					</Route>
+					{/* ANALYSIS */}
+					<Route path="/analysis">
+						<Route index element={<Analysis />} />
+					</Route>
+				</Routes>
+			) : (
+				<AdminLogin />
+			)}
 		</>
 	);
 }
