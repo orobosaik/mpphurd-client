@@ -66,11 +66,12 @@
 .applicationItem input,
 .applicantCode input,
 .applicationItem select {
+	/* font-size: 1.05em; */
+	height: 3.2rem;
 	width: 100%;
 	display: flex;
 	background-color: transparent;
 	border: var(--sc-grey) solid 1px;
-	height: 2.9rem;
 	padding: 0.2rem 0.7rem;
 	transition: box-shadow 0.3s;
 	border-radius: 4px;
@@ -86,6 +87,7 @@
 
 .applicationItem input:active,
 .applicationItem input:focus {
+	/* font-size: 1.1em; */
 	border: var(--sc-grey) solid 1px;
 	box-shadow: 0px 0px 7px 0px rgb(0, 200, 83, 0.4);
 	border-bottom: 2px solid var(--pc-green);
@@ -122,7 +124,7 @@
 	justify-content: space-between;
 	width: 100%;
 	align-items: center;
-	padding: 0.2rem 0.7rem;
+	padding: 0 0.7rem;
 	cursor: pointer;
 	border: var(--sc-grey) solid 1px;
 	border-radius: 4px;
@@ -193,6 +195,7 @@ input[type="file"]::file-selector {
 	display: flex;
 	padding: none;
 	width: 100%;
+	height: 100%;
 	align-items: center;
 	gap: 2rem;
 	cursor: pointer;
@@ -206,12 +209,18 @@ input[type="file"]::file-selector {
 
 .uploadFileWrapper span {
 	padding: 0.4rem 0.7rem;
+	height: 3.2rem;
 	background-color: var(--light-grey);
 	display: flex;
 	align-items: center;
 	min-width: fit-content;
 	border-top-left-radius: 4px;
 	border-bottom-left-radius: 4px;
+}
+.uploadFileWrapper input {
+	display: flex;
+	align-items: center;
+	font-size: 1em;
 }
 
 .uploadFileWrapper:hover span {

@@ -20,6 +20,7 @@ export default function searchResultCard({ data, changeOpen }) {
 				{data.dev?.plotNo && data.dev?.plotNo + ","}{" "}
 				{data.dev?.address && data.dev?.address?.toLowerCase()}
 			</span>
+			<span>Zone {data.dev?.zone}</span>
 			<span>{data.dev?.type}</span>
 		</div>
 	);

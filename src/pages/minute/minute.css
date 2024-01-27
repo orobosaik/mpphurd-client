@@ -25,6 +25,7 @@
 }
 
 .minuteItem textarea {
+	font-size: 1.6rem;
 	white-space: pre-wrap;
 }
 .minuteItem textarea:focus {
