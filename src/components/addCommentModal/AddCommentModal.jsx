@@ -62,21 +62,13 @@ export default function AddCommentModal({
 		};
 		console.log(newData);
 
-		axios.defaults.withCredentials = true;
-
 		try {
 			let host = import.meta.env.VITE_SERVER;
 			const res = await axios.post(
 				`${host}/staffs/plan/${data._id}/comment`,
-				newData,
-				{
-					withCredentials: true,
-				}
+				newData
 			);
-			console.log(res.data);
 
-			// dispatch(resetOfficeData());
-			// navigate(-2);
 			reload(() => []);
 			handleClose();
 
@@ -98,6 +90,8 @@ export default function AddCommentModal({
 				: error.message;
 			console.log(error);
 			console.log(message);
+
+			setLoading(false);
 
 			toast.error(message, {
 				position: "top-right",
@@ -167,7 +161,7 @@ export default function AddCommentModal({
 							</div>
 						</div>
 						<footer>
-							<button type="submit" className="primary">
+							<button type="submit" className="primary" disabled={loading}>
 								{loading ? (
 									<CircularProgress
 										thickness={5}

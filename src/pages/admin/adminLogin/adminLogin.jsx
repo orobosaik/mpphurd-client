@@ -35,39 +35,33 @@ export default function AdminLogin() {
 	const email = useRef();
 	const password = useRef();
 
+	// SET AXIOS CONNECTION TIMEOUT
+	axios.interceptors.request.use((config) => {
+		config.timeout = 5000; // Wait for 5 seconds before timing out
+		config.signal = AbortSignal.timeout(5000); // Wait for 5 seconds before aborting
+		return config;
+	});
+	axios.interceptors.response.use(
+		(response) => response,
+		(error) => {
+			if (error.code === "ECONNABORTED" || error.code === "ERR_CANCELED") {
+				error.message = "Request timed out";
+			}
+			return Promise.reject(error);
+		}
+	);
+	axios.defaults.withCredentials = true;
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
-		console.log(email, password);
-
 		dispatch(adminLoginStart());
-		// dispatch(adminLoginSuccess(true));
-
-		// 	setTimeout(() => {
-		// 		toast.success("Login Successful", {
-		// 			position: "top-right",
-		// 			autoClose: 1000,
-		// 			hideProgressBar: false,
-		// 			closeOnClick: true,
-		// 			pauseOnHover: true,
-		// 			draggable: true,
-		// 			progress: undefined,
-		// 			theme: themeColor,
-		// 		});
-		// 	}, 200);
-
-		axios.defaults.withCredentials = true;
 
 		try {
 			let host = import.meta.env.VITE_SERVER;
-			const res = await axios.post(
-				`${host}/staffs/auth/admin_login`,
-				{
-					email: email.current.value,
-					password: password.current.value,
-				},
-				{ withCredentials: true }
-			);
+			const res = await axios.post(`${host}/staffs/auth/admin_login`, {
+				email: email.current.value,
+				password: password.current.value,
+			});
 			console.log(res.data);
 			dispatch(adminLoginSuccess(res.data));
 			navigate("/");

@@ -20,7 +20,7 @@ import ChangePasswordModal from "../../components/changePasswordModal/ChangePass
 import { getThemeColor } from "../../utilities/themeColor";
 import { useNavigate } from "react-router-dom";
 
-export default function LoginPage() {
+function LoginPage() {
 	const [showPassword, setShowPassword] = useState(false);
 
 	const { currentUser, loading } = useSelector((state) => state.user);
@@ -32,22 +32,36 @@ export default function LoginPage() {
 	const email = useRef();
 	const password = useRef();
 
+	// SET AXIOS CONNECTION TIMEOUT
+	axios.interceptors.request.use((config) => {
+		config.timeout = 5000; // Wait for 5 seconds before timing out
+		config.signal = AbortSignal.timeout(5000); // Wait for 5 seconds before aborting
+		return config;
+	});
+	axios.interceptors.response.use(
+		(response) => response,
+		(error) => {
+			if (error.code === "ECONNABORTED" || error.code === "ERR_CANCELED") {
+				error.message = "Request timed out";
+			}
+			// if (error.code === "ECONNABORTED" && error.message.includes("timeout")) {
+			// 	console.log("Request timed out");
+			// }
+			return Promise.reject(error);
+		}
+	);
+	axios.defaults.withCredentials = true;
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		dispatch(loginStart());
 
-		axios.defaults.withCredentials = true;
-
 		try {
 			let host = import.meta.env.VITE_SERVER;
-			const res = await axios.post(
-				`${host}/staffs/auth/login`,
-				{
-					email: email.current.value,
-					password: password.current.value,
-				},
-				{ withCredentials: true }
-			);
+			const res = await axios.post(`${host}/staffs/auth/login`, {
+				email: email.current.value,
+				password: password.current.value,
+			});
 
 			dispatch(loginSuccess(res.data));
 			navigate("/");
@@ -230,3 +244,5 @@ export default function LoginPage() {
 		</>
 	);
 }
+
+export default LoginPage;
