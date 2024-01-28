@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import SearchResultCard from "../searchResultCard/SearchResultCard";
 import axios from "axios";
 import { LinearProgress } from "@mui/material";
+import { toast } from "react-toastify";
 
 export default function Header() {
 	const [searchQuery, setSearchQuery] = useState("");
@@ -69,13 +70,35 @@ export default function Header() {
 	useEffect(() => {
 		setIsFetching(true);
 		const getData = async () => {
-			let host = import.meta.env.VITE_SERVER;
-			const res = await axios.get(`${host}/staffs/plan?search=${searchQuery}`, {
-				withCredentials: true,
-			});
-			setSearchData(res.data);
-			setIsFetching(false);
-			console.log("SEARCH RESULT: ", res.data);
+			try {
+				let host = import.meta.env.VITE_SERVER;
+				const res = await axios.get(
+					`${host}/staffs/plan?search=${searchQuery}`,
+					{
+						withCredentials: true,
+					}
+				);
+				setSearchData(res.data);
+				setIsFetching(false);
+				console.log("SEARCH RESULT: ", res.data);
+			} catch (error) {
+				let message = error.response
+					? error.response.data.message
+					: error.message;
+				console.log(error);
+				console.log(message);
+
+				toast.error(message, {
+					position: "top-right",
+					autoClose: 2000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: themeColor,
+				});
+			}
 		};
 
 		// Function launches after 1.5 seconds (1500 ms) of the last keystroke
