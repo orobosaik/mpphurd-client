@@ -65,3 +65,13 @@
 	align-items: center;
 	justify-content: center;
 }
+
+.printBtn{
+	margin-top: 5rem;
+	display: flex;
+	width: 100%;
+	gap: 1rem;
+}
+.printBtn button{
+	width: 50%;
+}

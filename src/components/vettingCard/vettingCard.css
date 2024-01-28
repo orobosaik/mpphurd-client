@@ -1,0 +1,291 @@
+.vettingCard {
+	position: relative;
+	padding: 1rem 2rem;
+	display: flex;
+	flex-direction: column;
+	gap: .5rem;
+	/*background: lightgoldenrodyellow;
+	*/
+	box-shadow: 0px 0px 11px -4px rgba(0, 0, 0, 0.5);
+	/* margin-left: 1rem; */
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	-ms-border-radius: 8px;
+	-o-border-radius: 8px;
+}
+.vettingCard.cleared{
+	/* box-shadow: 0px 0px 11px -4px var(--pc-green); */
+/* outline: 1px solid var(--pc-green); */
+/* outline: 1px solid var(--accent-red); */
+}
+
+html[data-theme="dark"] .vettingCard {
+	box-shadow: 0px 0px 11px -4px rgba(255, 255, 255, 0.5);
+}
+
+.vettingCardTypeTag {
+	position: absolute;
+	top: 0;
+
+	padding: 0.2rem 0.8rem;
+
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+.vettingCardTypeTag.Minute{
+	color: var(--white);
+	background-color: var(--pc-green);
+	/* background-color: orangered; */
+	/* background-color: #FE7A36; */
+
+}
+.vettingCardTypeTag.Action{
+	color: var(--white);
+	background-color: var(--accent-action);
+}
+/* .vettingCardTypeTag.Action{
+	color: #3e3e3e;
+	background-color: var(--accent-yellow);
+} */
+
+.vettingCardViewMoreIcon {
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	top: 6px;
+	right: 6px;
+	color: var(--black);
+	padding: 2px;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-o-border-radius: 4px;
+}
+.vettingCardViewMoreIcon:hover {
+	background-color: var(--light-grey);
+}
+
+.vettingCard .type {
+	font-size: 1.6rem;
+	cursor: pointer;
+	align-items: center;
+	justify-content: space-between;
+	gap: .5rem;
+	/* margin-bottom: 1rem; */
+}
+.vettingCard .type__title{
+ text-transform: uppercase;
+}
+.vettingCard .type__status{
+	font-size: .7em;
+	padding: .2rem .5rem;
+	margin-right: 2rem;
+	font-weight: 700;
+	text-transform: capitalize;
+color: white;
+	/* background-color: var(--pc-green); */
+	/* background-color: var(--accent-red); */
+	background-color: goldenrod;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-o-border-radius: 4px;
+}
+
+.vettingCard * {
+	font-size: 0.95em;
+}
+.vettingCard div {
+	display: flex;
+}
+.vettingCard .vet{
+	display: flex;
+	flex-direction: column;
+	gap: .5rem;
+	background-color: var(--light-grey);
+	padding: .5rem 1rem;
+	border-radius: .5rem;
+	-webkit-border-radius: .5rem;
+	-moz-border-radius: .5rem;
+	-ms-border-radius: .5rem;
+	-o-border-radius: .5rem;
+}
+.vettingCard .vet__head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 1em;
+}
+.vettingCard .vet__status {
+	font-size: .9em;
+	/* padding: 0 .2rem; */
+	font-weight: 700;
+	text-transform: capitalize;
+color: var(--pc-green);
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-o-border-radius: 4px;
+}
+.vettingCard .vet__date {
+	color: #FE7A36;
+
+	color: var(--pc-green);
+	font-weight: 400;
+}
+.vettingCard .vet__date span {
+	font-weight: 600;
+	padding: 0;
+}
+.vettingCard .vet__comment{
+	display: flex;
+	flex-direction: column;
+}
+.vettingCard .vet__officer{
+	font-weight: 700;
+	color: var(--accent-action);
+}
+.vettingCard .vet__add{
+	padding: .2rem 1rem;
+	width: 100%;
+}
+.vettingCardTitle {
+	/* flex: 1; */
+	font-weight: 700;
+	width: 5rem;
+}
+.vettingCardText {
+	/* flex: 2; */
+	/* justify-self: flex-start; */
+}
+
+.vettingCardComment {
+	flex-direction: column;
+	background-color: var(--light-grey);
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	-ms-border-radius: 8px;
+	-o-border-radius: 8px;
+}
+
+.vettingCardCommentButton {
+	display: flex;
+	justify-content: space-between;
+	cursor: pointer;
+
+	font-weight: 700;
+	padding: 0.5rem;
+}
+
+.vettingCardCommentButtonIcon {
+	font-size: 2rem !important;
+}
+
+.vettingCardCommentText {
+	border-top: solid var(--sc-grey) 1px;
+	padding: 1rem;
+	white-space: pre-wrap;
+}
+
+.vettingCardArrow {
+	z-index: 10;
+	position: absolute;
+	left: -1rem;
+	top: 4rem;
+	width: 2px;
+	background-color: var(--sc-grey);
+	height: calc(100% - 3rem);
+}
+.vettingCardArrow::before {
+	position: absolute;
+	content: "\25b2";
+	font-size: 1.2rem;
+	top: -10px;
+	left: -4px;
+	color: var(--pc-green);
+}
+.vettingCardArrow::after {
+	position: absolute;
+	content: "";
+	height: 0.7rem;
+	width: 0.7rem;
+	right: -2px;
+	bottom: -2px;
+	background-color: var(--pc-green);
+	border-radius: 2px;
+	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	-ms-border-radius: 2px;
+	-o-border-radius: 2px;
+}
+.vettingCard:not(:last-of-type) {
+	margin-bottom: 1rem;
+}
+.vettingCardArrow:not(:last-of-type) {
+	height: calc(100% - 0.8rem);
+}
+.vettingCard:last-of-type .vettingCardArrow {
+	height: calc(100% - 5rem);
+}
+/*
+.vettingCard:first-of-type::before {
+	content: "";
+	position: absolute;
+	height: 15px;
+	width: 15px;
+	left: calc(-1rem + -7px);
+	top: 1.2rem;
+	border: solid var(--pc-green) 4px;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-ms-border-radius: 50%;
+	-o-border-radius: 50%;
+}
+.vettingCard:first-of-type::after {
+	content: "";
+	position: absolute;
+	height: 15px;
+	width: 15px;
+	left: calc(-1rem + -7px);
+	top: 1.2rem;
+	border: solid var(--pc-green) 4px;
+	animation: vettingCardBlink 2s infinite;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-ms-border-radius: 50%;
+	-o-border-radius: 50%;
+	-webkit-animation: vettingCardBlink 2s infinite;
+} */
+
+@keyframes vettingCardBlink {
+	50% {
+		opacity: 0;
+		transform: scale(2);
+		-webkit-transform: scale(2);
+		-moz-transform: scale(2);
+		-ms-transform: scale(2);
+		-o-transform: scale(2);
+}
+	100% {
+		opacity: 0;
+		transform: scale(1.7);
+		-webkit-transform: scale(1.7);
+		-moz-transform: scale(1.7);
+		-ms-transform: scale(1.7);
+		-o-transform: scale(1.7);
+}
+}

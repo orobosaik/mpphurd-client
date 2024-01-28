@@ -1,0 +1,116 @@
+import { useState } from "react";
+import "./vettingCard.css";
+import {
+	ExpandLessRounded,
+	ExpandMoreRounded,
+	LaunchRounded,
+} from "@mui/icons-material";
+import AddCommentModal from "../addCommentModal/AddCommentModal";
+// import ActivityCardModal from "../activityCardModal/ActivityCardModal";
+import {
+	format,
+	isToday,
+	isYesterday,
+	isTomorrow,
+	formatDistance,
+	formatRelative,
+	subDays,
+} from "date-fns";
+import ActivityCardModal from "../activityCardModal/ActivityCardModal";
+import VettingCardAddModal from "../vettingCardAddModal/VettingCardAddModal";
+
+function VettingCard({ data, header }) {
+	const [showComment, setShowComment] = useState(false);
+	const [showVetting, setShowVetting] = useState(false);
+
+	const displayDate = (originalDate) => {
+		if (isToday(originalDate)) {
+			return (
+				<>
+					<span>Today</span>
+					{/* <span>{format(originalDate, "HH:mm")}</span> */}
+				</>
+			);
+		} else if (isYesterday(originalDate)) {
+			return (
+				<>
+					<span>Yesterday</span>
+					{/* <span>{format(originalDate, "HH:mm")}</span> */}
+				</>
+			);
+		} else {
+			return (
+				<>
+					<span>{format(originalDate, "dd/MM/yyyy")}</span>
+					{/* <span>{format(originalDate, "HH:mm")}</span> */}
+				</>
+			);
+		}
+	};
+
+	return (
+		<div className="vettingCard">
+			{/* <div className="vettingCardArrow"></div> */}
+
+			{<ActivityCardModal stateData={data} />}
+
+			<div className="type" onClick={() => setShowVetting(!showVetting)}>
+				<h2 className="type__title">{header}</h2>
+				<span className="type__status">Pending</span>
+			</div>
+
+			{showVetting && (
+				<>
+					<div className="vet">
+						<div className="vet__head">
+							<div className="vet__status">Cleared</div>
+							<div className="vet__date">{displayDate(new Date())}</div>
+						</div>
+
+						<div className="vet__comment">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo
+							saepe nemo eligendi minus, dolor animi sint hic possimus eius et
+							fuga dolorem, suscipit quia autem.
+						</div>
+						<div className="vet__officer">orobosa Ikponmwosa</div>
+					</div>
+					<div className="vet">
+						<div className="vet__head">
+							<div className="vet__status">Cleared</div>
+							<div className="vet__date">{displayDate(new Date())}</div>
+						</div>
+
+						<div className="vet__comment">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo
+							saepe nemo eligendi minus, dolor animi sint hic possimus eius et
+							fuga dolorem, suscipit quia autem.
+						</div>
+						<div className="vet__officer">orobosa Ikponmwosa</div>
+					</div>
+					<VettingCardAddModal data={data} className="btn vet__add" />
+				</>
+			)}
+
+			{/* Show comment if available */}
+			{/* <div className="vettingCardComment">
+				{data?.comment?.text && (
+					<div
+						className="vettingCardCommentButton"
+						onClick={() => setShowComment(!showComment)}>
+						<span>Comment</span>
+						{showComment ? (
+							<ExpandLessRounded className="vettingCardCommentButtonIcon" />
+						) : (
+							<ExpandMoreRounded className="vettingCardCommentButtonIcon" />
+						)}
+					</div>
+				)}
+
+				{showComment && (
+					<p className="vettingCardCommentText">{data?.comment?.text}</p>
+				)}
+			</div> */}
+		</div>
+	);
+}
+export default VettingCard;

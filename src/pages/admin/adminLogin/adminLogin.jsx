@@ -23,7 +23,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { getThemeColor } from "../../../utilities/themeColor";
 import { useNavigate } from "react-router-dom";
 
-export default function AdminLogin() {
+function AdminLogin() {
 	const [showPassword, setShowPassword] = useState(false);
 	const { currentAdmin, loading } = useSelector((state) => state.admin);
 	const dispatch = useDispatch();
@@ -233,3 +233,4 @@ export default function AdminLogin() {
 		</>
 	);
 }
+export default AdminLogin;

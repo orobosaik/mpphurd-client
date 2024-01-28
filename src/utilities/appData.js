@@ -92,3 +92,8 @@ export const MINUTE_STATUS_LIST = [
 	"Issue Raised",
 	"Recommended for Rejection",
 ];
+export const VETTING_STATUS_LIST = [
+	"Cleared",
+	"Issue Raised",
+	"Process Further",
+];

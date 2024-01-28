@@ -1,0 +1,7 @@
+.modalView.vettingCardAddModal{
+  font-size: 1.4em;
+}
+.vettingCardAddModal{
+  display: flex;
+  flex-direction: column;
+}
