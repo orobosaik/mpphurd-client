@@ -29,6 +29,10 @@
 	background-color: var(--accent-action);
 	color: var(--white);
 }
+.activityCardModal .minuteType.Vetting {
+	background-color: goldenrod;
+	color: var(--white);
+}
 
 .activityCardModalWrapper {
 	display: flex;

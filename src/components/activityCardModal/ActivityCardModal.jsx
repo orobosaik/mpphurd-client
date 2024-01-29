@@ -98,7 +98,7 @@ export default function ActivityCardModal({
 
 						<div className="activityCardHead">
 							<h2 className="action">
-								{data.type === "Action" ? data.title : "File Minuted"}
+								{data.type === "Minute" ? "File Minuted" : data.title}
 							</h2>
 						</div>
 

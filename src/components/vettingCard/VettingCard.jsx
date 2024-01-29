@@ -60,7 +60,9 @@ function VettingCard({ data, header, reload }) {
 	});
 	const isCorrectJobTitle =
 		currentUser.jobTitle.toLowerCase() === header.jobTitle.toLowerCase();
-
+	const isCleared =
+		data?.vetting?.status?.toLowerCase() === "cleared" ||
+		data?.vetting?.status?.toLowerCase() === "process further";
 	console.log(isInOfficeAndPermitted, isCorrectJobTitle);
 	return (
 		<div className="vettingCard">
@@ -70,7 +72,8 @@ function VettingCard({ data, header, reload }) {
 
 			<div className="type" onClick={() => setShowVetting(!showVetting)}>
 				<h2 className="type__title">{header.title}</h2>
-				<span className="type__status">
+				<span
+					className={`type__status ${data?.vetting?.status?.toLowerCase()}`}>
 					{data?.vetting?.status || "No Action"}
 				</span>
 			</div>
@@ -109,7 +112,9 @@ function VettingCard({ data, header, reload }) {
 						return (
 							<div className="vet">
 								<div className="vet__head">
-									<div className="vet__status">{item?.status}</div>
+									<div className={`vet__status ${item?.status?.toLowerCase()}`}>
+										{item?.status}
+									</div>
 									<div className="vet__date">{displayDate(item?.date)}</div>
 								</div>
 
@@ -127,7 +132,7 @@ function VettingCard({ data, header, reload }) {
 						<VettingCardAddModal
 							data={data.plan}
 							reload={reload}
-							isCleared={data?.vetting?.status?.toLowerCase() === "cleared"}
+							// isCleared={isCleared}
 							type={header.jobTitle}
 							className="btn vet__add"
 						/>

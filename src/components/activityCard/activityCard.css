@@ -36,6 +36,10 @@ html[data-theme="dark"] .activityCard {
 	color: var(--white);
 	background-color: var(--accent-action);
 }
+.activityCardTypeTag.Vetting {
+	background-color: goldenrod;
+	color: var(--white);
+}
 /* .activityCardTypeTag.Action{
 	color: #3e3e3e;
 	background-color: var(--accent-yellow);
@@ -131,6 +135,7 @@ html[data-theme="dark"] .activityCard {
 	border-top: solid var(--sc-grey) 1px;
 	padding: 1rem;
 	white-space: pre-wrap;
+	line-height: 1.2;
 }
 
 .activityCardArrow {

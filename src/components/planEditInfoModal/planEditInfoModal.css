@@ -27,7 +27,10 @@ html[data-theme="dark"] dialog {
 	background-color: var(--white);
 	box-shadow: 0 0 0.5rem 0.25rem rgba(255, 255, 255, 0.2);
 }
-
+.modalView {
+	min-width: 40%;
+	width: 100%;
+}
 .modalView header {
 	display: flex;
 	align-items: center;
@@ -156,53 +159,52 @@ html[data-theme="dark"] dialog {
 	color: var(--accent-red);
 	font-size: 0.8em;
 }
-.planApprovalStatus{
+.planApprovalStatus {
 	display: flex;
 	align-items: center;
 	gap: 1rem;
 }
-.planApprovalStatus label{
+.planApprovalStatus label {
 	color: var(--pc-green);
 	font-weight: 700;
 }
-.planApprovalStatus .title{
+.planApprovalStatus .title {
 	font-size: 1.1em;
 	font-weight: 600;
 }
-.planApprovalStatus .editBtn{
+.planApprovalStatus .editBtn {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	min-width: 4rem;
 
-	font-size: .8em;
+	font-size: 0.8em;
 	border: var(--pc-green) 1px solid;
 	padding: 0px 4px;
 	padding-top: 1px;
 	cursor: pointer;
 
-		border-radius: 8px;
+	border-radius: 8px;
 	-webkit-border-radius: 8px;
 	-moz-border-radius: 8px;
 	-ms-border-radius: 8px;
 	-o-border-radius: 8px;
 }
 
-.planApprovalStatus .editBtn:hover{
+.planApprovalStatus .editBtn:hover {
 	font-weight: 700;
 	color: var(--white);
 	background-color: var(--pc-green);
-
 }
-.planApprovalStatus .items{
+.planApprovalStatus .items {
 	font-size: 1.3em;
 }
-.approvalStatusDisplay{
+.approvalStatusDisplay {
 	display: flex;
 	gap: 1rem;
 	align-items: center;
 }
-.approvalStatusDisplay .status{
+.approvalStatusDisplay .status {
 	font-size: 1.2em;
 	text-transform: uppercase;
 }

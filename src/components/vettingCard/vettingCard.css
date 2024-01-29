@@ -3,7 +3,7 @@
 	padding: 1rem 2rem;
 	display: flex;
 	flex-direction: column;
-	gap: .5rem;
+	gap: 0.5rem;
 	/*background: lightgoldenrodyellow;
 	*/
 	box-shadow: 0px 0px 11px -4px rgba(0, 0, 0, 0.5);
@@ -14,10 +14,10 @@
 	-ms-border-radius: 8px;
 	-o-border-radius: 8px;
 }
-.vettingCard.cleared{
+.vettingCard.cleared {
 	/* box-shadow: 0px 0px 11px -4px var(--pc-green); */
-/* outline: 1px solid var(--pc-green); */
-/* outline: 1px solid var(--accent-red); */
+	/* outline: 1px solid var(--pc-green); */
+	/* outline: 1px solid var(--accent-red); */
 }
 
 html[data-theme="dark"] .vettingCard {
@@ -33,14 +33,13 @@ html[data-theme="dark"] .vettingCard {
 	border-bottom-right-radius: 5px;
 	border-bottom-left-radius: 5px;
 }
-.vettingCardTypeTag.Minute{
+.vettingCardTypeTag.Minute {
 	color: var(--white);
 	background-color: var(--pc-green);
 	/* background-color: orangered; */
 	/* background-color: #FE7A36; */
-
 }
-.vettingCardTypeTag.Action{
+.vettingCardTypeTag.Action {
 	color: var(--white);
 	background-color: var(--accent-action);
 }
@@ -74,27 +73,37 @@ html[data-theme="dark"] .vettingCard {
 	cursor: pointer;
 	align-items: center;
 	justify-content: space-between;
-	gap: .5rem;
+	gap: 0.5rem;
 	/* margin-bottom: 1rem; */
 }
-.vettingCard .type__title{
- text-transform: uppercase;
+.vettingCard .type__title {
+	text-transform: uppercase;
 }
-.vettingCard .type__status{
-	font-size: .7em;
-	padding: .2rem .5rem;
+.vettingCard .type__status {
+	font-size: 0.7em;
+	padding: 0.2rem 0.5rem;
 	margin-right: 2rem;
 	font-weight: 700;
 	text-transform: capitalize;
-color: white;
+	color: var(--white);
 	/* background-color: var(--pc-green); */
 	/* background-color: var(--accent-red); */
-	background-color: goldenrod;
+	background-color: var(--sc-grey);
+	/* background-color: goldenrod; */
 	border-radius: 4px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	-ms-border-radius: 4px;
 	-o-border-radius: 4px;
+}
+.vettingCard .type__status.cleared,
+.vettingCard .type__status.process {
+	color: white;
+	background-color: var(--pc-green);
+}
+.vettingCard .type__status.issue {
+	color: white;
+	background-color: var(--accent-red);
 }
 
 .vettingCard * {
@@ -103,17 +112,17 @@ color: white;
 .vettingCard div {
 	display: flex;
 }
-.vettingCard .vet{
+.vettingCard .vet {
 	display: flex;
 	flex-direction: column;
-	gap: .5rem;
+	gap: 0.5rem;
 	background-color: var(--light-grey);
-	padding: .5rem 1rem;
-	border-radius: .5rem;
-	-webkit-border-radius: .5rem;
-	-moz-border-radius: .5rem;
-	-ms-border-radius: .5rem;
-	-o-border-radius: .5rem;
+	padding: 0.5rem 1rem;
+	border-radius: 0.5rem;
+	-webkit-border-radius: 0.5rem;
+	-moz-border-radius: 0.5rem;
+	-ms-border-radius: 0.5rem;
+	-o-border-radius: 0.5rem;
 }
 .vettingCard .vet__head {
 	display: flex;
@@ -122,19 +131,26 @@ color: white;
 	font-size: 1em;
 }
 .vettingCard .vet__status {
-	font-size: .9em;
+	font-size: 0.9em;
 	/* padding: 0 .2rem; */
 	font-weight: 700;
 	text-transform: capitalize;
-color: var(--pc-green);
+	color: var(--pc-green);
 	border-radius: 4px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	-ms-border-radius: 4px;
 	-o-border-radius: 4px;
 }
+.vettingCard .vet__status.cleared {
+	color: var(--pc-green);
+}
+.vettingCard .vet__status.issue {
+	color: var(--accent-red);
+}
+
 .vettingCard .vet__date {
-	color: #FE7A36;
+	color: #fe7a36;
 
 	color: var(--pc-green);
 	font-weight: 400;
@@ -143,16 +159,18 @@ color: var(--pc-green);
 	font-weight: 600;
 	padding: 0;
 }
-.vettingCard .vet__comment{
+.vettingCard .vet__comment {
 	display: flex;
 	flex-direction: column;
+	white-space: pre-wrap;
+	line-height: 1.2;
 }
-.vettingCard .vet__officer{
+.vettingCard .vet__officer {
 	font-weight: 700;
 	color: var(--accent-action);
 }
-.vettingCard .vet__add{
-	padding: .2rem 1rem;
+.vettingCard .vet__add {
+	padding: 0.2rem 1rem;
 	width: 100%;
 }
 .vettingCardTitle {
@@ -279,7 +297,7 @@ color: var(--pc-green);
 		-moz-transform: scale(2);
 		-ms-transform: scale(2);
 		-o-transform: scale(2);
-}
+	}
 	100% {
 		opacity: 0;
 		transform: scale(1.7);
@@ -287,5 +305,5 @@ color: var(--pc-green);
 		-moz-transform: scale(1.7);
 		-ms-transform: scale(1.7);
 		-o-transform: scale(1.7);
-}
+	}
 }
