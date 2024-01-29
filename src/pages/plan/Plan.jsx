@@ -136,6 +136,7 @@ function Plan() {
 							isInUserOffice={isInUserOffice}
 							reload={reload}
 							setRightBarView={setRightBarView}
+							planData={data}
 						/>
 					) : (
 						<Document setRightBarView={setRightBarView} />

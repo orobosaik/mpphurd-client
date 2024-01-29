@@ -7,7 +7,13 @@ import LoadingIcon from "../../utilities/LoadingIcon";
 import ActivityCardModal from "../activityCardModal/ActivityCardModal";
 import VettingCard from "../vettingCard/VettingCard";
 
-function Activities({ setRightBarView, reload, isInUserOffice, admin }) {
+function Activities({
+	setRightBarView,
+	reload,
+	isInUserOffice,
+	admin,
+	planData,
+}) {
 	const [isLoading, setIsLoading] = useState(false);
 	const [data, setData] = useState([]);
 	const [isAdmin, setIsAdmin] = useState(admin);
@@ -87,13 +93,14 @@ function Activities({ setRightBarView, reload, isInUserOffice, admin }) {
 	const mockVettingData = {
 		architect: {
 			status: "Issue Raised",
-			array: [
+			items: [
 				{
 					status: "Issue Raised",
 					date: new Date(),
 					staffName: "Gift Igbinosadion",
 					staffId: "",
-					comment: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil quis quasi quas explicabo!",
+					comment:
+						"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil quis quasi quas explicabo!",
 				},
 			],
 		},
@@ -154,11 +161,56 @@ function Activities({ setRightBarView, reload, isInUserOffice, admin }) {
 					))}
 				{activityType.toLowerCase() === "vetting" && (
 					<>
-						<VettingCard  data={""} header={"Architect"} />
-						<VettingCard header={"E. Engineer"} />
-						<VettingCard header={"M. Engineer"} />
-						<VettingCard header={"S/C. Engineer"} />
-						<VettingCard header={"Town Planner"} />
+						<VettingCard
+							data={{
+								plan: planData,
+								vetting: planData?.vetting?.architect,
+							}}
+							header={{
+								jobTitle: "Architect",
+								title: "Architect",
+							}}
+						/>
+						<VettingCard
+							data={{
+								plan: planData,
+								vetting: planData?.vetting?.electricalEngineer,
+							}}
+							header={{
+								jobTitle: "Electrical Engineer",
+								title: "E. Engineer",
+							}}
+						/>
+						<VettingCard
+							data={{
+								plan: planData,
+								vetting: planData?.vetting?.mechanicalEngineer,
+							}}
+							header={{
+								jobTitle: "Mechanical Engineer",
+								title: "M. Engineer",
+							}}
+						/>
+						<VettingCard
+							data={{
+								plan: planData,
+								vetting: planData?.vetting?.civilEngineer,
+							}}
+							header={{
+								jobTitle: "S/C Engineer",
+								title: "S/C. Engineer",
+							}}
+						/>
+						<VettingCard
+							data={{
+								plan: planData,
+								vetting: planData?.vetting?.townPlanner,
+							}}
+							header={{
+								jobTitle: "Town Planning Officer",
+								title: "Town Planner",
+							}}
+						/>
 
 						<div className="printBtn">
 							<button>Print Vetting Sheet</button>

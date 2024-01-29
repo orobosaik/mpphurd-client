@@ -17,6 +17,7 @@ function VettingCardAddModal({
 	children,
 	data,
 	reload,
+	type,
 }) {
 	const [open, setOpen] = useState(false);
 	const [loading, setLoading] = useState(false);
@@ -52,58 +53,59 @@ function VettingCardAddModal({
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		setLoading(true);
 		const form = new FormData(e.target);
 		console.log(form);
 
 		const newData = {
 			status: form.get("minuteStatus"),
 			text: form.get("minuteText"),
+			type: type,
 		};
 		console.log(newData);
 
-		try {
-			let host = import.meta.env.VITE_SERVER;
-			const res = await axios.post(
-				`${host}/staffs/plan/${data._id}/comment`,
-				newData
-			);
+		// try {
+			// setLoading(true);
+		// 	let host = import.meta.env.VITE_SERVER;
+		// 	const res = await axios.post(
+		// 		`${host}/staffs/plan/${data._id}/comment`,
+		// 		newData
+		// 	);
 
-			reload(() => []);
-			handleClose();
+		// 	reload(() => []);
+		// 	handleClose();
 
-			setTimeout(() => {
-				toast.success(res.data, {
-					position: "top-right",
-					autoClose: 1000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-					theme: themeColor,
-				});
-			}, 200);
-		} catch (error) {
-			let message = error.response
-				? error.response.data.message
-				: error.message;
-			console.log(error);
-			console.log(message);
+		// 	setTimeout(() => {
+		// 		toast.success(res.data, {
+		// 			position: "top-right",
+		// 			autoClose: 1000,
+		// 			hideProgressBar: false,
+		// 			closeOnClick: true,
+		// 			pauseOnHover: true,
+		// 			draggable: true,
+		// 			progress: undefined,
+		// 			theme: themeColor,
+		// 		});
+		// 	}, 200);
+		// } catch (error) {
+		// 	let message = error.response
+		// 		? error.response.data.message
+		// 		: error.message;
+		// 	console.log(error);
+		// 	console.log(message);
 
-			setLoading(false);
+		// 	setLoading(false);
 
-			toast.error(message, {
-				position: "top-right",
-				autoClose: 2000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-				theme: themeColor,
-			});
-		}
+		// 	toast.error(message, {
+		// 		position: "top-right",
+		// 		autoClose: 2000,
+		// 		hideProgressBar: false,
+		// 		closeOnClick: true,
+		// 		pauseOnHover: true,
+		// 		draggable: true,
+		// 		progress: undefined,
+		// 		theme: themeColor,
+		// 	});
+		// }
 	};
 
 	useEffect(() => {
@@ -131,13 +133,13 @@ function VettingCardAddModal({
 					<form action="" onSubmit={handleSubmit}>
 						<div className="applicationItemsWrapper">
 							<div className="applicationTitle">
-								<h3>Add Proffessional Comment </h3>
+								<h3>Add {type} Comment </h3>
 							</div>
 
 							<div className="minuteItems">
 								<div className="minuteItem">
 									<label htmlFor="minuteStatus">Status:</label>
-									<select name="minuteStatus" id="minuteStatus">
+									<select name="minuteStatus" id="minuteStatus" required>
 										<option value="">...</option>
 
 										{VETTING_STATUS_LIST.map((e) => {
@@ -149,6 +151,7 @@ function VettingCardAddModal({
 								<div className="minuteItem">
 									<label htmlFor="minuteText">Comment:</label>
 									<textarea
+										required
 										name="minuteText"
 										id="minuteText"
 										cols="30"
