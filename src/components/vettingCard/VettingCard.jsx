@@ -132,7 +132,7 @@ function VettingCard({ data, header, reload }) {
 						<VettingCardAddModal
 							data={data.plan}
 							reload={reload}
-							// isCleared={isCleared}
+							isCleared={isCleared}
 							type={header.jobTitle}
 							className="btn vet__add"
 						/>
