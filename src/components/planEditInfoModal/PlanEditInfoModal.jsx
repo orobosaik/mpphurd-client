@@ -12,8 +12,12 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { getThemeColor } from "../../utilities/themeColor";
 import { format } from "date-fns";
-import { BUILDING_STATUS, BUILDING_TYPE, LGA_LIST, STACK_LIST } from "../../utilities/appData";
-
+import {
+	BUILDING_STATUS,
+	BUILDING_TYPE,
+	LGA_LIST,
+	STACK_LIST,
+} from "../../utilities/appData";
 
 export default function PlanEditInfoModal({
 	buttonIcon,
@@ -244,7 +248,8 @@ export default function PlanEditInfoModal({
 				: error.message;
 			console.log(error);
 			console.log(message);
-			handleClose();
+			// handleClose();
+			setSubmitting(false);
 
 			toast.error(message, {
 				position: "top-right",
