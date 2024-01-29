@@ -36,9 +36,10 @@ function AdminLogin() {
 	const password = useRef();
 
 	// SET AXIOS CONNECTION TIMEOUT
+	const timeoutDuration = import.meta.env.VITE_TIMEOUT;
 	axios.interceptors.request.use((config) => {
-		config.timeout = 5000; // Wait for 5 seconds before timing out
-		config.signal = AbortSignal.timeout(5000); // Wait for 5 seconds before aborting
+		config.timeout = timeoutDuration; // Wait for timeout duration in seconds before timing out
+		config.signal = AbortSignal.timeout(timeoutDuration); // Wait for timeout duration in seconds before timing out
 		return config;
 	});
 	axios.interceptors.response.use(
