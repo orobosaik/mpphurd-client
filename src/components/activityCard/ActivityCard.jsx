@@ -72,7 +72,7 @@ export default function ActivityCard({ data }) {
 
 			<div className="activityCardHead">
 				<h2 className="title">
-					{data.type === "Action" ? data.title : data.to?.office}
+					{data.type === "Minute" ? data.to?.office : data.title}
 				</h2>
 				<div className="date">
 					{/* {formatDistance(subDays(new Date(data.createdAt)), new Date(), {

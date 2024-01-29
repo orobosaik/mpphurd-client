@@ -57,7 +57,6 @@ function Plan() {
 			setData(() => res.data);
 			setIsLoading(false);
 
-
 			console.log(res.data);
 		} catch (error) {
 			let message = error.response
@@ -134,7 +133,7 @@ function Plan() {
 					{rightBarView !== 1 ? (
 						<Activities
 							isInUserOffice={isInUserOffice}
-							reload={reload}
+							reload={setReload}
 							setRightBarView={setRightBarView}
 							planData={data}
 						/>

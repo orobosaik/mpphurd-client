@@ -162,6 +162,7 @@ function Activities({
 				{activityType.toLowerCase() === "vetting" && (
 					<>
 						<VettingCard
+							reload={reload}
 							data={{
 								plan: planData,
 								vetting: planData?.vetting?.architect,
@@ -172,6 +173,7 @@ function Activities({
 							}}
 						/>
 						<VettingCard
+							reload={reload}
 							data={{
 								plan: planData,
 								vetting: planData?.vetting?.electricalEngineer,
@@ -182,6 +184,7 @@ function Activities({
 							}}
 						/>
 						<VettingCard
+							reload={reload}
 							data={{
 								plan: planData,
 								vetting: planData?.vetting?.mechanicalEngineer,
@@ -192,6 +195,7 @@ function Activities({
 							}}
 						/>
 						<VettingCard
+							reload={reload}
 							data={{
 								plan: planData,
 								vetting: planData?.vetting?.civilEngineer,
@@ -202,6 +206,7 @@ function Activities({
 							}}
 						/>
 						<VettingCard
+							reload={reload}
 							data={{
 								plan: planData,
 								vetting: planData?.vetting?.townPlanner,

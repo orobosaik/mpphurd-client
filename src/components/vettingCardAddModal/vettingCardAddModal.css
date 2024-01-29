@@ -5,3 +5,21 @@
   display: flex;
   flex-direction: column;
 }
+.errorProhibited{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--light-grey);
+  color: var(--accent-red);
+  font-weight: 700;
+  font-size: 1.4rem;
+  padding: 1rem;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+.errorProhibitedIcon{
+  font-size: 2.2rem !important;
+}

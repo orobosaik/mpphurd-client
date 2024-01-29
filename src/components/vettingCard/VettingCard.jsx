@@ -20,7 +20,7 @@ import ActivityCardModal from "../activityCardModal/ActivityCardModal";
 import VettingCardAddModal from "../vettingCardAddModal/VettingCardAddModal";
 import { useSelector } from "react-redux";
 
-function VettingCard({ data, header }) {
+function VettingCard({ data, header, reload }) {
 	const [showComment, setShowComment] = useState(false);
 	const [showVetting, setShowVetting] = useState(false);
 
@@ -124,7 +124,13 @@ function VettingCard({ data, header }) {
 					{console.log({ Header: header, User: currentUser })}
 
 					{isCorrectJobTitle && isInOfficeAndPermitted && (
-						<VettingCardAddModal data={data.plan} type={header.jobTitle} className="btn vet__add" />
+						<VettingCardAddModal
+							data={data.plan}
+							reload={reload}
+							isCleared={data?.vetting?.status?.toLowerCase() === "cleared"}
+							type={header.jobTitle}
+							className="btn vet__add"
+						/>
 					)}
 				</>
 			)}

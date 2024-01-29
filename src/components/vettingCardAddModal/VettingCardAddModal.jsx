@@ -3,13 +3,17 @@ import "./vettingCardAddModal.css";
 import {
 	CloseRounded,
 	EditRounded,
+	ErrorRounded,
 	FileUploadRounded,
 } from "@mui/icons-material";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { getThemeColor } from "../../utilities/themeColor";
 import { CircularProgress } from "@mui/material";
-import { COMMENT_STATUS_LIST, VETTING_STATUS_LIST } from "../../utilities/appData";
+import {
+	COMMENT_STATUS_LIST,
+	VETTING_STATUS_LIST,
+} from "../../utilities/appData";
 
 function VettingCardAddModal({
 	buttonIcon,
@@ -17,6 +21,7 @@ function VettingCardAddModal({
 	children,
 	data,
 	reload,
+	isCleared,
 	type,
 }) {
 	const [open, setOpen] = useState(false);
@@ -25,7 +30,10 @@ function VettingCardAddModal({
 	const themeColor = getThemeColor();
 
 	const handleOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
+	const handleClose = () => {
+		setLoading(false);
+		setOpen(false);
+	};
 
 	const KEY_NAME_ESC = "Escape";
 	const KEY_EVENT_TYPE = "keyup";
@@ -63,49 +71,49 @@ function VettingCardAddModal({
 		};
 		console.log(newData);
 
-		// try {
-			// setLoading(true);
-		// 	let host = import.meta.env.VITE_SERVER;
-		// 	const res = await axios.post(
-		// 		`${host}/staffs/plan/${data._id}/comment`,
-		// 		newData
-		// 	);
+		try {
+			setLoading(true);
+			let host = import.meta.env.VITE_SERVER;
+			const res = await axios.post(
+				`${host}/staffs/plan/${data._id}/vet_plan`,
+				newData
+			);
 
-		// 	reload(() => []);
-		// 	handleClose();
+			handleClose();
+			reload(() => []);
 
-		// 	setTimeout(() => {
-		// 		toast.success(res.data, {
-		// 			position: "top-right",
-		// 			autoClose: 1000,
-		// 			hideProgressBar: false,
-		// 			closeOnClick: true,
-		// 			pauseOnHover: true,
-		// 			draggable: true,
-		// 			progress: undefined,
-		// 			theme: themeColor,
-		// 		});
-		// 	}, 200);
-		// } catch (error) {
-		// 	let message = error.response
-		// 		? error.response.data.message
-		// 		: error.message;
-		// 	console.log(error);
-		// 	console.log(message);
+			setTimeout(() => {
+				toast.success(res.data, {
+					position: "top-right",
+					autoClose: 1000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: themeColor,
+				});
+			}, 200);
+		} catch (error) {
+			let message = error.response
+				? error.response.data.message
+				: error.message;
+			console.log(error);
+			console.log(message);
 
-		// 	setLoading(false);
+			setLoading(false);
 
-		// 	toast.error(message, {
-		// 		position: "top-right",
-		// 		autoClose: 2000,
-		// 		hideProgressBar: false,
-		// 		closeOnClick: true,
-		// 		pauseOnHover: true,
-		// 		draggable: true,
-		// 		progress: undefined,
-		// 		theme: themeColor,
-		// 	});
-		// }
+			toast.error(message, {
+				position: "top-right",
+				autoClose: 2000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: themeColor,
+			});
+		}
 	};
 
 	useEffect(() => {
@@ -135,6 +143,15 @@ function VettingCardAddModal({
 							<div className="applicationTitle">
 								<h3>Add {type} Comment </h3>
 							</div>
+							{isCleared && (
+								<div className="errorProhibited">
+									<ErrorRounded className="errorProhibitedIcon" />{" "}
+									<p>
+										Adding comment after it is cleared is prohibited. Make sure
+										you have the appropriate permission to perform this task!
+									</p>
+								</div>
+							)}
 
 							<div className="minuteItems">
 								<div className="minuteItem">
