@@ -284,7 +284,7 @@ export default function AdminStaffEditModal({ ...props }) {
 		newData.phone1 = phones.phone1;
 		newData.email = emails.email;
 		newData.email1 = emails.email1;
-		newData.designation = designation;
+		newData.jobTitle = designation;
 		newData.position = position;
 		newData.region = region;
 		newData.office = list;

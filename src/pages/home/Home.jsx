@@ -39,28 +39,28 @@ export default function Home() {
 
 	const [isLogout, setIsLogout] = useState(0);
 
-	// // Check if Plan is in User Office(s)
+	// Check if Plan is in User Office(s)
 	// const isInUserOffice = currentUser.office.some((e) => {
 	// 	return data.currentOffice.id._id === e.id._id;
 	// });
 	// Check if Plan is in User Office(s)
 	const isInUserOffice = currentUser.office.some((e) => {
-		return e.id.name.includes("ASSESSMENT");
+		return e?.id?.name?.includes("ASSESSMENT");
 	});
 
 	const [assessment, setAssessment] = useState(
 		currentUser.office.some((e) => {
-			return e.id.name.includes("ASSESSMENT");
+			return e?.id?.name?.includes("ASSESSMENT");
 		})
 	);
 	const [clearing, setClearing] = useState(
 		currentUser.office.some((e) => {
-			return e.id.name.includes("CLEARING HOUSE");
+			return e?.id?.name?.includes("CLEARING HOUSE");
 		})
 	);
 	const [archive, setArchive] = useState(
 		currentUser.office.some((e) => {
-			return e.id.name.includes("ARCHIVE");
+			return e?.id?.name?.includes("ARCHIVE");
 		})
 	);
 
