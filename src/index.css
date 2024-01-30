@@ -99,6 +99,7 @@ img {
 }
 .btn {
 	cursor: pointer;
+	text-transform: capitalize;
 }
 button {
 	display: flex;

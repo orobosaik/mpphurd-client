@@ -115,13 +115,14 @@
 	text-transform: uppercase;
 	text-decoration: underline;
 	font-weight: 700;
-	margin: 2rem 0;
+	margin: 1rem 0;
 	margin-bottom: 1rem;
 }
 .billAnalysisItems {
 	/* width: 80%; */
-	padding: 3rem;
-	background: var(--green-background);
+	z-index: 10;
+	padding: 1rem 3rem;
+	background-color: rgba(168, 219, 168, 0.3);
 	border-radius: 8px;
 	-webkit-border-radius: 8px;
 	-moz-border-radius: 8px;
@@ -129,8 +130,8 @@
 	-o-border-radius: 8px;
 }
 .billAnalysisItem{
-	padding: .5rem 1rem;
-	border-top: dashed 1px var(--accent-yellow);
+	padding: .5rem .5rem;
+	border-top: dashed 1px gold;
 }
 .billAnalysisItem:last-of-type{
 	font-weight: 700;

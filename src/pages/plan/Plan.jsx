@@ -81,13 +81,14 @@ function Plan() {
 		}
 	};
 	useEffect(() => {
-		if (location.state) {
-			setData(location.state);
-			setIsLoading(false);
-		} else {
-			getData();
-		}
+		// if (location.state) {
+		// 	setData(location.state);
+		// 	setIsLoading(false);
+		// } else {
+		// 	getData();
+		// }
 
+		getData();
 		// 	// return () => {
 		// 	// 	second
 		// 	// }
@@ -135,7 +136,7 @@ function Plan() {
 							isInUserOffice={isInUserOffice}
 							reload={setReload}
 							setRightBarView={setRightBarView}
-							planData={data}
+							plan={data}
 						/>
 					) : (
 						<Document setRightBarView={setRightBarView} />

@@ -1,20 +1,9 @@
 import { useState } from "react";
 import "./vettingCard.css";
 import {
-	ExpandLessRounded,
-	ExpandMoreRounded,
-	LaunchRounded,
-} from "@mui/icons-material";
-import AddCommentModal from "../addCommentModal/AddCommentModal";
-// import ActivityCardModal from "../activityCardModal/ActivityCardModal";
-import {
 	format,
 	isToday,
 	isYesterday,
-	isTomorrow,
-	formatDistance,
-	formatRelative,
-	subDays,
 } from "date-fns";
 import ActivityCardModal from "../activityCardModal/ActivityCardModal";
 import VettingCardAddModal from "../vettingCardAddModal/VettingCardAddModal";
@@ -54,7 +43,7 @@ function VettingCard({ data, header, reload }) {
 	// Check if User has authorization to vet plan
 	const isInOfficeAndPermitted = currentUser.office.some((e) => {
 		return (
-			data.plan.currentOffice?.id?._id === e?.id?._id &&
+			data?.plan?.currentOffice?.id?._id === e?.id?._id &&
 			e.tasks.includes("VET PLAN")
 		);
 	});
@@ -63,6 +52,7 @@ function VettingCard({ data, header, reload }) {
 	const isCleared =
 		data?.vetting?.status?.toLowerCase() === "cleared" ||
 		data?.vetting?.status?.toLowerCase() === "process further";
+
 	console.log(isInOfficeAndPermitted, isCorrectJobTitle);
 	return (
 		<div className="vettingCard">
@@ -108,9 +98,9 @@ function VettingCard({ data, header, reload }) {
 						<div className="vet__officer">Orobosa Ikponmwosa</div>
 					</div> */}
 
-					{data?.vetting?.items?.map((item) => {
+					{data?.vetting?.items?.map((item, index) => {
 						return (
-							<div className="vet">
+							<div className="vet" key={index}>
 								<div className="vet__head">
 									<div className={`vet__status ${item?.status?.toLowerCase()}`}>
 										{item?.status}

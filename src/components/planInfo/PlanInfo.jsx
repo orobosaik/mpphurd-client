@@ -21,7 +21,7 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 
 	// Check if Plan is in User Office(s)
 	const isInUserOffice = currentUser.office.some((e) => {
-		return data.currentOffice?.id?._id === e?.id?._id;
+		return data?.currentOffice?.id?._id === e?.id?._id;
 	});
 	// Check if User is a management staff
 	const isManagementStaff = currentUser.isManagement;
@@ -34,20 +34,20 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 		<div className="planInfo">
 			<div
 				className={
-					data.approval.status === "approved"
+					data?.approval?.status === "approved"
 						? "watermark approved"
-						: data.approval.status === "kiv"
+						: data?.approval?.status === "kiv"
 						? "watermark kiv"
-						: data.approval.status === "rejected"
+						: data?.approval?.status === "rejected"
 						? "watermark rejected"
 						: "watermark processing"
 				}>
 				<span>
-					{data.approval.status === "approved"
+					{data?.approval?.status === "approved"
 						? "APPROVED"
-						: data.approval.status === "kiv"
+						: data?.approval?.status === "kiv"
 						? "KIV"
-						: data.approval.status === "rejected"
+						: data?.approval?.status === "rejected"
 						? "REJECTED"
 						: ""}
 				</span>
@@ -57,22 +57,22 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 					<div className="planInfoSummaryItem">
 						<span className="planInfoSummaryTitle">File Name:</span>
 						<span className="planInfoSummaryText large">
-							{data.applicant?.name?.toLowerCase()}
-							{data.dev?.name && ` (${data.dev?.name?.toLowerCase()})`}
+							{data?.applicant?.name?.toLowerCase()}
+							{data?.dev?.name && ` (${data?.dev?.name?.toLowerCase()})`}
 						</span>
 					</div>
 					<div className="planInfoSummaryItem">
 						<span className="planInfoSummaryTitle">Site Location:</span>
 						<span className="planInfoSummaryText large">
-							{data.dev?.plotNo && data.dev?.plotNo + ","}{" "}
-							{data.dev?.address && data.dev?.address?.toLowerCase()}
+							{data?.dev?.plotNo && data?.dev?.plotNo + ","}{" "}
+							{data?.dev?.address && data?.dev?.address?.toLowerCase()}
 						</span>
 					</div>
 					<div className="planInfoSummaryItem">
 						<span className="planInfoSummaryTitle">Current Office:</span>
 						<span className="planInfoSummaryText">
 							<span className="planInfoSummaryStack">
-								{data.currentOffice?.id?.name} Office
+								{data?.currentOffice?.id?.name} Office
 							</span>
 							.
 						</span>
@@ -82,23 +82,23 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 						<div className="planInfoSummaryItem">
 							<span className="planInfoSummaryTitle">Current Stack:</span>
 							<span className="planInfoSummaryText">
-								<span className="planInfoSummaryStack">{data.stack}</span>.
+								<span className="planInfoSummaryStack">{data?.stack}</span>.
 							</span>
 						</div>
 					)}
 
 					<div className="planInfoSummaryItem">
-						{(data.isFastTrack || data.isFileOfInterest || data.isOldFile) && (
+						{(data?.isFastTrack || data?.isFileOfInterest || data?.isOldFile) && (
 							<span className="planInfoSummaryTitle">Tags:</span>
 						)}
 						<span className="planInfoSummaryText">
-							{data.isFastTrack && (
+							{data?.isFastTrack && (
 								<span className="tag tag-fastTrack">Fast Track</span>
 							)}
-							{data.isOldFile && (
+							{data?.isOldFile && (
 								<span className="tag tag-oldFile">Old File</span>
 							)}
-							{data.isFileOfInterest && (
+							{data?.isFileOfInterest && (
 								<span className="tag tag-fileOfInterest">File Of Interest</span>
 							)}
 						</span>
@@ -116,16 +116,16 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 						// Check if User has authorization to generate plan number
 						currentUser.office.some((e) => {
 							return (
-								data.currentOffice?.id?._id === e?.id?._id &&
+								data?.currentOffice?.id?._id === e?.id?._id &&
 								e.tasks.includes("GENERATE PLAN NUMBER")
 							);
 						}) &&
-							!data.planNumber && (
+							!data?.planNumber && (
 								<GeneratePlanNoModal
 									headerText={
-										data.dev?.type
-											? `${data.uniqueId} - ${data.dev?.type}`
-											: data.uniqueId
+										data?.dev?.type
+											? `${data?.uniqueId} - ${data?.dev?.type}`
+											: data?.uniqueId
 									}
 									buttonText={"Generate PN"}
 									title={"Generate Plan Number"}
@@ -141,12 +141,12 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 
 			<div className="planInfoWrapper">
 				<PlanInfoCard
-					type={data.applicant.type}
+					type={data?.applicant.type}
 					BD={true}
-					data={data.applicant}
+					data={data?.applicant}
 				/>
-				<PlanInfoCard type={"rep"} BD={true} data={data.rep} />
-				<PlanInfoCard type={"building"} data={data.dev} />
+				<PlanInfoCard type={"rep"} BD={true} data={data?.rep} />
+				<PlanInfoCard type={"building"} data={data?.dev} />
 			</div>
 
 			<div className="planInfoButtons">
@@ -154,7 +154,7 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 					// Check if User has authorization to create bill
 					currentUser.office.some((e) => {
 						return (
-							data.currentOffice?.id?._id === e?.id?._id &&
+							data?.currentOffice?.id?._id === e?.id?._id &&
 							e.tasks.includes("CREATE BILL")
 						);
 					}) && (
@@ -176,7 +176,7 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 					// Check if User has authorization to comment on plan
 					currentUser.office.some((e) => {
 						return (
-							data.currentOffice?.id?._id === e?.id?._id &&
+							data?.currentOffice?.id?._id === e?.id?._id &&
 							e.tasks.includes("COMMENT ON PLAN")
 						);
 					}) && (
@@ -190,7 +190,7 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 					// Check if User has authorization to minute plan
 					currentUser.office.some((e) => {
 						return (
-							data.currentOffice?.id?._id === e?.id?._id &&
+							data?.currentOffice?.id?._id === e?.id?._id &&
 							e.tasks.includes("MINUTE PLAN")
 						);
 					}) && (
