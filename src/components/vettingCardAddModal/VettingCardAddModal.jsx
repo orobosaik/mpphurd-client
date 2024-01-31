@@ -70,6 +70,7 @@ function VettingCardAddModal({
 			type: type,
 		};
 		console.log(newData);
+		console.log(data)
 
 		try {
 			setLoading(true);

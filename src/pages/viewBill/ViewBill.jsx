@@ -18,11 +18,12 @@ import axios from "axios";
 
 export default function ViewBill() {
 	const [rightBarView, setRightBarView] = useState(0);
+	const [data, setData] = useState();
+	const [reload, setReload] = useState();
 
-		const [isInUserOffice, setIsInUserOffice] = useState();
-		const { currentUser } = useSelector((state) => state.user);
+	const [isInUserOffice, setIsInUserOffice] = useState();
+	const { currentUser } = useSelector((state) => state.user);
 	const params = useParams();
-
 
 	useEffect(() => {
 		axios.defaults.withCredentials = true;
@@ -41,6 +42,8 @@ export default function ViewBill() {
 				// 	axios.get(`${host}/staffs/plan/${params.id}`),
 				// ]);
 				const res = await axios.get(`${host}/staffs/plan/${params.id}`);
+
+				setData(res.data)
 
 				// Check if Plan is in User Office(s)
 				setIsInUserOffice(
@@ -96,7 +99,7 @@ export default function ViewBill() {
 			}
 		};
 		getData();
-	}, []);
+	}, [reload]);
 
 	return (
 		<>
@@ -117,8 +120,9 @@ export default function ViewBill() {
 					{rightBarView !== 1 ? (
 						<Activities
 							isInUserOffice={isInUserOffice}
-							// reload={reload}
+							reload={setReload}
 							setRightBarView={setRightBarView}
+							plan={data}
 						/>
 					) : (
 						<Document setRightBarView={setRightBarView} />

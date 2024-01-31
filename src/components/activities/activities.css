@@ -75,3 +75,68 @@
 .printBtn button {
 	width: 50%;
 }
+
+/* VETTING COMMENT SHEET PRINT VIEW */
+.vettingCommentSheet {
+	padding: 0 2rem;
+	position: relative;
+}
+.vettingCommentSheet .date{
+	position: absolute;
+	font-size: .9em;
+
+
+}
+.vettingCommentSheet .header {
+	text-align: center;
+	padding: 1rem;
+	font-size: 2.5rem;
+	font-weight: 600;
+	text-transform: uppercase;
+}
+.vettingCommentSheet .header2 {
+	font-size: 2rem;
+	font-weight: 600;
+	margin-top: 2rem;
+	padding-bottom: 0.5rem;
+	text-transform: uppercase;
+}
+
+.vettingCommentSheet .detailsItem {
+	display: grid;
+	grid-template-columns: 1fr 3fr;
+	font-size: 1.4rem;
+}
+.vettingCommentSheet .detailsItem-name {
+	font-weight: 600;
+}
+.vettingCommentSheet .detailsItem-details {
+	text-transform: capitalize;
+}
+.vettingCommentSheet .comments-wrapper {
+	/* padding: 0 2rem; */
+}
+.vettingCommentSheet .comments {
+	font-size: 1.4rem;
+	border-top: 1px dashed #3e3e3e;
+	padding: 0.5rem 0;
+}
+.vettingCommentSheet .comments:last-child {
+	border-bottom: 1px dashed #3e3e3e;
+}
+.vettingCommentSheet .comment-type {
+	font-size: 1.6rem;
+	font-weight: 600;
+	text-transform: uppercase;
+}
+.vettingCommentSheet .comment-body-item {
+	display: grid;
+	grid-template-columns: 1fr 12fr;
+	font-size: 1.4rem;
+	padding: 0 2rem;
+	align-items: start;
+}
+.vettingCommentSheet .comment-text {
+	white-space: pre-wrap;
+	/* line-height: 1.2; */
+}

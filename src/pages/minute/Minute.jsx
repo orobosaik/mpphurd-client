@@ -28,6 +28,7 @@ export default function Minute() {
 	const [rightBarView, setRightBarView] = useState(0);
 	const [officeList, setOfficeList] = useState([]);
 	const [loading, setLoading] = useState();
+	const [reload, setReload] = useState();
 
 	const [isInUserOffice, setIsInUserOffice] = useState();
 	const { currentUser } = useSelector((state) => state.user);
@@ -304,8 +305,9 @@ export default function Minute() {
 					{rightBarView !== 1 ? (
 						<Activities
 							isInUserOffice={isInUserOffice}
-							// reload={reload}
+							reload={setReload}
 							setRightBarView={setRightBarView}
+							plan={data}
 						/>
 					) : (
 						<Document setRightBarView={setRightBarView} />

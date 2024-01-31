@@ -10,28 +10,241 @@ import PrintWrapper from "../printWrapper/PrintWrapper";
 import { toast } from "react-toastify";
 import { getThemeColor } from "../../utilities/themeColor";
 import { useSelector } from "react-redux";
+import { format } from "date-fns";
 
 function Activities({ setRightBarView, reload, admin, plan }) {
 	const [isLoading, setIsLoading] = useState(false);
-	const [planData, setPlanData] = useState(plan);
 	const [data, setData] = useState([]);
 	const [isAdmin, setIsAdmin] = useState(admin);
 	const [dataList, setDataList] = useState([]);
 	const [activityType, setActivityType] = useState("All");
 	const [customError, setCustomError] = useState("No Record...");
+	const [planDataD, setPlanDataD] = useState(plan);
 
 	const [isInUserOffice, setIsInUserOffice] = useState();
-
 	const { currentUser, loading } = useSelector((state) => state.user);
-
-	// const [fileInStaffOffice, setFileInStaffOffice] = useState(inUserOffice);
 
 	const params = useParams();
 	const themeColor = getThemeColor();
 
-	const getData = async () => {
-		// setIsLoading(true);
+	// 	plan?.vetting.architect.status ||
+	// 	plan?.vetting.mechanicalEngineer.status ||
+	// 	plan?.vetting.electricalEngineer.status ||
+	// 	plan?.vetting.civilEngineer.status ||
+	// 	plan?.vetting.townPlanner.status
 
+	// isInUserOffice
+
+	const isPrintNotAllowed = (plan) => {
+		// Check if all professionals have vetted and if plan is in user office or user is an admin
+		console.log(plan);
+		if (
+			!(
+				plan?.vetting?.architect?.status?.toLowerCase() === "no action" ||
+				plan?.vetting?.mechanicalEngineer?.status?.toLowerCase() ===
+					"no action" ||
+				plan?.vetting?.electricalEngineer?.status?.toLowerCase() ===
+					"no action" ||
+				plan?.vetting?.civilEngineer?.status?.toLowerCase() === "no action" ||
+				plan?.vetting?.townPlanner?.status?.toLowerCase() === "no action"
+			) &&
+			isInUserOffice
+		) {
+			console.log("Condition met");
+			return false;
+		} else {
+			console.log("Condition not met");
+			return true;
+		}
+	};
+
+	const vettingCommentPrintView = () => {
+		return (
+			<div className="vettingCommentSheet">
+				<div className="date">Printed: {format(new Date(), "dd/MM/yyyy")}</div>
+				<h1 className="header">Vetting Comment Sheet</h1>
+
+				<div className="details">
+					<div className="detailsItem">
+						<span className="detailsItem-name">Plan Number:</span>
+						<span className="detailsItem-value">
+							{plan?.planNumber?.fullValue || plan?.uniqueId}
+						</span>
+					</div>
+					<div className="detailsItem">
+						<span className="detailsItem-name">Applicant Name:</span>
+						<span className="detailsItem-value">
+							{plan?.applicant?.name?.toLowerCase()}
+						</span>
+					</div>
+					<div className="detailsItem">
+						<span className="detailsItem-name">Development Address:</span>
+						<span className="detailsItem-value">
+							{" "}
+							{plan?.dev?.plotNo && plan?.dev?.plotNo + ","}{" "}
+							{plan?.dev?.address && plan?.dev?.address?.toLowerCase()}
+						</span>
+					</div>
+					<div className="detailsItem">
+						<span className="detailsItem-name">Development Type:</span>
+						<span className="detailsItem-value">{plan?.dev?.type}</span>
+					</div>
+				</div>
+
+				<h2 className="header2">Comments</h2>
+
+				<div className="comments-wrapper">
+					{/* ARCHITECT */}
+					{!(
+						plan?.vetting?.architect?.status?.toLowerCase() === "cleared" ||
+						plan?.vetting?.architect?.status?.toLowerCase() ===
+							"process further"
+					) && (
+						<>
+							<div className="comments">
+								<p className="comment-type">Architect</p>
+
+								{plan?.vetting?.architect?.items?.map((e, index) => {
+									if (
+										e.status.toLowerCase() !== "cleared" ||
+										e.status.toLowerCase() !== "process further"
+									) {
+										return (
+											<div className="comment-body">
+												<div className="comment-body-item">
+													<span className="comment-number">{index + 1}</span>
+													<span className="comment-text">{e.comment}</span>
+												</div>
+											</div>
+										);
+									}
+								})}
+							</div>
+						</>
+					)}
+
+					{/* CIVIL ENGINEER */}
+					{!(
+						plan?.vetting?.civilEngineer?.status?.toLowerCase() === "cleared" ||
+						plan?.vetting?.civilEngineer?.status?.toLowerCase() ===
+							"process further"
+					) && (
+						<>
+							<div className="comments">
+								<p className="comment-type">Civil Engineer</p>
+
+								{plan?.vetting?.civilEngineer?.items?.map((e, index) => {
+									if (
+										e.status.toLowerCase() !== "cleared" ||
+										e.status.toLowerCase() !== "process further"
+									) {
+										return (
+											<div className="comment-body">
+												<div className="comment-body-item">
+													<span className="comment-number">{index + 1}</span>
+													<span className="comment-text">{e.comment}</span>
+												</div>
+											</div>
+										);
+									}
+								})}
+							</div>
+						</>
+					)}
+
+					{/* ELECTRICAL ENGINEER */}
+					{!(
+						plan?.vetting?.electricalEngineer?.status?.toLowerCase() ===
+							"cleared" ||
+						plan?.vetting?.electricalEngineer?.status?.toLowerCase() ===
+							"process further"
+					) && (
+						<>
+							<div className="comments">
+								<p className="comment-type">Electrical Engineer</p>
+
+								{plan?.vetting?.electricalEngineer?.items?.map((e, index) => {
+									if (
+										e.status.toLowerCase() !== "cleared" ||
+										e.status.toLowerCase() !== "process further"
+									) {
+										return (
+											<div className="comment-body">
+												<div className="comment-body-item">
+													<span className="comment-number">{index + 1}</span>
+													<span className="comment-text">{e.comment}</span>
+												</div>
+											</div>
+										);
+									}
+								})}
+							</div>
+						</>
+					)}
+
+					{/* MECHANICAL ENGINEER */}
+					{!(
+						plan?.vetting?.mechanicalEngineer?.status?.toLowerCase() ===
+							"cleared" ||
+						plan?.vetting?.mechanicalEngineer?.status?.toLowerCase() ===
+							"process further"
+					) && (
+						<>
+							<div className="comments">
+								<p className="comment-type">Mechanical Engineer</p>
+
+								{plan?.vetting?.mechanicalEngineer?.items?.map((e, index) => {
+									if (
+										e.status.toLowerCase() !== "cleared" ||
+										e.status.toLowerCase() !== "process further"
+									) {
+										return (
+											<div className="comment-body">
+												<div className="comment-body-item">
+													<span className="comment-number">{index + 1}</span>
+													<span className="comment-text">{e.comment}</span>
+												</div>
+											</div>
+										);
+									}
+								})}
+							</div>
+						</>
+					)}
+					{/* TOWN PLANNER */}
+					{!(
+						plan?.vetting?.townPlanner?.status?.toLowerCase() === "cleared" ||
+						plan?.vetting?.townPlanner?.status?.toLowerCase() ===
+							"process further"
+					) && (
+						<>
+							<div className="comments">
+								<p className="comment-type">Town Planner</p>
+
+								{plan?.vetting?.townPlanner?.items?.map((e, index) => {
+									if (
+										e.status.toLowerCase() !== "cleared" ||
+										e.status.toLowerCase() !== "process further"
+									) {
+										return (
+											<div className="comment-body">
+												<div className="comment-body-item">
+													<span className="comment-number">{index + 1}</span>
+													<span className="comment-text">{e.comment}</span>
+												</div>
+											</div>
+										);
+									}
+								})}
+							</div>
+						</>
+					)}
+				</div>
+			</div>
+		);
+	};
+
+	const getData = async () => {
 		try {
 			let host = import.meta.env.VITE_SERVER;
 
@@ -61,7 +274,6 @@ function Activities({ setRightBarView, reload, admin, plan }) {
 			setIsInUserOffice(fileInUserOffice);
 
 			setData(activitiesData);
-			setPlanData(plan);
 
 			// Send only 3 items if file is not in user's office
 			!fileInUserOffice
@@ -119,7 +331,6 @@ function Activities({ setRightBarView, reload, admin, plan }) {
 	}, []);
 
 	useEffect(() => {
-		setPlanData(plan);
 		plan && getData();
 	}, [plan, reload, params.id]);
 
@@ -176,7 +387,7 @@ function Activities({ setRightBarView, reload, admin, plan }) {
 							// return  <ActivityCardModal key={d._id} data={d}/>;
 						})
 					))}
-				{activityType.toLowerCase() === "vetting" && (
+				{activityType.toLowerCase() === "vetting" && !isLoading && (
 					<>
 						<VettingCard
 							reload={reload}
@@ -218,7 +429,7 @@ function Activities({ setRightBarView, reload, admin, plan }) {
 								vetting: plan?.vetting?.civilEngineer,
 							}}
 							header={{
-								jobTitle: "S/C Engineer",
+								jobTitle: "Civil Engineer",
 								title: "S/C. Engineer",
 							}}
 						/>
@@ -236,7 +447,14 @@ function Activities({ setRightBarView, reload, admin, plan }) {
 
 						<div className="printBtn">
 							<PrintWrapper classes={"btn"} label={"Print Vetting Sheet"} />
-							<PrintWrapper classes={"btn"} label={"Print Vetting Comment"} />
+
+							<PrintWrapper
+								title={`vetting_Comment_${plan?.planNumber?.fullValue}`}
+								classes={"btn"}
+								label={"Print Vetting Comment"}
+								content={vettingCommentPrintView()}
+								error={isPrintNotAllowed(plan)}
+							/>
 						</div>
 
 						<br />

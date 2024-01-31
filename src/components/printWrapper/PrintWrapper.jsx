@@ -1,9 +1,37 @@
 import "./printWrapper.css";
 import { useEffect, useRef, useState } from "react";
 import ReactToPrint from "react-to-print";
+import { getThemeColor } from "../../utilities/themeColor";
+import { toast } from "react-toastify";
 
-function PrintWrapper({ label, classes, content }) {
+function PrintWrapper({ title, label, classes, content, error }) {
 	let printComponent = useRef(null);
+
+	const headerText = () => {
+		return (
+			<div className="header-text">
+				<span className="header-text-state">EDO STATE GOVERNMENT</span>
+				<span className="header-text-ministry">
+					Ministry of Physical Planning,
+				</span>
+				<span className="header-text-ministry">
+					Housing, Urban and Regional Development
+				</span>
+			</div>
+		);
+	};
+	const footerText = () => {
+		return (
+			<div>
+				<p>
+					2nd Floor, Block "C" Secretariat Complex, Sapele Road, Benin City, Edo
+					State.
+				</p>
+				<p>Email: info.mppud@edostate.gov.ng</p>
+				<p>Tel: +234 810 466 3697</p>
+			</div>
+		);
+	};
 
 	return (
 		<>
@@ -26,7 +54,7 @@ function PrintWrapper({ label, classes, content }) {
 											src="/assets/logos/Logo-Edo State.png"
 											alt=""
 										/>
-										<div className="header-text">
+										{/* <div className="header-text">
 											<span className="header-text-state">
 												EDO STATE GOVERNMENT
 											</span>
@@ -36,7 +64,8 @@ function PrintWrapper({ label, classes, content }) {
 											<span className="header-text-ministry">
 												Housing, Urban and Regional Development
 											</span>
-										</div>
+										</div> */}
+										{headerText()}
 										<img
 											className="header-logo-right"
 											src="/assets/logos/Logo-Mpphurd.png"
@@ -54,12 +83,16 @@ function PrintWrapper({ label, classes, content }) {
 								<div className="footer-info">
 									<div className={"page-footer"}>
 										<div className="footer-rule"></div>
-										<p>
-											2nd Floor, Block "C" Secretariat Complex, Sapele Road,
-											Benin City, Edo State.
-										</p>
-										<p>Email: info.mppud@edostate.gov.ng</p>
-										<p>Tel: +234 810 466 3697</p>
+
+										{/* <div>
+											<p>
+												2nd Floor, Block "C" Secretariat Complex, Sapele Road,
+												Benin City, Edo State.
+											</p>
+											<p>Email: info.mppud@edostate.gov.ng</p>
+											<p>Tel: +234 810 466 3697</p>
+										</div> */}
+										{footerText()}
 									</div>
 								</div>
 							</td>
@@ -77,8 +110,12 @@ function PrintWrapper({ label, classes, content }) {
 			</div>
 
 			<ReactToPrint
-				documentTitle="Hello world"
-				trigger={() => <button className={classes}>{label}</button>}
+				documentTitle={title}
+				trigger={() => (
+					<button disabled={error} className={classes}>
+						{label}
+					</button>
+				)}
 				content={() => printComponent}
 			/>
 		</>

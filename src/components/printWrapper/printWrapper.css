@@ -1,4 +1,3 @@
-
 /*  */
 div.page-footer {
 	page-break-after: always;
@@ -13,7 +12,7 @@ div.page-footer {
 	line-height: 110%;
 	font-family: "Algerian";
 	padding: 0 3rem;
-
+	color: black;
 }
 
 div.page-footer p {
@@ -48,7 +47,7 @@ div.page-footer {
 	display: none;
 	height: 80px;
 }
-.printWrapper{
+.printWrapper {
 	display: none;
 }
 
@@ -69,20 +68,20 @@ div.page-footer {
 	div.main {
 		display: block;
 	}
-	.printWrapper{
+	.header-text{
+		color: black;
+	}
+	.printWrapper {
 		display: block;
+		color: black;
 	}
 }
-
-
-
-
 
 /* HEADER TOP */
 .printWrapper {
 	padding: 0 3rem;
 }
-.printWrapper .header{
+.printWrapper .header {
 	padding: 3rem 0;
 	padding-bottom: 1rem;
 }
@@ -91,11 +90,11 @@ div.page-footer {
 	justify-content: space-between;
 }
 
-
 .header-text {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	color: black;
 	justify-content: center;
 	text-align: center;
 	line-height: 170%;
@@ -114,13 +113,13 @@ div.page-footer {
 	text-transform: uppercase;
 }
 
-.header-rule{
+.header-rule {
 	margin-top: 5px;
 	width: 100%;
 	height: 1px;
 	background-color: rgb(221, 0, 0);
 }
-.footer-rule{
+.footer-rule {
 	margin-bottom: 4px;
 	width: 100%;
 	height: 1px;

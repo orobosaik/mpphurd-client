@@ -74,7 +74,6 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 							<span className="planInfoSummaryStack">
 								{data?.currentOffice?.id?.name} Office
 							</span>
-							.
 						</span>
 					</div>
 
@@ -88,7 +87,9 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 					)}
 
 					<div className="planInfoSummaryItem">
-						{(data?.isFastTrack || data?.isFileOfInterest || data?.isOldFile) && (
+						{(data?.isFastTrack ||
+							data?.isFileOfInterest ||
+							data?.isOldFile) && (
 							<span className="planInfoSummaryTitle">Tags:</span>
 						)}
 						<span className="planInfoSummaryText">
