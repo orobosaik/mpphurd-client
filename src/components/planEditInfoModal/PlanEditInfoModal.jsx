@@ -78,6 +78,9 @@ export default function PlanEditInfoModal({
 	const [approvalStatusEdit, setApprovalStatusEdit] = useState(false);
 	const [collectedApprovalEdit, setCollectedApprovalEdit] = useState(false);
 
+	// Development Description Edit
+	const [devDescriptionEdit, setDevDescriptionEdit] = useState(false);
+
 	const { currentUser, loading } = useSelector((state) => state.user);
 	const themeColor = getThemeColor();
 
@@ -95,15 +98,8 @@ export default function PlanEditInfoModal({
 		setCollectedApproval(data.approval.isCollected);
 		setApprovalStatusEdit(false);
 		setCollectedApprovalEdit(false);
+		setDevDescriptionEdit(false);
 		setOpen(false);
-	};
-
-	const handleEditSubmiteee = (e) => {
-		e.preventDefault();
-		setSubmitting(true);
-		const form = new FormData(e.target);
-		console.log(e);
-		console.log(form);
 	};
 
 	const handleEditSubmit = async (e) => {
@@ -171,15 +167,21 @@ export default function PlanEditInfoModal({
 				"dev.status": form.get("planBuildingStatus") || "",
 				"dev.noOfFloor": form.get("planFloors") || "",
 				"dev.coordinates": form.get("planCoordinates") || "",
-				"dev.description": form.get("devDescription") || "",
 				"dev.assessedAmount": rawAmount,
 			};
+			// building description / narration
+			if (devDescriptionEdit) {
+				newData["dev.description"] = form.get("devDescription") || "";
+			}
 		} else if (archive) {
 			newData = {
 				stack: form.get("planStack") || "",
 				hasTax: form.get("planHasTax") === "yes" ? true : false,
-				"dev.description": form.get("devDescription") || "",
 			};
+			// building description / narration
+			if (devDescriptionEdit) {
+				newData["dev.description"] = form.get("devDescription") || "";
+			}
 
 			if (approvalStatusEdit) {
 				(newData["approval.status"] = form.get("planApprovalStatus")),
@@ -197,8 +199,11 @@ export default function PlanEditInfoModal({
 			newData = {
 				stack: form.get("planStack") || "",
 				hasTax: form.get("planHasTax") === "yes" ? true : false,
-				"dev.description": form.get("devDescription") || "",
 			};
+			// building description / narration
+			if (devDescriptionEdit) {
+				newData["dev.description"] = form.get("devDescription") || "";
+			}
 
 			if (approvalStatusEdit) {
 				(newData["approval.status"] = form.get("planApprovalStatus")),
@@ -208,9 +213,11 @@ export default function PlanEditInfoModal({
 		} else {
 			newData = {
 				stack: form.get("planStack") || "",
-				// building information
-				"dev.description": form.get("devDescription") || "",
 			};
+			// building description / narration
+			if (devDescriptionEdit) {
+				newData["dev.description"] = form.get("devDescription") || "";
+			}
 		}
 
 		console.log(newData);
@@ -1073,7 +1080,7 @@ export default function PlanEditInfoModal({
 							""
 						)}
 
-						{!clearing && (
+						{/* {!clearing && (
 							<div className="minuteItem">
 								<label htmlFor="devDescription">Development Description:</label>
 								<textarea
@@ -1082,6 +1089,37 @@ export default function PlanEditInfoModal({
 									id="devDescription"
 									cols="30"
 									rows="7"></textarea>
+							</div>
+						)} */}
+
+						{!clearing && (
+							<div className="minuteItem">
+								<div className="planApprovalStatus">
+									<label htmlFor="devDescription">
+										Development Description:
+									</label>
+									<div
+										className="editBtn"
+										onClick={() => {
+											setDevDescriptionEdit(!devDescriptionEdit);
+										}}>
+										<span>
+											{devDescriptionEdit ? "Cancel Update" : "Update"}
+										</span>
+									</div>
+								</div>
+								{devDescriptionEdit ? (
+									<textarea
+										defaultValue={data?.dev?.description}
+										name="devDescription"
+										id="devDescription"
+										cols="30"
+										rows="7"></textarea>
+								) : (
+									<div className="devDescriptionText">
+										<p>{data?.dev?.description}</p>
+									</div>
+								)}
 							</div>
 						)}
 

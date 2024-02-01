@@ -208,3 +208,21 @@ html[data-theme="dark"] dialog {
 	font-size: 1.2em;
 	text-transform: uppercase;
 }
+
+.minuteItem .planApprovalStatus label{
+	font: inherit;
+	color: var(--black);
+	font-size: 1.6rem;
+}
+.minuteItem .devDescriptionText{
+	padding: 1rem;
+	background-color: var(--green-background);
+	font-weight: normal;
+
+
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	-ms-border-radius: 8px;
+	-o-border-radius: 8px;
+}
