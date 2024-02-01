@@ -446,19 +446,23 @@ function Activities({ setRightBarView, reload, admin, plan }) {
 						/>
 
 						<div className="printBtn">
-							<PrintWrapper classes={"btn"} label={"Print Vetting Sheet"} />
-
 							<PrintWrapper
 								title={`vetting_Comment_${plan?.planNumber?.fullValue}`}
 								classes={"btn"}
-								label={"Print Vetting Comment"}
+								label={"Print Vetting Sheet"}
+								// content={vettingCommentPrintView()}
+								error={isPrintNotAllowed(plan)}
+							/>
+							<PrintWrapper
+								title={`vetting_Comment_${plan?.planNumber?.fullValue}`}
+								classes={"btn"}
+								label={"Print Comment Sheet"}
 								content={vettingCommentPrintView()}
 								error={isPrintNotAllowed(plan)}
 							/>
 						</div>
 
 						<br />
-						<PrintWrapper classes={"btn"} label={"testing label"} />
 					</>
 				)}
 			</div>
