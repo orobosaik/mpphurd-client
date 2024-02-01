@@ -97,3 +97,23 @@ export const VETTING_STATUS_LIST = [
 	"Issue Raised",
 	"Process Further",
 ];
+export const JOB_TITLE_LIST = [
+	"Architect",
+	"Civil Engineer",
+	"Mechanical Engineer",
+	"Electrical Engineer",
+	"Town Planning Officer",
+	"Estate Surveyor",
+	"ICTA",
+];
+export const POSITION_LIST = [
+	"Hon. Commissioner",
+	"Perm. Secretary",
+	"Director",
+	"APO",
+	"STPO",
+	"TPO",
+	"TA",
+	"ICTA",
+	"Staff",
+];

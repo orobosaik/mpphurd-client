@@ -12,6 +12,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { getThemeColor } from "../../utilities/themeColor";
 import { CircularProgress } from "@mui/material";
+import { JOB_TITLE_LIST, POSITION_LIST } from "../../utilities/appData";
 
 export default function AdminStaffEditModal({ ...props }) {
 	const [open, setOpen] = useState(false);
@@ -628,23 +629,29 @@ export default function AdminStaffEditModal({ ...props }) {
 														<label htmlFor="staffDesignation">
 															Designation:
 														</label>
-														<input
-															type="text"
-															name="staffDesignation"
-															id="staffDesignation"
+														<select
 															defaultValue={designation}
 															onChange={(e) => setDesignation(e.target.value)}
-														/>
+															name="staffDesignation"
+															id="staffDesignation">
+															<option value="">----</option>
+															{JOB_TITLE_LIST.map((e) => {
+																return <option value={e}>{e}</option>;
+															})}
+														</select>
 													</div>
 													<div>
 														<label htmlFor="staffPosition">Position:</label>
-														<input
-															type="text"
-															name="staffPosition"
-															id="staffPosition"
+														<select
 															defaultValue={position}
 															onChange={(e) => setPosition(e.target.value)}
-														/>
+															name="staffPosition"
+															id="staffPosition">
+															<option value="">----</option>
+															{POSITION_LIST.map((e) => {
+																return <option value={e}>{e}</option>;
+															})}
+														</select>
 													</div>
 
 													<div>
