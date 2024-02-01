@@ -278,7 +278,7 @@ function ListWrapper({ children }) {
 							setSearchQuery(e.target.value);
 						}}
 						type="text"
-						placeholder="Search record..."
+						placeholder={`Search ${state?.id?.name.toLowerCase()} record...`}
 					/>
 					{searchQuery && (
 						<div
@@ -350,7 +350,7 @@ function ListWrapper({ children }) {
 										key={index}
 										date={arr.date}
 										count={arr.items.length}>
-										{arr.items.map((item, i) => {
+										{arr.items.toReversed().map((item, i) => {
 											return (
 												<ListCard
 													key={uuid()}
