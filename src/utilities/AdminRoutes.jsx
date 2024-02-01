@@ -24,6 +24,7 @@ import { setThemeColor } from "./themeColor";
 import AdminRegionList from "../pages/admin/adminRegionList/AdminRegionList.jsx";
 import DocumentView from "../pages/documentView/DocumentView.jsx";
 import AdminPlan from "../pages/admin/adminPlan/AdminPlan.jsx";
+import AdminViewBill from "../pages/admin/adminViewBill/AdminViewBill.jsx";
 
 function AdminRoutes() {
 	const { currentAdmin } = useSelector((state) => state.admin);
@@ -70,7 +71,7 @@ function AdminRoutes() {
 						<Route path="new" element={<CreateApplication />} />
 						<Route path=":id">
 							<Route index element={<AdminPlan />} />
-							<Route path="bills" element={<ViewBill />} />
+							<Route path="bills" element={<AdminViewBill />} />
 							{/* <Route path="minute" element={<Minute />} /> */}
 							<Route path="documents" element={<DocumentView />} />
 						</Route>

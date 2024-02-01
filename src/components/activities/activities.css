@@ -81,36 +81,39 @@
 	padding: 0 2rem;
 	position: relative;
 }
-.vettingCommentSheet .date{
+.vettingCommentSheet .date {
 	position: absolute;
-	font-size: .9em;
-
-
+	font-size: 0.9em;
 }
 .vettingCommentSheet .header {
 	text-align: center;
 	padding: 1rem;
-	font-size: 2.5rem;
-	font-weight: 600;
+	font-size: 2rem;
 	text-transform: uppercase;
+	opacity: 0.87;
 }
 .vettingCommentSheet .header2 {
-	font-size: 2rem;
-	font-weight: 600;
+	font-size: 1.4rem;
 	margin-top: 2rem;
 	padding-bottom: 0.5rem;
 	text-transform: uppercase;
+	opacity: 0.87;
 }
 
+.vettingCommentSheet .detailsWrapper {
+	padding: 0 3.5rem;
+}
 .vettingCommentSheet .detailsItem {
 	display: grid;
 	grid-template-columns: 1fr 3fr;
+	gap: 5px;
 	font-size: 1.4rem;
 }
 .vettingCommentSheet .detailsItem-name {
 	font-weight: 600;
+	opacity: 0.87;
 }
-.vettingCommentSheet .detailsItem-details {
+.vettingCommentSheet .detailsItem-value {
 	text-transform: capitalize;
 }
 .vettingCommentSheet .comments-wrapper {
@@ -125,8 +128,7 @@
 	border-bottom: 1px dashed #3e3e3e;
 }
 .vettingCommentSheet .comment-type {
-	font-size: 1.6rem;
-	font-weight: 600;
+	font-size: 1.4rem;
 	text-transform: uppercase;
 }
 .vettingCommentSheet .comment-body-item {

@@ -293,6 +293,7 @@ export default function PlanBill() {
 				</div>
 
 				<PrintWrapper
+					title={`Assessment_Sheet`}
 					classes={"planBillPrint primary"}
 					label={"Print this out!"}
 					content={contentRef()}

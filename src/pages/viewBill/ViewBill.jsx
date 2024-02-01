@@ -43,7 +43,7 @@ export default function ViewBill() {
 				// ]);
 				const res = await axios.get(`${host}/staffs/plan/${params.id}`);
 
-				setData(res.data)
+				setData(res.data);
 
 				// Check if Plan is in User Office(s)
 				setIsInUserOffice(
@@ -111,7 +111,12 @@ export default function ViewBill() {
 				<MiddleBar
 					topBarData={{
 						action: "View Bills",
-						planNumber: "BC/3421/2023",
+						planNumber:
+							(data?.planNumber
+								? `${data?.dev.region.substring(0, 3).toUpperCase()}/${
+										data?.planNumber.value
+								  }/${new Date(data?.planNumber.date).getFullYear()}`
+								: data?.uniqueId) + " (This Feature Is In Development...)",
 					}}>
 					<PlanBill />
 				</MiddleBar>

@@ -23,6 +23,7 @@ function Activities({ setRightBarView, reload, admin, plan }) {
 
 	const [isInUserOffice, setIsInUserOffice] = useState();
 	const { currentUser, loading } = useSelector((state) => state.user);
+	const { currentAdmin } = useSelector((state) => state.admin);
 
 	const params = useParams();
 	const themeColor = getThemeColor();
@@ -64,181 +65,184 @@ function Activities({ setRightBarView, reload, admin, plan }) {
 				<div className="date">Printed: {format(new Date(), "dd/MM/yyyy")}</div>
 				<h1 className="header">Vetting Comment Sheet</h1>
 
-				<div className="details">
-					<div className="detailsItem">
-						<span className="detailsItem-name">Plan Number:</span>
-						<span className="detailsItem-value">
-							{plan?.planNumber?.fullValue || plan?.uniqueId}
-						</span>
+				<div className="detailsWrapper">
+					<div className="details">
+						<div className="detailsItem">
+							<span className="detailsItem-name">Plan Number:</span>
+							<span className="detailsItem-value">
+								{plan?.planNumber?.fullValue || plan?.uniqueId}
+							</span>
+						</div>
+						<div className="detailsItem">
+							<span className="detailsItem-name">Applicant Name:</span>
+							<span className="detailsItem-value">
+								{plan?.applicant?.name?.toLowerCase()}
+							</span>
+						</div>
+						<div className="detailsItem">
+							<span className="detailsItem-name">Development Address:</span>
+							<span className="detailsItem-value">
+								{" "}
+								{plan?.dev?.plotNo && plan?.dev?.plotNo + ","}{" "}
+								{plan?.dev?.address && plan?.dev?.address?.toLowerCase()}
+							</span>
+						</div>
+						<div className="detailsItem">
+							<span className="detailsItem-name">Development Type:</span>
+							<span className="detailsItem-value">{plan?.dev?.type}</span>
+						</div>
 					</div>
-					<div className="detailsItem">
-						<span className="detailsItem-name">Applicant Name:</span>
-						<span className="detailsItem-value">
-							{plan?.applicant?.name?.toLowerCase()}
-						</span>
+
+					<h2 className="header2">Comments</h2>
+
+					<div className="comments-wrapper">
+						{/* ARCHITECT */}
+						{!(
+							plan?.vetting?.architect?.status?.toLowerCase() === "cleared" ||
+							plan?.vetting?.architect?.status?.toLowerCase() ===
+								"process further"
+						) && (
+							<>
+								<div className="comments">
+									<p className="comment-type">Architect</p>
+
+									{plan?.vetting?.architect?.items?.map((e, index) => {
+										if (
+											e.status.toLowerCase() !== "cleared" ||
+											e.status.toLowerCase() !== "process further"
+										) {
+											return (
+												<div className="comment-body">
+													<div className="comment-body-item">
+														<span className="comment-number">{index + 1}</span>
+														<span className="comment-text">{e.comment}</span>
+													</div>
+												</div>
+											);
+										}
+									})}
+								</div>
+							</>
+						)}
+
+						{/* CIVIL ENGINEER */}
+						{!(
+							plan?.vetting?.civilEngineer?.status?.toLowerCase() ===
+								"cleared" ||
+							plan?.vetting?.civilEngineer?.status?.toLowerCase() ===
+								"process further"
+						) && (
+							<>
+								<div className="comments">
+									<p className="comment-type">Civil Engineer</p>
+
+									{plan?.vetting?.civilEngineer?.items?.map((e, index) => {
+										if (
+											e.status.toLowerCase() !== "cleared" ||
+											e.status.toLowerCase() !== "process further"
+										) {
+											return (
+												<div className="comment-body">
+													<div className="comment-body-item">
+														<span className="comment-number">{index + 1}</span>
+														<span className="comment-text">{e.comment}</span>
+													</div>
+												</div>
+											);
+										}
+									})}
+								</div>
+							</>
+						)}
+
+						{/* ELECTRICAL ENGINEER */}
+						{!(
+							plan?.vetting?.electricalEngineer?.status?.toLowerCase() ===
+								"cleared" ||
+							plan?.vetting?.electricalEngineer?.status?.toLowerCase() ===
+								"process further"
+						) && (
+							<>
+								<div className="comments">
+									<p className="comment-type">Electrical Engineer</p>
+
+									{plan?.vetting?.electricalEngineer?.items?.map((e, index) => {
+										if (
+											e.status.toLowerCase() !== "cleared" ||
+											e.status.toLowerCase() !== "process further"
+										) {
+											return (
+												<div className="comment-body">
+													<div className="comment-body-item">
+														<span className="comment-number">{index + 1}</span>
+														<span className="comment-text">{e.comment}</span>
+													</div>
+												</div>
+											);
+										}
+									})}
+								</div>
+							</>
+						)}
+
+						{/* MECHANICAL ENGINEER */}
+						{!(
+							plan?.vetting?.mechanicalEngineer?.status?.toLowerCase() ===
+								"cleared" ||
+							plan?.vetting?.mechanicalEngineer?.status?.toLowerCase() ===
+								"process further"
+						) && (
+							<>
+								<div className="comments">
+									<p className="comment-type">Mechanical Engineer</p>
+
+									{plan?.vetting?.mechanicalEngineer?.items?.map((e, index) => {
+										if (
+											e.status.toLowerCase() !== "cleared" ||
+											e.status.toLowerCase() !== "process further"
+										) {
+											return (
+												<div className="comment-body">
+													<div className="comment-body-item">
+														<span className="comment-number">{index + 1}</span>
+														<span className="comment-text">{e.comment}</span>
+													</div>
+												</div>
+											);
+										}
+									})}
+								</div>
+							</>
+						)}
+						{/* TOWN PLANNER */}
+						{!(
+							plan?.vetting?.townPlanner?.status?.toLowerCase() === "cleared" ||
+							plan?.vetting?.townPlanner?.status?.toLowerCase() ===
+								"process further"
+						) && (
+							<>
+								<div className="comments">
+									<p className="comment-type">Town Planner</p>
+
+									{plan?.vetting?.townPlanner?.items?.map((e, index) => {
+										if (
+											e.status.toLowerCase() !== "cleared" ||
+											e.status.toLowerCase() !== "process further"
+										) {
+											return (
+												<div className="comment-body">
+													<div className="comment-body-item">
+														<span className="comment-number">{index + 1}</span>
+														<span className="comment-text">{e.comment}</span>
+													</div>
+												</div>
+											);
+										}
+									})}
+								</div>
+							</>
+						)}
 					</div>
-					<div className="detailsItem">
-						<span className="detailsItem-name">Development Address:</span>
-						<span className="detailsItem-value">
-							{" "}
-							{plan?.dev?.plotNo && plan?.dev?.plotNo + ","}{" "}
-							{plan?.dev?.address && plan?.dev?.address?.toLowerCase()}
-						</span>
-					</div>
-					<div className="detailsItem">
-						<span className="detailsItem-name">Development Type:</span>
-						<span className="detailsItem-value">{plan?.dev?.type}</span>
-					</div>
-				</div>
-
-				<h2 className="header2">Comments</h2>
-
-				<div className="comments-wrapper">
-					{/* ARCHITECT */}
-					{!(
-						plan?.vetting?.architect?.status?.toLowerCase() === "cleared" ||
-						plan?.vetting?.architect?.status?.toLowerCase() ===
-							"process further"
-					) && (
-						<>
-							<div className="comments">
-								<p className="comment-type">Architect</p>
-
-								{plan?.vetting?.architect?.items?.map((e, index) => {
-									if (
-										e.status.toLowerCase() !== "cleared" ||
-										e.status.toLowerCase() !== "process further"
-									) {
-										return (
-											<div className="comment-body">
-												<div className="comment-body-item">
-													<span className="comment-number">{index + 1}</span>
-													<span className="comment-text">{e.comment}</span>
-												</div>
-											</div>
-										);
-									}
-								})}
-							</div>
-						</>
-					)}
-
-					{/* CIVIL ENGINEER */}
-					{!(
-						plan?.vetting?.civilEngineer?.status?.toLowerCase() === "cleared" ||
-						plan?.vetting?.civilEngineer?.status?.toLowerCase() ===
-							"process further"
-					) && (
-						<>
-							<div className="comments">
-								<p className="comment-type">Civil Engineer</p>
-
-								{plan?.vetting?.civilEngineer?.items?.map((e, index) => {
-									if (
-										e.status.toLowerCase() !== "cleared" ||
-										e.status.toLowerCase() !== "process further"
-									) {
-										return (
-											<div className="comment-body">
-												<div className="comment-body-item">
-													<span className="comment-number">{index + 1}</span>
-													<span className="comment-text">{e.comment}</span>
-												</div>
-											</div>
-										);
-									}
-								})}
-							</div>
-						</>
-					)}
-
-					{/* ELECTRICAL ENGINEER */}
-					{!(
-						plan?.vetting?.electricalEngineer?.status?.toLowerCase() ===
-							"cleared" ||
-						plan?.vetting?.electricalEngineer?.status?.toLowerCase() ===
-							"process further"
-					) && (
-						<>
-							<div className="comments">
-								<p className="comment-type">Electrical Engineer</p>
-
-								{plan?.vetting?.electricalEngineer?.items?.map((e, index) => {
-									if (
-										e.status.toLowerCase() !== "cleared" ||
-										e.status.toLowerCase() !== "process further"
-									) {
-										return (
-											<div className="comment-body">
-												<div className="comment-body-item">
-													<span className="comment-number">{index + 1}</span>
-													<span className="comment-text">{e.comment}</span>
-												</div>
-											</div>
-										);
-									}
-								})}
-							</div>
-						</>
-					)}
-
-					{/* MECHANICAL ENGINEER */}
-					{!(
-						plan?.vetting?.mechanicalEngineer?.status?.toLowerCase() ===
-							"cleared" ||
-						plan?.vetting?.mechanicalEngineer?.status?.toLowerCase() ===
-							"process further"
-					) && (
-						<>
-							<div className="comments">
-								<p className="comment-type">Mechanical Engineer</p>
-
-								{plan?.vetting?.mechanicalEngineer?.items?.map((e, index) => {
-									if (
-										e.status.toLowerCase() !== "cleared" ||
-										e.status.toLowerCase() !== "process further"
-									) {
-										return (
-											<div className="comment-body">
-												<div className="comment-body-item">
-													<span className="comment-number">{index + 1}</span>
-													<span className="comment-text">{e.comment}</span>
-												</div>
-											</div>
-										);
-									}
-								})}
-							</div>
-						</>
-					)}
-					{/* TOWN PLANNER */}
-					{!(
-						plan?.vetting?.townPlanner?.status?.toLowerCase() === "cleared" ||
-						plan?.vetting?.townPlanner?.status?.toLowerCase() ===
-							"process further"
-					) && (
-						<>
-							<div className="comments">
-								<p className="comment-type">Town Planner</p>
-
-								{plan?.vetting?.townPlanner?.items?.map((e, index) => {
-									if (
-										e.status.toLowerCase() !== "cleared" ||
-										e.status.toLowerCase() !== "process further"
-									) {
-										return (
-											<div className="comment-body">
-												<div className="comment-body-item">
-													<span className="comment-number">{index + 1}</span>
-													<span className="comment-text">{e.comment}</span>
-												</div>
-											</div>
-										);
-									}
-								})}
-							</div>
-						</>
-					)}
 				</div>
 			</div>
 		);
@@ -268,9 +272,9 @@ function Activities({ setRightBarView, reload, admin, plan }) {
 
 			// Check if Plan is in User Office(s)
 			const fileInUserOffice =
-				currentUser.office.some((e) => {
+				currentUser?.office?.some((e) => {
 					return plan?.currentOffice?.id?._id === e?.id?._id;
-				}) || currentUser?.isManagement === true;
+				}) || currentUser?.isManagement === true || currentAdmin;
 			setIsInUserOffice(fileInUserOffice);
 
 			setData(activitiesData);

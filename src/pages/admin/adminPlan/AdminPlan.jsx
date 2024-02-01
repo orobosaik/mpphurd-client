@@ -327,6 +327,7 @@ export default function AdminPlan() {
 							admin={true}
 							reload={reload}
 							setRightBarView={setRightBarView}
+							plan={data}
 						/>
 					) : (
 						<Document setRightBarView={setRightBarView} />

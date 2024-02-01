@@ -1,10 +1,6 @@
 import { useState } from "react";
 import "./vettingCard.css";
-import {
-	format,
-	isToday,
-	isYesterday,
-} from "date-fns";
+import { format, isToday, isYesterday } from "date-fns";
 import ActivityCardModal from "../activityCardModal/ActivityCardModal";
 import VettingCardAddModal from "../vettingCardAddModal/VettingCardAddModal";
 import { useSelector } from "react-redux";
@@ -14,6 +10,7 @@ function VettingCard({ data, header, reload }) {
 	const [showVetting, setShowVetting] = useState(false);
 
 	const { currentUser } = useSelector((state) => state.user);
+	const { currentAdmin } = useSelector((state) => state.admin);
 
 	const displayDate = (originalDate) => {
 		if (isToday(originalDate)) {
@@ -41,14 +38,14 @@ function VettingCard({ data, header, reload }) {
 	};
 
 	// Check if User has authorization to vet plan
-	const isInOfficeAndPermitted = currentUser.office.some((e) => {
+	const isInOfficeAndPermitted = currentUser?.office?.some((e) => {
 		return (
 			data?.plan?.currentOffice?.id?._id === e?.id?._id &&
 			e.tasks.includes("VET PLAN")
 		);
 	});
 	const isCorrectJobTitle =
-		currentUser.jobTitle.toLowerCase() === header.jobTitle.toLowerCase();
+		currentUser?.jobTitle?.toLowerCase() === header.jobTitle.toLowerCase();
 	const isCleared =
 		data?.vetting?.status?.toLowerCase() === "cleared" ||
 		data?.vetting?.status?.toLowerCase() === "process further";
