@@ -115,6 +115,8 @@ export const POSITION_LIST = [
 	"TPO",
 	"TA",
 	"ICTA",
+	"ESV",
+	"QS",
 	"Staff",
 ];
 export const FEEDBACK_LIST = [

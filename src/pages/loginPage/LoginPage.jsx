@@ -123,7 +123,7 @@ function LoginPage() {
 								development app
 							</h2>
 							<p>
-								An Application to automate the internal{" "}
+								Simplifying and automating the internal{" "}
 								<span className="app-cover__info--highlight">
 									Workflow <span className="app-cover__info--svg" />
 								</span>

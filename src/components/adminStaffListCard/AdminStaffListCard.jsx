@@ -38,7 +38,7 @@ export default function AdminStaffListCard(props) {
 							})}
 						</span>
 						<span className="adminStaffListCard__title">
-							{d.jobTitle?.fullName}
+							{d.jobTitle}
 						</span>
 						<span
 							className={

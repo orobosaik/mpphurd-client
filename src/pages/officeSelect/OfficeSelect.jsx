@@ -54,11 +54,11 @@ export default function OfficeSelect() {
 				<SideBar />
 				<div className="officeSelect">
 					<FeedBackground>
-						{console.log(currentUser.office[0].id.name)}
+						{console.log(currentUser?.office[0]?.id?.name)}
 						<div className="feedCard__container">
-							<h2 className="feedCard__title">OFFICE(S)</h2>
+							<h2 className="feedCard__title">OFFICE</h2>
 							<div className="feedCard__list">
-								{currentUser.office.map((e) => {
+								{currentUser?.office?.map((e) => {
 									{
 										console.log(e);
 									}
