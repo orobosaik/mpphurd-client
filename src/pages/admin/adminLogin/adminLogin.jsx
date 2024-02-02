@@ -122,7 +122,7 @@ function AdminLogin() {
 								development app
 							</h2>
 							<p>
-								An Application to automate the internal{" "}
+								For a simplified, efficient and automated <br />
 								<span className="app-cover__info--highlight">
 									Workflow <span className="app-cover__info--svg" />
 								</span>
@@ -134,10 +134,7 @@ function AdminLogin() {
 							<div className="form-logo">
 								{/* <img src="Mpphurd.png" alt="Mpphurd Logo" /> */}
 							</div>
-							<p className="form-greeting">
-								{" "}
-								Please Login to continue as Admin
-							</p>
+							<p className="form-greeting">Login to continue as Admin</p>
 							<div className="form-input">
 								<label htmlFor="email">Email</label>
 								<div>
@@ -179,7 +176,8 @@ function AdminLogin() {
 									</span>
 								</div>
 							</div>
-							<p className="btn password-reset">Forgot Password</p>
+							{/* <p className="btn password-reset">Forgot Password</p> */}
+							<p></p>
 							<button
 								type="submit"
 								className="btn btn-form-submit"

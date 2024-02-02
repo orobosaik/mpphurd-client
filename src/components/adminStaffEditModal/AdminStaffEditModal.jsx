@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import { getThemeColor } from "../../utilities/themeColor";
 import { CircularProgress } from "@mui/material";
 import { JOB_TITLE_LIST, POSITION_LIST } from "../../utilities/appData";
+import uuid from "react-uuid";
 
 export default function AdminStaffEditModal({ ...props }) {
 	const [open, setOpen] = useState(false);
@@ -208,7 +209,7 @@ export default function AdminStaffEditModal({ ...props }) {
 	const handleSubmitNew = async () => {
 		setLoading(true);
 		let newData = {};
-		newData.password = "909090";
+		newData.password = uuid();
 		newData.isActive = isActive;
 		newData.isManagement = isManagement;
 		// newData.profilePicture = photo;
