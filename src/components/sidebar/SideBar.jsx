@@ -21,6 +21,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { persistor } from "../../redux/store";
 import { getThemeColor } from "../../utilities/themeColor";
 import { resetOfficeData } from "../../redux/appSlice";
+import FeedbackModal from "../feedbackModal/FeedbackModal";
 
 export default function SideBar({ selected }) {
 	const navigate = useNavigate();
@@ -32,7 +33,7 @@ export default function SideBar({ selected }) {
 	const handleLogout = () => {
 		console.log("YAYAYAYAYAYA");
 		dispatch(logout());
-		dispatch(resetOfficeData())
+		dispatch(resetOfficeData());
 		// navigate("/login");
 		// persistor.purge();
 
@@ -102,7 +103,10 @@ export default function SideBar({ selected }) {
 					<LogoutRounded className="sideBarIcon" />
 					<span>Log Out</span>
 				</div>
-					<ToastContainer />
+				<div className="sidebarFeedBackButton">
+					<FeedbackModal />
+				</div>
+				<ToastContainer />
 			</div>
 		</div>
 	);

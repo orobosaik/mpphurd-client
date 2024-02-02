@@ -1,0 +1,19 @@
+.inDevelopmentText {
+	font-size: 3rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 600;
+		opacity: 0.8;
+
+	height: 100%;
+	color: var(--white);
+	animation: dimmer 2s infinite;
+	-webkit-animation: dimmer 2s infinite;
+}
+
+@keyframes dimmer {
+	50% {
+		opacity: 0.1;
+	}
+}

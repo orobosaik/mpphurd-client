@@ -19,6 +19,7 @@ import { useSelector } from "react-redux";
 import { setThemeColor } from "./themeColor";
 import OfficeSelect from "../pages/officeSelect/OfficeSelect.jsx";
 import DevelopmentControl from "../pages/buildingControl/BuildingControl";
+import InDevelopment from "../pages/inDevelopment/InDevelopment.jsx";
 
 function MainRoutes() {
 	const navigate = useNavigate();
@@ -79,26 +80,30 @@ function MainRoutes() {
 
 					{/* PETITION */}
 					<Route path="/petition">
-						<Route index element={<Petition />} />
+						<Route index element={<InDevelopment />} />
 					</Route>
 
 					{/* BUILDING CONTROL */}
 					<Route path="/b_control">
-						<Route index element={<BuildingControl />} />
+						{/* <Route index element={<BuildingControl />} /> */}
+						<Route index element={<InDevelopment />} />
 					</Route>
 
 					{/* DEVELOPMENT CONTROL */}
 					<Route path="/d_control">
-						<Route index element={<DevelopmentControl />} />
+						{/* <Route index element={<DevelopmentControl />} /> */}
+						<Route index element={<InDevelopment />} />
 					</Route>
 
 					{/* ACTIVITIES */}
 					<Route path="/activities">
-						<Route index element={<ActivitiesView />} />
+						{/* <Route index element={<ActivitiesView />} /> */}
+						<Route index element={<InDevelopment />} />
 					</Route>
 					{/* ANALYSIS */}
 					<Route path="/analysis">
-						<Route index element={<Analysis />} />
+						{/* <Route index element={<Analysis />} /> */}
+						<Route index element={<InDevelopment />} />
 					</Route>
 				</Routes>
 			) : (

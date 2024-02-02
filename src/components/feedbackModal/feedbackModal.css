@@ -1,0 +1,8 @@
+.feedBackModalButton {
+	margin: auto 0;
+  color: var(--black);
+}
+.feedBackModalButton:hover {
+	color: var(--pc-green);
+	cursor: pointer;
+}

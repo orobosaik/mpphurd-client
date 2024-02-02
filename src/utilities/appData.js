@@ -117,3 +117,10 @@ export const POSITION_LIST = [
 	"ICTA",
 	"Staff",
 ];
+export const FEEDBACK_LIST = [
+	"Product Feedback",
+	"Feature Requests",
+	"Bug Reports",
+	"Complaints & Questions",
+	"Praise & Appreciation",
+];

@@ -25,6 +25,7 @@ import AdminRegionList from "../pages/admin/adminRegionList/AdminRegionList.jsx"
 import DocumentView from "../pages/documentView/DocumentView.jsx";
 import AdminPlan from "../pages/admin/adminPlan/AdminPlan.jsx";
 import AdminViewBill from "../pages/admin/adminViewBill/AdminViewBill.jsx";
+import AdminInDevelopment from "../pages/admin/adminInDevelopment/AdminInDevelopment.jsx";
 
 function AdminRoutes() {
 	const { currentAdmin } = useSelector((state) => state.admin);
@@ -110,22 +111,22 @@ function AdminRoutes() {
 					</Route>
 
 					{/* BUILDING CONTROL */}
-					<Route path="/control">
-						<Route index element={<BuildingControl />} />
+					<Route path="/permit">
+						<Route index element={<AdminInDevelopment />} />
 					</Route>
 
 					{/* OFFICE */}
-					<Route path="/offices">
-						<Route index element={<Office />} />
+					<Route path="/public">
+						<Route index element={<AdminInDevelopment />} />
 					</Route>
 
 					{/* ACTIVITIES */}
 					<Route path="/activities">
-						<Route index element={<ActivitiesView />} />
+						<Route index element={<AdminInDevelopment />} />
 					</Route>
 					{/* ANALYSIS */}
 					<Route path="/analysis">
-						<Route index element={<Analysis />} />
+						<Route index element={<AdminInDevelopment />} />
 					</Route>
 				</Routes>
 			) : (

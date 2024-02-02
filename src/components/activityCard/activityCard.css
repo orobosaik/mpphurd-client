@@ -25,14 +25,13 @@ html[data-theme="dark"] .activityCard {
 	border-bottom-right-radius: 5px;
 	border-bottom-left-radius: 5px;
 }
-.activityCardTypeTag.Minute{
+.activityCardTypeTag.Minute {
 	color: var(--white);
 	background-color: var(--pc-green);
 	/* background-color: orangered; */
 	/* background-color: #FE7A36; */
-
 }
-.activityCardTypeTag.Action{
+.activityCardTypeTag.Action {
 	color: var(--white);
 	background-color: var(--accent-action);
 }
@@ -85,7 +84,7 @@ html[data-theme="dark"] .activityCard {
 	flex-direction: column;
 	align-items: end;
 	/* color: orange; */
-	color: #FE7A36;
+	color: #fe7a36;
 
 	color: var(--pc-green);
 
@@ -223,7 +222,7 @@ html[data-theme="dark"] .activityCard {
 		-moz-transform: scale(2);
 		-ms-transform: scale(2);
 		-o-transform: scale(2);
-}
+	}
 	100% {
 		opacity: 0;
 		transform: scale(1.7);
@@ -231,5 +230,5 @@ html[data-theme="dark"] .activityCard {
 		-moz-transform: scale(1.7);
 		-ms-transform: scale(1.7);
 		-o-transform: scale(1.7);
-}
+	}
 }
