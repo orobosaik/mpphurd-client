@@ -208,7 +208,7 @@ export default function Minute() {
 							<form action="" onSubmit={handleSubmit}>
 								<div className="minuteItem">
 									<label htmlFor="minuteStatus">Status:</label>
-									<select name="minuteStatus" id="minuteStatus">
+									<select required name="minuteStatus" id="minuteStatus">
 										<option value="">...</option>
 										{MINUTE_STATUS_LIST.map((e) => {
 											return <option value={e}>{e}</option>;
@@ -219,6 +219,7 @@ export default function Minute() {
 								<div className="minuteItem">
 									<label htmlFor="minuteText">Comment:</label>
 									<textarea
+										required
 										name="minuteText"
 										id="minuteText"
 										cols="30"
@@ -272,7 +273,7 @@ export default function Minute() {
 								<div className="minuteItem">
 									<span>Select Officer/Office:</span>
 
-									<select name="minuteToOfficer" id="minuteToOfficer">
+									<select required name="minuteToOfficer" id="minuteToOfficer">
 										{officeList.map((o) => {
 											if (o?.officeId) {
 												return (

@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { getThemeColor } from "../../utilities/themeColor";
 import { CircularProgress } from "@mui/material";
+import { MINUTE_STATUS_LIST } from "../../utilities/appData";
 
 export default function AdminMinuteModal({
 	buttonIcon,
@@ -159,7 +160,7 @@ export default function AdminMinuteModal({
 
 				setStaffList(currentStaffList);
 
-				console.log(staff)
+				console.log(staff);
 
 				let presentOfficeList = office.map((o) => {
 					// Prevent showing current plan office
@@ -309,18 +310,18 @@ export default function AdminMinuteModal({
 
 									<div className="minuteItem">
 										<label htmlFor="minuteStatus">Status:</label>
-										<select name="minuteStatus" id="minuteStatus">
+										<select required name="minuteStatus" id="minuteStatus">
 											<option value="">...</option>
-											<option value="Action Taken">Action Taken</option>
-											<option value="Issue Raised">Issue Raised</option>
-											<option value="Observation">Observation</option>
-											<option value="Pending Action">Pending Action</option>
+											{MINUTE_STATUS_LIST.map((e) => {
+												return <option value={e}>{e}</option>;
+											})}
 										</select>
 									</div>
 
 									<div className="minuteItem">
 										<label htmlFor="minuteText">Comment:</label>
 										<textarea
+											required
 											name="minuteText"
 											id="minuteText"
 											cols="30"
