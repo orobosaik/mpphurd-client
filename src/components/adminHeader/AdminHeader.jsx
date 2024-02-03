@@ -15,6 +15,7 @@ import SearchResultCard from "../searchResultCard/SearchResultCard";
 import axios from "axios";
 import { LinearProgress } from "@mui/material";
 import { toast } from "react-toastify";
+import { getThemeColor } from "../../utilities/themeColor";
 export default function AdminHeader() {
 	const [searchQuery, setSearchQuery] = useState("");
 	const [searchData, setSearchData] = useState([]);
@@ -24,6 +25,7 @@ export default function AdminHeader() {
 	const staff = currentAdmin;
 
 	const dispatch = useDispatch();
+	const themeColor = getThemeColor()
 
 	const [isLoading, setIsLoading] = useState(true);
 	const [data, setData] = useState(null);
@@ -72,7 +74,7 @@ export default function AdminHeader() {
 			try {
 				let host = import.meta.env.VITE_SERVER;
 				const res = await axios.get(
-					`${host}/staffs/plan?search=${searchQuery}`,
+					`${host}/admin/plan?search=${searchQuery}`,
 					{
 						withCredentials: true,
 					}

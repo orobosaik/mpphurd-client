@@ -15,6 +15,7 @@ import SearchResultCard from "../searchResultCard/SearchResultCard";
 import axios from "axios";
 import { LinearProgress } from "@mui/material";
 import { toast } from "react-toastify";
+import { getThemeColor } from "../../utilities/themeColor";
 
 export default function Header() {
 	const [searchQuery, setSearchQuery] = useState("");
@@ -25,6 +26,8 @@ export default function Header() {
 	const staff = currentUser;
 
 	const dispatch = useDispatch();
+	const themeColor = getThemeColor();
+
 
 	const [isLoading, setIsLoading] = useState(true);
 	const [data, setData] = useState(null);

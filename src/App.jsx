@@ -20,7 +20,7 @@ function App() {
 		} else if (arr.length < 3 && arr[0].toLowerCase() === "mpphurd") {
 			setView("staff");
 		}
-	}, []);
+	}, [window.location.host]);
 
 	return (
 		<>
