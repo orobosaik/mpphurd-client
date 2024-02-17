@@ -274,7 +274,9 @@ function Activities({ setRightBarView, reload, admin, plan }) {
 			const fileInUserOffice =
 				currentUser?.office?.some((e) => {
 					return plan?.currentOffice?.id?._id === e?.id?._id;
-				}) || currentUser?.isManagement === true || currentAdmin;
+				}) ||
+				currentUser?.isManagement === true ||
+				currentAdmin;
 			setIsInUserOffice(fileInUserOffice);
 
 			setData(activitiesData);
@@ -412,7 +414,7 @@ function Activities({ setRightBarView, reload, admin, plan }) {
 							}}
 							header={{
 								jobTitle: "Electrical Engineer",
-								title: "E. Engineer",
+								title: "Elect. Engr",
 							}}
 						/>
 						<VettingCard
@@ -423,7 +425,7 @@ function Activities({ setRightBarView, reload, admin, plan }) {
 							}}
 							header={{
 								jobTitle: "Mechanical Engineer",
-								title: "M. Engineer",
+								title: "Mech. Engr",
 							}}
 						/>
 						<VettingCard
@@ -434,7 +436,7 @@ function Activities({ setRightBarView, reload, admin, plan }) {
 							}}
 							header={{
 								jobTitle: "Civil Engineer",
-								title: "S/C. Engineer",
+								title: "Civil Engr",
 							}}
 						/>
 						<VettingCard
