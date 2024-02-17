@@ -85,6 +85,7 @@ export default function Header() {
 				setIsFetching(false);
 				console.log("SEARCH RESULT: ", res.data);
 			} catch (error) {
+				setIsFetching(false);
 				let message = error.response
 					? error.response.data.message
 					: error.message;
