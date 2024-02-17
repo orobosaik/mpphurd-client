@@ -269,7 +269,7 @@ export default function AdminStaffEditModal({ ...props }) {
 			});
 		}
 	};
-	const handleSubmitEdit = async (e, data) => {
+	const handleSubmitEdit = async (data) => {
 		setLoading(true);
 		let newData = {};
 		newData.isActive = isActive;
@@ -330,11 +330,6 @@ export default function AdminStaffEditModal({ ...props }) {
 			});
 		}
 	};
-	const handleSubmit = () => {
-		props.modalType === "edit"
-			? (e) => handleSubmitEdit(e, data)
-			: handleSubmitNew;
-	};
 
 	return (
 		<>
@@ -362,7 +357,14 @@ export default function AdminStaffEditModal({ ...props }) {
 								</div>
 							</header>
 
-							<form action="" onSubmit={handleSubmit}>
+							<form
+								action=""
+								onSubmit={(e) => {
+									e.preventDefault();
+									props.modalType === "edit"
+										? handleSubmitEdit(data)
+										: handleSubmitNew;
+								}}>
 								<div className="inputStaffHeader">
 									<div
 										className="staffImage"

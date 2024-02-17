@@ -107,11 +107,19 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 				</div>
 
 				<div className="planInfoSummaryDetails2">
-					{isInUserOffice && (
-						<>
-							<PlanEditInfoModal reload={reload} state={data} />
-						</>
-					)}
+					{
+						// Check if User has authorization to update plan
+						currentUser.office.some((e) => {
+							return (
+								data?.currentOffice?.id?._id === e?.id?._id &&
+								e.tasks.includes("UPDATE PLAN")
+							);
+						}) && (
+							<>
+								<PlanEditInfoModal reload={reload} state={data} />
+							</>
+						)
+					}
 
 					{
 						// Check if User has authorization to generate plan number
