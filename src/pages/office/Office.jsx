@@ -9,6 +9,7 @@ import axios from "axios";
 import { getThemeColor } from "../../utilities/themeColor";
 import { toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
+import DropDownSelect from "../../widgets/dropDownSelect/DropDownSelect";
 
 export default function Office() {
 	// const [isLoading, setIsLoading] = useState(true);
@@ -59,8 +60,8 @@ export default function Office() {
 	// 	// }
 	// }, [reload]);
 
-	const location = useLocation()
-	const data = location.state
+	const location = useLocation();
+	const data = location.state;
 
 	return (
 		<>
@@ -76,8 +77,23 @@ export default function Office() {
 					<div className="OfficeMiddleBar">
 						<MiddleBar
 							topBarData={{
-								action: data.id.name+" Office",
-								// option: "Think of me"
+								action: data.id.name + " Office",
+								options: (
+									<DropDownSelect
+										data={{
+											title: "Export Data",
+											items: [
+												{
+													text: "Download PDF Format",
+													action: () => {
+														return alert("hey there!!");
+													},
+												},
+												{ text: "Download CSV Format" },
+											],
+										}}
+									/>
+								),
 								// planNumber: "BC/1212/2023",
 							}}>
 							<ListWrapper state={data} />
