@@ -65,8 +65,12 @@ export default function Office() {
 															{officeData?.type?.toUpperCase()}
 														</span>
 														<span className="header-text-date">
-															({format(officeData?.startDate, "dd/MM/yyyy")} -{" "}
-															{format(officeData?.endDate, "dd/MM/yyyy")})
+															{officeData?.type !== "current" && (
+																<>
+																	({format(officeData?.startDate, "dd/MM/yyyy")}{" "}
+																	- {format(officeData?.endDate, "dd/MM/yyyy")})
+																</>
+															)}
 														</span>
 													</div>
 												</div>
@@ -152,6 +156,7 @@ export default function Office() {
 	const handlePrint = useReactToPrint({
 		content: () => componentRef.current,
 		removeAfterPrint: true,
+		suppressErrors: true,
 	});
 
 	// const [isLoading, setIsLoading] = useState(true);
