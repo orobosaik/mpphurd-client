@@ -24,6 +24,7 @@ export default function Office() {
 	const data = location.state;
 
 	const { officeData } = useSelector((state) => state.app);
+	const { currentUser } = useSelector((state) => state.user);
 
 	function exportPDF() {
 		return (
@@ -153,6 +154,12 @@ export default function Office() {
 	}
 
 	const componentRef = useRef();
+
+	// Check if User has authorization to export data
+	const exportPermitted = currentUser?.office?.some((e) => {
+		return data?.id?._id === e?.id?._id && e.tasks.includes("EXPORT DATA");
+	});
+
 	const handlePrint = useReactToPrint({
 		content: () => componentRef.current,
 		removeAfterPrint: true,
@@ -224,14 +231,20 @@ export default function Office() {
 								action: data.id.name + " Office",
 								options: (
 									<DropDownSelect
+										disable={true}
 										data={{
 											title: "Export Data",
 											items: [
 												{
 													text: "Download PDF Format",
-													action: handlePrint,
+													disabled: !exportPermitted,
+													action: exportPermitted ? handlePrint : () => null,
 												},
-												{ text: "Download CSV Format" },
+												{
+													text: "Download CSV Format",
+													disabled: true,
+													action: () => null,
+												},
 											],
 										}}
 									/>

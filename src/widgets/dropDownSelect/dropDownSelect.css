@@ -40,6 +40,9 @@
 	align-items: center;
 	gap: 1rem;
 }
+.dropdown-item.disabled {
+	cursor: not-allowed;
+}
 
 .dropdown {
 	z-index: 100;

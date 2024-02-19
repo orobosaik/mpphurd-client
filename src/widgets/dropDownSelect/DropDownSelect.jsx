@@ -10,6 +10,7 @@ import {
 	DarkModeRounded,
 	LightModeRounded,
 } from "@mui/icons-material";
+import uuid from "react-uuid";
 
 export default function DropDownSelect({ data }) {
 	return (
@@ -24,7 +25,11 @@ export default function DropDownSelect({ data }) {
 				}}>
 				{data?.items?.map((e) => {
 					return (
-						<MenuItem className="dropdown-item" onClick={() => e?.action()}>
+						<MenuItem
+							disabled={e?.disabled || false}
+							className={`dropdown-item ${e?.disabled && "disabled"}`}
+							onClick={() => e?.action()}
+							key={uuid()}>
 							{/* <LightModeRounded className="theme-icon" /> */}
 							<span>{e?.text}</span>
 						</MenuItem>
