@@ -78,7 +78,7 @@ export default function Office() {
 											<div className="header-info-right">
 												{/* <span className="header-text-type">Search: Johnbull edion</span> */}
 												<span className="header-text-total">
-													Total - {officeData?.listArray?.length}
+													Total - {officeData?.data?.length}
 												</span>
 												<span className="header-text-printdate">
 													Printed on {format(new Date(), "dd/MM/yyyy, HH:mm")}
