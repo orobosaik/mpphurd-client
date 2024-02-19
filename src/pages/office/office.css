@@ -1,15 +1,362 @@
-.OfficeWrapper{
-  display: flex;
-  width: 100%;
-  padding: 0 6px;
-  gap: 6px;
+.OfficeWrapper {
+	display: flex;
+	width: 100%;
+	padding: 0 6px;
+	gap: 6px;
 }
-.OfficeSideBar{
-  flex: 2;
+.OfficeSideBar {
+	flex: 2;
 }
-.OfficeMiddleBar{
-  flex: 10;
+.OfficeMiddleBar {
+	flex: 10;
 }
-.OfficeMiddleBar .middleBarWrapper{
-  padding-bottom: 0;
+.OfficeMiddleBar .middleBarWrapper {
+	padding-bottom: 0;
+}
+
+.exportPDF div.page-footer {
+	page-break-after: always;
+	text-align: center;
+	/* height: 20px; */
+	font-size: 12px;
+	opacity: 0.8;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	line-height: 110%;
+	font-family: "Algerian";
+	padding: 0 3rem;
+	color: black;
+}
+
+.exportPDF div.page-footer p {
+	margin: 0;
+}
+
+.exportPDF .watermark {
+	display: none;
+	top: 55vh;
+	z-index: -9;
+	width: 70vw;
+	page-break-after: always;
+	left: 50%;
+	opacity: 0.08;
+}
+
+.exportPDF table.report-container {
+	page-break-after: always;
+	width: 100%;
+}
+
+.exportPDF thead.report-header {
+	display: table-header-group;
+}
+
+.exportPDF tfoot.report-footer {
+	display: table-footer-group;
+}
+
+.exportPDF div.footer-info,
+.exportPDF div.page-footer {
+	display: none;
+	height: 40px;
+}
+.exportPDF {
+	display: none;
+}
+
+@media print {
+	@page {
+		size: A4;
+		margin: 16mm 16mm 16mm 16mm;
+	}
+
+	.exportPDF .watermark {
+		display: block;
+		counter-increment: page;
+		position: fixed;
+	}
+
+	.exportPDF div.page-footer,
+	.exportPDF div.footer-info,
+	.exportPDF div.main {
+		display: block;
+	}
+	.exportPDF .header-text {
+		color: black;
+	}
+	.exportPDF {
+		display: block;
+		color: black;
+	}
+}
+
+/* HEADER TOP */
+.exportPDF {
+	padding: 0 3rem;
+}
+.exportPDF .main {
+	font-family: Arial, Helvetica, sans-serif;
+}
+.exportPDF .header {
+	padding: 0;
+	padding-top: 2rem;
+}
+.exportPDF .header-info {
+	display: flex;
+	gap: 2rem;
+	justify-content: space-between;
+}
+.exportPDF .header-info-left {
+	display: flex;
+	gap: 2rem;
+}
+.exportPDF .header-info-right {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: end;
+}
+
+.exportPDF .header-text {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	color: black;
+	justify-content: center;
+	text-align: center;
+	line-height: 170%;
+	font-family: "Algerian";
+}
+.exportPDF .header-text > div {
+	display: flex;
+	gap: 1rem;
+}
+
+.exportPDF .header-text-office {
+	font-weight: 600;
+	color: #0d9f4f;
+	font-size: 2rem;
+	text-transform: uppercase;
+	justify-content: space-evenly;
+}
+/* .exportPDF .header-text-type {
+	font-weight: 600;
+	color: #0d9f4f;
+	font-size: 2rem;
+	text-transform: uppercase;
+	justify-content: space-evenly;
+	background-color: red;
+} */
+.exportPDF .header-text-date {
+	font-weight: 400;
+	/* font-style: italic; */
+}
+
+.exportPDF .header-text-printdate {
+	font-size: 1rem;
+	font-weight: 400;
+}
+
+.exportPDF .header-rule {
+	margin-top: 5px;
+	width: 100%;
+	height: 1px;
+	background-color: rgb(221, 0, 0);
+}
+.exportPDF .footer-rule {
+	margin-bottom: 4px;
+	width: 100%;
+	height: 1px;
+	background-color: rgb(221, 0, 0);
+}
+.exportPDF .header-logos {
+	display: flex;
+	align-items: center;
+
+	gap: 1rem;
+}
+.exportPDF .header-logos > div {
+	height: 95%;
+	border-right: 1px dashed grey;
+}
+
+.exportPDF .header-logo {
+	height: 50px;
+	width: 50px;
+}
+.exportPDF .header-logo:not(:nth-child(1)):before {
+	position: absolute;
+	content: "";
+	left: -1rem;
+	width: 1px;
+	height: 100%;
+	border-left: dashed grey 1px;
+}
+
+.exportPDF .listHeader {
+	font-size: 0.8em;
+}
+
+/* .exportPDF .listFormat {
+	display: flex;
+	gap: 2rem;
+	padding: 1rem 1.5rem;
+} */
+
+.exportPDF .listFormat.listHeader {
+	text-transform: uppercase;
+	padding: 0;
+	padding-top: 1rem;
+	font-weight: 700;
+	font-size: 1.1rem;
+}
+
+/* LIST CONTAINER */
+
+.exportPDF .listCardContainer,
+.exportPDF .listCardContainerCards {
+	display: flex;
+	flex-direction: column;
+	height: auto;
+
+	font-size: 0.85em;
+	/* gap: 1rem; */
+	/* padding: 0 1rem; */
+
+	transition: height 5s;
+	-webkit-transition: height 5s;
+	-moz-transition: height 5s;
+	-ms-transition: height 5s;
+	-o-transition: height 5s;
+}
+
+.exportPDF .listCardContainerCards.collapsed {
+	height: 0;
+	overflow: hidden;
+	transition: height 5s;
+	-webkit-transition: height 5s;
+	-moz-transition: height 5s;
+	-ms-transition: height 5s;
+	-o-transition: height 5s;
+}
+
+.exportPDF .listCardContainerTop {
+	display: flex;
+	background-color: var(--white);
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0.5rem 1rem;
+	cursor: pointer;
+}
+
+.exportPDF .listCardContainerTop:hover {
+	/* background-color: var(--light-grey); */
+}
+
+.exportPDF .listCardContainerCount {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+.exportPDF .listCardContainerCount span:nth-child(1) {
+	padding: 0 5px;
+	font-weight: 700;
+	color: #2c2c2c;
+	font-size: 1.1rem;
+	/* background-color: var(--accent-yellow); */
+	background-color: lightgoldenrodyellow;
+	border-radius: 0.8rem;
+	-webkit-border-radius: 0.8rem;
+	-moz-border-radius: 0.8rem;
+	-ms-border-radius: 0.8rem;
+	-o-border-radius: 0.8rem;
+}
+.exportPDF .listCardContainerCount span:nth-child(2) {
+	padding: 0 5px;
+	font-weight: 700;
+	color: #2c2c2c;
+	background-color: rgba(255, 215, 0, 0.7);
+
+	border-radius: 0.8rem;
+	-webkit-border-radius: 0.8rem;
+	-moz-border-radius: 0.8rem;
+	-ms-border-radius: 0.8rem;
+	-o-border-radius: 0.8rem;
+}
+
+/* LIST CARD */
+.exportPDF .listCard {
+	position: relative;
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2rem;
+	padding: 1rem 1.5rem;
+	cursor: pointer;
+	border: 1px solid lightgrey;
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	-ms-border-radius: 8px;
+	-o-border-radius: 8px;
+}
+
+.exportPDF .listCard:not(:last-of-type) {
+	border-bottom: 1px solid lightgray;
+	margin-bottom: 0.5rem;
+}
+
+.exportPDF .listCard span {
+	position: relative;
+	text-transform: capitalize;
+}
+
+.exportPDF .listCard span:not(:nth-child(1)):before {
+	position: absolute;
+	content: "";
+	left: -1rem;
+	width: 1px;
+	height: 100%;
+	border-left: dashed grey 1px;
+}
+
+.exportPDF .listCard .tags {
+	display: flex;
+	gap: 2px;
+	align-items: end;
+	flex-direction: column;
+	position: absolute;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+}
+.exportPDF .listCard .fast_track,
+.exportPDF .listCard .file_of_interest,
+.exportPDF .listCard .old_file {
+	text-transform: uppercase;
+	font-weight: 1000;
+	color: #fff;
+	font-size: 0.9em;
+	padding: 0 3px;
+	margin: 0;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-o-border-radius: 4px;
+}
+.exportPDF .listCard .fast_track {
+	background-color: #f73832;
+}
+.exportPDF .listCard .file_of_interest {
+	background-color: #7882a4;
+}
+.exportPDF .listCard .old_file {
+	background-color: gold;
 }

@@ -117,6 +117,8 @@ function PrintWrapper({ title, label, classes, content, error }) {
 					</button>
 				)}
 				content={() => printComponent}
+				removeAfterPrint={true}
+				
 			/>
 		</>
 	);

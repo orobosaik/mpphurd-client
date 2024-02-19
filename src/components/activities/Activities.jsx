@@ -6,7 +6,7 @@ import axios from "axios";
 import LoadingIcon from "../../utilities/LoadingIcon";
 import ActivityCardModal from "../activityCardModal/ActivityCardModal";
 import VettingCard from "../vettingCard/VettingCard";
-import PrintWrapper from "../printWrapper/PrintWrapper";
+import PrintWrapper from "../../widgets/printWrapper/PrintWrapper";
 import { toast } from "react-toastify";
 import { getThemeColor } from "../../utilities/themeColor";
 import { useSelector } from "react-redux";

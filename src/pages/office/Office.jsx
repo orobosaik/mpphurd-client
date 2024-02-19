@@ -4,14 +4,156 @@ import SideBar from "../../components/sidebar/SideBar";
 import MiddleBar from "../../components/middleBar/MiddleBar";
 import ApplicationForm from "../../components/applicationForm/ApplicationForm";
 import ListWrapper from "../../components/listWrapper/ListWrapper";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { getThemeColor } from "../../utilities/themeColor";
 import { toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
 import DropDownSelect from "../../widgets/dropDownSelect/DropDownSelect";
+import { useDispatch, useSelector } from "react-redux";
+import DataExportPDF from "../../widgets/dataExportPDF/DataExportPDF";
+import { useReactToPrint } from "react-to-print";
+import ListCard from "../../components/listCard/ListCard";
+import uuid from "react-uuid";
+import ListCardContainer from "../../components/listCardContainer/ListCardContainer";
+import { format } from "date-fns";
 
 export default function Office() {
+	const dispatch = useDispatch();
+	const location = useLocation();
+	const data = location.state;
+
+	const { officeData } = useSelector((state) => state.app);
+
+	function exportPDF() {
+		return (
+			<>
+				<div className="exportPDF" ref={componentRef}>
+					<img
+						alt={""}
+						src={"/assets/logos/Logo-Mpphurd.png"}
+						className={"watermark"}
+					/>
+					<table className="report-container">
+						<thead className="report-header">
+							<tr>
+								<th className="report-header-cell">
+									{/* <div className="header-info">header content....</div> */}
+
+									<div className="header">
+										<div className="header-info">
+											<div className="header-info-left">
+												<div className="header-logos">
+													<img
+														className="header-logo"
+														src="/assets/logos/Logo-Edo State.png"
+														alt=""
+													/>
+													<div></div>
+													<img
+														className="header-logo"
+														src="/assets/logos/Logo-Mpphurd.png"
+														alt=""
+													/>
+												</div>
+												<div className="header-text">
+													<span className="header-text-office">
+														{data?.id?.name} OFFICE RECORD
+													</span>
+													<div>
+														<span className="header-text-type">
+															{officeData?.type?.toUpperCase()}
+														</span>
+														<span className="header-text-date">
+															({format(officeData?.startDate, "dd/MM/yyyy")} -{" "}
+															{format(officeData?.endDate, "dd/MM/yyyy")})
+														</span>
+													</div>
+												</div>
+											</div>
+											<div className="header-info-right">
+												{/* <span className="header-text-type">Search: Johnbull edion</span> */}
+												<span className="header-text-total">
+													Total - {officeData?.listArray?.length}
+												</span>
+												<span className="header-text-printdate">
+													Printed on {format(new Date(), "dd/MM/yyyy, HH:mm")}
+												</span>
+											</div>
+										</div>
+										<div className="header-rule"></div>
+
+										<div className="listHeader listFormat">
+											<span>Plan No</span>
+											<span>File Name</span>
+											<span>Location</span>
+											<span>Property Type</span>
+											<span>Has Rep</span>
+											<span>Zone / stk</span>
+										</div>
+									</div>
+								</th>
+							</tr>
+						</thead>
+						<tfoot className="report-footer">
+							<tr>
+								<td className="report-footer-cell">
+									<div className="footer-info">
+										<div className={"page-footer"}>
+											<div className="footer-rule"></div>
+											<div>
+												<p>
+													Ministry of Physical Planning, Housing, Urban and
+													Regional Development.
+												</p>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+						</tfoot>
+						<tbody className="report-content">
+							<tr>
+								<td className="report-content-cell">
+									{/* <div className="main">body content...</div> */}
+
+									{/* <div className="main">{"content"}</div> */}
+
+									<div className="main">
+										{officeData?.listArray?.map((arr, index) => {
+											return (
+												<ListCardContainer
+													key={index}
+													date={arr.date}
+													count={arr.items.length}>
+													{arr.items.toReversed().map((item, i) => {
+														return (
+															<ListCard
+																key={uuid()}
+																data={item}
+																type={officeData?.type}
+															/>
+														);
+													})}
+												</ListCardContainer>
+											);
+										})}
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</>
+		);
+	}
+
+	const componentRef = useRef();
+	const handlePrint = useReactToPrint({
+		content: () => componentRef.current,
+		removeAfterPrint: true,
+	});
+
 	// const [isLoading, setIsLoading] = useState(true);
 	// const [data, setData] = useState();
 	// const [staff, setStaff] = useState([]);
@@ -60,13 +202,10 @@ export default function Office() {
 	// 	// }
 	// }, [reload]);
 
-	const location = useLocation();
-	const data = location.state;
-
 	return (
 		<>
+			{exportPDF()}
 			<div className="pageWrapper"></div>
-
 			<div className="Office">
 				<Header />
 				<div className="OfficeWrapper">
@@ -85,9 +224,7 @@ export default function Office() {
 											items: [
 												{
 													text: "Download PDF Format",
-													action: () => {
-														return alert("hey there!!");
-													},
+													action: handlePrint,
 												},
 												{ text: "Download CSV Format" },
 											],

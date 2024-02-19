@@ -1,7 +1,7 @@
 import "./planBill.css";
 import { useRef } from "react";
 import ReactToPrint from "react-to-print";
-import PrintWrapper from "../printWrapper/PrintWrapper";
+import PrintWrapper from "../../widgets/printWrapper/PrintWrapper";
 
 export default function PlanBill() {
 	let componentRef = useRef(null);
