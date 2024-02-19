@@ -21,7 +21,7 @@ div.page-footer p {
 
 .watermark {
 	display: none;
-	top: 50vh;
+	top: 55vh;
 	z-index: -9;
 	width: 70vw;
 	page-break-after: always;

@@ -77,6 +77,7 @@ export const TASK_LIST = [
 	"CREATE PLAN",
 	"GENERATE PLAN NUMBER",
 	"VET PLAN",
+	"EXPORT DATA",
 ];
 
 export const COMMENT_STATUS_LIST = [
