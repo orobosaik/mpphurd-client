@@ -167,6 +167,23 @@ function ListWrapper({ children }) {
 		// }
 	}, [type, endDate, startDate]);
 
+	useEffect(() => {
+		// Update officeData on every change in listArray
+		dispatch(
+			setOfficeData({
+				type,
+				data,
+				listArray,
+				startDate,
+				endDate,
+				searchQuery,
+				searchResult,
+				searchData,
+				sort: sortReverse,
+			})
+		);
+	}, [listArray]);
+
 	// useEffect(() => {
 	// 	setIsLoading(true);
 	// 	getData();
@@ -355,7 +372,7 @@ function ListWrapper({ children }) {
 												<ListCard
 													key={uuid()}
 													data={item}
-													type = {type}
+													type={type}
 													officeState={{
 														active: true,
 														type,
