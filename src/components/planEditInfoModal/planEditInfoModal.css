@@ -46,9 +46,18 @@ html[data-theme="dark"] dialog {
 	display: flex;
 	align-items: center;
 	justify-content: end;
+	/* justify-content: space-between; */
 }
 .modalView footer button {
 	width: 12rem;
+}
+.modalView footer .deleteBtn {
+	justify-self: start;
+	color: var(--accent-red);
+	font-weight: 600;
+}
+.modalView footer .deleteBtn:hover {
+	outline-color: var(--accent-red);
 }
 
 .modalViewCloseButton {

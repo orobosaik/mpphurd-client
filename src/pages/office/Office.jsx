@@ -26,6 +26,8 @@ export default function Office() {
 	const { officeData } = useSelector((state) => state.app);
 	const { currentUser } = useSelector((state) => state.user);
 
+	const componentRef = useRef();
+
 	function exportPDF() {
 		return (
 			<>
@@ -153,8 +155,6 @@ export default function Office() {
 		);
 	}
 
-	const componentRef = useRef();
-
 	// Check if User has authorization to export data
 	const exportPermitted = currentUser?.office?.some((e) => {
 		return data?.id?._id === e?.id?._id && e.tasks.includes("EXPORT DATA");
@@ -162,6 +162,14 @@ export default function Office() {
 
 	const handlePrint = useReactToPrint({
 		content: () => componentRef.current,
+		documentTitle: `${
+			data?.id?.name
+		}_OFFICE_RECORD_${officeData?.type?.toUpperCase()}${
+			officeData?.type !== "current"
+				? `__${format(officeData?.startDate, "dd-MM-yyyy")}_to_
+				  ${format(officeData?.endDate, "dd-MM-yyyy")}`
+				: ""
+		}`,
 		removeAfterPrint: true,
 		suppressErrors: true,
 	});

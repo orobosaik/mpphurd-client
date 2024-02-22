@@ -18,7 +18,7 @@ import uuid from "react-uuid";
 export default function AdminStaffEditModal({ ...props }) {
 	const [open, setOpen] = useState(false);
 
-	const [isActive, setIsActive] = useState(false);
+	const [isActive, setIsActive] = useState(true);
 	const [isManagement, setIsManagement] = useState(false);
 
 	const [loading, setLoading] = useState(false);
@@ -72,7 +72,7 @@ export default function AdminStaffEditModal({ ...props }) {
 							self.findIndex((v) => v.region._id === value.region._id) === index
 						);
 					})
-					.map((item) => item.region);
+					?.map((item) => item.region);
 
 				setRegion(filteredRegions[0]);
 				setRegions(filteredRegions);
@@ -153,6 +153,7 @@ export default function AdminStaffEditModal({ ...props }) {
 		setOffices([]);
 		setRegions([]);
 		setList([]);
+		setLoading(false);
 		setOpen(false);
 	};
 
@@ -209,7 +210,8 @@ export default function AdminStaffEditModal({ ...props }) {
 	const handleSubmitNew = async () => {
 		setLoading(true);
 		let newData = {};
-		newData.password = uuid();
+		// newData.password = uuid();
+		newData.password = "123456";
 		newData.isActive = isActive;
 		newData.isManagement = isManagement;
 		// newData.profilePicture = photo;
@@ -361,9 +363,10 @@ export default function AdminStaffEditModal({ ...props }) {
 								action=""
 								onSubmit={(e) => {
 									e.preventDefault();
+									console.log("inside here");
 									props.modalType === "edit"
 										? handleSubmitEdit(data)
-										: handleSubmitNew;
+										: handleSubmitNew();
 								}}>
 								<div className="inputStaffHeader">
 									<div
@@ -697,12 +700,13 @@ export default function AdminStaffEditModal({ ...props }) {
 
 													<div className="inputStaffOfficeWrapper">
 														<div className="inputStaffOfficeList">
-															{list.map((li, index) => {
+															{list?.map((li, index) => {
 																return (
 																	<div
 																		key={`${li?.id?._id}${index}`}
 																		className="inputStaffOffice">
 																		<button
+																			type="button"
 																			onClick={() => {
 																				let newArr = [...list];
 																				newArr.splice(index, 1);
@@ -803,6 +807,7 @@ export default function AdminStaffEditModal({ ...props }) {
 														</div>
 
 														<button
+															type="button"
 															onClick={() => {
 																let newArr = [...list];
 																newArr.push({});

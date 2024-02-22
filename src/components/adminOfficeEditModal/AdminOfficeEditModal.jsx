@@ -351,24 +351,33 @@ export default function AdminOfficeEditModal({ ...props }) {
 						</div>
 					</div>
 					<footer>
-						<button
-							disabled={loading}
-							onClick={
-								props.modalType === "edit" ? handleSubmitEdit : handleSubmitNew
-							}
-							className="primary">
-							{loading ? (
-								<CircularProgress
-									thickness={5}
-									size={20}
-									sx={{ color: "white" }}
-								/>
-							) : props.modalType === "edit" ? (
-								"Update"
-							) : (
-								"Save"
+						{/* <div>
+							{props.modalType === "edit" && (
+								<button className="deleteBtn">Delete</button>
 							)}
-						</button>
+						</div> */}
+						{/* <div> */}
+							<button
+								disabled={loading}
+								onClick={
+									props.modalType === "edit"
+										? handleSubmitEdit
+										: handleSubmitNew
+								}
+								className="primary">
+								{loading ? (
+									<CircularProgress
+										thickness={5}
+										size={20}
+										sx={{ color: "white" }}
+									/>
+								) : props.modalType === "edit" ? (
+									"Update"
+								) : (
+									"Save"
+								)}
+							</button>
+						{/* </div> */}
 					</footer>
 				</dialog>
 			)}
