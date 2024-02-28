@@ -14,14 +14,20 @@ function App() {
 		// const arr = path.split("/");
 
 		// const arr = host.split(".").slice(0, host.includes("localhost") ? -1 : 1);
-		const arr = host.split(".").slice(0);
-		console.log(arr)
+		const arr = host.split(".");
 
-		if (arr.length < 3 && arr[0].toLowerCase() === "admin-mpphurd") {
+
+		if (arr[0].toLowerCase() === "admin-mpphurd") {
 			setView("admin");
-		} else if (arr.length < 3 && arr[0].toLowerCase() === "mpphurd") {
+		} else if (arr[0].toLowerCase() === "mpphurd") {
 			setView("staff");
 		}
+
+		// if (arr.length < 3 && arr[0].toLowerCase() === "admin-mpphurd") {
+		// 	setView("admin");
+		// } else if (arr.length < 3 && arr[0].toLowerCase() === "mpphurd") {
+		// 	setView("staff");
+		// }
 	}, [window.location.host]);
 
 	return (
