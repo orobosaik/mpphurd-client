@@ -35,12 +35,12 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 			<div
 				className={
 					data?.approval?.status === "approved"
-						? "watermark approved"
+						? "plan-watermark approved"
 						: data?.approval?.status === "kiv"
-						? "watermark kiv"
+						? "plan-watermark kiv"
 						: data?.approval?.status === "rejected"
-						? "watermark rejected"
-						: "watermark processing"
+						? "plan-watermark rejected"
+						: "plan-watermark processing"
 				}>
 				<span>
 					{data?.approval?.status === "approved"

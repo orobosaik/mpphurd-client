@@ -210,8 +210,8 @@ export default function AdminStaffEditModal({ ...props }) {
 	const handleSubmitNew = async () => {
 		setLoading(true);
 		let newData = {};
-		// newData.password = uuid();
-		newData.password = "123456";
+		newData.password = uuid();
+		// newData.password = "123456";
 		newData.isActive = isActive;
 		newData.isManagement = isManagement;
 		// newData.profilePicture = photo;

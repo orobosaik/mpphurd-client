@@ -147,8 +147,8 @@
 }
 .adminOfficeListHeader__tasks,
 .adminOfficeListCard__tasks {
-	min-width: 20rem;
-	flex: 8;
+	min-width: 15rem;
+	flex: 5;
 }
 .adminOfficeListHeader__region,
 .adminOfficeListCard__region {

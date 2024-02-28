@@ -13,7 +13,9 @@ function App() {
 		// const path = window.location.pathname;
 		// const arr = path.split("/");
 
-		const arr = host.split(".").slice(0, host.includes("localhost") ? -1 : 1);
+		// const arr = host.split(".").slice(0, host.includes("localhost") ? -1 : 1);
+		const arr = host.split(".").slice(0);
+		console.log(arr)
 
 		if (arr.length < 3 && arr[0].toLowerCase() === "admin-mpphurd") {
 			setView("admin");

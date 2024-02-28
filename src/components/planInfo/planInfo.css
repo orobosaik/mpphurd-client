@@ -84,7 +84,7 @@
 	gap: 1rem;
 }
 
-.watermark {
+.plan-watermark {
 	position: absolute;
 	/*height: 90%;
 	*/ /*width: 90%;
@@ -102,16 +102,16 @@
 	-ms-transform: translate(-50%, -50%);
 	-o-transform: translate(-50%, -50%);
 }
-.watermark span {
+.plan-watermark span {
 	font-size: 12rem;
 	font-family: monospace;
 }
-.watermark.approved {
+.plan-watermark.approved {
 	color: rgba(255, 215, 0, 0.3);
 }
-.watermark.rejected {
+.plan-watermark.rejected {
 	color: rgba(255, 0, 0, 0.3);
 }
-.watermark.kiv {
+.plan-watermark.kiv {
 	color: rgba(255, 0, 0, 0.3);
 }
