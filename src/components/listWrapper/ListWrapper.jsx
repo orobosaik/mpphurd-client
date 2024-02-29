@@ -117,6 +117,22 @@ function ListWrapper({ children }) {
 			console.log("CATEGORIZED: ", newData);
 			setListArray(newData);
 
+			// Update officeData on every change in listArray
+			dispatch(
+				setOfficeData({
+					active: true,
+					type,
+					data: res.data,
+					listArray: newData,
+					startDate,
+					endDate,
+					searchQuery,
+					searchResult,
+					searchData,
+					sort: sortReverse,
+				})
+			);
+
 			// const size =
 			// 	encodeURI(JSON.stringify(listArray)).split(/%..|./).length - 1;
 			// console.log(size / 1024);
@@ -167,27 +183,6 @@ function ListWrapper({ children }) {
 		// }
 	}, [type, endDate, startDate]);
 
-	useEffect(() => {
-		// Update officeData on every change in listArray
-		dispatch(
-			setOfficeData({
-				type,
-				data,
-				listArray,
-				startDate,
-				endDate,
-				searchQuery,
-				searchResult,
-				searchData,
-				sort: sortReverse,
-			})
-		);
-	}, [listArray]);
-
-	// useEffect(() => {
-	// 	setIsLoading(true);
-	// 	getData();
-	// }, [type, endDate, startDate]);
 
 	useEffect(() => {
 		if (officeData.scroll) {
