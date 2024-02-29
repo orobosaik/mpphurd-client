@@ -254,7 +254,7 @@ export default function AdminMinuteModal({
 									</div>
 
 									{/* Show from staff if plan office is captured */}
-									{data?.currentOffice?.id && (
+									{/* {data?.currentOffice?.id && (
 										<div className="minuteItem">
 											<label htmlFor="minuteFromOfficer">From Officer:</label>
 											<select name="minuteFromOfficer" id="minuteFromOfficer">
@@ -271,10 +271,10 @@ export default function AdminMinuteModal({
 												})}
 											</select>
 										</div>
-									)}
+									)} */}
 
 									{/* Show from office if plan current office is not yet captured */}
-									{!data?.currentOffice?.id && (
+									{data?.currentOffice?.id && (
 										<div className="minuteItem">
 											<label htmlFor="minuteToOfficer">From Office:</label>
 
@@ -296,6 +296,7 @@ export default function AdminMinuteModal({
 										<label htmlFor="minuteToOfficer">To Office:</label>
 
 										<select name="minuteToOfficer" id="minuteToOfficer">
+											<option value=""></option>
 											{officeList.map((o) => {
 												if (o?.officeId) {
 													return (
