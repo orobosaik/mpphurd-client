@@ -39,7 +39,7 @@ export default function GeneratePlanNoModal({
 				}
 			);
 
-			console.log(res.data);
+			// console.log(res.data);
 
 			// setIsLoading(false);
 			reload(() => []);
@@ -64,8 +64,8 @@ export default function GeneratePlanNoModal({
 			let message = error.response
 				? error.response.data.message
 				: error.message;
-			console.log(error);
-			console.log(message);
+			// console.log(error);
+			// console.log(message);
 
 			setTimeout(() => {
 				toast.error(message, {

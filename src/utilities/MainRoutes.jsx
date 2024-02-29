@@ -25,7 +25,7 @@ function MainRoutes() {
 	const navigate = useNavigate();
 	const { currentUser } = useSelector((state) => state.user);
 	const { theme } = useSelector((state) => state.app);
-	console.log(currentUser);
+	// console.log(currentUser);
 
 	useEffect(() => {
 		setThemeColor(theme);

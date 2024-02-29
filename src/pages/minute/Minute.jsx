@@ -48,7 +48,7 @@ export default function Minute() {
 		setLoading(true);
 		const form = new FormData(e.target);
 		// console.log(form.get("plan.PlotNo"));
-		console.log(form);
+		// console.log(form);
 
 		const newData = {
 			status: form.get("minuteStatus"),
@@ -56,7 +56,7 @@ export default function Minute() {
 			proposedActions: form.get("proposedActions"),
 			newOfficeId: form.get("minuteToOfficer"),
 		};
-		console.log(newData);
+		// console.log(newData);
 
 		axios.defaults.withCredentials = true;
 
@@ -69,7 +69,7 @@ export default function Minute() {
 					withCredentials: true,
 				}
 			);
-			console.log(res.data);
+			// console.log(res.data);
 
 			setLoading(false);
 
@@ -94,8 +94,8 @@ export default function Minute() {
 			let message = error.response
 				? error.response.data.message
 				: error.message;
-			console.log(error);
-			console.log(message);
+			// console.log(error);
+			// console.log(message);
 
 			toast.error(message, {
 				position: "top-right",
@@ -180,8 +180,8 @@ export default function Minute() {
 				let message = error.response
 					? error.response.data.message
 					: error.message;
-				console.log(error);
-				console.log(message);
+				// console.log(error);
+				// console.log(message);
 			}
 		};
 		getData();

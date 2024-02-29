@@ -62,15 +62,15 @@ function VettingCardAddModal({
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const form = new FormData(e.target);
-		console.log(form);
+		// console.log(form);
 
 		const newData = {
 			status: form.get("minuteStatus"),
 			text: form.get("minuteText"),
 			type: type,
 		};
-		console.log(newData);
-		console.log(data)
+		// console.log(newData);
+		// console.log(data)
 
 		try {
 			setLoading(true);
@@ -99,8 +99,8 @@ function VettingCardAddModal({
 			let message = error.response
 				? error.response.data.message
 				: error.message;
-			console.log(error);
-			console.log(message);
+			// console.log(error);
+			// console.log(message);
 
 			setLoading(false);
 

@@ -39,7 +39,7 @@ export default function AdminPlan() {
 			setLoading(true);
 			const form = new FormData(e.target);
 			// console.log(form.get("plan.PlotNo"));
-			console.log(form);
+			// console.log(form);
 
 			const newData = {
 				status: form.get("minuteStatus"),
@@ -47,7 +47,7 @@ export default function AdminPlan() {
 				proposedActions: form.get("proposedActions"),
 				newOfficeId: form.get("minuteToOfficer"),
 			};
-			console.log(newData);
+			// console.log(newData);
 
 			axios.defaults.withCredentials = true;
 
@@ -60,7 +60,7 @@ export default function AdminPlan() {
 						withCredentials: true,
 					}
 				);
-				console.log(res.data);
+				// console.log(res.data);
 
 				setLoading(false);
 
@@ -85,8 +85,8 @@ export default function AdminPlan() {
 				let message = error.response
 					? error.response.data.message
 					: error.message;
-				console.log(error);
-				console.log(message);
+				// console.log(error);
+				// console.log(message);
 
 				toast.error(message, {
 					position: "top-right",
@@ -102,7 +102,7 @@ export default function AdminPlan() {
 		};
 
 	const getData = async () => {
-		console.log(params);
+		// console.log(params);
 		// console.log(location.state);
 		setIsLoading(true);
 		try {
@@ -112,13 +112,13 @@ export default function AdminPlan() {
 			setData(() => res.data);
 			setIsLoading(false);
 
-			console.log(res.data);
+			// console.log(res.data);
 		} catch (error) {
 			let message = error.response
 				? error.response.data.message
 				: error.message;
-			console.log(error);
-			console.log(message);
+			// console.log(error);
+			// console.log(message);
 
 			setTimeout(() => {
 				toast.error(message, {

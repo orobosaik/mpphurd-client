@@ -25,9 +25,9 @@ export default function ChangePasswordModal({ ...props }) {
 	const [passwordUpdate2, setPasswordUpdate2] = useState("");
 	const [otpCode, setOtpCode] = useState("");
 
-	console.log(emailUpdate);
-	console.log(passwordUpdate1);
-	console.log(passwordUpdate2);
+	// console.log(emailUpdate);
+	// console.log(passwordUpdate1);
+	// console.log(passwordUpdate2);
 
 	const themeColor = getThemeColor();
 
@@ -40,7 +40,7 @@ export default function ChangePasswordModal({ ...props }) {
 	const handleSubmit = () => setOpen(null);
 
 	const handleStartReset = (e) => {
-		console.log("In Handle Start Reset");
+		// console.log("In Handle Start Reset");
 		setLoading(true);
 
 		if (

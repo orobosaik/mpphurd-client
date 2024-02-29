@@ -104,7 +104,7 @@ function ListWrapper({ children }) {
 			}
 
 			setIsLoading(false);
-			console.log("RAW:", res.data);
+			// console.log("RAW:", res.data);
 
 			setData(res.data);
 
@@ -114,7 +114,7 @@ function ListWrapper({ children }) {
 			} else {
 				newData = categorizeListByDate(res.data, sortReverse, false);
 			}
-			console.log("CATEGORIZED: ", newData);
+			// console.log("CATEGORIZED: ", newData);
 			setListArray(newData);
 
 			// Update officeData on every change in listArray
@@ -140,8 +140,8 @@ function ListWrapper({ children }) {
 			let message = error.response
 				? error.response.data.message
 				: error.message;
-			console.log(error);
-			console.log(message);
+			// console.log(error);
+			// console.log(message);
 
 			setTimeout(() => {
 				toast.error(message, {
@@ -164,7 +164,7 @@ function ListWrapper({ children }) {
 	useEffect(() => {
 		setIsLoading(true);
 		if (officeData.active) {
-			console.log("Redux OFFICEDATA:", officeData);
+			// console.log("Redux OFFICEDATA:", officeData);
 			setData(officeData.data);
 			setType(officeData.type);
 			setListArray(officeData.listArray);
@@ -212,7 +212,7 @@ function ListWrapper({ children }) {
 	};
 
 	useEffect(() => {
-		console.log("DATA WHILE IN SEARCH", data);
+		// console.log("DATA WHILE IN SEARCH", data);
 		// If the user searched for an empty string,
 		// display all data.
 		if (searchQuery.length === 0) {
@@ -223,8 +223,8 @@ function ListWrapper({ children }) {
 		const fuse = new Fuse(data, options);
 		const results = fuse.search(searchQuery);
 		const items = results.map((result) => result.item);
-		console.log("FUSE SEARCH: ", results);
-		console.log("FUSE SEARCH MAPPED: ", items);
+		// console.log("FUSE SEARCH: ", results);
+		// console.log("FUSE SEARCH MAPPED: ", items);
 		setSearchData(items);
 
 		if (type === "current") {

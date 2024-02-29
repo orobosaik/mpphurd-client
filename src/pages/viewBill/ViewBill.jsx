@@ -94,8 +94,8 @@ export default function ViewBill() {
 				let message = error.response
 					? error.response.data.message
 					: error.message;
-				console.log(error);
-				console.log(message);
+				// console.log(error);
+				// console.log(message);
 			}
 		};
 		getData();

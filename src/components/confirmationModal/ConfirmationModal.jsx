@@ -38,8 +38,8 @@ export default function ConfirmationModal({
 			let message = error.response
 				? error.response.data.message
 				: error.message;
-			console.log(error);
-			console.log(message);
+			// console.log(error);
+			// console.log(message);
 			setTimeout(() => {
 				toast.error(message, {
 					position: "top-right",

@@ -58,7 +58,7 @@ export default function AdminMinuteModal({
 		e.preventDefault();
 		setLoading(true);
 		const form = new FormData(e.target);
-		console.log(form);
+		// console.log(form);
 
 		let newData = {
 			newOfficeId: form.get("minuteToOfficer"),
@@ -71,7 +71,7 @@ export default function AdminMinuteModal({
 
 
 
-		console.log(newData);
+		// console.log(newData);
 
 		axios.defaults.withCredentials = true;
 
@@ -84,7 +84,7 @@ export default function AdminMinuteModal({
 					withCredentials: true,
 				}
 			);
-			console.log(res.data);
+			// console.log(res.data);
 
 			// dispatch(resetOfficeData());
 			// navigate(-2);
@@ -107,8 +107,8 @@ export default function AdminMinuteModal({
 			let message = error.response
 				? error.response.data.message
 				: error.message;
-			console.log(error);
-			console.log(message);
+			// console.log(error);
+			// console.log(message);
 
 			toast.error(message, {
 				position: "top-right",
@@ -149,7 +149,7 @@ export default function AdminMinuteModal({
 
 				const office = res[0].data;
 				const staff = res[1].data;
-				console.log(staff);
+				// console.log(staff);
 
 				let currentStaffList = staff.filter((s) =>
 					s?.office?.some((so) => so?.id?._id === data?.currentOffice?.id?._id)
@@ -157,7 +157,7 @@ export default function AdminMinuteModal({
 
 				setStaffList(currentStaffList);
 
-				console.log(staff);
+				// console.log(staff);
 
 				let presentOfficeList = office.map((o) => {
 					// Prevent showing current plan office
@@ -198,14 +198,14 @@ export default function AdminMinuteModal({
 						return 0;
 					})
 				);
-				console.log("Office List:", officeList);
-				console.log("Staff List:", staffList);
+				// console.log("Office List:", officeList);
+				// console.log("Staff List:", staffList);
 			} catch (error) {
 				let message = error.response
 					? error.response.data.message
 					: error.message;
-				console.log(error);
-				console.log(message);
+				// console.log(error);
+				// console.log(message);
 			}
 		};
 		getData();

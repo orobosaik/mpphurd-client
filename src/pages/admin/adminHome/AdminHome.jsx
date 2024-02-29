@@ -71,13 +71,13 @@ export default function AdminHome() {
 	// this function sets the timer that logs out the user after 10 secs
 	const handleLogoutTimer = () => {
 		const time = import.meta.env.VITE_ADMIN_LOGOUT_TIMER;
-		console.log(Number(time))
+		// console.log(Number(time))
 		if (currentAdmin) {
 			// Add this check to ensure the user is still authenticated
 			timer = setTimeout(() => {
 				// clears any pending timer.
 				resetTimer();
-				console.log("INSIDE TIMER");
+				// console.log("INSIDE TIMER");
 
 				// logs out user
 				// logoutAction();
@@ -134,7 +134,7 @@ export default function AdminHome() {
 		}
 
 		// Display the greeting with the formatted date
-		console.log(`${greeting} ${currentAdmin?.firstName}`);
+		// console.log(`${greeting} ${currentAdmin?.firstName}`);
 		return `${greeting} ${currentAdmin?.firstName} (Admin)`;
 	};
 	const getGreetingDate = () => {

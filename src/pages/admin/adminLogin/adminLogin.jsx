@@ -63,7 +63,7 @@ function AdminLogin() {
 				email: email.current.value,
 				password: password.current.value,
 			});
-			console.log(res.data);
+			// console.log(res.data);
 			dispatch(adminLoginSuccess(res.data));
 			navigate("/");
 
@@ -83,8 +83,8 @@ function AdminLogin() {
 			let message = error.response
 				? error.response.data.message
 				: error.message;
-			console.log(error);
-			console.log(message);
+			// console.log(error);
+			// console.log(message);
 
 			toast.error(message, {
 				position: "top-right",

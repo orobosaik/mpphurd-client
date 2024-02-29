@@ -105,9 +105,9 @@ export default function PlanEditInfoModal({
 	const handleEditSubmit = async (e) => {
 		e.preventDefault();
 		setSubmitting(true);
-		console.log(e);
+		// console.log(e);
 		const form = new FormData(e.target);
-		console.log(form);
+		// console.log(form);
 
 		let newData;
 
@@ -220,8 +220,8 @@ export default function PlanEditInfoModal({
 			}
 		}
 
-		console.log(newData);
-		console.log(isOldFile);
+		// console.log(newData);
+		// console.log(isOldFile);
 
 		axios.defaults.withCredentials = true;
 
@@ -230,7 +230,7 @@ export default function PlanEditInfoModal({
 			const res = await axios.put(`${host}/staffs/plan/${data._id}`, newData, {
 				withCredentials: true,
 			});
-			console.log(res.data);
+			// console.log(res.data);
 
 			// dispatch(resetOfficeData());
 			// navigate(-2);
@@ -253,8 +253,8 @@ export default function PlanEditInfoModal({
 			let message = error.response
 				? error.response.data.message
 				: error.message;
-			console.log(error);
-			console.log(message);
+			// console.log(error);
+			// console.log(message);
 			// handleClose();
 			setSubmitting(false);
 

@@ -83,14 +83,14 @@ export default function Header() {
 				);
 				setSearchData(res.data);
 				setIsFetching(false);
-				console.log("SEARCH RESULT: ", res.data);
+				// console.log("SEARCH RESULT: ", res.data);
 			} catch (error) {
 				setIsFetching(false);
 				let message = error.response
 					? error.response.data.message
 					: error.message;
-				console.log(error);
-				console.log(message);
+				// console.log(error);
+				// console.log(message);
 
 				toast.error(message, {
 					position: "top-right",

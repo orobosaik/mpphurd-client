@@ -31,13 +31,13 @@ export default function AdminStaffList() {
 
 				setData(res.data);
 				setIsLoading(false);
-				console.log(res.data);
+				// console.log(res.data);
 			} catch (error) {
 				let message = error.response
 					? error.response.data.message
 					: error.message;
-				console.log(error);
-				console.log(message);
+				// console.log(error);
+				// console.log(message);
 
 				setTimeout(() => {
 					toast.error(message, {

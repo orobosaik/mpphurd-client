@@ -77,7 +77,7 @@ export default function AdminStaffEditModal({ ...props }) {
 				setRegion(filteredRegions[0]);
 				setRegions(filteredRegions);
 
-				console.log(offices, filteredRegions, filteredRegions[0]);
+				// console.log(offices, filteredRegions, filteredRegions[0]);
 			} catch (error) {
 				let message = error.response
 					? error.response.data.message
@@ -202,8 +202,8 @@ export default function AdminStaffEditModal({ ...props }) {
 				event.target.files[0].name
 			);
 			// setPhoto(formData);
-			console.log(photo);
-			console.log(formData);
+			// console.log(photo);
+			// console.log(formData);
 		}
 	};
 
@@ -230,7 +230,7 @@ export default function AdminStaffEditModal({ ...props }) {
 		newData.position = position;
 		newData.region = region;
 		newData.office = list;
-		console.log(newData);
+		// console.log(newData);
 
 		try {
 			let host = import.meta.env.VITE_SERVER;
@@ -363,7 +363,7 @@ export default function AdminStaffEditModal({ ...props }) {
 								action=""
 								onSubmit={(e) => {
 									e.preventDefault();
-									console.log("inside here");
+									// console.log("inside here");
 									props.modalType === "edit"
 										? handleSubmitEdit(data)
 										: handleSubmitNew();

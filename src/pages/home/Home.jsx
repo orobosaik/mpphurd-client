@@ -99,7 +99,7 @@ export default function Home() {
 			timer = setTimeout(() => {
 				// clears any pending timer.
 				resetTimer();
-				console.log("INSIDE TIMER");
+				// console.log("INSIDE TIMER");
 
 				// logs out user
 				// logoutAction();
@@ -156,7 +156,7 @@ export default function Home() {
 		}
 
 		// Display the greeting with the formatted date
-		console.log(`${greeting} ${currentUser.firstName}`);
+		// console.log(`${greeting} ${currentUser.firstName}`);
 		return `${greeting} ${currentUser.firstName}`;
 	};
 	const getGreetingDate = () => {
@@ -196,10 +196,10 @@ export default function Home() {
 
 				setData(res.data);
 				setIsLoading(false);
-				console.log(res.data);
+				// console.log(res.data);
 				dispatch(loginSuccess(res.data));
 
-				console.log(res.data);
+				// console.log(res.data);
 			} catch (error) {
 				setIsLoading(false);
 				setErr(true);

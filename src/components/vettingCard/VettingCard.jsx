@@ -50,7 +50,7 @@ function VettingCard({ data, header, reload }) {
 		data?.vetting?.status?.toLowerCase() === "cleared" ||
 		data?.vetting?.status?.toLowerCase() === "process further";
 
-	console.log(isInOfficeAndPermitted, isCorrectJobTitle);
+	// console.log(isInOfficeAndPermitted, isCorrectJobTitle);
 	return (
 		<div className="vettingCard">
 			{/* <div className="vettingCardArrow"></div> */}
@@ -110,10 +110,10 @@ function VettingCard({ data, header, reload }) {
 							</div>
 						);
 					})}
-					{console.log(data?.vetting?.items)}
+					{/* {console.log(data?.vetting?.items)} */}
 					{data?.vetting?.items?.length === 0 && "No Professional Comment"}
 
-					{console.log({ Header: header, User: currentUser })}
+					{/* {console.log({ Header: header, User: currentUser })} */}
 
 					{isCorrectJobTitle && isInOfficeAndPermitted && (
 						<VettingCardAddModal

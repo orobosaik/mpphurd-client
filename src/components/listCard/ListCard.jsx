@@ -13,9 +13,9 @@ function ListCard({ data, officeState, scrollSection, type, reload }) {
 				className="listCard listFormat"
 				onClick={() => {
 					// console.log(scrollSection())
-					console.log(scrollSection);
-					console.log(scrollSection.current.scrollTop);
-					console.log(scrollSection.current.clientHeight);
+					// console.log(scrollSection);
+					// console.log(scrollSection.current.scrollTop);
+					// console.log(scrollSection.current.clientHeight);
 
 					{
 					}

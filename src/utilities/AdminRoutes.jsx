@@ -33,7 +33,7 @@ function AdminRoutes() {
 	const navigate = useNavigate();
 
 	const { theme } = useSelector((state) => state.app);
-	console.log(currentAdmin);
+	// console.log(currentAdmin);
 
 	useEffect(() => {
 		setThemeColor(theme);

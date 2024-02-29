@@ -38,7 +38,7 @@ function Activities({ setRightBarView, reload, admin, plan }) {
 
 	const isPrintNotAllowed = (plan) => {
 		// Check if all professionals have vetted and if plan is in user office or user is an admin
-		console.log(plan);
+		// console.log(plan);
 		if (
 			!(
 				plan?.vetting?.architect?.status?.toLowerCase() === "no action" ||
@@ -51,10 +51,10 @@ function Activities({ setRightBarView, reload, admin, plan }) {
 			) &&
 			isInUserOffice
 		) {
-			console.log("Condition met");
+			// console.log("Condition met");
 			return false;
 		} else {
-			console.log("Condition not met");
+			// console.log("Condition not met");
 			return true;
 		}
 	};
@@ -268,7 +268,7 @@ function Activities({ setRightBarView, reload, admin, plan }) {
 			const activitiesData = res[0].data;
 			// const returnedPlan = res[1].data;
 
-			console.log(res);
+			// console.log(res);
 
 			// Check if Plan is in User Office(s)
 			const fileInUserOffice =
@@ -287,13 +287,13 @@ function Activities({ setRightBarView, reload, admin, plan }) {
 				: setDataList(activitiesData); // Else send everything
 
 			setIsLoading(false);
-			console.log(activitiesData);
+			// console.log(activitiesData);
 		} catch (error) {
 			let message = error.response
 				? error.response.data.message
 				: error.message;
-			console.log(error);
-			console.log(message);
+			// console.log(error);
+			// console.log(message);
 
 			setCustomError(error.message || "Network Error");
 

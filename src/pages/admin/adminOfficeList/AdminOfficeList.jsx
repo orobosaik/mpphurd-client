@@ -51,14 +51,14 @@ export default function AdminOfficeList() {
 				setRegion(res[2].data);
 				setIsLoading(false);
 
-				console.log(res[0].data);
-				console.log(res[1].data);
+				// console.log(res[0].data);
+				// console.log(res[1].data);
 			} catch (error) {
 				let message = error.response
 					? error.response.data.message
 					: error.message;
-				console.log(error);
-				console.log(message);
+				// console.log(error);
+				// console.log(message);
 
 				setTimeout(() => {
 					toast.error(message, {

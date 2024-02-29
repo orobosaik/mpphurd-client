@@ -83,8 +83,8 @@ function LoginPage() {
 			let message = error.response
 				? error.response.data.message
 				: error.message;
-			console.log(error);
-			console.log(message);
+			// console.log(error);
+			// console.log(message);
 
 			toast.error(message, {
 				position: "top-right",

@@ -32,7 +32,7 @@ export default function AdminSideBar({ selected }) {
 	const themeColor = getThemeColor(theme);
 
 	const handleAdminLogout = () => {
-		console.log("YAYAYAYAYAYA");
+		// console.log("YAYAYAYAYAYA");
 		dispatch(adminLogout());
 		navigate("/login");
 		// persistor.purge();
@@ -49,7 +49,7 @@ export default function AdminSideBar({ selected }) {
 				theme: themeColor,
 			});
 
-			console.log("LOGEDOUT");
+			// console.log("LOGEDOUT");
 		}, 0);
 	};
 

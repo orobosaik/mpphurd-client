@@ -55,13 +55,13 @@ export default function FeedbackModal({ classList }) {
 		e.preventDefault();
 		setLoading(true);
 		const form = new FormData(e.target);
-		console.log(form);
+		// console.log(form);
 
 		const newData = {
 			category: form.get("minuteStatus"),
 			comment: form.get("minuteText"),
 		};
-		console.log(newData);
+		// console.log(newData);
 
 		try {
 			let host = import.meta.env.VITE_SERVER;
@@ -88,8 +88,8 @@ export default function FeedbackModal({ classList }) {
 			let message = error.response
 				? error.response.data.message
 				: error.message;
-			console.log(error);
-			console.log(message);
+			// console.log(error);
+			// console.log(message);
 
 			setLoading(false);
 

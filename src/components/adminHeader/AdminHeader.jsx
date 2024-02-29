@@ -81,13 +81,13 @@ export default function AdminHeader() {
 				);
 				setSearchData(res.data);
 				setIsFetching(false);
-				console.log("SEARCH RESULT: ", res.data);
+				// console.log("SEARCH RESULT: ", res.data);
 			} catch (error) {
 				let message = error.response
 					? error.response.data.message
 					: error.message;
-				console.log(error);
-				console.log(message);
+				// console.log(error);
+				// console.log(message);
 
 				setIsFetching(false);
 				toast.error(message, {

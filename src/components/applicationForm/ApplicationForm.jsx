@@ -32,9 +32,9 @@ export default function ApplicationForm() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(e);
+		// console.log(e);
 		const form = new FormData(e.target);
-		console.log(form);
+		// console.log(form);
 		setIsLoading(true);
 
 		let newData = {
@@ -72,7 +72,7 @@ export default function ApplicationForm() {
 			"dev.coordinates": form.get("planCoordinates") || "",
 		};
 
-		console.log(newData);
+		// console.log(newData);
 
 		axios.defaults.withCredentials = true;
 
@@ -81,7 +81,7 @@ export default function ApplicationForm() {
 			const res = await axios.post(`${host}/staffs/plan`, newData, {
 				withCredentials: true,
 			});
-			console.log(res.data);
+			// console.log(res.data);
 
 			navigate(`/permit/${res.data._id}`);
 
@@ -101,8 +101,8 @@ export default function ApplicationForm() {
 			let message = error.response
 				? error.response.data.message
 				: error.message;
-			console.log(error);
-			console.log(message);
+			// console.log(error);
+			// console.log(message);
 
 			setIsLoading(false);
 

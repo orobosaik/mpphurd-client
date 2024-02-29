@@ -31,7 +31,7 @@ export default function SideBar({ selected }) {
 	const themeColor = getThemeColor(theme);
 
 	const handleLogout = () => {
-		console.log("YAYAYAYAYAYA");
+		// console.log("YAYAYAYAYAYA");
 		dispatch(logout());
 		dispatch(resetOfficeData());
 		// navigate("/login");
@@ -49,7 +49,7 @@ export default function SideBar({ selected }) {
 				theme: themeColor,
 			});
 
-			console.log("LOGEDOUT");
+			// console.log("LOGEDOUT");
 		}, 0);
 	};
 	return (
