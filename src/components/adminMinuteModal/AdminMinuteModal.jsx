@@ -168,11 +168,11 @@ export default function AdminMinuteModal({
 					);
 					let text;
 					if (officeStaff.length === 0) {
-						text = `${o.region.code.toUpperCase()} - ${o.name} (---)`;
+						text = `${o.name}`;
 					} else if (officeStaff.length > 1) {
-						text = `${o.region.code.toUpperCase()} - ${o.name} (Multiple)`;
+						text = `${o.name} (Multiple)`;
 					} else {
-						text = `${o.region.code.toUpperCase()} - ${o.name} (${
+						text = `${o.name} (${
 							officeStaff[0].fullName
 						})`;
 					}

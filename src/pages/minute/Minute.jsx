@@ -146,11 +146,11 @@ export default function Minute() {
 					);
 					let text;
 					if (staffList.length === 0) {
-						text = `${o.region.code.toUpperCase()} - ${o.name} (Unavailable)`;
+						text = `${o.name}`;
 					} else if (staffList.length > 1) {
-						text = `${o.region.code.toUpperCase()} - ${o.name} (Multiple)`;
+						text = `${o.name} (Multiple)`;
 					} else {
-						text = `${o.region.code.toUpperCase()} - ${o.name} (${
+						text = `${o.name} (${
 							staffList[0].fullName
 						})`;
 					}
