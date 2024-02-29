@@ -164,14 +164,14 @@ export default function AdminMinuteModal({
 
 				let presentOfficeList = office.map((o) => {
 					// Prevent showing current plan office
-					if (o._id === data.currentOffice?.id?._id) return;
+					// if (o._id === data.currentOffice?.id?._id) return;
 
 					let officeStaff = staff.filter((s) =>
 						s.office.some((so) => so?.id?._id === o._id)
 					);
 					let text;
 					if (officeStaff.length === 0) {
-						text = `${o.region.code.toUpperCase()} - ${o.name} (Unavailable)`;
+						text = `${o.region.code.toUpperCase()} - ${o.name} (---)`;
 					} else if (officeStaff.length > 1) {
 						text = `${o.region.code.toUpperCase()} - ${o.name} (Multiple)`;
 					} else {
