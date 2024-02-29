@@ -66,13 +66,10 @@ export default function AdminMinuteModal({
 			status: form.get("minuteStatus"),
 			text: form.get("minuteText"),
 			date: form.get("minuteItemData"),
+			fromOfficeId: form.get("minuteFromOffice")
 		};
 
-		if (data?.currentOffice?.id) {
-			newData.fromOfficerId = form.get("minuteFromOfficer");
-		} else {
-			newData.fromOfficeId = form.get("minuteFromOffice");
-		}
+
 
 		console.log(newData);
 
