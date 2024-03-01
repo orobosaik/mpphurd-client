@@ -137,6 +137,8 @@ function ListWrapper({ children }) {
 			// 	encodeURI(JSON.stringify(listArray)).split(/%..|./).length - 1;
 			// console.log(size / 1024);
 		} catch (error) {
+
+			setListArray;([])
 			let message = error.response
 				? error.response.data.message
 				: error.message;
