@@ -137,8 +137,9 @@ function ListWrapper({ children }) {
 			// 	encodeURI(JSON.stringify(listArray)).split(/%..|./).length - 1;
 			// console.log(size / 1024);
 		} catch (error) {
-
-			setListArray;([])
+			// dispatch(resetOfficeData());
+			setListArray([]);
+			setData([]);
 			let message = error.response
 				? error.response.data.message
 				: error.message;
@@ -148,7 +149,7 @@ function ListWrapper({ children }) {
 			setTimeout(() => {
 				toast.error(message, {
 					position: "top-right",
-					autoClose: 2000,
+					autoClose: 3000,
 					hideProgressBar: false,
 					closeOnClick: true,
 					pauseOnHover: true,
@@ -157,9 +158,9 @@ function ListWrapper({ children }) {
 					theme: themeColor,
 				});
 			}, 0);
-			setTimeout(() => {
-				setIsLoading(false);
-			}, 4000);
+			setIsLoading(false);
+			// setTimeout(() => {
+			// }, 2000);
 		}
 	};
 
@@ -184,7 +185,6 @@ function ListWrapper({ children }) {
 		// 	second
 		// }
 	}, [type, endDate, startDate]);
-
 
 	useEffect(() => {
 		if (officeData.scroll) {
