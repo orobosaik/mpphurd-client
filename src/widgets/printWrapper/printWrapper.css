@@ -21,12 +21,17 @@ div.page-footer p {
 
 .watermark {
 	display: none;
-	top: 55vh;
 	z-index: -9;
-	width: 70vw;
+	width: 75%;
 	page-break-after: always;
-	left: 50%;
 	opacity: 0.08;
+	top: 60%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
 }
 
 table.report-container {
