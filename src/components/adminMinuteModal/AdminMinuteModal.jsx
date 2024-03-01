@@ -24,6 +24,7 @@ export default function AdminMinuteModal({
 
 	const [officeList, setOfficeList] = useState([]);
 	const [staffList, setStaffList] = useState([]);
+	const [initLoading, setInitLoading] = useState(false);
 
 	const themeColor = getThemeColor();
 
@@ -66,10 +67,8 @@ export default function AdminMinuteModal({
 			status: form.get("minuteStatus"),
 			text: form.get("minuteText"),
 			date: form.get("minuteItemData"),
-			fromOfficeId: form.get("minuteFromOffice")
+			fromOfficeId: form.get("minuteFromOffice"),
 		};
-
-
 
 		// console.log(newData);
 
@@ -133,6 +132,8 @@ export default function AdminMinuteModal({
 
 	// Fetch Data on Load
 	useEffect(() => {
+		setInitLoading(true);
+
 		const getData = async () => {
 			axios.defaults.withCredentials = true;
 			try {
@@ -172,9 +173,7 @@ export default function AdminMinuteModal({
 					} else if (officeStaff.length > 1) {
 						text = `${o.name} (Multiple)`;
 					} else {
-						text = `${o.name} (${
-							officeStaff[0].fullName
-						})`;
+						text = `${o.name} (${officeStaff[0].fullName})`;
 					}
 					return {
 						office: o,
@@ -200,6 +199,7 @@ export default function AdminMinuteModal({
 				);
 				// console.log("Office List:", officeList);
 				// console.log("Staff List:", staffList);
+				setInitLoading(false);
 			} catch (error) {
 				let message = error.response
 					? error.response.data.message
@@ -221,37 +221,47 @@ export default function AdminMinuteModal({
 
 			{open && (
 				<dialog className="modalView">
-					<header>
-						<span>{data?.planNumber?.fullValue || data?.uniqueId}</span>
-						<div className="modalViewCloseButton" onClick={handleClose}>
-							<CloseRounded className="closeButton" />
+					{initLoading ? (
+						<div className="loading-container">
+							<CircularProgress
+								thickness={3}
+								size={55}
+								className="loading-icon"
+							/>
 						</div>
-					</header>
+					) : (
+						<>
+							<header>
+								<span>{data?.planNumber?.fullValue || data?.uniqueId}</span>
+								<div className="modalViewCloseButton" onClick={handleClose}>
+									<CloseRounded className="closeButton" />
+								</div>
+							</header>
 
-					<form action="" onSubmit={handleSubmit}>
-						<div className="applicationItemsWrapper">
-							<div className="applicationTitle">
-								<h3>Minute Plan</h3>
-							</div>
-
-							<div>
-								<div className="minuteItems">
-									<div className="minuteItem">
-										<label htmlFor="minuteItemData">
-											Date:{" "}
-											<span className="optionIssueTag">
-												Do not select a date except for backlog
-											</span>
-										</label>
-										<input
-											type="date"
-											name="minuteItemData"
-											id="minuteItemData"
-										/>
+							<form action="" onSubmit={handleSubmit}>
+								<div className="applicationItemsWrapper">
+									<div className="applicationTitle">
+										<h3>Minute Plan</h3>
 									</div>
 
-									{/* Show from staff if plan office is captured */}
-									{/* {data?.currentOffice?.id && (
+									<div>
+										<div className="minuteItems">
+											<div className="minuteItem">
+												<label htmlFor="minuteItemData">
+													Date:{" "}
+													<span className="optionIssueTag">
+														Do not select a date except for backlog
+													</span>
+												</label>
+												<input
+													type="date"
+													name="minuteItemData"
+													id="minuteItemData"
+												/>
+											</div>
+
+											{/* Show from staff if plan office is captured */}
+											{/* {data?.currentOffice?.id && (
 										<div className="minuteItem">
 											<label htmlFor="minuteFromOfficer">From Officer:</label>
 											<select name="minuteFromOfficer" id="minuteFromOfficer">
@@ -270,78 +280,80 @@ export default function AdminMinuteModal({
 										</div>
 									)} */}
 
-									{/* Show from office if plan current office is not yet captured */}
-									{/* {data?.currentOffice?.id && ( */}
-									<div className="minuteItem">
-										<label htmlFor="minuteToOfficer">From Office:</label>
+											{/* Show from office if plan current office is not yet captured */}
+											{/* {data?.currentOffice?.id && ( */}
+											<div className="minuteItem">
+												<label htmlFor="minuteToOfficer">From Office:</label>
 
-										<select name="minuteFromOffice" id="minuteFromOffice">
-											<option value=""></option>
-											{officeList.map((o) => {
-												if (o?.officeId) {
-													return (
-														<option key={o.officeId} value={o.officeId}>
-															{o.text}
-														</option>
-													);
-												}
-											})}
-										</select>
-									</div>
-									{/* )} */}
-									<div className="minuteItem">
-										<label htmlFor="minuteToOfficer">To Office:</label>
+												<select name="minuteFromOffice" id="minuteFromOffice">
+													<option value=""></option>
+													{officeList.map((o) => {
+														if (o?.officeId) {
+															return (
+																<option key={o.officeId} value={o.officeId}>
+																	{o.text}
+																</option>
+															);
+														}
+													})}
+												</select>
+											</div>
+											{/* )} */}
+											<div className="minuteItem">
+												<label htmlFor="minuteToOfficer">To Office:</label>
 
-										<select name="minuteToOfficer" id="minuteToOfficer">
-											<option value=""></option>
-											{officeList.map((o) => {
-												if (o?.officeId) {
-													return (
-														<option key={o.officeId} value={o.officeId}>
-															{o.text}
-														</option>
-													);
-												}
-											})}
-										</select>
-									</div>
+												<select name="minuteToOfficer" id="minuteToOfficer">
+													<option value=""></option>
+													{officeList.map((o) => {
+														if (o?.officeId) {
+															return (
+																<option key={o.officeId} value={o.officeId}>
+																	{o.text}
+																</option>
+															);
+														}
+													})}
+												</select>
+											</div>
 
-									<div className="minuteItem">
-										<label htmlFor="minuteStatus">Status:</label>
-										<select required name="minuteStatus" id="minuteStatus">
-											<option value="">...</option>
-											{MINUTE_STATUS_LIST.map((e) => {
-												return <option value={e}>{e}</option>;
-											})}
-										</select>
-									</div>
+											<div className="minuteItem">
+												<label htmlFor="minuteStatus">Status:</label>
+												<select required name="minuteStatus" id="minuteStatus">
+													<option value="">...</option>
+													{MINUTE_STATUS_LIST.map((e) => {
+														return <option value={e}>{e}</option>;
+													})}
+												</select>
+											</div>
 
-									<div className="minuteItem">
-										<label htmlFor="minuteText">Comment:</label>
-										<textarea
-											required
-											name="minuteText"
-											id="minuteText"
-											cols="30"
-											rows="7"></textarea>
+											<div className="minuteItem">
+												<label htmlFor="minuteText">Comment:</label>
+												<textarea
+													required
+													name="minuteText"
+													id="minuteText"
+													cols="30"
+													rows="7"></textarea>
+											</div>
+										</div>
 									</div>
 								</div>
-							</div>
-						</div>
-						<footer>
-							<button type="submit" className="primary">
-								{loading ? (
-									<CircularProgress
-										thickness={5}
-										size={20}
-										sx={{ color: "white" }}
-									/>
-								) : (
-									"Minute"
-								)}
-							</button>
-						</footer>
-					</form>
+								<footer>
+									<button type="submit" className="primary">
+										{loading ? (
+											<CircularProgress
+												thickness={5}
+												size={20}
+												sx={{ color: "white" }}
+											/>
+										) : (
+											"Minute"
+										)}
+									</button>
+								</footer>
+							</form>
+						</>
+					)}
 				</dialog>
 			)}
 		</div>
