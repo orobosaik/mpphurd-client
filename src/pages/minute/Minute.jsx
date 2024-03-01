@@ -29,6 +29,7 @@ export default function Minute() {
 	const [officeList, setOfficeList] = useState([]);
 	const [loading, setLoading] = useState();
 	const [reload, setReload] = useState();
+	const [planData, setPlanData] = useState();
 
 	const [isInUserOffice, setIsInUserOffice] = useState();
 	const { currentUser } = useSelector((state) => state.user);
@@ -131,6 +132,8 @@ export default function Minute() {
 				const staff = res[1].data;
 				const planData = res[2].data;
 
+				setPlanData(planData);
+
 				// Check if Plan is in User Office(s)
 				setIsInUserOffice(
 					currentUser.office.some((e) => {
@@ -150,9 +153,7 @@ export default function Minute() {
 					} else if (staffList.length > 1) {
 						text = `${o.name} (Multiple)`;
 					} else {
-						text = `${o.name} (${
-							staffList[0].fullName
-						})`;
+						text = `${o.name} (${staffList[0].fullName})`;
 					}
 					return {
 						office: o,
@@ -274,15 +275,27 @@ export default function Minute() {
 									<span>Select Officer/Office:</span>
 
 									<select required name="minuteToOfficer" id="minuteToOfficer">
-										{officeList.map((o) => {
-											if (o?.officeId) {
-												return (
-													<option key={o.officeId} value={o.officeId}>
-														{o.text}
-													</option>
-												);
-											}
-										})}
+										<option value=""></option>
+										{planData?.currentOffice?.id?.name.toUpperCase() ===
+										"CLEARING HOUSE"
+											? officeList.map((o) => {
+													if (o?.office.name === "ASSESSMENT") {
+														return (
+															<option key={o.officeId} value={o.officeId}>
+																{o.text}
+															</option>
+														);
+													}
+											  })
+											: officeList.map((o) => {
+													if (o?.officeId) {
+														return (
+															<option key={o.officeId} value={o.officeId}>
+																{o.text}
+															</option>
+														);
+													}
+											  })}
 									</select>
 								</div>
 								<button type="submit" className="primary">

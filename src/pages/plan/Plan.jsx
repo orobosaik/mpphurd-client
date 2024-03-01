@@ -41,7 +41,7 @@ function Plan() {
 	const location = useLocation();
 
 	const getData = async () => {
-		console.log(params);
+		// console.log(params);
 		// console.log(location.state);
 		setIsLoading(true);
 		try {
