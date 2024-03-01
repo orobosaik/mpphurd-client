@@ -11,27 +11,31 @@
 	border-top-left-radius: 8px;
 	height: 5rem;
 	box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
-  gap: 1rem;
+	gap: 1rem;
 }
-html[data-theme="dark"] .topBar{
+html[data-theme="dark"] .topBar {
 	box-shadow: 0px 0px 4px 0px rgba(255, 255, 255, 0.25);
-
 }
 
-.topBarLeft{
+.topBarLeft {
 	/* width: fit-content; */
 	display: flex;
 	align-items: center;
 	gap: 1rem;
-
 }
-.topBarRight{
+.topBarRight {
 	/* width: 100%; */
 	display: flex;
 	align-items: center;
-	gap: 1rem;
+	gap: 2rem;
 	margin-right: 2rem;
-
+}
+.topBarRight-planText {
+	font-weight: 500;
+}
+.topBarRight-planText span {
+	color: var(--pc-green);
+	font-weight: 800;
 }
 .topBarIcon {
 	font-size: 1.5rem !important;
@@ -52,22 +56,23 @@ html[data-theme="dark"] .topBar{
 	-ms-border-radius: 8px;
 	-o-border-radius: 8px;
 }
-.topBarAction{
+.topBarAction {
 	display: flex;
 	gap: 1rem;
 }
 
-.topBarName,.topBarPlanNumber{
-  font-size: 1.6rem;
-  font-weight: 600;
+.topBarName,
+.topBarPlanNumber {
+	font-size: 1.6rem;
+	font-weight: 600;
 }
-.topBarDivider{
+.topBarDivider {
 	display: flex;
 	align-items: center;
 	/* background-color: black; */
 }
 
-.topBarOptions{
+.topBarOptions {
 	display: flex;
 	align-items: center;
 	justify-content: center;

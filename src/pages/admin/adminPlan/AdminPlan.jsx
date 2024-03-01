@@ -33,64 +33,43 @@ export default function AdminPlan() {
 	const params = useParams();
 	const location = useLocation();
 
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		setLoading(true);
+		const form = new FormData(e.target);
+		// console.log(form.get("plan.PlotNo"));
+		// console.log(form);
 
-		const handleSubmit = async (e) => {
-			e.preventDefault();
-			setLoading(true);
-			const form = new FormData(e.target);
-			// console.log(form.get("plan.PlotNo"));
-			// console.log(form);
+		const newData = {
+			status: form.get("minuteStatus"),
+			text: form.get("minuteText"),
+			proposedActions: form.get("proposedActions"),
+			newOfficeId: form.get("minuteToOfficer"),
+		};
+		// console.log(newData);
 
-			const newData = {
-				status: form.get("minuteStatus"),
-				text: form.get("minuteText"),
-				proposedActions: form.get("proposedActions"),
-				newOfficeId: form.get("minuteToOfficer"),
-			};
-			// console.log(newData);
+		axios.defaults.withCredentials = true;
 
-			axios.defaults.withCredentials = true;
+		try {
+			let host = import.meta.env.VITE_SERVER;
+			const res = await axios.post(
+				`${host}/staffs/plan/${data._id}/minute`,
+				newData,
+				{
+					withCredentials: true,
+				}
+			);
+			// console.log(res.data);
 
-			try {
-				let host = import.meta.env.VITE_SERVER;
-				const res = await axios.post(
-					`${host}/staffs/plan/${data._id}/minute`,
-					newData,
-					{
-						withCredentials: true,
-					}
-				);
-				// console.log(res.data);
+			setLoading(false);
 
-				setLoading(false);
+			dispatch(resetOfficeData());
+			navigate(-2);
 
-				dispatch(resetOfficeData());
-				navigate(-2);
-
-				setTimeout(() => {
-					toast.success(res.data, {
-						position: "top-right",
-						autoClose: 1000,
-						hideProgressBar: false,
-						closeOnClick: true,
-						pauseOnHover: true,
-						draggable: true,
-						progress: undefined,
-						theme: themeColor,
-					});
-				}, 200);
-			} catch (error) {
-				setLoading(false);
-
-				let message = error.response
-					? error.response.data.message
-					: error.message;
-				// console.log(error);
-				// console.log(message);
-
-				toast.error(message, {
+			setTimeout(() => {
+				toast.success(res.data, {
 					position: "top-right",
-					autoClose: 2000,
+					autoClose: 1000,
 					hideProgressBar: false,
 					closeOnClick: true,
 					pauseOnHover: true,
@@ -98,8 +77,28 @@ export default function AdminPlan() {
 					progress: undefined,
 					theme: themeColor,
 				});
-			}
-		};
+			}, 200);
+		} catch (error) {
+			setLoading(false);
+
+			let message = error.response
+				? error.response.data.message
+				: error.message;
+			// console.log(error);
+			// console.log(message);
+
+			toast.error(message, {
+				position: "top-right",
+				autoClose: 2000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: themeColor,
+			});
+		}
+	};
 
 	const getData = async () => {
 		// console.log(params);
@@ -311,9 +310,7 @@ export default function AdminPlan() {
 										<button className="secondary">View Bills</button>
 									</Link>
 
-									{data?.planNumber?.value && (
-										<AdminMinuteModal data={data} reload={setReload} />
-									)}
+									{<AdminMinuteModal data={data} reload={setReload} />}
 								</div>
 							</div>
 						)

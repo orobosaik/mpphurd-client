@@ -10,6 +10,7 @@ export default function MiddleBar({ topBarData, children }) {
 			<TopBar
 				action={topBarData.action}
 				planNumber={topBarData.planNumber}
+				lastPlanNo={topBarData.lastPlanNo}
 				options={topBarData.options}
 				style={{
 					boxShadow:

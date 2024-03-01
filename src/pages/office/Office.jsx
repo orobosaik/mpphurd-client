@@ -179,48 +179,77 @@ export default function Office() {
 	// const [staff, setStaff] = useState([]);
 	// const [region, setRegion] = useState([]);
 	// const themeColor = getThemeColor();
-	// const [reload, setReload] = useState();
+	const [reload, setReload] = useState();
+	const [lastPlanNumber, setLastPlanNumber] = useState();
 
-	// useEffect(() => {
-	// 	const getData = async () => {
-	// 		try {
-	// 			let host = import.meta.env.VITE_SERVER;
+	const isAssessmentOffice = () => {
+		return data.id.name.toUpperCase() === "ASSESSMENT";
+	};
 
-	// 			const res = await axios.get(`${host}/staffs/office/plans`);
+	let topBarDataObj = isAssessmentOffice()
+		? {
+				action: data.id.name + " Office",
+				options: (
+					<DropDownSelect
+						disable={true}
+						data={{
+							title: "Export Data",
+							items: [
+								{
+									text: "Download PDF Format",
+									disabled: !exportPermitted,
+									action: exportPermitted ? handlePrint : () => null,
+								},
+								{
+									text: "Download CSV Format",
+									disabled: true,
+									action: () => null,
+								},
+							],
+						}}
+					/>
+				),
+				lastPlanNo: "3343/2024",
+				// planNumber: "BC/1212/2023",
+		  }
+		: {
+				action: data.id.name + " Office",
+				options: (
+					<DropDownSelect
+						disable={true}
+						data={{
+							title: "Export Data",
+							items: [
+								{
+									text: "Download PDF Format",
+									disabled: !exportPermitted,
+									action: exportPermitted ? handlePrint : () => null,
+								},
+								{
+									text: "Download CSV Format",
+									disabled: true,
+									action: () => null,
+								},
+							],
+						}}
+					/>
+				),
+				// planNumber: "BC/1212/2023",
+		  };
 
-	// 			setData(res.data);
-	// 			setIsLoading(false);
+	useEffect(() => {
+		const getData = async () => {
+			try {
+				let host = import.meta.env.VITE_SERVER;
+				const res = await axios.get(`${host}/staffs/plan/last-plan-number`);
+				setLastPlanNumber(res.data);
+			} catch (error) {}
+		};
 
-	// 			console.log(res.data);
-	// 		} catch (error) {
-	// 			let message = error.response
-	// 				? error.response.data.message
-	// 				: error.message;
-	// 			console.log(error);
-	// 			console.log(message);
-
-	// 			setTimeout(() => {
-	// 				toast.error(message, {
-	// 					position: "top-right",
-	// 					autoClose: 2000,
-	// 					hideProgressBar: false,
-	// 					closeOnClick: true,
-	// 					pauseOnHover: true,
-	// 					draggable: true,
-	// 					progress: undefined,
-	// 					theme: themeColor,
-	// 				});
-	// 			}, 0);
-	// 			setIsLoading(false);
-	// 		}
-	// 	};
-
-	// 	getData();
-
-	// 	// return () => {
-	// 	// 	second
-	// 	// }
-	// }, [reload]);
+		if (isAssessmentOffice()) {
+			getData();
+		}
+	}, [reload]);
 
 	return (
 		<>
@@ -234,31 +263,8 @@ export default function Office() {
 					</div>
 
 					<div className="OfficeMiddleBar">
-						<MiddleBar
-							topBarData={{
-								action: data.id.name + " Office",
-								options: (
-									<DropDownSelect
-										disable={true}
-										data={{
-											title: "Export Data",
-											items: [
-												{
-													text: "Download PDF Format",
-													disabled: !exportPermitted,
-													action: exportPermitted ? handlePrint : () => null,
-												},
-												{
-													text: "Download CSV Format",
-													disabled: true,
-													action: () => null,
-												},
-											],
-										}}
-									/>
-								),
-								// planNumber: "BC/1212/2023",
-							}}>
+						{}
+						<MiddleBar topBarData={topBarDataObj}>
 							<ListWrapper state={data} />
 						</MiddleBar>
 					</div>
