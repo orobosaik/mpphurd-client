@@ -331,7 +331,7 @@ function ListWrapper({ children }) {
 					<p>Search Results</p>
 				</div>
 			)}
-			{console.log("SEARCH RESULT", searchResult)}
+			{/* {console.log("SEARCH RESULT", searchResult)} */}
 
 			<div className="listHeader listFormat">
 				<span>PlanNo</span>

@@ -209,7 +209,7 @@ export default function Office() {
 						}}
 					/>
 				),
-				lastPlanNo: "3343/2024",
+				lastPlanNo: lastPlanNumber,
 				// planNumber: "BC/1212/2023",
 		  }
 		: {
