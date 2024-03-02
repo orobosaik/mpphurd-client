@@ -22,6 +22,7 @@
 
 	padding: 0.5rem 1rem;
 	gap: 2rem;
+	cursor: pointer;
 }
 .searchResultCard:not(:last-of-type) {
 	border-bottom: 1px solid var(--sc-grey);
