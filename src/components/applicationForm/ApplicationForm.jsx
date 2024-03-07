@@ -360,6 +360,7 @@ export default function ApplicationForm() {
 						<div>
 							<span>Applicant Type:</span>
 							<select
+								required
 								name="applicantType"
 								id="applicantType"
 								onChange={(e) =>
@@ -494,7 +495,10 @@ export default function ApplicationForm() {
 											<label htmlFor="planBuildingType">
 												Building/Dev Type:
 											</label>
-											<select name="planBuildingType" id="planBuildingType">
+											<select
+												required
+												name="planBuildingType"
+												id="planBuildingType">
 												<option value=""></option>
 												{BUILDING_TYPE.map((e) => {
 													return (
@@ -517,7 +521,10 @@ export default function ApplicationForm() {
 											<label htmlFor="planBuildingStatus">
 												Building/Dev Status:
 											</label>
-											<select name="planBuildingStatus" id="planBuildingStatus">
+											<select
+												required
+												name="planBuildingStatus"
+												id="planBuildingStatus">
 												<option value=""></option>
 												{BUILDING_STATUS.map((e) => {
 													return (
