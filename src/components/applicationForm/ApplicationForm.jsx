@@ -39,7 +39,7 @@ export default function ApplicationForm() {
 
 		let newData = {
 			// applicant information
-			"applicant.type": form.get("applicantType") || "",
+			"applicant.type": isCompany === true ? "Organization" : "Individual",
 			"applicant.name": form.get("applicantName") || "",
 			"applicant.gender": form.get("applicantGender") || "",
 			"applicant.address": form.get("applicantAddress") || "",
@@ -126,7 +126,7 @@ export default function ApplicationForm() {
 					{/* <div className="applicationItemName"> */}
 					<div>
 						<label htmlFor={type + "Name"}>
-							{isCompany && type !== "rep" ? "Company Name:" : "Full Name:"}
+							{isCompany && type !== "rep" ? "Organization Name:" : "Full Name:"}
 						</label>
 						<input
 							type="text"
@@ -169,7 +169,7 @@ export default function ApplicationForm() {
 				)}
 				<div className="applicationItem">
 					<label htmlFor={type + "Address"}>
-						{isCompany && type !== "rep" ? "Company Address:" : "Address:"}
+						{isCompany && type !== "rep" ? "Organization Address:" : "Address:"}
 					</label>
 					<input
 						type="text"
@@ -267,7 +267,7 @@ export default function ApplicationForm() {
 			<div className="applicationItems">
 				<div className="applicationItem">
 					<div>
-						<label htmlFor={type + "Name"}>Company Name:</label>
+						<label htmlFor={type + "Name"}>Organization Name:</label>
 						<input
 							type="apl1Text"
 							name={type + "Name"}
@@ -278,7 +278,7 @@ export default function ApplicationForm() {
 				</div>
 
 				<div className="applicationItem">
-					<label htmlFor={type + "Address"}>Company Address:</label>
+					<label htmlFor={type + "Address"}>Organization Address:</label>
 					<input
 						type="text"
 						name={type + "Address"}
@@ -364,7 +364,7 @@ export default function ApplicationForm() {
 									setIsCompany(e.target.value === "individual" ? false : true)
 								}>
 								<option value="individual">Individual</option>
-								<option value="company">Company</option>
+								<option value="organization">Organization</option>
 							</select>
 						</div>
 					</div>
@@ -376,7 +376,7 @@ export default function ApplicationForm() {
 									{" "}
 									{!isCompany
 										? "Applicant Personal Information"
-										: "Company Information"}
+										: "Organization Information"}
 								</h3>
 								{/* <div className="applicantCode">
 									<span>Uni Code:</span>
