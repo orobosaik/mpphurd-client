@@ -39,7 +39,7 @@ export default function ApplicationForm() {
 
 		let newData = {
 			// applicant information
-			"applicant.type": isCompany === true ? "Organization" : "Individual",
+			"applicant.type": isCompany === true ? "organization" : "individual",
 			"applicant.name": form.get("applicantName") || "",
 			"applicant.gender": form.get("applicantGender") || "",
 			"applicant.address": form.get("applicantAddress") || "",
@@ -126,7 +126,9 @@ export default function ApplicationForm() {
 					{/* <div className="applicationItemName"> */}
 					<div>
 						<label htmlFor={type + "Name"}>
-							{isCompany && type !== "rep" ? "Organization Name:" : "Full Name:"}
+							{isCompany && type !== "rep"
+								? "Organization Name:"
+								: "Full Name:"}
 						</label>
 						<input
 							type="text"
@@ -414,7 +416,9 @@ export default function ApplicationForm() {
 							<div className="applicationItems">
 								<div className="applicationItem">
 									<div>
-										<label htmlFor="planBuildingName">Building Name:</label>
+										<label htmlFor="planBuildingName">
+											Development / Building Name:
+										</label>
 										<input
 											type="text"
 											name="planBuildingName"
@@ -487,7 +491,9 @@ export default function ApplicationForm() {
 								<div className="applicationItem">
 									<div className="applicationItemType">
 										<div>
-											<label htmlFor="planBuildingType">Building Type:</label>
+											<label htmlFor="planBuildingType">
+												Building/Dev Type:
+											</label>
 											<select name="planBuildingType" id="planBuildingType">
 												<option value=""></option>
 												{BUILDING_TYPE.map((e) => {
@@ -500,7 +506,7 @@ export default function ApplicationForm() {
 											</select>
 										</div>
 										<div>
-											<label htmlFor="planBuildingUse">Building Use:</label>
+											<label htmlFor="planBuildingUse">Building/Dev Use:</label>
 											<input
 												type="text"
 												name="planBuildingUse"
@@ -509,7 +515,7 @@ export default function ApplicationForm() {
 										</div>
 										<div>
 											<label htmlFor="planBuildingStatus">
-												Building Status:
+												Building/Dev Status:
 											</label>
 											<select name="planBuildingStatus" id="planBuildingStatus">
 												<option value=""></option>

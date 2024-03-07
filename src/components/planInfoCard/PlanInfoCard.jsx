@@ -48,7 +48,7 @@ export default function PlanInfoCard({ type, AD2, R, BD, data }) {
 		return (
 			<div className="planInfoCard">
 				<div className="planInfoDetails">
-					<h2 className="planInfoCardTitle">Company Information</h2>
+					<h2 className="planInfoCardTitle">Organization Information</h2>
 					<div className="planInfoItems">
 						<div className="planInfoItem">
 							<span className="planInfoTitle">Name:</span>
@@ -81,7 +81,7 @@ export default function PlanInfoCard({ type, AD2, R, BD, data }) {
 		return (
 			<div className="planInfoCard">
 				<div className="planInfoDetails">
-					<h2 className="planInfoCardTitle">Building Details</h2>
+					<h2 className="planInfoCardTitle">Development/Building Details</h2>
 					<div className="planInfoItems">
 						<div className="planInfoItem">
 							<span className="planInfoTitle">Name:</span>
@@ -147,7 +147,7 @@ export default function PlanInfoCard({ type, AD2, R, BD, data }) {
 				? individual("Applicant Details")
 				: type === "rep"
 				? individual("Representative Details")
-				: type === "company"
+				: type === "organization"
 				? company("Organization Details")
 				: type === "building"
 				? building("Building Details")
