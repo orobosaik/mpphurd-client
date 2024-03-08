@@ -57,6 +57,16 @@ function LoginPage() {
 		e.preventDefault();
 		dispatch(loginStart());
 
+		const time = timeoutDuration + 1000;
+
+		clearTimeout(removeLoading);
+		const removeLoading = setTimeout(() => {
+			if (loading) {
+				dispatch(loginFailure());
+			}
+		}, time);
+		removeLoading();
+
 		try {
 			let host = import.meta.env.VITE_SERVER;
 			const res = await axios.post(`${host}/staffs/auth/login`, {
