@@ -57,16 +57,6 @@ function LoginPage() {
 		e.preventDefault();
 		dispatch(loginStart());
 
-		const time = timeoutDuration + 1000;
-
-		clearTimeout(removeLoading);
-		const removeLoading = setTimeout(() => {
-			if (loading) {
-				dispatch(loginFailure());
-			}
-		}, time);
-		removeLoading();
-
 		try {
 			let host = import.meta.env.VITE_SERVER;
 			const res = await axios.post(`${host}/staffs/auth/login`, {
@@ -107,6 +97,9 @@ function LoginPage() {
 				theme: themeColor,
 			});
 
+			dispatch(loginFailure());
+		}
+		if (loading) {
 			dispatch(loginFailure());
 		}
 	};
@@ -204,7 +197,8 @@ function LoginPage() {
 							<button
 								type="submit"
 								className="btn btn-form-submit"
-								disabled={loading}>
+								// disabled={"loading"}
+							>
 								{loading ? (
 									<CircularProgress
 										thickness={5}
