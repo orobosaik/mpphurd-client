@@ -92,7 +92,9 @@ export const MINUTE_STATUS_LIST = [
 	"Process Further",
 	"Plan In Order",
 	"Issue Raised",
+	"Recommended for Approval",
 	"Recommended for Rejection",
+	"Issuance of Conveyance",
 ];
 export const VETTING_STATUS_LIST = [
 	"Cleared",
@@ -106,6 +108,7 @@ export const JOB_TITLE_LIST = [
 	"Electrical Engineer",
 	"Town Planning Officer",
 	"Estate Surveyor",
+	"Quantity Surveyor",
 	"ICTA",
 ];
 export const POSITION_LIST = [
@@ -124,7 +127,7 @@ export const POSITION_LIST = [
 export const FEEDBACK_LIST = [
 	"Product Feedback",
 	"Feature Requests",
-	"Bug Reports",
+	"Bug / Issue Reports",
 	"Complaints & Questions",
 	"Praise & Appreciation",
 ];
