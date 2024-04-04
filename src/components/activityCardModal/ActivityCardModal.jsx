@@ -137,6 +137,17 @@ export default function ActivityCardModal({
 								</div>
 							</>
 						)}
+						{data?.through?.office && (
+							<>
+								<div className="title">Through:</div>
+								<div className="card">
+									<span className="text">{`${data.through.office}`}</span>
+									<span className="text">
+										{data.through.staff && `${data.through.staff}`}
+									</span>
+								</div>
+							</>
+						)}
 						{data?.comment?.status && (
 							<>
 								<div className="title">Status:</div>
