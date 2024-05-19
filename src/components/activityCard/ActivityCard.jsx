@@ -21,26 +21,12 @@ export default function ActivityCard({ data }) {
 	const [showComment, setShowComment] = useState(false);
 	const displayDate = (originalDate) => {
 		if (isToday(originalDate)) {
-			return (
-				<>
-					<span>Today</span>
-					{/* <span>{format(originalDate, "HH:mm")}</span> */}
-				</>
-			);
+			return <span className="date">Today</span>;
 		} else if (isYesterday(originalDate)) {
-			return (
-				<>
-					<span>Yesterday</span>
-					{/* <span>{format(originalDate, "HH:mm")}</span> */}
-				</>
-			);
+			return <span className="date">Yesterday</span>;
 		} else {
 			return (
-				<>
-					{/* <span>{format(originalDate, "dd/MM/yyyy")}</span> */}
-					<span>{format(originalDate, "MMM d, yyyy")}</span>
-					{/* <span>{format(originalDate, "HH:mm")}</span> */}
-				</>
+				<span className="date">{format(originalDate, "MMM d, yyyy")}</span>
 			);
 		}
 	};
@@ -75,13 +61,7 @@ export default function ActivityCard({ data }) {
 				<h2 className="title">
 					{data.type === "Minute" ? data.to?.office : data.title}
 				</h2>
-				<div className="date">
-					{/* {formatDistance(subDays(new Date(data.createdAt)), new Date(), {
-						addSuffix: true,
-					})} */}
-					{/* {formatDistance(new Date(data.createdAt), new Date())} */}
-					{displayDate(data.createdAt)}
-				</div>
+				{displayDate(data.createdAt)}
 			</div>
 
 			{/* {data?.to?.staff && <p>{data.to.staff}</p>} */}
