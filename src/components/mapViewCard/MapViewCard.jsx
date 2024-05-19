@@ -1,3 +1,4 @@
+import mapboxgl from "mapbox-gl";
 import { useEffect, useRef, useState } from "react";
 import "./mapViewCard.css";
 import Map, {
@@ -8,7 +9,12 @@ import Map, {
 	NavigationControl,
 	Popup,
 } from "react-map-gl";
-import mapboxgl from "mapbox-gl";
+
+import ReactMapGL from "react-map-gl";
+
+// eslint-disable-next-line import/no-webpack-loader-syntax
+mapboxgl.workerClass =
+	require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
 
 import "mapbox-gl/dist/mapbox-gl.css";
 import { getThemeColor } from "../../utilities/themeColor";
