@@ -14,7 +14,7 @@ import ReactMapGL from "react-map-gl";
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
 // mapboxgl.workerClass =
-	// require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
+// require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
 
 // import MapboxWorker from "worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker";
 
@@ -43,7 +43,7 @@ export default function MapViewCard({ data }) {
 
 	return (
 		<div className="mapViewCard">
-			<ReactMapGL
+			<Map
 				reuseMaps
 				mapboxAccessToken={mapboxAccessToken}
 				initialViewState={{
@@ -74,7 +74,7 @@ export default function MapViewCard({ data }) {
 				<Marker longitude={location.longitude} latitude={location.latitude} />
 				<NavigationControl position="top-left" />
 				{/* <AttributionControl customAttribution="Map design by me" /> */}
-			</ReactMapGL>
+			</Map>
 		</div>
 	);
 }
