@@ -8,6 +8,8 @@ import { persistor, store } from "./redux/store.js";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import axios from "axios";
+// import "mapbox-gl/dist/mapbox-gl.css";
+
 
 // Set Axios Defaults
 axios.defaults.withCredentials = true;

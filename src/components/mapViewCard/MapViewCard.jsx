@@ -1,12 +1,5 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./mapViewCard.css";
-import {
-	ExpandLessRounded,
-	ExpandMoreRounded,
-	LaunchRounded,
-} from "@mui/icons-material";
-import GoogleMapReact from "google-map-react";
-import MapLocationPin from "../mapLocationPin/MapLocationPin";
 import Map, {
 	AttributionControl,
 	FullscreenControl,
@@ -15,12 +8,12 @@ import Map, {
 	NavigationControl,
 	Popup,
 } from "react-map-gl";
+import mapboxgl from "mapbox-gl";
 
 import "mapbox-gl/dist/mapbox-gl.css";
 import { getThemeColor } from "../../utilities/themeColor";
 
 export default function MapViewCard({ data }) {
-	const [showComment, setShowComment] = useState(false);
 	const [showPopup, setShowPopup] = useState(true);
 
 	const theme = getThemeColor();
@@ -41,18 +34,6 @@ export default function MapViewCard({ data }) {
 	return (
 		<>
 			<div className="mapViewCard">
-				{/* <GoogleMapReact
-				bootstrapURLKeys={{ key: "AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg" }}
-				// bootstrapURLKeys={{ key: "YOUR_API_KEY" }}
-				defaultCenter={location}
-				defaultZoom={17}>
-				<MapLocationPin
-					lat={location.lat}
-					lng={location.lng}
-					text={location.address}
-				/>
-			</GoogleMapReact> */}
-
 				<Map
 					reuseMaps
 					mapboxAccessToken={mapboxAccessToken}
@@ -67,6 +48,7 @@ export default function MapViewCard({ data }) {
 					mapStyle={style}
 					scrollZoom={false}
 					attributionControl={false}>
+					<FullscreenControl />
 					{/* {showPopup && (
 						<Popup
 							longitude={location.longitude}
@@ -80,10 +62,10 @@ export default function MapViewCard({ data }) {
 						positionOptions={{ enableHighAccuracy: true }}
 						trackUserLocation={true}
 					/>
-					{/* <Marker longitude={location.longitude} latitude={location.latitude} /> */}
+					<Marker longitude={location.longitude} latitude={location.latitude} />
 					<NavigationControl position="top-left" />
-					<FullscreenControl />
 					{/* <AttributionControl customAttribution="Map design by me" /> */}
+
 				</Map>
 			</div>
 		</>
