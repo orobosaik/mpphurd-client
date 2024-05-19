@@ -12,6 +12,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { getThemeColor } from "../../utilities/themeColor";
 import GeneratePlanNoModal from "../generatePlanNoModal/GeneratePlanNoModal";
+import MapViewCard from "../mapViewCard/MapViewCard";
 
 function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 	const navigate = useNavigate();
@@ -147,6 +148,8 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 					}
 				</div>
 			</div>
+
+			<MapViewCard></MapViewCard>
 
 			<div className="planInfoWrapper">
 				<PlanInfoCard
