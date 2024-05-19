@@ -52,7 +52,8 @@
 	height: 3px;
 }
 .activitiesWrapper {
-	background-color: var(--white);
+	/* background-color: var(--semi-white); */
+	background-color: var(--semi-white);
 	height: calc(100vh - 146px);
 	border-bottom-left-radius: 8px;
 	border-bottom-right-radius: 8px;

@@ -65,7 +65,7 @@ export default function MapViewCard({ data }) {
 					// mapStyle="mapbox://styles/mapbox/navigation-day-v1">
 					// mapStyle="mapbox://styles/mapbox/dark-v11">
 					mapStyle={style}
-					light={false}
+					scrollZoom={false}
 					attributionControl={false}>
 					{/* {showPopup && (
 						<Popup
@@ -80,7 +80,7 @@ export default function MapViewCard({ data }) {
 						positionOptions={{ enableHighAccuracy: true }}
 						trackUserLocation={true}
 					/>
-					<Marker longitude={location.longitude} latitude={location.latitude} />
+					{/* <Marker longitude={location.longitude} latitude={location.latitude} /> */}
 					<NavigationControl position="top-left" />
 					<FullscreenControl />
 					{/* <AttributionControl customAttribution="Map design by me" /> */}

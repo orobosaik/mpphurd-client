@@ -12,6 +12,7 @@
 }
 .middleBarWrapper {
 	position: relative;
+	background-color: var(--semi-white);
 	overflow: auto;
 	box-shadow: 0 8px 5px -5px rgb(0 0 0 / 0.4);
 	height: calc(100vh - 112px);

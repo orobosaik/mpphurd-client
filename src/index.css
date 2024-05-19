@@ -138,7 +138,10 @@ select:focus-visible {
 	text-transform: capitalize;
 }
 .secondary {
-	background-color: transparent;
+	/* background-color: transparent; */
+	background-color: var(--white);
+		box-shadow: 0px 0px 11px -4px rgba(0, 0, 0, 0.5);
+
 	color: var(--black);
 	outline: var(--pc-green) 1.5px solid;
 	padding: .4rem 1rem;
@@ -154,6 +157,7 @@ select:focus-visible {
 } */
 input,
 input:active {
+	background-color: var(--white);
 	font: inherit;
 	outline: none;
 	border: none;

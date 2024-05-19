@@ -1,8 +1,8 @@
 .activityCard {
 	position: relative;
 	padding: 1rem 2rem;
-	/*background: lightgoldenrodyellow;
-	*/
+	background: var(--white);
+
 	box-shadow: 0px 0px 11px -4px rgba(0, 0, 0, 0.5);
 	margin-left: 1rem;
 	border-radius: 8px;

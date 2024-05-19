@@ -37,7 +37,8 @@
 .minuteItem textarea {
 	width: 100%;
 	display: flex;
-	background-color: transparent;
+	/* background-color: transparent; */
+	background-color: var(--white);
 	border: var(--sc-grey) solid 1px;
 	padding: 0.2rem 0.7rem;
 	transition: all 0.3s;
