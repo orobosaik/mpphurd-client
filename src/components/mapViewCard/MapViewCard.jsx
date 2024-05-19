@@ -13,8 +13,12 @@ import Map, {
 import ReactMapGL from "react-map-gl";
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
-mapboxgl.workerClass =
-	require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
+// mapboxgl.workerClass =
+// require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
+
+// import MapboxWorker from "worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker";
+
+// mapboxgl.workerClass = MapboxWorker.default;
 
 import "mapbox-gl/dist/mapbox-gl.css";
 import { getThemeColor } from "../../utilities/themeColor";
