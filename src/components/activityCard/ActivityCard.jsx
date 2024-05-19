@@ -37,7 +37,8 @@ export default function ActivityCard({ data }) {
 		} else {
 			return (
 				<>
-					<span>{format(originalDate, "dd/MM/yyyy")}</span>
+					{/* <span>{format(originalDate, "dd/MM/yyyy")}</span> */}
+					<span>{format(originalDate, "MMM d, yyyy")}</span>
 					{/* <span>{format(originalDate, "HH:mm")}</span> */}
 				</>
 			);

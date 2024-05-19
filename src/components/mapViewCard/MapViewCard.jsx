@@ -32,24 +32,23 @@ export default function MapViewCard({ data }) {
 	};
 
 	return (
-		<>
-			<div className="mapViewCard">
-				<Map
-					reuseMaps
-					mapboxAccessToken={mapboxAccessToken}
-					initialViewState={{
-						longitude: location.longitude,
-						latitude: location.latitude,
-						zoom: zoomLevel,
-					}}
-					// mapStyle="mapbox://styles/mapbox/navigation-night-v1">
-					// mapStyle="mapbox://styles/mapbox/navigation-day-v1">
-					// mapStyle="mapbox://styles/mapbox/dark-v11">
-					mapStyle={style}
-					scrollZoom={false}
-					attributionControl={false}>
-					<FullscreenControl />
-					{/* {showPopup && (
+		<div className="mapViewCard">
+			<Map
+				reuseMaps
+				mapboxAccessToken={mapboxAccessToken}
+				initialViewState={{
+					longitude: location.longitude,
+					latitude: location.latitude,
+					zoom: zoomLevel,
+				}}
+				// mapStyle="mapbox://styles/mapbox/navigation-night-v1">
+				// mapStyle="mapbox://styles/mapbox/navigation-day-v1">
+				// mapStyle="mapbox://styles/mapbox/dark-v11">
+				mapStyle={style}
+				scrollZoom={false}
+				attributionControl={false}>
+				<FullscreenControl />
+				{/* {showPopup && (
 						<Popup
 							longitude={location.longitude}
 							latitude={location.latitude}
@@ -58,16 +57,14 @@ export default function MapViewCard({ data }) {
 							You are here
 						</Popup>
 					)} */}
-					<GeolocateControl
-						positionOptions={{ enableHighAccuracy: true }}
-						trackUserLocation={true}
-					/>
-					<Marker longitude={location.longitude} latitude={location.latitude} />
-					<NavigationControl position="top-left" />
-					{/* <AttributionControl customAttribution="Map design by me" /> */}
-
-				</Map>
-			</div>
-		</>
+				<GeolocateControl
+					positionOptions={{ enableHighAccuracy: true }}
+					trackUserLocation={true}
+				/>
+				<Marker longitude={location.longitude} latitude={location.latitude} />
+				<NavigationControl position="top-left" />
+				{/* <AttributionControl customAttribution="Map design by me" /> */}
+			</Map>
+		</div>
 	);
 }

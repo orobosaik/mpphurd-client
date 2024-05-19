@@ -90,35 +90,3 @@ html[data-theme="dark"] .planInfoWrapper {
 	align-items: center;
 	gap: 1rem;
 }
-
-.plan-watermark {
-	position: absolute;
-	/*height: 90%;
-	*/ /*width: 90%;
-	*/ /*background-color: red;
-	*/
-	display: flex;
-	align-items: center;
-
-	justify-content: center;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	-webkit-transform: translate(-50%, -50%);
-	-moz-transform: translate(-50%, -50%);
-	-ms-transform: translate(-50%, -50%);
-	-o-transform: translate(-50%, -50%);
-}
-.plan-watermark span {
-	font-size: 12rem;
-	font-family: monospace;
-}
-.plan-watermark.approved {
-	color: rgba(255, 215, 0, 0.3);
-}
-.plan-watermark.rejected {
-	color: rgba(255, 0, 0, 0.3);
-}
-.plan-watermark.kiv {
-	color: rgba(255, 0, 0, 0.3);
-}

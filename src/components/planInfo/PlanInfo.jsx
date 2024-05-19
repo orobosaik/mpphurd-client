@@ -1,4 +1,4 @@
-import { EditRounded } from "@mui/icons-material";
+import { EditRounded, ErrorRounded } from "@mui/icons-material";
 import "./planInfo.css";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import PlanInfoCard from "../planInfoCard/PlanInfoCard";
@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { getThemeColor } from "../../utilities/themeColor";
 import GeneratePlanNoModal from "../generatePlanNoModal/GeneratePlanNoModal";
 import MapViewCard from "../mapViewCard/MapViewCard";
+import ApprovalStatus from "../approvalStatus/ApprovalStatus";
 
 function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 	const navigate = useNavigate();
@@ -33,26 +34,6 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 
 	return (
 		<div className="planInfo">
-			<div
-				className={
-					data?.approval?.status === "approved"
-						? "plan-watermark approved"
-						: data?.approval?.status === "kiv"
-						? "plan-watermark kiv"
-						: data?.approval?.status === "rejected"
-						? "plan-watermark rejected"
-						: "plan-watermark processing"
-				}>
-				<span>
-					{data?.approval?.status === "approved"
-						? "APPROVED"
-						: data?.approval?.status === "kiv"
-						? "KIV"
-						: data?.approval?.status === "rejected"
-						? "REJECTED"
-						: ""}
-				</span>
-			</div>
 			<div className="planInfoSummary">
 				<div className="planInfoSummaryDetails">
 					<div className="planInfoSummaryItem">
@@ -82,7 +63,7 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 						<div className="planInfoSummaryItem">
 							<span className="planInfoSummaryTitle">Current Stack:</span>
 							<span className="planInfoSummaryText">
-								<span className="planInfoSummaryStack">{data?.stack}</span>.
+								<span className="planInfoSummaryStack">{data?.stack}</span>
 							</span>
 						</div>
 					)}
@@ -148,6 +129,8 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 					}
 				</div>
 			</div>
+
+			<ApprovalStatus data={data}/>
 
 			<MapViewCard></MapViewCard>
 
