@@ -59,12 +59,36 @@
 	border-bottom-right-radius: 8px;
 	overflow-y: auto;
 	padding: 2rem;
+	padding-bottom: 6rem;
 }
 
 .activitiesWrapper .empty {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+.limited-activity {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 2rem;
+}
+.limited-activity span {
+	width: fit-content;
+	padding: 0.5rem 1rem;
+	background-color: var(--white);
+	font-size: smaller;
+	box-shadow: 0px 0px 10px -4px rgba(0, 0, 0, 0.5);
+
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-o-border-radius: 4px;
+}
+html[data-theme="dark"] .limited-activity span {
+	box-shadow: 0px 0px 10px -4px rgba(255, 255, 255, 0.5);
 }
 
 .printBtn {

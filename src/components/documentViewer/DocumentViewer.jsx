@@ -20,7 +20,7 @@ import "./documentViewer.css";
 export default function DocumentViewer() {
 	return (
 		<div className="documentViewerContainer">
-			<div className="documentViewerTopControl">
+			<div className="documentViewerTopControl secondary">
 				<ViewModuleRounded className="documentViewerIcon" />
 				<ZoomInRounded className="documentViewerIcon" />
 				<ZoomOutRounded className="documentViewerIcon" />
@@ -30,8 +30,8 @@ export default function DocumentViewer() {
 			<span>DocumentViewer</span>
 
 			<div className="documentViewerBottomControl">
-				<div>Page <input type="number" name="" id="" min="1"/> of 45</div>
-				<div>Comment</div>
+				<div className="secondary">Page <input type="number" name="" id="" min="1"/> of 45</div>
+				<button className="secondary">Comment</button>
 			</div>
 		</div>
 	);

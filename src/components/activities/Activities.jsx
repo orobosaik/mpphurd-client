@@ -387,12 +387,21 @@ function Activities({ setRightBarView, reload, admin, plan }) {
 							<p>{customError}</p>
 						</div>
 					) : (
-						activityType.toLowerCase() !== "vetting" &&
-						dataList.map((d) => {
-							return <ActivityCard key={d._id} data={d} />;
-							// return  <ActivityCardModal key={d._id} data={d}/>;
-						})
+						activityType.toLowerCase() !== "vetting" && (
+							<>
+								{dataList.map((d) => {
+									return <ActivityCard key={d._id} data={d} />;
+									// return  <ActivityCardModal key={d._id} data={d}/>;
+								})}
+								{!isInUserOffice && (
+									<span className="limited-activity">
+										<span>Limited View</span>
+									</span>
+								)}
+							</>
+						)
 					))}
+
 				{activityType.toLowerCase() === "vetting" && !isLoading && (
 					<>
 						<VettingCard
