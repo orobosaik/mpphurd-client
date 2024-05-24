@@ -36,7 +36,7 @@
   bottom: -10px;
   left: 0;
   width: 100%;
-  border-bottom: 1px var(--accent-yellow) dashed;
+  border-bottom: 1px var(--accent-yellow) solid;
 }
 .planInfoDetails{
   display: flex;

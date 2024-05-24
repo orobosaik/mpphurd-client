@@ -228,6 +228,9 @@ html[data-theme="dark"] dialog {
 	background-color: var(--green-background);
 	font-weight: normal;
 
+	white-space: pre-wrap;
+	line-height: 1.2;
+
 
 	border-radius: 8px;
 	-webkit-border-radius: 8px;

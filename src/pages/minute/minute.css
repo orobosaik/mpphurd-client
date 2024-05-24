@@ -30,23 +30,23 @@
 }
 .minuteItem textarea:focus {
 	outline: none;
-	padding: 2rem;
+	padding: 2.5rem;
 }
 
 .minuteItem input,
 .minuteItem textarea {
 	width: 100%;
 	display: flex;
-	/* background-color: transparent; */
-	background-color: var(--white);
+	/*background-color: transparent;
+	*/background-color: var(--white);
 	border: var(--sc-grey) solid 1px;
-	padding: 0.2rem 0.7rem;
+	padding: 1.5rem;
 	transition: all 0.3s;
-	border-radius: 4px;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	-ms-border-radius: 4px;
-	-o-border-radius: 4px;
+	border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	-ms-border-radius: 6px;
+	-o-border-radius: 6px;
 	-webkit-transition: all 0.3s;
 	-moz-transition: all 0.3s;
 	-ms-transition: all 0.3s;

@@ -178,6 +178,7 @@ input:-webkit-autofill:active {
 ::-webkit-scrollbar {
 	width: 5px;
 	height: 10px;
+	scrollbar-gutter: stable;
 }
 ::-webkit-scrollbar-thumb {
 	background-color: var(--sc-grey);

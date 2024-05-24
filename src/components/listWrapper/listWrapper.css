@@ -10,9 +10,6 @@
 	align-items: center;
 	gap: 1rem;
 }
-.listQueryDate input[type="date"] {
-	width: 13rem;
-}
 .listCount {
 	display: flex;
 	justify-content: center;
@@ -69,6 +66,10 @@
 	-moz-transition: all 0.3s;
 	-ms-transition: all 0.3s;
 	-o-transition: all 0.3s;
+}
+.listQueryDate input {
+	/* border: var(--sc-grey) solid 3px; */
+	padding: 0.2rem 0.7rem;
 }
 
 .listQuery input:focus,
@@ -159,7 +160,7 @@
 	-moz-border-radius: 8px;
 	-ms-border-radius: 8px;
 	-o-border-radius: 8px;
-	border: var(--sc-grey) solid 1px;
+	border: var(--sc-grey) solid 2px;
 }
 
 .querySearchBar input::placeholder {

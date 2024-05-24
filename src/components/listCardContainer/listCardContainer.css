@@ -50,7 +50,8 @@
 	font-weight: 700;
 	color: #2c2c2c;
 	/* background-color: var(--accent-yellow); */
-	background-color: lightgoldenrodyellow;
+	/* background-color: #ffffac; */
+	background-color: #fff2aff3 ;
 	border-radius: 0.8rem;
 	-webkit-border-radius: 0.8rem;
 	-moz-border-radius: 0.8rem;

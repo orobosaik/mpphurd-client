@@ -20,6 +20,7 @@ export default function DropDownSelect({ data }) {
 			</MenuButton>
 			<Menu
 				className="dropdown"
+				placement="bottom-end"
 				slotProps={{
 					listbox: { className: "dropdown-listbox" },
 				}}>

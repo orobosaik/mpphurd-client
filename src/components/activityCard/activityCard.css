@@ -109,7 +109,7 @@ html[data-theme="dark"] .activityCard {
 
 .activityCardComment {
 	flex-direction: column;
-	background-color: var(--light-grey);
+	overflow: hidden;
 	border-radius: 8px;
 	-webkit-border-radius: 8px;
 	-moz-border-radius: 8px;
@@ -121,6 +121,7 @@ html[data-theme="dark"] .activityCard {
 	display: flex;
 	justify-content: space-between;
 	cursor: pointer;
+	background-color: var(--light-grey);
 
 	font-weight: 700;
 	padding: 0.5rem;
@@ -131,7 +132,10 @@ html[data-theme="dark"] .activityCard {
 }
 
 .activityCardCommentText {
-	border-top: solid var(--sc-grey) 1px;
+	border: solid var(--light-grey) 2px;
+	border-top: none;
+	border-bottom-left-radius: 8px;
+	border-bottom-right-radius: 8px;
 	padding: 1rem;
 	white-space: pre-wrap;
 	line-height: 1.2;
