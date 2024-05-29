@@ -95,6 +95,8 @@ export const MINUTE_STATUS_LIST = [
 	"Recommended for Approval",
 	"Recommended for Rejection",
 	"Issuance of Conveyance",
+	"KIV",
+	"Approved",
 ];
 export const VETTING_STATUS_LIST = [
 	"Cleared",
