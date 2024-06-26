@@ -233,7 +233,7 @@ export default function Minute() {
 										{proposedActions.map((el, index) => {
 											const keyId = uuid();
 											return (
-												<div key={keyId} className="minuteItemAction">
+												<div key={index} className="minuteItemAction">
 													<button
 														type="button"
 														onClick={() => {

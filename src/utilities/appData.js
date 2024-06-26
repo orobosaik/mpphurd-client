@@ -133,3 +133,29 @@ export const FEEDBACK_LIST = [
 	"Complaints & Questions",
 	"Praise & Appreciation",
 ];
+
+export const ASSESSMENT_FEES = {
+	registrationFee: 25000,
+	developmentFee: 50000,
+	squareMeterFeeList: [25, 50, 75, 100],
+	facilities: [
+		{
+			name: "Gate House",
+			amount: 50000,
+		},
+		{
+			name: "Fence",
+			amount: 100000,
+		},
+	],
+	others: [
+		{
+			name: "Land Use",
+			amount: 50000,
+		},
+		{
+			name: "Tax",
+			amount: 100000,
+		},
+	],
+};

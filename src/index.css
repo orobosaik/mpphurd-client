@@ -128,7 +128,7 @@ select:focus,
 select:focus-visible {
 	/* outline: 4px auto -webkit-focus-ring-color; */
 
-	outline: none;
+	/* outline: none; */
 }
 
 .primary {
@@ -145,8 +145,10 @@ select:focus-visible {
 	color: var(--black);
 	outline: var(--pc-green) 1.5px solid;
 	padding: .4rem 1rem;
+	text-transform: capitalize;
 }
-.secondary:hover {
+.secondary:hover,
+.secondary:active {
 	outline: var(--pc-green) 2px solid;
 }
 
