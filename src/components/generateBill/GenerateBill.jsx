@@ -410,7 +410,7 @@ export default function GenerateBill() {
 													<div>
 														<span>Type of Facility:</span>
 														<select
-															defaultValue=""
+															defaultValue={assessment.facilities.list[i].name}
 															className="secondary"
 															onChange={(e) => {
 																let val = Number(e.target.value);
@@ -481,13 +481,10 @@ export default function GenerateBill() {
 							</button>
 						</div>
 
-
 						{/* OTHERS */}
 						<div className="generateBillItem">
 							<div className="generateBillItemSummary">
-								<span className="generateBillItemName">
-									Other Fees:
-								</span>
+								<span className="generateBillItemName">Other Fees:</span>
 								<span className="generateBillItemValue">
 									{Intl.NumberFormat("en-NG", {
 										style: "currency",
@@ -532,7 +529,7 @@ export default function GenerateBill() {
 													<div>
 														<span>Type of Fee:</span>
 														<select
-															defaultValue=""
+															defaultValue={assessment.others.list[i].name}
 															className="secondary"
 															onChange={(e) => {
 																let val = Number(e.target.value);
@@ -602,7 +599,6 @@ export default function GenerateBill() {
 								<Add />
 							</button>
 						</div>
-
 
 						<div className="generateBillItem">
 							<div className="generateBillItemSummary">
