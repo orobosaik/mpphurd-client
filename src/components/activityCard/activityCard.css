@@ -83,6 +83,7 @@ html[data-theme="dark"] .activityCard {
 	display: flex;
 	flex-direction: column;
 	align-items: end;
+	text-align: end;
 	/* color: orange; */
 	color: #fe7a36;
 
@@ -146,7 +147,7 @@ html[data-theme="dark"] .activityCard {
 	position: absolute;
 	left: -1rem;
 	top: 4rem;
-	width: 2px;
+	width: 2.5px;
 	background-color: var(--sc-grey);
 	height: calc(100% - 3rem);
 }
@@ -155,7 +156,7 @@ html[data-theme="dark"] .activityCard {
 	content: "\25b2";
 	font-size: 1.2rem;
 	top: -10px;
-	left: -4px;
+	left: -4.55px;
 	color: var(--pc-green);
 }
 .activityCardArrow::after {
@@ -163,7 +164,7 @@ html[data-theme="dark"] .activityCard {
 	content: "";
 	height: 0.7rem;
 	width: 0.7rem;
-	right: -2px;
+	right: -2.35px;
 	bottom: -2px;
 	background-color: var(--pc-green);
 	border-radius: 2px;

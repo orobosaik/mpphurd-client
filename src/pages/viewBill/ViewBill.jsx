@@ -15,10 +15,13 @@ import GenerateBill from "../../components/generateBill/GenerateBill";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import LoadingIcon from "../../utilities/LoadingIcon";
+
 
 export default function ViewBill() {
 	const [rightBarView, setRightBarView] = useState(0);
 	const [data, setData] = useState();
+	const [isLoading, setIsLoading] = useState();
 	const [reload, setReload] = useState();
 
 	const [isInUserOffice, setIsInUserOffice] = useState();
@@ -30,6 +33,7 @@ export default function ViewBill() {
 
 		const getData = async () => {
 			try {
+				setIsLoading(true)
 				let host = import.meta.env.VITE_SERVER;
 
 				// const res = await Promise.all([
@@ -96,6 +100,8 @@ export default function ViewBill() {
 					: error.message;
 				// console.log(error);
 				// console.log(message);
+			} finally {
+				setIsLoading(false)
 			}
 		};
 		getData();
@@ -116,9 +122,15 @@ export default function ViewBill() {
 								? `${data?.dev.region.substring(0, 3).toUpperCase()}/${
 										data?.planNumber.value
 								  }/${new Date(data?.planNumber.date).getFullYear()}`
-								: data?.uniqueId) + " (This Feature Is In Development...)",
+								: data?.uniqueId),
 					}}>
-					<PlanBill />
+					{!isLoading ? (
+
+						<PlanBill data={data} />
+					) : (
+						<LoadingIcon />
+					)}
+
 				</MiddleBar>
 
 				<RightBar>

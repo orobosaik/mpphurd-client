@@ -39,9 +39,6 @@ html[data-theme="dark"] dialog {
 	font-size: 1.8rem;
 	padding-bottom: 1rem;
 }
-.modalView .headerText{
-	text-transform: capitalize;
-}
 
 .modalView footer {
 	align-self: end;

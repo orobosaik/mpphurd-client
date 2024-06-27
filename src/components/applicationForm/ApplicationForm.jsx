@@ -199,7 +199,12 @@ export default function ApplicationForm() {
 				</div>
 				<div className="applicationItem">
 					<label htmlFor={type + "Email"}>Email:</label>
-					<input type="email" name={type + "Email"} id={type + "Email"} />
+					<input
+						type="email"
+						required
+						name={type + "Email"}
+						id={type + "Email"}
+					/>
 				</div>
 
 				{(!isCompany || type === "rep") && (
@@ -360,6 +365,7 @@ export default function ApplicationForm() {
 						<div>
 							<span>Applicant Type:</span>
 							<select
+								className="secondary"
 								required
 								name="applicantType"
 								id="applicantType"

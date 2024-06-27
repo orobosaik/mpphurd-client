@@ -135,6 +135,7 @@ export const FEEDBACK_LIST = [
 ];
 
 export const ASSESSMENT_FEES = {
+	fastTrackFee: 100000,
 	registrationFee: 25000,
 	developmentFee: 50000,
 	squareMeterFeeList: [25, 50, 75, 100],

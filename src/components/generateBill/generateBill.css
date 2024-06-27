@@ -42,6 +42,10 @@ html[data-theme="dark"] .generateBillWrapper {
 	font-weight: 800;
 	color: var(--pc-green);
 }
+.generateBillItem.total {
+	font-weight: 800;
+	color: var(--pc-green);
+}
 .generateBillItemSummary {
 	display: flex;
 	justify-content: space-between;
@@ -69,6 +73,19 @@ html[data-theme="dark"] .generateBillWrapper {
 	display: flex;
 	flex-direction: column;
 }
+.generateBillItemBreakdown.previousPayment {
+	display: flex;
+  padding: 1rem 0;
+  padding-bottom: 2rem;
+  align-items: center;
+  color: var(--color-6);
+}
+.generateBillItemBreakdown.previousPayment input:active,
+.generateBillItemBreakdown.previousPayment input:focus,
+.generateBillItemBreakdown.previousPayment input{
+	width: 10rem;
+}
+
 .generateBillItemBreakdown input:active,
 .generateBillItemBreakdown input {
 	width: 7.4rem;
@@ -109,6 +126,7 @@ html[data-theme="dark"] .generateBillWrapper {
   align-items: center;
 }
 
+.generateBillItem .button,
 .generateBillItem button {
 	padding: 0.2rem 1rem;
 	display: flex;
@@ -120,5 +138,6 @@ html[data-theme="dark"] .generateBillWrapper {
 
 .generateButtonsWrapper {
 	display: flex;
+  align-items: center;
 	gap: 1rem;
 }

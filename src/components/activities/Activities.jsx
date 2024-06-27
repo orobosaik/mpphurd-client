@@ -12,14 +12,14 @@ import { getThemeColor } from "../../utilities/themeColor";
 import { useSelector } from "react-redux";
 import { format } from "date-fns";
 
-function Activities({ setRightBarView, reload, admin, plan }) {
+function Activities({ setRightBarView, reload, admin }) {
 	const [isLoading, setIsLoading] = useState(false);
 	const [data, setData] = useState([]);
 	const [isAdmin, setIsAdmin] = useState(admin);
 	const [dataList, setDataList] = useState([]);
 	const [activityType, setActivityType] = useState("All");
 	const [customError, setCustomError] = useState("No Record...");
-	const [planDataD, setPlanDataD] = useState(plan);
+	const [plan, setPlan] = useState();
 
 	const [isInUserOffice, setIsInUserOffice] = useState();
 	const { currentUser, loading } = useSelector((state) => state.user);
@@ -256,17 +256,19 @@ function Activities({ setRightBarView, reload, admin, plan }) {
 			if (!isAdmin) {
 				res = await Promise.all([
 					axios.get(`${host}/staffs/plan/${params.id}/activities`),
-					// axios.get(`${host}/staffs/plan/${params.id}`),
+					axios.get(`${host}/staffs/plan/${params.id}`),
 				]);
 			} else {
 				res = await Promise.all([
 					axios.get(`${host}/admin/plan/${params.id}/activities`),
-					// axios.get(`${host}/staffs/plan/${params.id}`),
+					axios.get(`${host}/staffs/plan/${params.id}`),
 				]);
 			}
 
 			const activitiesData = res[0].data;
 			// const returnedPlan = res[1].data;
+			let plan = res[1].data;
+			setPlan(plan);
 
 			// console.log(res);
 
@@ -337,8 +339,8 @@ function Activities({ setRightBarView, reload, admin, plan }) {
 	}, []);
 
 	useEffect(() => {
-		plan && getData();
-	}, [plan, reload, params.id]);
+		getData();
+	}, [reload, params.id]);
 
 	return (
 		<div className="activities">

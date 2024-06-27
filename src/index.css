@@ -101,11 +101,14 @@ img {
 	cursor: pointer;
 	text-transform: capitalize;
 }
+.button,
 button {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	gap: 1rem;
 }
+.button,
 button,
 select {
 	border-radius: 8px;
@@ -118,10 +121,13 @@ select {
 	cursor: pointer;
 	transition: border-color 0.25s;
 }
+.button,
 button:hover {
 	/* border-color: #646cff; */
 	outline: var(--pc-green) 1px solid;
 }
+.button:focus,
+.button:focus-visible,
 button:focus,
 button:focus-visible,
 select:focus,
@@ -129,6 +135,12 @@ select:focus-visible {
 	/* outline: 4px auto -webkit-focus-ring-color; */
 
 	/* outline: none; */
+}
+select:focus,
+select:focus-visible {
+	/* outline: 4px auto -webkit-focus-ring-color; */
+
+	outline: none;
 }
 
 .primary {
