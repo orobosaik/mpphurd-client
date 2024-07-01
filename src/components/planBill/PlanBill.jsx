@@ -28,37 +28,38 @@ export default function PlanBill({ data }) {
 							<div className="billDetailsTopItems">
 								<div className="billDetailsTopItem">
 									<div className="billDetailsTopItemTitle">File No</div>
-									<div className="billDetailsTopItemText">BC/3522/2023</div>
+									<div className="billDetailsTopItemText">
+										{data.planNumber.fullValue}
+									</div>
 								</div>
 								<div className="billDetailsTopItem">
 									<div className="billDetailsTopItemTitle">Applicant Name</div>
 									<div className="billDetailsTopItemText">
-										Mr. Osaretin Emmanuel Josh
+										{data.applicant.name}
 									</div>
 								</div>
 								<div className="billDetailsTopItem">
 									<div className="billDetailsTopItemTitle">Telephone:</div>
 									<div className="billDetailsTopItemText">
-										0808358343, 0908273423
+										{data?.applicant?.phone}
+										{data?.applicant?.phone1 && ", " + data?.applicant?.phone1}
 									</div>
 								</div>
 								<div className="billDetailsTopItem">
 									<div className="billDetailsTopItemTitle">Site Location:</div>
 									<div className="billDetailsTopItemText">
-										No. 3b Ekenwan barracks, off Etete Crescent
+										{data?.dev?.plotNo && data?.dev?.plotNo + ","}{" "}
+										{data?.dev?.address && data?.dev?.address?.toLowerCase()}
 									</div>
 								</div>
-								<div className="billDetailsTopItem">
-									<div className="billDetailsTopItemTitle">Applicant Name</div>
-									<div className="billDetailsTopItemText">
-										Mr. Osaretin Emmanuel Josh
-									</div>
-								</div>
+
 								<div className="billDetailsTopItem">
 									<div className="billDetailsTopItemTitle">
 										Building Description:
 									</div>
-									<div className="billDetailsTopItemText">Built Building</div>
+									<div className="billDetailsTopItemText">
+										{data?.dev?.status}
+									</div>
 								</div>
 							</div>
 
@@ -194,37 +195,38 @@ export default function PlanBill({ data }) {
 							<div className="billDetailsTopItems">
 								<div className="billDetailsTopItem">
 									<div className="billDetailsTopItemTitle">File No</div>
-									<div className="billDetailsTopItemText">BC/3522/2023</div>
+									<div className="billDetailsTopItemText">
+										{data.planNumber.fullValue}
+									</div>
 								</div>
 								<div className="billDetailsTopItem">
 									<div className="billDetailsTopItemTitle">Applicant Name</div>
 									<div className="billDetailsTopItemText">
-										Mr. Osaretin Emmanuel Josh
+										{data.applicant.name}
 									</div>
 								</div>
 								<div className="billDetailsTopItem">
 									<div className="billDetailsTopItemTitle">Telephone:</div>
 									<div className="billDetailsTopItemText">
-										0808358343, 0908273423
+										{data?.applicant?.phone}
+										{data?.applicant?.phone1 && ", " + data?.applicant?.phone1}
 									</div>
 								</div>
 								<div className="billDetailsTopItem">
 									<div className="billDetailsTopItemTitle">Site Location:</div>
 									<div className="billDetailsTopItemText">
-										No. 3b Ekenwan barracks, off Etete Crescent
+										{data?.dev?.plotNo && data?.dev?.plotNo + ","}{" "}
+										{data?.dev?.address && data?.dev?.address?.toLowerCase()}
 									</div>
 								</div>
-								<div className="billDetailsTopItem">
-									<div className="billDetailsTopItemTitle">Applicant Name</div>
-									<div className="billDetailsTopItemText">
-										Mr. Osaretin Emmanuel Josh
-									</div>
-								</div>
+
 								<div className="billDetailsTopItem">
 									<div className="billDetailsTopItemTitle">
 										Building Description:
 									</div>
-									<div className="billDetailsTopItemText">Built Building</div>
+									<div className="billDetailsTopItemText">
+										{data?.dev?.status}
+									</div>
 								</div>
 							</div>
 

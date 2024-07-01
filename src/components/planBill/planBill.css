@@ -124,6 +124,7 @@ html[data-theme="dark"] .planBillViewWrapper {
 	max-width: 150px;
 }
 .billDetailsTopItemText {
+	text-transform: capitalize;
 	flex: 4;
 	max-width: 450px;
 }
