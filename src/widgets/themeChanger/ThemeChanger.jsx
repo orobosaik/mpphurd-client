@@ -14,7 +14,7 @@ import {
 } from "@mui/icons-material";
 
 export default function ThemeChanger({ client }) {
-	const {theme} = useSelector((state) => state.app);
+	const { theme } = useSelector((state) => state.app);
 	const dispatch = useDispatch();
 
 	return (

@@ -16,6 +16,7 @@ import axios from "axios";
 import { LinearProgress } from "@mui/material";
 import { toast } from "react-toastify";
 import { getThemeColor } from "../../utilities/themeColor";
+import HeaderUserOptions from "../../widgets/headerUserOptions/HeaderUserOptions";
 
 export default function Header() {
 	const [searchQuery, setSearchQuery] = useState("");
@@ -27,7 +28,6 @@ export default function Header() {
 
 	const dispatch = useDispatch();
 	const themeColor = getThemeColor();
-
 
 	const [isLoading, setIsLoading] = useState(true);
 	const [data, setData] = useState(null);
@@ -207,7 +207,7 @@ export default function Header() {
 					</div>
 				</div>
 
-				<div className="headerUser">
+				{/* <div className="headerUser">
 					<div className="headerDetails">
 						<span className="headerName">{`${staff.firstName} ${staff.lastName}`}</span>
 						<span className="headerOffice">{`${staff.position}`}</span>
@@ -218,7 +218,9 @@ export default function Header() {
 						alt=""
 						className="headerImg"
 					/>
-				</div>
+				</div> */}
+
+				<HeaderUserOptions staff={staff} />
 			</div>
 		</div>
 	);
