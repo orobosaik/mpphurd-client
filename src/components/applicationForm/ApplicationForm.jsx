@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
+	AddPhotoAlternateRounded,
+	CloseRounded,
 	FileUploadRounded,
 	Image,
 	UploadFileRounded,
@@ -14,10 +16,12 @@ import { CircularProgress } from "@mui/material";
 import { useSelector } from "react-redux";
 import uuid from "react-uuid";
 import {
+	APPLICATION_DOCUMENTS,
 	BUILDING_STATUS,
 	BUILDING_TYPE,
 	LGA_LIST,
 } from "../../utilities/appData";
+import FileUploadWithThumbnail from "../../widgets/fileUploadWithThumbnail/FileUploadWithThumbnail";
 
 export default function ApplicationForm() {
 	const [isLoading, setIsLoading] = useState(false);
@@ -27,9 +31,22 @@ export default function ApplicationForm() {
 
 	const { currentUser, loading } = useSelector((state) => state.user);
 
+	const documentRefs = useRef([]);
+
+	// documentRefs.current = APPLICATION_DOCUMENTS.map(
+	// 	(ref, index) => (documentRefs.current[index] = React.createRef())
+	// );
+	documentRefs.current = [...Array(19)].map(
+		(ref, index) => (documentRefs.current[index] = React.createRef())
+	);
+
 	const themeColor = getThemeColor();
 	const navigate = useNavigate();
 
+	// const handleSubmit = async (e) => {
+	// 	e.preventDefault();
+	// 	console.log(documentRefs);
+	// };
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		// console.log(e);
@@ -119,7 +136,7 @@ export default function ApplicationForm() {
 		}
 	};
 
-	const individualApplicationItems = (type) => {
+	const individualApplicationItems = (type, refCount) => {
 		return (
 			<div className="applicationItems">
 				<div className="applicationItem">
@@ -208,62 +225,33 @@ export default function ApplicationForm() {
 				</div>
 
 				{(!isCompany || type === "rep") && (
-					<div className="applicationItem">
-						<label htmlFor={type + "IdCard"}>
-							Select Means of identification:
-						</label>
-						<label htmlFor={type + "IdCard"} className="uploadFileWrapper">
-							<span>
-								<FileUploadRounded />
-								Upload File
-							</span>
-							<input
-								type="file"
-								name={type + "IdCard"}
-								id={type + "IdCard"}
-								accept="image/png, image/jpeg, image/jpg"
-							/>
-						</label>
-					</div>
+					<FileUploadWithThumbnail
+						ref={documentRefs.current[refCount]}
+						keyId={Date.now()}
+						type=""
+						id="IdCard"
+						label="Select Means of identification"
+					/>
 				)}
 
-				<div className="applicationItem">
-					<label htmlFor={type + "Passport"}>
-						{!isCompany || type === "rep" ? "Select passport:" : "Select Logo"}
-					</label>
-					<label htmlFor={type + "Passport"} className="uploadFileWrapper">
-						<span>
-							<FileUploadRounded />
-							Upload File
-						</span>
-						<input
-							type="file"
-							name={type + "Passport"}
-							id={type + "Passport"}
-							accept="image/png, image/jpeg, image/jpg"
-						/>
-					</label>
-				</div>
+				<FileUploadWithThumbnail
+					ref={documentRefs.current[refCount + 1]}
+					keyId={Date.now()}
+					type="image"
+					id="Passport"
+					label={
+						!isCompany || type === "rep" ? "Select passport:" : "Select Logo"
+					}
+				/>
+
 				{isCompany && type !== "rep" && (
-					<div className="applicationItem">
-						<label htmlFor={type + "CacCertificate"}>
-							Select CAC Certificate:
-						</label>
-						<label
-							htmlFor={type + "CacCertificate"}
-							className="uploadFileWrapper">
-							<span>
-								<FileUploadRounded />
-								Upload File
-							</span>
-							<input
-								type="file"
-								name={type + "CacCertificate"}
-								id={type + "CacCertificate"}
-								accept="image/png, image/jpeg, image/jpg"
-							/>
-						</label>
-					</div>
+					<FileUploadWithThumbnail
+						ref={documentRefs.current[refCount + 2]}
+						keyId={Date.now()}
+						type="pdf"
+						id="CacCertificate"
+						label="Select CAC Certificate"
+					/>
 				)}
 			</div>
 		);
@@ -337,26 +325,6 @@ export default function ApplicationForm() {
 		);
 	};
 
-	const documentUpload = (id, label) => {
-		return (
-			<div className="applicationItem">
-				<label htmlFor={id + "Document"}>{label}:</label>
-				<label htmlFor={id + "Document"} className="uploadFileWrapper">
-					<span>
-						<FileUploadRounded />
-						Upload File
-					</span>
-					<input
-						type="file"
-						name={id + "Document"}
-						id={id + "Document"}
-						accept="image/png, image/jpeg, image/jpg, .pdf"
-					/>
-				</label>
-			</div>
-		);
-	};
-
 	return (
 		<>
 			<form action="#" onSubmit={handleSubmit}>
@@ -387,10 +355,10 @@ export default function ApplicationForm() {
 										? "Applicant Personal Information"
 										: "Organization Information"}
 								</h3>
-								{/* <div className="applicantCode">
+								<div className="applicantCode">
 									<span>Uni Code:</span>
-									<input type="text" />
-								</div> */}
+									<input type="text" className="" />
+								</div>
 								{
 									<div>
 										<span>Has Rep</span>
@@ -402,7 +370,7 @@ export default function ApplicationForm() {
 									</div>
 								}
 							</div>
-							{individualApplicationItems("applicant")}
+							{individualApplicationItems("applicant", 15)}
 						</div>
 
 						{/* REP INFORMATION */}
@@ -410,8 +378,12 @@ export default function ApplicationForm() {
 							<div className="applicationItemsWrapper">
 								<div className="applicationTitle">
 									<h3>Representative Information</h3>
+									<div className="applicantCode">
+										<span>Uni Code:</span>
+										<input type="text" className="" />
+									</div>
 								</div>
-								{individualApplicationItems("rep")}
+								{individualApplicationItems("rep", 18)}
 							</div>
 						)}
 
@@ -570,7 +542,20 @@ export default function ApplicationForm() {
 								<h3>Upload The Relevant Documents</h3>
 							</div>
 							<div className="applicationItems">
-								{documentUpload("survey", "Survey plan")}
+								{APPLICATION_DOCUMENTS.map((e, i) => {
+									return (
+										<FileUploadWithThumbnail
+											key={i}
+											ref={documentRefs.current[i]}
+											keyId={Date.now()}
+											type="pdf"
+											id={e.tag}
+											label={e.name}
+										/>
+									);
+								})}
+
+								{/* {documentUpload("survey", "Survey plan")}
 								{documentUpload("layout", "Layout plan")}
 								{documentUpload("deed", "Deed of Transfer")}
 								{documentUpload("obaApproval", "Oba approval")}
@@ -583,7 +568,7 @@ export default function ApplicationForm() {
 								{documentUpload("mechanical", "Mechanical Drawing")}
 								{documentUpload("electrical", "Electrical Drawing")}
 								{documentUpload("architecture", "Architectural Drawing")}
-								{documentUpload("structural", "Structural Drawing")}
+								{documentUpload("structural", "Structural Drawing")} */}
 							</div>
 						</div>
 					</div>

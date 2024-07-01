@@ -152,11 +152,11 @@ select:focus-visible {
 .secondary {
 	/* background-color: transparent; */
 	background-color: var(--white);
-		box-shadow: 0px 0px 11px -4px rgba(0, 0, 0, 0.5);
+	box-shadow: 0px 0px 11px -4px rgba(0, 0, 0, 0.5);
 
 	color: var(--black);
 	outline: var(--pc-green) 1.5px solid;
-	padding: .4rem 1rem;
+	padding: 0.4rem 1rem;
 	text-transform: capitalize;
 }
 .secondary:hover,
@@ -275,4 +275,14 @@ html[data-theme="light"] {
 }
 html[data-theme="dark"] {
 	color-scheme: "dark";
+}
+
+.flex {
+	display: flex;
+}
+.relative {
+	position: relative;
+}
+.absolute {
+	position: absolute;
 }

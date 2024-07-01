@@ -160,3 +160,20 @@ export const ASSESSMENT_FEES = {
 		},
 	],
 };
+
+export const APPLICATION_DOCUMENTS = [
+	{ tag: "survey", name: "Survey plan" },
+	{ tag: "layout", name: "Layout plan" },
+	{ tag: "deed", name: "Deed of Transfer" },
+	{ tag: "obaApproval", name: "Oba approval" },
+	{ tag: "cOfO", name: "Certificate of occupancy" },
+	{ tag: "sar", name: "Site analysis report" },
+	{ tag: "soilTest", name: "Soil Test" },
+	{ tag: "eia", name: "Environmental impact analysis" },
+	{ tag: "fireSafety", name: "Fire safety report" },
+	{ tag: "tax", name: "Tax clearance" },
+	{ tag: "mechanical", name: "Mechanical Drawing" },
+	{ tag: "electrical", name: "Electrical Drawing" },
+	{ tag: "architecture", name: "Architectural Drawing" },
+	{ tag: "structural", name: "Structural Drawing" },
+];

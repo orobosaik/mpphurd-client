@@ -1,0 +1,36 @@
+.fileWrapper{
+  display: flex;
+  gap: 1rem;
+  margin-top: .5rem;
+}
+.fileWrapperThumbnail{
+
+}
+
+.fileWrapperInfo{
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+  /* justify-content: center; */
+  gap: .5rem;
+
+}
+.fileWrapperInfo div{
+  display: flex;
+  gap: .5rem;
+
+}
+
+.fileWrapperInfo .del{
+  /* display: flex; */
+  color: var(--accent-red);
+  width: fit-content;
+
+
+}
+.fileWrapperInfo .del:hover{
+  font-weight: bold;
+  cursor: pointer;
+
+
+}
