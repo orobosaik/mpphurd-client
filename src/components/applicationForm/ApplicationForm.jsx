@@ -218,7 +218,6 @@ export default function ApplicationForm() {
 					<label htmlFor={type + "Email"}>Email:</label>
 					<input
 						type="email"
-						required
 						name={type + "Email"}
 						id={type + "Email"}
 					/>

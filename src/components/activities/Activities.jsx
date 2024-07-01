@@ -262,7 +262,7 @@ function Activities({ setRightBarView, reload, admin }) {
 			} else {
 				res = await Promise.all([
 					axios.get(`${host}/admin/plan/${params.id}/activities`),
-					axios.get(`${host}/staffs/plan/${params.id}`),
+					axios.get(`${host}/admin/plan/${params.id}`),
 				]);
 			}
 
