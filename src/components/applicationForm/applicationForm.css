@@ -79,6 +79,7 @@
 .applicationItem select {
 	/* font-size: 1.05em; */
 	height: 3.2rem;
+	color: var(--black);
 	width: 100%;
 	display: flex;
 	background-color: var(--white);
@@ -95,11 +96,17 @@
 	-ms-transition: box-shadow 0.3s;
 	-o-transition: box-shadow 0.3s;
 }
-
+.applicationItem input{
+	font-size: 1.1em;
+}
+.applicationItem input{
+	font-size: 1.1em;
+}
 .applicationItem input:active,
+.applicationItem input::selection,
 .applicationItem input:focus {
 	background-color: var(--white);
-	/* font-size: 1.1em; */
+	font-size: 1.1em;
 	border: var(--sc-grey) solid 1px;
 	box-shadow: 0px 0px 7px 0px rgb(0, 200, 83, 0.4);
 	border-bottom: 2px solid var(--pc-green);
@@ -238,6 +245,9 @@ input[type="file"]::file-selector {
 	border: none;
 	box-shadow: none;
 }
+.uploadFileWrapper input:focus
+.uploadFileWrapper input::selection,
+.uploadFileWrapper input:active,
 .uploadFileWrapper input {
 	display: flex;
 	align-items: center;

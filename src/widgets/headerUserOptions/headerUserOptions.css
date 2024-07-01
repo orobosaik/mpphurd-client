@@ -48,8 +48,11 @@
 	font-size: 1.8rem !important;
 }
 
-.plain-dropdown button {
+.plain-dropdown button,
+.plain-dropdown button:active .plain-dropdown button:hover {
+	padding: 0;
 	background: transparent;
 	border: none;
-	outline: none;
+	outline: none !important;
+	color: var(--black);
 }

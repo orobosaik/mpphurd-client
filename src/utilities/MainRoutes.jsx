@@ -20,6 +20,8 @@ import { setThemeColor } from "./themeColor";
 import OfficeSelect from "../pages/officeSelect/OfficeSelect.jsx";
 import DevelopmentControl from "../pages/buildingControl/BuildingControl";
 import InDevelopment from "../pages/inDevelopment/InDevelopment.jsx";
+import Profile from "../pages/profile/Profile.jsx";
+import Activity from "../pages/activity/Activity.jsx";
 
 function MainRoutes() {
 	const navigate = useNavigate();
@@ -98,13 +100,31 @@ function MainRoutes() {
 					{/* ACTIVITIES */}
 					<Route path="/activities">
 						{/* <Route index element={<ActivitiesView />} /> */}
-						<Route index element={<InDevelopment />} />
+						<Route index element={<Activity />} />
 					</Route>
 					{/* ANALYSIS */}
 					<Route path="/analysis">
 						{/* <Route index element={<Analysis />} /> */}
 						<Route index element={<InDevelopment />} />
 					</Route>
+
+					{/* PROFILE */}
+					<Route path="/profile">
+						<Route index element={<Profile />} />
+
+						<Route path="new" element={<CreateApplication />} />
+						<Route path=":id">
+							<Route index element={<Plan />} />
+							<Route path="bills" element={<ViewBill />} />
+							<Route path="create_bill" element={<CreateBill />} />
+							<Route path="minute" element={<Minute />} />
+							<Route path="documents" element={<DocumentView />} />
+						</Route>
+						<Route path="office">
+							<Route path=":id" element={<Office />} />
+						</Route>
+					</Route>
+
 				</Routes>
 			) : (
 				<LoginPage />

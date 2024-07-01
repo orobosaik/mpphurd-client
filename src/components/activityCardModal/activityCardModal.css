@@ -57,6 +57,7 @@
 	/* gap: 4rem; */
 }
 .activityCardModalWrapper .action {
+	text-transform: capitalize;
 	font-size: 1.7rem;
 }
 .activityCardModalWrapper .title {

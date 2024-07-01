@@ -8,20 +8,29 @@ import { MenuButton } from "@mui/base/MenuButton";
 import { Menu } from "@mui/base/Menu";
 import { MenuItem } from "@mui/base/MenuItem";
 import {
+	ApartmentRounded,
 	BrightnessMediumRounded,
+	BuildRounded,
 	DarkModeRounded,
 	LightModeRounded,
+	Person2Rounded,
+	Person3Rounded,
+	PersonRounded,
+	SettingsRounded,
 } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 export default function HeaderUserOptions({ staff }) {
 	const { theme } = useSelector((state) => state.app);
+	const navigate = useNavigate();
+
 	const dispatch = useDispatch();
 
 	return (
 		<div className="plain-dropdown">
 			<Dropdown>
 				{/* <MenuButton className="dropdown-button"> */}
-				<MenuButton className="plain-dropdown">
+				<MenuButton>
 					<div className="headerUser">
 						<div className="headerDetails">
 							<span className="headerName">{`${staff.firstName} ${staff.lastName}`}</span>
@@ -42,21 +51,22 @@ export default function HeaderUserOptions({ staff }) {
 					}}>
 					<MenuItem
 						className="dropdown-item"
-						onClick={() => dispatch(setTheme("light"))}>
-						<LightModeRounded className="theme-icon" />
-						<span>Light</span>
+						onClick={() => navigate("/profile")}>
+						<Person2Rounded className="theme-icon" />
+						<span>Profile</span>
 					</MenuItem>
 					<MenuItem
 						className="dropdown-item"
-						onClick={() => dispatch(setTheme("dark"))}>
-						<DarkModeRounded className="theme-icon" />
-						<span>Dark</span>
+						onClick={() => navigate("/profile")}>
+						<ApartmentRounded className="theme-icon" />
+						<span>Office</span>
 					</MenuItem>
 					<MenuItem
 						className="dropdown-item"
-						onClick={() => dispatch(setTheme("system"))}>
-						<BrightnessMediumRounded className="theme-icon" />
-						<span>System</span>
+						// onClick={() => dispatch(setTheme("system"))}
+					>
+						<SettingsRounded className="theme-icon" />
+						<span>Settings</span>
 					</MenuItem>
 				</Menu>
 			</Dropdown>

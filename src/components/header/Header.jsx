@@ -207,19 +207,6 @@ export default function Header() {
 					</div>
 				</div>
 
-				{/* <div className="headerUser">
-					<div className="headerDetails">
-						<span className="headerName">{`${staff.firstName} ${staff.lastName}`}</span>
-						<span className="headerOffice">{`${staff.position}`}</span>
-					</div>
-
-					<img
-						src={staff.profilePicture || "/assets/persons/no_avatar.png"}
-						alt=""
-						className="headerImg"
-					/>
-				</div> */}
-
 				<HeaderUserOptions staff={staff} />
 			</div>
 		</div>

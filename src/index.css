@@ -71,7 +71,7 @@ a:hover {
 
 body {
 	font-size: 1.45rem;
-	/* color: var(--black); */
+	color: var(--black);
 
 	/* display: flex; */
 	/* place-items: center; */

@@ -17,6 +17,7 @@ import { format } from "date-fns";
 export default function ActivityCardModal({
 	buttonIcon,
 	buttonText,
+	className,
 	children,
 	stateData,
 }) {
@@ -70,11 +71,17 @@ export default function ActivityCardModal({
 
 	return (
 		<div>
-			<div
-				className="modalTrigger activityCardViewMoreIcon"
-				onClick={handleOpen}>
-				<LaunchRounded />
-			</div>
+			{buttonText ? (
+				<button className={className} onClick={handleOpen}>
+					{buttonText}
+				</button>
+			) : (
+				<div
+					className="modalTrigger activityCardViewMoreIcon"
+					onClick={handleOpen}>
+					<LaunchRounded />
+				</div>
+			)}
 
 			{open && (
 				<dialog className="modalView activityCardModal">
