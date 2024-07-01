@@ -5,7 +5,7 @@ import ActivityCardModal from "../activityCardModal/ActivityCardModal";
 import VettingCardAddModal from "../vettingCardAddModal/VettingCardAddModal";
 import { useSelector } from "react-redux";
 
-function VettingCard({ data, header, reload }) {
+function VettingCard({ data, header, reload, reloadActivities }) {
 	const [showComment, setShowComment] = useState(false);
 	const [showVetting, setShowVetting] = useState(false);
 
@@ -119,6 +119,7 @@ function VettingCard({ data, header, reload }) {
 						<VettingCardAddModal
 							data={data.plan}
 							reload={reload}
+							reloadActivities={reloadActivities}
 							isCleared={isCleared}
 							type={header.jobTitle}
 							className="btn vet__add"

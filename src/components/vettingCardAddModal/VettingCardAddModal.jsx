@@ -21,6 +21,7 @@ function VettingCardAddModal({
 	children,
 	data,
 	reload,
+	reloadActivities,
 	isCleared,
 	type,
 }) {
@@ -82,6 +83,7 @@ function VettingCardAddModal({
 
 			handleClose();
 			reload(() => []);
+			reloadActivities(() => []);
 
 			setTimeout(() => {
 				toast.success(res.data, {

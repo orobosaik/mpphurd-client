@@ -20,6 +20,7 @@ function Activities({ setRightBarView, reload, admin }) {
 	const [activityType, setActivityType] = useState("All");
 	const [customError, setCustomError] = useState("No Record...");
 	const [plan, setPlan] = useState();
+	const [reloadActivities, setReloadActivities] = useState();
 
 	const [isInUserOffice, setIsInUserOffice] = useState();
 	const { currentUser, loading } = useSelector((state) => state.user);
@@ -334,13 +335,13 @@ function Activities({ setRightBarView, reload, admin }) {
 		setIsLoading(true);
 		// setPlanData(plan);
 		// if (plan) {
-		// 	getData();
+			// getData();
 		// }
 	}, []);
 
 	useEffect(() => {
 		getData();
-	}, [reload, params.id]);
+	}, [reloadActivities, reload, params.id]);
 
 	return (
 		<div className="activities">
@@ -408,6 +409,7 @@ function Activities({ setRightBarView, reload, admin }) {
 					<>
 						<VettingCard
 							reload={reload}
+							reloadActivities={setReloadActivities}
 							data={{
 								plan: plan,
 								vetting: plan?.vetting?.architect,
@@ -419,6 +421,7 @@ function Activities({ setRightBarView, reload, admin }) {
 						/>
 						<VettingCard
 							reload={reload}
+							reloadActivities={setReloadActivities}
 							data={{
 								plan: plan,
 								vetting: plan?.vetting?.electricalEngineer,
@@ -430,6 +433,7 @@ function Activities({ setRightBarView, reload, admin }) {
 						/>
 						<VettingCard
 							reload={reload}
+							reloadActivities={setReloadActivities}
 							data={{
 								plan: plan,
 								vetting: plan?.vetting?.mechanicalEngineer,
@@ -441,6 +445,7 @@ function Activities({ setRightBarView, reload, admin }) {
 						/>
 						<VettingCard
 							reload={reload}
+							reloadActivities={setReloadActivities}
 							data={{
 								plan: plan,
 								vetting: plan?.vetting?.civilEngineer,
@@ -452,6 +457,7 @@ function Activities({ setRightBarView, reload, admin }) {
 						/>
 						<VettingCard
 							reload={reload}
+							reloadActivities={setReloadActivities}
 							data={{
 								plan: plan,
 								vetting: plan?.vetting?.townPlanner,
