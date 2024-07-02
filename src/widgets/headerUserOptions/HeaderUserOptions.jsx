@@ -57,16 +57,16 @@ export default function HeaderUserOptions({ staff }) {
 					</MenuItem>
 					<MenuItem
 						className="dropdown-item"
-						onClick={() => navigate("/profile")}>
+						onClick={() => navigate("/office_setting")}>
 						<ApartmentRounded className="theme-icon" />
-						<span>Office</span>
+						<span>Office Setting</span>
 					</MenuItem>
 					<MenuItem
 						className="dropdown-item"
 						// onClick={() => dispatch(setTheme("system"))}
 					>
 						<SettingsRounded className="theme-icon" />
-						<span>Settings</span>
+						<span>General Settings</span>
 					</MenuItem>
 				</Menu>
 			</Dropdown>

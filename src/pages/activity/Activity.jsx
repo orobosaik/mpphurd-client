@@ -93,14 +93,14 @@ export default function Activity() {
 				`/staffs/staff/${currentUser._id}/activities?type=${type}&dateFrom=${startDate}&dateTo=${endDate}`
 			);
 
-			console.log("RAW:", res.data);
+			// console.log("RAW:", res.data);
 
 			setData(res.data);
 
 			let newData;
 			newData = categorizeListByDate(res.data, sortReverse, true);
 
-			console.log("CATEGORIZED: ", newData);
+			// console.log("CATEGORIZED: ", newData);
 			setListArray(newData);
 
 			// Update officeData on every change in listArray

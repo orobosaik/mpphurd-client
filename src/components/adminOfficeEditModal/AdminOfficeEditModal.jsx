@@ -21,6 +21,8 @@ export default function AdminOfficeEditModal({ ...props }) {
 
 	const [loading, setLoading] = useState(false);
 	const [isActive, setIsActive] = useState(true);
+	const [officeStaff, setOfficeStaff] = useState();
+	const [officeLead, setOfficeLead] = useState();
 
 	const [name, setName] = useState(undefined);
 	const [region, setRegion] = useState(undefined);
@@ -41,6 +43,12 @@ export default function AdminOfficeEditModal({ ...props }) {
 			setZone(props.data.zone);
 			setTasks(props.data.tasks);
 			setIsActive(props.data.isActive);
+			setOfficeLead(props.data.lead);
+			setOfficeStaff(
+				props.staff.filter((s) =>
+					s.office.some((office) => office?.id?._id === props.data?._id)
+				)
+			);
 		} else {
 			setRegion(props.region[0]);
 		}
@@ -141,6 +149,7 @@ export default function AdminOfficeEditModal({ ...props }) {
 		newData.isActive = isActive;
 		name && (newData.name = name);
 		region && (newData.region = region._id);
+		officeLead && (newData.lead = officeLead);
 		zone && (newData.zone = zone);
 		tasks && (newData.tasks = tasks.filter((str) => str !== ""));
 
@@ -281,9 +290,62 @@ export default function AdminOfficeEditModal({ ...props }) {
 										</div>
 									</div>
 
+									<div className="applicationTitle">
+										<h3>Office Lead</h3>
+									</div>
+
+									<select
+										name=""
+										id=""
+										defaultValue={officeLead?.id}
+										onChange={(e) => {
+											const val = e.target.value;
+											const newD = {};
+											newD.id = val;
+											const user = officeStaff.filter((s, i) => {
+												return s._id === val;
+											});
+
+											const name = [
+												user[0].title,
+												user[0].firstName,
+												user[0].middleName,
+												user[0].lastName,
+												user[0].prefix,
+											]
+												.filter(
+													(value) =>
+														value != null && value !== "" && value !== undefined
+												)
+												.join(" ");
+											newD.name = name;
+											console.log(newD);
+											setOfficeLead(newD);
+										}}>
+										<option value="">---</option>
+										{officeStaff.map((s, i) => (
+											<option value={s._id} key={i}>
+												{[
+													s.title,
+													s.firstName,
+													s.middleName,
+													s.lastName,
+													s.prefix,
+												]
+													.filter(
+														(value) =>
+															value != null &&
+															value !== "" &&
+															value !== undefined
+													)
+													.join(" ")}
+											</option>
+										))}
+									</select>
+
 									{/* <br /> */}
 									<div className="applicationTitle">
-										<h3>Tasks</h3>
+										<h3>Office Tasks</h3>
 									</div>
 									{tasks?.map((d, i) => {
 										return (
@@ -357,26 +419,24 @@ export default function AdminOfficeEditModal({ ...props }) {
 							)}
 						</div> */}
 						{/* <div> */}
-							<button
-								disabled={loading}
-								onClick={
-									props.modalType === "edit"
-										? handleSubmitEdit
-										: handleSubmitNew
-								}
-								className="primary">
-								{loading ? (
-									<CircularProgress
-										thickness={5}
-										size={20}
-										sx={{ color: "white" }}
-									/>
-								) : props.modalType === "edit" ? (
-									"Update"
-								) : (
-									"Save"
-								)}
-							</button>
+						<button
+							disabled={loading}
+							onClick={
+								props.modalType === "edit" ? handleSubmitEdit : handleSubmitNew
+							}
+							className="primary">
+							{loading ? (
+								<CircularProgress
+									thickness={5}
+									size={20}
+									sx={{ color: "white" }}
+								/>
+							) : props.modalType === "edit" ? (
+								"Update"
+							) : (
+								"Save"
+							)}
+						</button>
 						{/* </div> */}
 					</footer>
 				</dialog>

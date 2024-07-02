@@ -219,6 +219,7 @@ export default function AdminOfficeList() {
 															modalType={"edit"}
 															setReload={setReload}
 															data={d}
+															staff={staff}
 															region={region}
 														/>
 													</div>

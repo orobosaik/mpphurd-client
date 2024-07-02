@@ -1,0 +1,104 @@
+.profile .top{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.profile-picture{
+	height: 35rem;
+	width: 30rem;
+	/* background-color: blue; */
+	outline: 4px solid var(--light-grey);
+	border-radius: 1rem;
+	-webkit-border-radius: 1rem;
+	-moz-border-radius: 1rem;
+	-ms-border-radius: 1rem;
+	-o-border-radius: 1rem;
+}
+.profile-picture img{
+	object-fit: cover;
+	object-position: top;
+}
+.profile .name{
+	font-size: 2.5rem;
+	font-weight: bold;
+	text-transform: uppercase;
+
+}
+.profile .jobTitle{
+	font-size: 1.8rem;
+	font-weight: bold;
+	text-transform: capitalize;
+
+}
+.profile .position{
+	font-size: 1.5rem;
+	font-weight: bold;
+	text-transform: uppercase;
+
+}
+
+
+.office_setting .middleBar{
+		background-color: rgba(255, 255, 255, .3);
+		backdrop-filter: brightness(80%) blur(10px);
+}
+html[data-theme="dark"] .office_setting .middleBar {
+	backdrop-filter: brightness(50%) blur(5px);
+}
+
+.office_setting .head{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+.office_setting .head .office{
+		font-size: 2.5rem;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.office_setting .head .name{
+	font-size: 1.1em;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.office_setting .head .position{
+	font-size: 1.1em;
+}
+
+.office_setting .office_member{
+	/* box-shadow: var(--shadow-1); */
+	padding: .5rem 1rem;
+	display: flex;
+	align-items: center;
+	gap: 1.5rem;
+	justify-content: space-between;
+
+	width: 100%;
+}
+.office_setting .office_member div{
+	display: flex;
+	align-items: center;
+	gap: 1.5rem;
+}
+.office_setting .title{
+	font-weight: bold;
+}
+.office_setting .members li{
+	padding: 1rem;
+}
+.office_setting .members li:not(:last-child){
+	border-bottom: solid var(--sc-grey) 2px;
+}
+.office_member .name{
+	min-width: fit-content;
+	flex: 1
+}
+.office_member .jobTitle{
+	min-width: fit-content;
+	flex: 1
+}
+.office_member .level{
+	min-width: fit-content;
+	flex: 1
+}

@@ -66,14 +66,14 @@ export default function ActivityCard({ data }) {
 
 			{/* {data?.to?.staff && <p>{data.to.staff}</p>} */}
 
-			{data?.from?.staff && (
+			{data?.from?.office && (
 				<div>
 					<span className="activityCardTitle">From:</span>
 					<span className="activityCardText">{`${data.from.office}`}</span>
 					{/* <span className="activityCardText">{`${data.from.office} (${data.from.staff})`}</span> */}
 				</div>
 			)}
-			{data?.by?.staff && (
+			{data?.by?.office && (
 				<div>
 					<span className="activityCardTitle">By:</span>
 					<span className="activityCardText">{`${data.by.office} `}</span>

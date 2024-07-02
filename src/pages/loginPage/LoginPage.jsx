@@ -236,9 +236,16 @@ function LoginPage() {
 					</div>
 					<div className="login__footer--social">
 						<div className="login__socialIcons">
-							<Facebook className="btn login__socialIcon" />
-							<Instagram className="btn login__socialIcon" />
-							<Twitter className="btn login__socialIcon" />
+							<a href="http://facebook.com/mpphurd.edostate/" target="_blank">
+								<Facebook className="btn login__socialIcon" />
+							</a>
+
+							<a href="http://instagram.com/mpphurd_edostate" target="_blank">
+								<Instagram className="btn login__socialIcon" />
+							</a>
+							<a href="" target="_blank">
+								<Twitter className="btn login__socialIcon" />
+							</a>
 						</div>
 						<div className="login__socialText">
 							<p>Follow On Social Media</p>
