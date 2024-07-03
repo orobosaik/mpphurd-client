@@ -420,13 +420,13 @@ export default function Activity() {
 																		<span>|</span>
 																		<span className="office">
 																			{currentUser._id === item?.by?.staffId
-																				? `By ${item.by.staff}`
+																				? `By You`
 																				: currentUser._id ===
 																				  item?.from?.staffId
-																				? `from ${item.from.staff}`
+																				? `from You`
 																				: item?.through?.staffId ===
 																				  currentUser._id
-																				? `through ${item.through.staff}`
+																				? `through You`
 																				: ""}
 																		</span>
 																		{
@@ -500,13 +500,13 @@ export default function Activity() {
 																		<span>|</span>
 																		<span className="office">
 																			{currentUser._id === item?.by?.staffId
-																				? `By ${item.by.staff}`
+																				? `By You`
 																				: currentUser._id ===
 																				  item?.from?.staffId
-																				? `from ${item.from.staff}`
+																				? `from You`
 																				: item?.through?.staffId ===
 																				  currentUser._id
-																				? `through ${item.through.staff}`
+																				? `through You`
 																				: ""}
 																		</span>
 																		<span className="expand">Expand</span>
