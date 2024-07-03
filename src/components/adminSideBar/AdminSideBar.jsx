@@ -27,7 +27,7 @@ import { adminLogout } from "../../redux/adminSlice";
 
 export default function AdminSideBar({ selected }) {
 	const dispatch = useDispatch();
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 	const { theme } = useSelector((state) => state.app);
 	const themeColor = getThemeColor(theme);
 
@@ -52,7 +52,6 @@ export default function AdminSideBar({ selected }) {
 			// console.log("LOGEDOUT");
 		}, 0);
 	};
-
 
 	return (
 		<div className="sideBar">
@@ -111,7 +110,6 @@ export default function AdminSideBar({ selected }) {
 					<LogoutRounded className="sideBarIcon" />
 					<span>Log Out</span>
 				</div>
-					<ToastContainer />
 			</div>
 		</div>
 	);

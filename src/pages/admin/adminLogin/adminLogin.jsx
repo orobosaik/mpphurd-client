@@ -192,7 +192,6 @@ function AdminLogin() {
 									"Login Admin"
 								)}
 							</button>
-							<ToastContainer />
 						</form>
 					</div>
 				</section>

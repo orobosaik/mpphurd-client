@@ -1,15 +1,23 @@
-.OfficeWrapper{
-  display: flex;
-  width: 100%;
-  padding: 0 6px;
-  gap: 6px;
+.OfficeWrapper {
+	display: flex;
+	width: 100%;
+	padding: 0 6px;
+	gap: 6px;
 }
-.OfficeSideBar{
-  flex: 2;
+.OfficeSideBar {
+	flex: 2;
 }
-.OfficeMiddleBar{
-  flex: 10;
+.OfficeMiddleBar {
+	flex: 10;
 }
-.OfficeMiddleBar .middleBarWrapper{
-  padding-bottom: 0;
+.OfficeMiddleBar .middleBarWrapper {
+	padding-bottom: 0;
+}
+.topBarOptions .createPlan {
+	font-size: 1.6rem;
+}
+.officeSelect .headerTitle {
+  font-size: 1.8rem;
+	color: var(--black);
+  font-weight: bold;
 }

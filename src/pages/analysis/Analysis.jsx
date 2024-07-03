@@ -518,7 +518,7 @@ export default function Activity() {
 																series={[
 																	{
 																		dataKey: "Actions",
-																		label: "Actions rainfall",
+																		label: "Actions",
 																		valueFormatter,
 																	},
 																]}

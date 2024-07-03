@@ -317,7 +317,6 @@ export default function Home() {
 					</FeedBackground>
 				</div>
 			</div>
-			{/* <ToastContainer /> */}
 		</>
 	);
 }

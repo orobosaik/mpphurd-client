@@ -209,7 +209,6 @@ function LoginPage() {
 									"Login"
 								)}
 							</button>
-							<ToastContainer />
 						</form>
 					</div>
 				</section>

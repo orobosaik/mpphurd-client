@@ -9,6 +9,8 @@ import "./officeSelect.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import { getThemeColor } from "../../utilities/themeColor";
 
 export default function OfficeSelect() {
 	const { currentUser, loading } = useSelector((state) => state.user);
@@ -17,10 +19,26 @@ export default function OfficeSelect() {
 
 	const navigate = useNavigate();
 
+	const themeColor = getThemeColor();
+
 	const [isLoading, setIsLoading] = useState(true);
 	const [data, setData] = useState(null);
 	const [reload, setReload] = useState();
 	const [err, setErr] = useState(false);
+
+	const [clearing, setClearing] = useState(
+		currentUser.office.some((e) => {
+			return e?.id?.name?.includes("CLEARING HOUSE");
+		})
+	);
+	// const [clearing, setClearing] = useState(
+	// 	currentUser.office.some((e) => {
+	// 		return (
+	// 			e?.id?.name?.includes("CLEARING HOUSE") &&
+	// 			e.tasks.includes("CREATE PLAN")
+	// 		);
+	// 	})
+	// );
 
 	// useEffect(() => {
 	// 	const getData = async () => {
@@ -52,13 +70,65 @@ export default function OfficeSelect() {
 			<Header />
 			<div className="homeContainer">
 				<SideBar />
-				<div className="officeSelect">
+				{/* <div className="officeSelect">
 					<FeedBackground>
-						{/* {console.log(currentUser?.office[0]?.id?.name)} */}
 						<div className="feedCard__container">
 							<h2 className="feedCard__title">
 								{currentUser?.office?.length > 1 ? "OFFICES" : "OFFICE"}
 							</h2>
+							<div className="feedCard__list">
+								{currentUser?.office?.map((e) => {
+									{
+										// console.log(e);
+									}
+									return (
+										<FeedCard
+											key={e.id._id}
+											route={`office/${e.id._id}`}
+											priText={e.id.name}
+											secText={"Office"}
+											data={e}
+										/>
+									);
+								})}
+							</div>
+						</div>
+					</FeedBackground>
+				</div> */}
+				<div className="homePage">
+					<div className="home__greetings officeSelect">
+						<div className="headerTitle">
+							{currentUser?.office?.length > 1 ? "OFFICES" : "OFFICE"}
+						</div>
+
+						<div className="topBarOptions">
+							<button
+								className="createPlan primary"
+								onClick={() => {
+									if (clearing) {
+										navigate("/permit/new");
+									} else {
+										toast.error("Cannot Perform Action", {
+											position: "top-right",
+											autoClose: 2500,
+											hideProgressBar: false,
+											closeOnClick: true,
+											pauseOnHover: true,
+											draggable: true,
+											progress: undefined,
+											theme: themeColor,
+										});
+									}
+								}}>
+								Create Application
+							</button>
+						</div>
+						{/* <span>{getGreetingDate()}</span> */}
+					</div>
+
+					<FeedBackground>
+						{/* {console.log(currentUser?.office[0]?.id?.name)} */}
+						<div className="feedCard__container">
 							<div className="feedCard__list">
 								{currentUser?.office?.map((e) => {
 									{

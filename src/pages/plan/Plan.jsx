@@ -143,7 +143,6 @@ function Plan() {
 					)}
 				</RightBar>
 			</div>
-			<ToastContainer />
 		</>
 	);
 }

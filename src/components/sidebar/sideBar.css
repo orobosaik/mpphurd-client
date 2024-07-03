@@ -59,7 +59,7 @@
 	/* background-color: var(--light-grey); */
 	background-color: var(--pc-green);
 	/* background-color: #47cf73; */
-	color: var(--white);
+	color: #fff;
 	font-weight: 800;
 }
 .sideBarListItem.active::before {

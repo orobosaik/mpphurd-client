@@ -99,7 +99,9 @@ export default function OfficeSetting() {
 												<div className="head">
 													<h2 className="office">{e.id.name}</h2>
 													<p className="name">{e.id?.lead?.name}</p>
-													<p className="position">Lead Officer / Director</p>
+													{e.id?.lead?.name && (
+														<p className="position">Lead Officer / Director</p>
+													)}
 												</div>
 
 												<p className="title">MEMBERS:</p>

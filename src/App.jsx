@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import AdminRoutes from "./utilities/AdminRoutes";
 import MainRoutes from "./utilities/MainRoutes";
+import { ToastContainer } from "react-toastify";
 
 function App() {
 	const [view, setView] = useState(null);
@@ -39,6 +40,7 @@ function App() {
 			) : (
 				""
 			)}
+			<ToastContainer/>
 		</>
 	);
 }

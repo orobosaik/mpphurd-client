@@ -331,7 +331,6 @@ export default function AdminPlan() {
 					)}
 				</RightBar>
 			</div>
-			<ToastContainer />
 		</>
 	);
 }

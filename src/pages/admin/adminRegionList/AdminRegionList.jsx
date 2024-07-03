@@ -90,7 +90,7 @@ export default function AdminRegionList() {
 									/>
 								),
 							}}>
-							{isLoading && <LoadingIcon/>}
+							{isLoading && <LoadingIcon />}
 							{data && (
 								<>
 									{/* LIST QUERY */}
@@ -178,7 +178,6 @@ export default function AdminRegionList() {
 								</>
 							)}
 						</MiddleBar>
-						<ToastContainer />
 					</div>
 				</div>
 			</div>

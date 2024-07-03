@@ -106,7 +106,6 @@ export default function SideBar({ selected }) {
 				<div className="sidebarFeedBackButton">
 					<FeedbackModal />
 				</div>
-				<ToastContainer />
 			</div>
 		</div>
 	);

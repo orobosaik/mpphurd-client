@@ -311,7 +311,6 @@ export default function Minute() {
 								</button>
 							</form>
 						</div>
-						<ToastContainer />
 					</div>
 				</MiddleBar>
 

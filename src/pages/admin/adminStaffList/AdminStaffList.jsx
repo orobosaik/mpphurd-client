@@ -166,7 +166,6 @@ export default function AdminStaffList() {
 								</>
 							)}
 						</MiddleBar>
-						<ToastContainer />
 					</div>
 				</div>
 			</div>

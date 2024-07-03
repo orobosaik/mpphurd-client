@@ -33,7 +33,7 @@ export default function ChangePasswordModal({ ...props }) {
 
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => {
-		setEmailUpdate("")
+		setEmailUpdate("");
 		setReset(true);
 		setOpen(false);
 	};
@@ -64,7 +64,6 @@ export default function ChangePasswordModal({ ...props }) {
 				setLoading(false);
 				setReset(true);
 				setOpen(false);
-
 
 				setTimeout(() => {
 					toast.success(res.data, {
@@ -201,7 +200,7 @@ export default function ChangePasswordModal({ ...props }) {
 								</div>
 							</div>
 
-							<ToastContainer />
+
 						</form>
 					)} */}
 
@@ -346,7 +345,6 @@ export default function ChangePasswordModal({ ...props }) {
 								)}
 							</button>
 						</footer>
-						<ToastContainer />
 					</div>
 				</dialog>
 			)}

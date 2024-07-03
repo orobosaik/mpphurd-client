@@ -40,11 +40,11 @@ export default function AdminRegionEditModal({ ...props }) {
 		}
 	};
 	const handleClose = () => {
-		setLoading(false)
-		setOpen(false)
-		setName(undefined)
-		setCode(undefined)
-		setZones([])
+		setLoading(false);
+		setOpen(false);
+		setName(undefined);
+		setCode(undefined);
+		setZones([]);
 	};
 
 	const KEY_NAME_ESC = "Escape";
@@ -91,7 +91,7 @@ export default function AdminRegionEditModal({ ...props }) {
 			let host = import.meta.env.VITE_SERVER;
 			let res = await axios.post(`${host}/admin/region`, newData);
 
-			handleClose()
+			handleClose();
 
 			props.setReload(() => []);
 
@@ -299,7 +299,7 @@ export default function AdminRegionEditModal({ ...props }) {
 						</div>
 						<footer>
 							<button
-								disabled = {loading}
+								disabled={loading}
 								onClick={
 									props.modalType === "edit"
 										? handleSubmitEdit
@@ -320,7 +320,6 @@ export default function AdminRegionEditModal({ ...props }) {
 							</button>
 						</footer>
 					</div>
-					<ToastContainer />
 				</dialog>
 			)}
 		</>

@@ -130,7 +130,7 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 				</div>
 			</div>
 
-			<ApprovalStatus data={data}/>
+			<ApprovalStatus data={data} />
 
 			<MapViewCard></MapViewCard>
 
@@ -201,7 +201,6 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 					)
 				}
 			</div>
-			<ToastContainer />
 		</div>
 	);
 }
