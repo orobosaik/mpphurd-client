@@ -17,10 +17,17 @@ function App() {
 		// const arr = host.split(".").slice(0, host.includes("localhost") ? -1 : 1);
 		const arr = host.split(".");
 
-
-		if (arr[0].toLowerCase() === "admin-mpphurd") {
+		if (
+			arr[0].toLowerCase() === "admin-mpphurd" ||
+			arr[0].toLowerCase() === "test-mpphurdadmin" ||
+			arr[0].toLowerCase() === "mpphurdadmintest"
+		) {
 			setView("admin");
-		} else if (arr[0].toLowerCase() === "mpphurd") {
+		} else if (
+			arr[0].toLowerCase() === "mpphurd" ||
+			arr[0].toLowerCase() === "test-mpphurduser" ||
+			arr[0].toLowerCase() === "mpphurdtest"
+		) {
 			setView("staff");
 		}
 
@@ -40,7 +47,7 @@ function App() {
 			) : (
 				""
 			)}
-			<ToastContainer/>
+			<ToastContainer />
 		</>
 	);
 }
