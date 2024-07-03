@@ -331,8 +331,8 @@ export default function Activity() {
 												// dispatch(resetOfficeData());
 												setType(e.target.value);
 											}}>
-											<option value="individual">Individual</option>
 											<option value="office">Office</option>
+											<option value="individual">Individual</option>
 										</select>
 									</div>
 									<div className="listQueryOptions">

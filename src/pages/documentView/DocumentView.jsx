@@ -27,8 +27,8 @@ export default function DocumentView() {
 				<MiddleBar
 					style={{ background: "transparent" }}
 					topBarData={{
-						action: "Environmental Impact Analysis",
-						planNumber: "BC/3421/2023",
+						action: "Survey Plan",
+						planNumber: "Plan Number",
 					}}>
 					<DocumentViewer />
 				</MiddleBar>

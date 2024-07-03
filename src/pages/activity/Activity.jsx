@@ -476,17 +476,22 @@ export default function Activity() {
 																			{item.type}
 																		</span>
 																		<span className="time">
-																			23:21, 23/12/2023
+																			{format(item.createdAt, "dd-MM-yyyy")}
+																			{` | ${format(item.createdAt, "HH:mm")}`}
 																		</span>
-																		<span className="planNo">
+																		<span
+																			className="planNo"
+																			onClick={() => {
+																				navigate(`/permit/${item?.plan?._id}`);
+																			}}>
 																			{item?.plan?.planNumber?.fullValue ||
 																				item?.plan?.uniqueId}
 																		</span>
-																		<span className="status">Issue Raised</span>
-																		<span>|</span>
-																		<span className="title">
-																			FastTrack Bill Created
+																		<span className="status">
+																			{item.comment.status}
 																		</span>
+																		<span>|</span>
+																		<span className="title">{item.title}</span>
 																		<span>|</span>
 																		<span className="office">
 																			{item?.by?.officeId
@@ -509,7 +514,13 @@ export default function Activity() {
 																				? `through You`
 																				: ""}
 																		</span>
-																		<span className="expand">Expand</span>
+																		{
+																			<ActivityCardModal
+																				className={"expand"}
+																				buttonText={"Expand"}
+																				stateData={item}
+																			/>
+																		}
 																	</div>
 																);
 															})}

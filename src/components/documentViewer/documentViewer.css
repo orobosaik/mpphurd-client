@@ -5,15 +5,15 @@
 	/* background-color: rgba(0, 0, 0, 0.1); */
 	height: 100%;
 	padding: 0 !important;
-  margin: 0;
+	margin: 0;
 }
 .documentViewerTopControl {
 	position: absolute;
 	display: flex;
 	margin: 0 1.5rem;
 	right: 0;
-  padding: .1rem !important;
-  /* background-color: rgba(250, 250, 250, 0.1); */
+	padding: 0.1rem !important;
+	/* background-color: rgba(250, 250, 250, 0.1); */
 	border-radius: 4px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
@@ -21,16 +21,14 @@
 	-o-border-radius: 4px;
 }
 html[data-theme="dark"] .documentViewerTopControl {
-  /* background-color: rgba(0, 0, 0, 0.1); */
+	/* background-color: rgba(0, 0, 0, 0.1); */
 }
-.documentViewerTopControl svg:hover{
-  background-color: var(--light-grey);
-
+.documentViewerTopControl svg:hover {
+	background-color: var(--pc-green);
 }
-.documentViewerTopControl svg:active{
-  /* background-color: var(--white); */
-  background-color: var(--color-2);
-
+.documentViewerTopControl svg:active {
+	/* background-color: var(--white); */
+	background-color: var(--color-2);
 }
 .documentViewerBottomControl {
 	display: flex;
@@ -42,8 +40,8 @@ html[data-theme="dark"] .documentViewerTopControl {
 }
 .documentViewerBottomControl button,
 .documentViewerBottomControl div {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 	padding: 0.2rem 0.6rem;
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -51,6 +49,13 @@ html[data-theme="dark"] .documentViewerTopControl {
 	-ms-border-radius: 5px;
 	-o-border-radius: 5px;
 }
+.documentViewerBottomControl button:hover {
+	background-color: var(--pc-green);
+	font-weight: bold;
+	color: #fff;
+	outline-color: #fff;
+}
+
 .documentViewerBottomControl div:hover {
 	background-color: var(--white);
 }
@@ -62,7 +67,7 @@ html[data-theme="dark"] .documentViewerTopControl {
 	/* display: flex; */
 	width: 4rem;
 	/* background-color: inherit; */
-  background-color: var(--light-grey);
+	background-color: var(--light-grey);
 }
 
 /* ICONS */
@@ -73,7 +78,8 @@ html[data-theme="dark"] .documentViewerTopControl {
 }
 .documentViewerIcon:hover {
 	cursor: pointer;
-	background-color: var(--light-grey);
+	/* background-color: var(--pc-green); */
+	color: #fff;
 	border-radius: 4px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;

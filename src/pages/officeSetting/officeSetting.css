@@ -61,7 +61,8 @@ html[data-theme="dark"] .office_setting .middleBar {
 	font-size: 1.1em;
 	font-weight: bold;
 	text-transform: uppercase;
-	color: var(--accent-action);
+	/* color: var(--accent-action); */
+	color: var(--pc-green);
 }
 .office_setting .head .position{
 	font-size: 1.1em;
@@ -89,7 +90,7 @@ html[data-theme="dark"] .office_setting .middleBar {
 	padding: 1rem;
 }
 .office_setting .members li:not(:last-child){
-	border-bottom: solid var(--accent-5) 1px;
+	border-bottom: solid var(--pc-green) 1px;
 }
 .office_member .name{
 	min-width: fit-content;

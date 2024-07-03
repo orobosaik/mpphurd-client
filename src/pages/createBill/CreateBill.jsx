@@ -12,9 +12,12 @@ import { useState } from "react";
 import TopBar from "../../components/topBar/TopBar";
 import PlanBill from "../../components/planBill/PlanBill";
 import GenerateBill from "../../components/generateBill/GenerateBill";
+import { useLocation } from "react-router-dom";
 
 export default function CreateBill() {
 	const [rightBarView, setRightBarView] = useState(0);
+	const {state} = useLocation()
+	const data = state.data;
 
 	return (
 		<>
@@ -26,7 +29,11 @@ export default function CreateBill() {
 				<MiddleBar
 					topBarData={{
 						action: "Create New Bill",
-						planNumber: "BC/3421/2023",
+						planNumber: data?.planNumber
+							? `${data?.dev.region.substring(0, 3).toUpperCase()}/${
+									data?.planNumber.value
+							  }/${new Date(data?.planNumber.date).getFullYear()}`
+							: data?.uniqueId,
 					}}>
 					<GenerateBill />
 				</MiddleBar>
@@ -34,8 +41,8 @@ export default function CreateBill() {
 				<RightBar>
 					{!rightBarView === 1 ? (
 						<Activities setRightBarView={setRightBarView} />
-						) : (
-							<Document setRightBarView={setRightBarView} />
+					) : (
+						<Document setRightBarView={setRightBarView} />
 					)}
 				</RightBar>
 			</div>

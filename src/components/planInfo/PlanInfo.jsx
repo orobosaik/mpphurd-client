@@ -154,7 +154,7 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 						);
 					}) && (
 						<>
-							<Link to="./create_bill">
+							<Link to="./create_bill" state={{ data: data }}>
 								<button className="primary">Generate Bill</button>
 							</Link>
 						</>

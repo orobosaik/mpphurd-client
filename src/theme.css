@@ -50,6 +50,7 @@ html[data-theme="light"] {
 	/* --accent-yellow: #ffcc00; */
 	--accent-yellow: gold;
 	--accent-blue: blue;
+	--accent-blue-2: #3e8eff;
 
 	/* --accent-red: #f70000; */
 	--accent-red: #f73832;
@@ -113,6 +114,8 @@ html[data-theme="dark"] {
 
 	/* --accent-yellow: #ffcc00; */
 	--accent-blue: cornflowerblue;
+	--accent-blue-2: #3e8eff;
+
 	--accent-yellow: gold;
 	--accent-red: #f73832;
 	--green-background: rgba(238, 248, 243, 0.2);
