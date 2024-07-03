@@ -268,6 +268,7 @@ function ListWrapper({ children }) {
 								name="listQueryDateStart"
 								id="listQueryDateStart"
 								value={startDate}
+								max={endDate}
 								onChange={(e) => {
 									dispatch(resetOfficeData());
 									setStartDate(e.target.value);
@@ -281,6 +282,8 @@ function ListWrapper({ children }) {
 								name="listQueryDateEnd"
 								id="listQueryDateEnd"
 								value={endDate}
+								min={startDate}
+								max={new Date().toISOString().slice(0, 10)}
 								onChange={(e) => {
 									dispatch(resetOfficeData());
 									setEndDate(e.target.value);

@@ -1,5 +1,7 @@
 import axios from "axios";
-
+import userSlice, { logout } from "../redux/userSlice";
+import { resetOfficeData } from "../redux/appSlice";
+import { persistor } from "../redux/store";
 export const fetchInstance = axios.create({
 	baseURL: import.meta.env.VITE_SERVER,
 	withCredentials: true,
@@ -22,12 +24,20 @@ fetchInstance.interceptors.request.use((config) => {
 	return config;
 });
 
+
+
 fetchInstance.interceptors.response.use(
 	(response) => response,
 	(error) => {
 		if (error.code === "ECONNABORTED" || error.code === "ERR_CANCELED") {
 			error.message = "Request timed out";
 		}
+		// let message = error.response ? error.response.data.message : error.message;
+
+		// if (message === "Token is not valid") {
+		// 	// userSlice.dispatch(logout())
+		// 	persistor.dispatch(logout())
+		// }
 		return Promise.reject(error);
 	}
 );

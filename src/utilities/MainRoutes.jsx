@@ -106,7 +106,7 @@ function MainRoutes() {
 					{/* ANALYSIS */}
 					<Route path="/analysis">
 						{/* <Route index element={<Analysis />} /> */}
-						<Route index element={<InDevelopment />} />
+						<Route index element={<Analysis />} />
 					</Route>
 
 					{/* PROFILE */}

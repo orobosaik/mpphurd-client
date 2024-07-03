@@ -86,6 +86,12 @@ export const COMMENT_STATUS_LIST = [
 	"Observation",
 	"Issue Raised",
 	"Pending Action",
+	"Calls",
+	"Request Sent",
+	"Request Received",
+	"Correction",
+	"Inspection",
+	"Site visit",
 ];
 
 export const MINUTE_STATUS_LIST = [
