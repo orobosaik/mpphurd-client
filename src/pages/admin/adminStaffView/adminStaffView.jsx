@@ -157,9 +157,10 @@ export default function AdminStaffView() {
 												htmlFor={"staffMeansOfIdentification"}
 												className="uploadImageWrapper">
 												<img
-													src={
-														data.profilePicture ||
-														"/assets/persons/no_avatar.png"
+													src={ data.profilePicture ?
+														`${import.meta.env.VITE_STORAGE_LINK}${
+															data.profilePicture
+														}` : "/assets/persons/no_avatar.png"
 													}
 													alt="photo"
 												/>

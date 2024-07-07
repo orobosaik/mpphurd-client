@@ -38,7 +38,10 @@ export default function HeaderUserOptions({ staff }) {
 						</div>
 
 						<img
-							src={staff.profilePicture || "/assets/persons/no_avatar.png"}
+							src={ staff.profilePicture ?
+								`${import.meta.env.VITE_STORAGE_LINK}${staff.profilePicture}` :
+								"/assets/persons/no_avatar.png"
+							}
 							alt=""
 							className="headerImg"
 						/>

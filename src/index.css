@@ -121,7 +121,7 @@ select {
 	cursor: pointer;
 	transition: border-color 0.25s;
 }
-.button,
+.button:hover,
 button:hover {
 	/* border-color: #646cff; */
 	outline: var(--pc-green) 1px solid;

@@ -25,7 +25,7 @@ export default function AdminHeader() {
 	const staff = currentAdmin;
 
 	const dispatch = useDispatch();
-	const themeColor = getThemeColor()
+	const themeColor = getThemeColor();
 
 	const [isLoading, setIsLoading] = useState(true);
 	const [data, setData] = useState(null);
@@ -210,7 +210,10 @@ export default function AdminHeader() {
 					</div>
 
 					<img
-						src={staff.profilePicture || "/assets/persons/no_avatar.png"}
+						src={ staff.profilePicture ?
+							`${import.meta.env.VITE_STORAGE_LINK}${staff.profilePicture}` :
+							"/assets/persons/no_avatar.png"
+						}
 						alt=""
 						className="headerImg"
 					/>

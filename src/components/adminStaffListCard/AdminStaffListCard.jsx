@@ -16,7 +16,10 @@ export default function AdminStaffListCard(props) {
 						state={{ data: d }}>
 						<span className="adminStaffListCard__avatar">
 							<img
-								src={d.profilePicture || "/assets/persons/no_avatar.png"}
+								src={ d.profilePicture ?
+									`${import.meta.env.VITE_STORAGE_LINK}${d.profilePicture}` :
+									"/assets/persons/no_avatar.png"
+								}
 								alt="avatar"
 							/>
 						</span>
@@ -37,9 +40,7 @@ export default function AdminStaffListCard(props) {
 								return <span key={i}>{a?.id?.name}</span>;
 							})}
 						</span>
-						<span className="adminStaffListCard__title">
-							{d.jobTitle}
-						</span>
+						<span className="adminStaffListCard__title">{d.jobTitle}</span>
 						<span
 							className={
 								d.isActive

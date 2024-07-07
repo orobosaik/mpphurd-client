@@ -1,20 +1,30 @@
-.staffView{
+.staffView {
 	padding: 1rem;
 }
-.staffView .inputStaffHeader{
+.staffView .inputStaffHeader {
 	align-items: center;
 }
-.staffViewHeader{
+.staffViewHeader {
 	display: flex;
 	/* align-items: center; */
 	justify-content: space-between;
-	max-width: 70rem;
+	/* max-width: 70rem; */
 }
 
-.staffViewHeader h2{
+.staffViewHeader h2 {
 	font-size: 3rem;
 }
- .staffView .staffImage{
-	height: 25rem;
-	width: 20rem;
- }
+.staffView .staffImage {
+	min-height: 25rem;
+	min-width: 20rem;
+
+	max-height: 45rem;
+	max-width: 40rem;
+
+	height: 100%;
+	width: 100%;
+	background-color: var(--white);
+}
+.staffView .staffImage img {
+	object-fit: contain;
+}

@@ -11,6 +11,16 @@ export const fetchInstance = axios.create({
 		"Content-Type": "application/json;charset=UTF-8",
 	},
 });
+export const fetchPostImage = axios.create({
+	baseURL: import.meta.env.VITE_SERVER,
+	withCredentials: true,
+	// timeout: 10000,
+	headers: { "Content-Type": "multipart/form-data" },
+	// headers: {
+	// 	Accept: "application/json",
+	// 	"Content-Type": "application/json;charset=UTF-8",
+	// },
+});
 
 //
 const timeoutDuration = 10000;
@@ -23,8 +33,6 @@ fetchInstance.interceptors.request.use((config) => {
 
 	return config;
 });
-
-
 
 fetchInstance.interceptors.response.use(
 	(response) => response,

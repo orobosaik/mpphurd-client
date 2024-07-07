@@ -20,31 +20,27 @@
 	width: 100%;
 	/* background-color: lightgray; */
 
-	/* cursor: pointer; */
-	/* border: 1px solid rgba(0, 0, 0, 0.2); */
-	/* border: 1px solid var(--sc-grey); */
-	/* box-shadow: 0px 0px 11px -4px rgba(0, 0, 0, 0.5); */
-	/* border-radius: 8px; */
-	/* -webkit-border-radius: 8px; */
-	/* -moz-border-radius: 8px; */
-	/* -ms-border-radius: 8px; */
-	/* -o-border-radius: 8px; */
+/* cursor: pointer; */
+/* border: 1px solid rgba(0, 0, 0, 0.2); */
+/* border: 1px solid var(--sc-grey); */
+/* box-shadow: 0px 0px 11px -4px rgba(0, 0, 0, 0.5); */
+/* border-radius: 8px; */
+/* -webkit-border-radius: 8px; */
+/* -moz-border-radius: 8px; */
+/* -ms-border-radius: 8px; */
+/* -o-border-radius: 8px; */
 /* } */
 
-
-
-.listCard:not(:last-of-type){
+.listCard:not(:last-of-type) {
 	border-bottom: 1px solid var(--light-grey);
-	margin-bottom: .5rem;
-
+	margin-bottom: 0.5rem;
 }
-
-
 
 .listCard:hover {
 	/* box-shadow: 0px 0px 7px 0px rgb(0, 200, 83, 0.4); */
 	/* font-weight: 700; */
-	background-color: var(--green-background);
+	/* background-color: var(--green-background); */
+	outline: 1px solid var(--pc-green);
 }
 
 .listCard span {
@@ -61,7 +57,7 @@
 	border-left: dashed grey 1px;
 }
 
-.listCard .tags{
+.listCard .tags {
 	display: flex;
 	gap: 2px;
 	align-items: end;
@@ -69,12 +65,12 @@
 	position: absolute;
 	right: 0;
 	top: 50%;
-	transform:  translateY(-50%);
-
+	transform: translateY(-50%);
 }
 .listCard .fast_track,
 .listCard .file_of_interest,
-.listCard .old_file{
+.listCard .old_file {
+	z-index: 10;
 	text-transform: uppercase;
 	font-weight: 1000;
 	color: var(--white);
@@ -87,6 +83,12 @@
 	-ms-border-radius: 4px;
 	-o-border-radius: 4px;
 }
-.listCard .fast_track{background-color: var(--accent-red);}
-.listCard .file_of_interest{background-color: var(--accent-4);}
-.listCard .old_file{background-color: gold;}
+.listCard .fast_track {
+	background-color: var(--accent-red);
+}
+.listCard .file_of_interest {
+	background-color: var(--accent-4);
+}
+.listCard .old_file {
+	background-color: gold;
+}

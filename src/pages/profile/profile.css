@@ -16,8 +16,17 @@
 	-ms-border-radius: 1rem;
 	-o-border-radius: 1rem;
 }
+.imageSection {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: end;
+	gap: 1rem;
+}
 .profile-picture img {
-	object-fit: cover;
+	max-width: 100%;
+	height: 100%;
+	object-fit: contain;
 	object-position: top;
 }
 .profile .name {
@@ -34,4 +43,32 @@
 	font-size: 1.5rem;
 	font-weight: bold;
 	text-transform: uppercase;
+}
+
+.editButtons {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	font-weight: bold;
+}
+.editButtons p{
+	font-weight: bold;
+}
+
+.editButtons input {
+	display: none;
+}
+.editButtons .button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+	min-width: 10rem;
+	text-align: center;
+}
+.editButtons .cancel {
+	font-weight: bold;
+}
+.editButtons .cancel:hover {
+	color: var(--accent-red);
 }

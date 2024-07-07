@@ -14,6 +14,7 @@ import { getThemeColor } from "../../utilities/themeColor";
 import { CircularProgress } from "@mui/material";
 import { JOB_TITLE_LIST, POSITION_LIST } from "../../utilities/appData";
 import uuid from "react-uuid";
+import { fetchInstance, fetchPostImage } from "../../utilities/fetcher";
 
 export default function AdminStaffEditModal({ ...props }) {
 	const [open, setOpen] = useState(false);
@@ -24,9 +25,12 @@ export default function AdminStaffEditModal({ ...props }) {
 	const [loading, setLoading] = useState(false);
 	const [initLoading, setInitLoading] = useState(false);
 
+	const [photoChanged, setPhotoChanged] = useState(false);
 	const [photo, setPhoto] = useState("");
 	const [photoUrl, setPhotoUrl] = useState("");
 	const [clearPhotoButton, setClearPhotoButton] = useState(true);
+	const [inputKey, setInputKey] = useState(new Date());
+	const [photoFormData, setPhotoFormData] = useState();
 
 	const [data, setData] = useState(null);
 
@@ -121,6 +125,11 @@ export default function AdminStaffEditModal({ ...props }) {
 			setIsManagement(data.isManagement);
 
 			setPhoto(data.profilePicture);
+			setPhotoUrl(
+				data.profilePicture
+					? `${import.meta.env.VITE_STORAGE_LINK}${data.profilePicture}`
+					: ""
+			);
 			setName({
 				title: data.title,
 				firstName: data.firstName,
@@ -207,24 +216,84 @@ export default function AdminStaffEditModal({ ...props }) {
 
 	const onPhotoChange = (event) => {
 		if (event.target.files && event.target.files[0]) {
+			setPhotoChanged(true);
 			setPhoto(event.target.files[0]);
 			setPhotoUrl(URL.createObjectURL(event.target.files[0]));
 
 			const formData = new FormData();
 			//FILE INFO NAME WILL BE "my-image-file"
-			formData.append(
-				"my-image-file",
-				event.target.files[0],
-				event.target.files[0].name
-			);
-			// setPhoto(formData);
+			formData.append("staffImage", event.target.files[0]);
+			setPhotoFormData(formData);
 			// console.log(photo);
 			// console.log(formData);
 		}
 	};
 
+	// const handleSubmitNew = async () => {
+	// 	setLoading(true);
+	// 	let newData = {};
+	// 	newData.password = uuid();
+	// 	// newData.password = "123456";
+	// 	newData.isActive = isActive;
+	// 	newData.isManagement = isManagement;
+	// 	// newData.profilePicture = photo;
+	// 	newData.title = name.title;
+	// 	newData.firstName = name.firstName;
+	// 	newData.middleName = name.middleName;
+	// 	newData.lastName = name.lastName;
+	// 	newData.suffix = name.suffix;
+	// 	newData.gender = gender;
+	// 	newData.address = address;
+	// 	newData.phone = phones.phone;
+	// 	newData.phone1 = phones.phone1;
+	// 	newData.email = emails.email;
+	// 	newData.email1 = emails.email1;
+	// 	newData.jobTitle = designation;
+	// 	newData.position = position;
+	// 	newData.region = region;
+	// 	newData.office = list;
+	// 	// console.log(newData);
+
+	// 	try {
+	// 		let host = import.meta.env.VITE_SERVER;
+	// 		let res = await axios.post(`${host}/admin/staff`, newData);
+
+	// 		handleClose();
+
+	// 		props.setReload(() => []);
+
+	// 		setTimeout(() => {
+	// 			toast.success(res.data, {
+	// 				position: "top-right",
+	// 				autoClose: 1000,
+	// 				hideProgressBar: false,
+	// 				closeOnClick: true,
+	// 				pauseOnHover: true,
+	// 				draggable: true,
+	// 				progress: undefined,
+	// 				theme: theme,
+	// 			});
+	// 		}, 0);
+	// 	} catch (error) {
+	// 		setLoading(false);
+
+	// 		let message = error.response
+	// 			? error.response.data.message
+	// 			: error.message;
+
+	// 		toast.error(message, {
+	// 			position: "top-right",
+	// 			autoClose: 2000,
+	// 			hideProgressBar: false,
+	// 			closeOnClick: true,
+	// 			pauseOnHover: true,
+	// 			draggable: true,
+	// 			progress: undefined,
+	// 			theme: theme,
+	// 		});
+	// 	}
+	// };
 	const handleSubmitNew = async () => {
-		setLoading(true);
 		let newData = {};
 		newData.password = uuid();
 		// newData.password = "123456";
@@ -249,8 +318,22 @@ export default function AdminStaffEditModal({ ...props }) {
 		// console.log(newData);
 
 		try {
-			let host = import.meta.env.VITE_SERVER;
-			let res = await axios.post(`${host}/admin/staff`, newData);
+			setLoading(true);
+
+			if (photo) {
+				const formData = new FormData();
+				formData.append("staffImage", photo);
+
+				let res = await fetchPostImage.post(
+					"/admin/staff/uploadPicture",
+					formData
+				);
+				newData.profilePicture = res.data.key;
+
+				// console.log(newData);
+			}
+
+			let res = await fetchInstance.post("/admin/staff", newData);
 
 			handleClose();
 
@@ -269,8 +352,7 @@ export default function AdminStaffEditModal({ ...props }) {
 				});
 			}, 0);
 		} catch (error) {
-			setLoading(false);
-
+			console.log(error);
 			let message = error.response
 				? error.response.data.message
 				: error.message;
@@ -285,10 +367,11 @@ export default function AdminStaffEditModal({ ...props }) {
 				progress: undefined,
 				theme: theme,
 			});
+		} finally {
+			setLoading(false);
 		}
 	};
 	const handleSubmitEdit = async (data) => {
-		setLoading(true);
 		let newData = {};
 		newData.isActive = isActive;
 		newData.isManagement = isManagement;
@@ -310,11 +393,28 @@ export default function AdminStaffEditModal({ ...props }) {
 		newData.office = list;
 
 		try {
-			let host = import.meta.env.VITE_SERVER;
-			let res = await axios.put(`${host}/admin/staff/${data._id}`, newData);
+			setLoading(true);
+
+			if (photo && photoChanged) {
+				const formData = new FormData();
+				formData.append("staffImage", photo);
+
+				let res = await fetchPostImage.post(
+					"/admin/staff/uploadPicture",
+					formData
+				);
+				newData.profilePicture = res.data.key;
+
+				// console.log(newData);
+			} else if (photo && !photoChanged) {
+				newData.profilePicture = photo;
+			} else {
+				newData.profilePicture = "";
+			}
+
+			let res = await fetchInstance.put(`/admin/staff/${data._id}`, newData);
 
 			props.setReload(() => []);
-			setLoading(false);
 			setOpen(false);
 
 			setTimeout(() => {
@@ -330,8 +430,6 @@ export default function AdminStaffEditModal({ ...props }) {
 				});
 			}, 0);
 		} catch (error) {
-			setLoading(false);
-
 			let message = error.response
 				? error.response.data.message
 				: error.message;
@@ -346,6 +444,8 @@ export default function AdminStaffEditModal({ ...props }) {
 				progress: undefined,
 				theme: theme,
 			});
+		} finally {
+			setLoading(false);
 		}
 	};
 
@@ -393,14 +493,18 @@ export default function AdminStaffEditModal({ ...props }) {
 											<div className="clearPhotoButton">
 												<CloseRounded
 													className="clearPhotoIcon"
-													onClick={() => setPhoto(null)}
+													onClick={() => {
+														setPhoto("");
+														setPhotoUrl("");
+														setInputKey(new Date());
+													}}
 												/>
 											</div>
 										)}
 										<label
 											htmlFor={"staffMeansOfIdentification"}
 											className="uploadImageWrapper">
-											{photo ? (
+											{photoUrl ? (
 												<img src={photoUrl} alt="" />
 											) : (
 												<div>
@@ -412,6 +516,7 @@ export default function AdminStaffEditModal({ ...props }) {
 											)}
 											<input
 												type="file"
+												key={inputKey}
 												name={"staffMeansOfIdentification"}
 												id={"staffMeansOfIdentification"}
 												accept="image/png, image/jpeg, image/jpg"
@@ -663,8 +768,12 @@ export default function AdminStaffEditModal({ ...props }) {
 																name="staffDesignation"
 																id="staffDesignation">
 																<option value="">----</option>
-																{JOB_TITLE_LIST.map((e) => {
-																	return <option value={e}>{e}</option>;
+																{JOB_TITLE_LIST.map((e, ind) => {
+																	return (
+																		<option key={ind} value={e}>
+																			{e}
+																		</option>
+																	);
 																})}
 															</select>
 														</div>
