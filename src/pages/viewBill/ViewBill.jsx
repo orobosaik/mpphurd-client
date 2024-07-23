@@ -17,7 +17,6 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import LoadingIcon from "../../utilities/LoadingIcon";
 
-
 export default function ViewBill() {
 	const [rightBarView, setRightBarView] = useState(0);
 	const [data, setData] = useState();
@@ -33,7 +32,7 @@ export default function ViewBill() {
 
 		const getData = async () => {
 			try {
-				setIsLoading(true)
+				setIsLoading(true);
 				let host = import.meta.env.VITE_SERVER;
 
 				// const res = await Promise.all([
@@ -101,7 +100,7 @@ export default function ViewBill() {
 				// console.log(error);
 				// console.log(message);
 			} finally {
-				setIsLoading(false)
+				setIsLoading(false);
 			}
 		};
 		getData();
@@ -109,28 +108,19 @@ export default function ViewBill() {
 
 	return (
 		<>
-			<div className="pageWrapper"></div>
-
 			<Header />
 			<div className="planContainer">
 				<SideBar selected={"home"} />
 				<MiddleBar
 					topBarData={{
 						action: "View Bills",
-						planNumber:
-							(data?.planNumber
-								? `${data?.dev.region.substring(0, 3).toUpperCase()}/${
-										data?.planNumber.value
-								  }/${new Date(data?.planNumber.date).getFullYear()}`
-								: data?.uniqueId),
+						planNumber: data?.planNumber
+							? `${data?.dev.region.substring(0, 3).toUpperCase()}/${
+									data?.planNumber.value
+							  }/${new Date(data?.planNumber.date).getFullYear()}`
+							: data?.uniqueId,
 					}}>
-					{!isLoading ? (
-
-						<PlanBill data={data} />
-					) : (
-						<LoadingIcon />
-					)}
-
+					{!isLoading ? <PlanBill data={data} /> : <LoadingIcon />}
 				</MiddleBar>
 
 				<RightBar>

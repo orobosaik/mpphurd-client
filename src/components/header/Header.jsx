@@ -199,11 +199,11 @@ export default function Header() {
 				<div className="headerIcons">
 					<div className="headerIconItem">
 						<Notifications className="notificationIcon" />
-						<span className="headerIconBadge">3</span>
+						{/* <span className="headerIconBadge">3</span> */}
 					</div>
 					<div className="headerIconItem">
 						<Email className="emailIcon" />
-						<span className="headerIconBadge">5</span>
+						{/* <span className="headerIconBadge">5</span> */}
 					</div>
 				</div>
 

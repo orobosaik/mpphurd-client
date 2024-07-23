@@ -77,8 +77,6 @@ export default function AdminStaffView() {
 
 	return (
 		<>
-			<div className="pageWrapper"></div>
-
 			<div className="Office">
 				<AdminHeader />
 				<div className="OfficeWrapper">
@@ -157,10 +155,12 @@ export default function AdminStaffView() {
 												htmlFor={"staffMeansOfIdentification"}
 												className="uploadImageWrapper">
 												<img
-													src={ data.profilePicture ?
-														`${import.meta.env.VITE_STORAGE_LINK}${
-															data.profilePicture
-														}` : "/assets/persons/no_avatar.png"
+													src={
+														data.profilePicture
+															? `${import.meta.env.VITE_STORAGE_LINK}${
+																	data.profilePicture
+															  }`
+															: "/assets/persons/no_avatar.png"
 													}
 													alt="photo"
 												/>

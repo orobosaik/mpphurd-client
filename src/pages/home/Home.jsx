@@ -215,7 +215,6 @@ export default function Home() {
 
 	return (
 		<>
-			<div className="pageWrapper"></div>
 			<Header />
 			<div className="homeContainer">
 				<SideBar />

@@ -7,7 +7,6 @@ import "./adminInDevelopment.css";
 export default function AdminInDevelopment() {
 	return (
 		<>
-			<div className="pageWrapper"></div>
 			<AdminHeader />
 			<div className="homeContainer">
 				<AdminSideBar />

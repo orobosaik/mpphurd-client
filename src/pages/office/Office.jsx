@@ -254,7 +254,7 @@ export default function Office() {
 	return (
 		<>
 			{exportPDF()}
-			<div className="pageWrapper"></div>
+
 			<div className="Office">
 				<Header />
 				<div className="OfficeWrapper">

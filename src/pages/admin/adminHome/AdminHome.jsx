@@ -147,7 +147,6 @@ export default function AdminHome() {
 
 	return (
 		<>
-			<div className="pageWrapper"></div>
 			<AdminHeader />
 			<div className="homeContainer">
 				<AdminSideBar />

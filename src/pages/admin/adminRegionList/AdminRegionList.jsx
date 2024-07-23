@@ -67,8 +67,6 @@ export default function AdminRegionList() {
 
 	return (
 		<>
-			<div className="pageWrapper"></div>
-
 			<div className="Office">
 				<AdminHeader />
 				<div className="OfficeWrapper">

@@ -190,8 +190,6 @@ export default function Minute() {
 
 	return (
 		<>
-			<div className="pageWrapper"></div>
-
 			<Header />
 			<div className="planContainer">
 				<SideBar selected={"home"} />

@@ -90,9 +90,9 @@
 	/* z-index: 10; */
 }
 .login .pageWrapper {
-	background-image: url(/assets/banners/bg.png);
-	filter: blur(4px) brightness(100%);
-	-webkit-filter: blur(4px) brightness(100%);
+	/* background-image: url(/assets/banners/bg.png); */
+	/* filter: blur(4px) brightness(100%); */
+	/* -webkit-filter: blur(4px) brightness(100%); */
 }
 html[data-theme="dark"] .login .pageWrapper {
 	filter: brightness(80%) blur(4px);
@@ -107,7 +107,7 @@ html[data-theme="dark"] .login .pageWrapper {
 	/*max-height: 100%;
 	*/
 	max-width: calc(100vw);
-	background-image: url(/assets/banners/bg.png);
+	/* background-image: url(/assets/banners/bg.png); */
 	background-size: cover;
 	background-repeat: repeat;
 	z-index: -10;
@@ -145,10 +145,11 @@ html[data-theme="dark"] .login .pageWrapper {
 
 .login__formBackground {
 	background-color: rgba(255, 255, 255, 0.85);
-	/* min-width: 70%; */
-	/* width: auto; */
-	/* height: 45rem; */
-	margin: 10rem 1rem;
+	backdrop-filter: blur(4px);
+	/*min-width: 70%;
+	*//*width: auto;
+	*//*height: 45rem;
+	*/margin: 10rem 1rem;
 	padding: 5rem 5rem;
 	max-width: calc(100vw - 1rem);
 
@@ -157,6 +158,7 @@ html[data-theme="dark"] .login .pageWrapper {
 	justify-content: space-around;
 	align-items: center;
 	flex-wrap: wrap;
+	z-index: 1;
 
 	border-radius: 8px;
 	-webkit-border-radius: 8px;
@@ -168,7 +170,7 @@ html[data-theme="dark"] .login__formBackground {
 	background-color: rgba(0, 0, 0, 0.55);
 }
 .login__form {
-	z-index: 1;
+	/* z-index: 50; */
 	/* background: #ffffff; */
 	background: var(--white);
 	border-radius: 20px;

@@ -22,6 +22,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getThemeColor } from "../../../utilities/themeColor";
 import { useNavigate } from "react-router-dom";
+import AnimatedBackground from "../../../widgets/animatedBackground/AnimatedBackground";
 
 function AdminLogin() {
 	const [showPassword, setShowPassword] = useState(false);
@@ -104,7 +105,8 @@ function AdminLogin() {
 	return (
 		<>
 			<div className="login">
-				<div className="login__background"></div>
+				{/* <div className="login__background"></div> */}
+				<AnimatedBackground />
 				<section className="login__header">
 					<div className="login__formBackground">
 						<section className="app-cover__info">

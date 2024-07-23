@@ -325,7 +325,7 @@ export default function AdminStaffEditModal({ ...props }) {
 				formData.append("staffImage", photo);
 
 				let res = await fetchPostImage.post(
-					"/admin/staff/uploadPicture",
+					`/admin/staff/uploadPicture?firstName=${name.firstName}&lastName=${name.lastName}`,
 					formData
 				);
 				newData.profilePicture = res.data.key;
@@ -400,7 +400,7 @@ export default function AdminStaffEditModal({ ...props }) {
 				formData.append("staffImage", photo);
 
 				let res = await fetchPostImage.post(
-					"/admin/staff/uploadPicture",
+					`/admin/staff/uploadPicture?firstName=${name.firstName}&lastName=${name.lastName}`,
 					formData
 				);
 				newData.profilePicture = res.data.key;

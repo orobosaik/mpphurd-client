@@ -77,7 +77,6 @@ export default function OfficeSetting() {
 
 	return (
 		<>
-			<div className="pageWrapper"></div>
 			<div className="Office">
 				<Header />
 				<div className="OfficeWrapper">

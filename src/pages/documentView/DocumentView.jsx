@@ -1,4 +1,4 @@
-import "./documentView.css"
+import "./documentView.css";
 import FeedBackground from "../../components/feedBackground/FeedBackground";
 import Header from "../../components/header/Header";
 import SideBar from "../../components/sidebar/SideBar";
@@ -17,10 +17,8 @@ import PlanInfoCard from "../../components/planInfoCard/PlanInfoCard";
 export default function DocumentView() {
 	const [rightBarView, setRightBarView] = useState(1);
 
-  return (
+	return (
 		<>
-			<div className="pageWrapper"></div>
-
 			<Header />
 			<div className="documentViewContainer">
 				<SideBar />
@@ -36,7 +34,7 @@ export default function DocumentView() {
 				<RightBar>
 					{rightBarView !== 1 ? (
 						<Activities setRightBarView={setRightBarView} />
-						) : (
+					) : (
 						<Document setRightBarView={setRightBarView} />
 					)}
 				</RightBar>

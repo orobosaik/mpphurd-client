@@ -7,8 +7,6 @@ import "./inDevelopment.css";
 export default function InDevelopment() {
 	return (
 		<>
-			<div className="pageWrapper"></div>
-
 			<Header />
 			<div className="homeContainer">
 				<SideBar />

@@ -66,7 +66,6 @@ export default function OfficeSelect() {
 
 	return (
 		<>
-			<div className="pageWrapper"></div>
 			<Header />
 			<div className="homeContainer">
 				<SideBar />

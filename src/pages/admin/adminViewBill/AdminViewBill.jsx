@@ -46,8 +46,6 @@ export default function ViewBill() {
 
 	return (
 		<>
-			<div className="pageWrapper"></div>
-
 			<AdminHeader />
 			<div className="planContainer">
 				<AdminSideBar selected={"home"} />

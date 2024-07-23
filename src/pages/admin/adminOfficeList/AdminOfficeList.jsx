@@ -86,8 +86,6 @@ export default function AdminOfficeList() {
 	const todayDate = new Date().toISOString().slice(0, 10);
 	return (
 		<>
-			<div className="pageWrapper"></div>
-
 			<div className="Office">
 				<AdminHeader />
 				<div className="OfficeWrapper">

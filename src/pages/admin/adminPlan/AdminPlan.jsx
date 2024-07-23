@@ -198,8 +198,6 @@ export default function AdminPlan() {
 	const todayDate = new Date().toISOString().slice(0, 10);
 	return (
 		<>
-			<div className="pageWrapper"></div>
-
 			<AdminHeader />
 			<div className="planContainer">
 				<AdminSideBar selected={"office"} />

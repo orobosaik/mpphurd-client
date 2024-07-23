@@ -221,7 +221,6 @@ export default function Activity() {
 
 	return (
 		<>
-			<div className="pageWrapper"></div>
 			<div className="Office">
 				<Header />
 				<div className="OfficeWrapper">

@@ -5,8 +5,6 @@ import SideBar from "../../components/sidebar/SideBar";
 export default function DevelopmentControl() {
 	return (
 		<>
-			<div className="pageWrapper"></div>
-
 			<Header />
 			<div className="homeContainer">
 				<SideBar />

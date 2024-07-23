@@ -19,6 +19,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ChangePasswordModal from "../../components/changePasswordModal/ChangePasswordModal";
 import { getThemeColor } from "../../utilities/themeColor";
 import { useNavigate } from "react-router-dom";
+import AnimatedBackground from "../../widgets/animatedBackground/AnimatedBackground";
 
 function LoginPage() {
 	const [showPassword, setShowPassword] = useState(false);
@@ -108,7 +109,8 @@ function LoginPage() {
 		<>
 			<div className="login">
 				{/* <div className="login__background"></div> */}
-				<div className="pageWrapper"></div>
+				{/* <div className="pageWrapper"></div> */}
+				<AnimatedBackground />
 				<section className="login__header">
 					<div className="login__formBackground">
 						<section className="app-cover__info">

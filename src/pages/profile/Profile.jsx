@@ -81,7 +81,7 @@ export default function Profile() {
 				formData.append("staffImage", photo);
 
 				res = await fetchPostImage.put(
-					`/staffs/staff/uploadProfilePicture`,
+					`/staffs/staff/uploadProfilePicture?firstName=${currentUser.firstName}&lastName=${currentUser.lastName}`,
 					formData
 				);
 
@@ -136,7 +136,6 @@ export default function Profile() {
 
 	return (
 		<>
-			<div className="pageWrapper"></div>
 			<div className="Office">
 				<Header />
 				<div className="OfficeWrapper">

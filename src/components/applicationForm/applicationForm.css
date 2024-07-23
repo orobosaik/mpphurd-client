@@ -78,7 +78,7 @@
 .applicantCode input,
 .applicationItem select {
 	/* font-size: 1.05em; */
-	height: 3.2rem;
+	height: 3.5rem;
 	color: var(--black);
 	width: 100%;
 	display: flex;

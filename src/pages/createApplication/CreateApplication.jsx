@@ -7,8 +7,6 @@ import ApplicationForm from "../../components/applicationForm/ApplicationForm";
 export default function CreateApplication() {
 	return (
 		<>
-			<div className="pageWrapper"></div>
-
 			<div className="createApplication">
 				<Header />
 				<div className="createApplicationWrapper">

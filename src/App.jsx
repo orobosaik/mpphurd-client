@@ -40,6 +40,8 @@ function App() {
 
 	return (
 		<>
+			<div className="pageWrapper"></div>
+
 			{view === "staff" ? (
 				<MainRoutes />
 			) : view === "admin" ? (

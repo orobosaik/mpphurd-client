@@ -16,13 +16,11 @@ import { useLocation } from "react-router-dom";
 
 export default function CreateBill() {
 	const [rightBarView, setRightBarView] = useState(0);
-	const {state} = useLocation()
+	const { state } = useLocation();
 	const data = state.data;
 
 	return (
 		<>
-			<div className="pageWrapper"></div>
-
 			<Header />
 			<div className="planContainer">
 				<SideBar selected={"home"} />

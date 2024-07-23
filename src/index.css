@@ -120,6 +120,10 @@ select {
 	background-color: var(--light-grey);
 	cursor: pointer;
 	transition: border-color 0.25s;
+	-webkit-transition: border-color 0.25s;
+	-moz-transition: border-color 0.25s;
+	-ms-transition: border-color 0.25s;
+	-o-transition: border-color 0.25s;
 }
 .button:hover,
 button:hover {
@@ -246,7 +250,7 @@ html[data-theme="dark"] ::-webkit-scrollbar-thumb {
 			rgba(255, 255, 255, 0.5),
 			rgba(255, 255, 255, 0.5)
 		),
-		url(/assets/banners/bg.png);
+		url(/assets/banners/bg2.jpg);
 	background-size: cover;
 	background-repeat: repeat;
 	z-index: -10;
