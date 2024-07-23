@@ -158,10 +158,6 @@ export default function AdminStaffList() {
 												const statusValBol =
 													statusVal === "true" ? true : false;
 												const designationVal = designation;
-												console.log(statusVal);
-												console.log(designationVal);
-												console.log(data);
-												console.log(filteredData);
 
 												setStatus(statusVal);
 
@@ -202,10 +198,6 @@ export default function AdminStaffList() {
 											onChange={(e) => {
 												const designationVal = e.target.value;
 												const statusValBol = status === "true" ? true : false;
-												console.log(status);
-												console.log(designationVal);
-												console.log(data);
-												console.log(filteredData);
 
 												setDesignation(designationVal);
 
@@ -214,12 +206,8 @@ export default function AdminStaffList() {
 													newData = data.filter(
 														(d) => d.jobTitle === designationVal
 													);
-													console.log("NOT IN ALL");
-													console.log(newData);
 												} else {
 													newData = data;
-													console.log("IN ALL");
-													console.log(newData);
 												}
 
 												if (status !== "null") {

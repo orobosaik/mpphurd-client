@@ -170,10 +170,6 @@ export default function AdminOfficeList() {
 													const statusValBol =
 														statusVal === "true" ? true : false;
 													const designationVal = designation;
-													console.log(statusVal);
-													console.log(designationVal);
-													console.log(data);
-													console.log(filteredData);
 
 													setStatus(statusVal);
 
