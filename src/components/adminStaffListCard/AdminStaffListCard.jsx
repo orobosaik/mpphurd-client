@@ -7,7 +7,7 @@ export default function AdminStaffListCard(props) {
 
 	return (
 		<>
-			{data.map((d) => {
+			{data.toReversed().map((d) => {
 				return (
 					<Link
 						className="adminStaffListCard"
@@ -16,39 +16,45 @@ export default function AdminStaffListCard(props) {
 						state={{ data: d }}>
 						<span className="adminStaffListCard__avatar">
 							<img
-								src={ d.profilePicture ?
-									`${import.meta.env.VITE_STORAGE_LINK}${d.profilePicture}` :
-									"/assets/persons/no_avatar.png"
+								src={
+									d.profilePicture
+										? `${import.meta.env.VITE_STORAGE_LINK}${d.profilePicture}`
+										: "/assets/persons/no_avatar.png"
 								}
 								alt="avatar"
 							/>
 						</span>
 
-						<span className="adminStaffListCard__name">
-							{[d.title, d.firstName, d.middleName, d.lastName, d.prefix]
-								.filter(function (value) {
-									return value !== null && value !== "" && value !== undefined;
-								})
-								.join(" ")}
-						</span>
+						<div className="adminStaffListCard__name">
+							<span>
+								{[d.title, d.firstName, d.middleName, d.lastName, d.prefix]
+									.filter(function (value) {
+										return (
+											value !== null && value !== "" && value !== undefined
+										);
+									})
+									.join(" ")}
+							</span>
+							<span className="adminStaffListCard__email">{d.email}</span>
+						</div>
 
-						<span className="adminStaffListCard__email">{d.email}</span>
-						<span className="adminStaffListCard__phone">{d.phone}</span>
-						<span className="adminStaffListCard__region">{d.region?.name}</span>
-						<span className="adminStaffListCard__office">
+						{/* <span className="adminStaffListCard__email">{d.email}</span> */}
+						<div className="adminStaffListCard__phone">{d.phone}</div>
+						<div className="adminStaffListCard__region">{d.region?.name}</div>
+						<div className="adminStaffListCard__office">
 							{d.office?.map((a, i) => {
 								return <span key={i}>{a?.id?.name}</span>;
 							})}
-						</span>
-						<span className="adminStaffListCard__title">{d.jobTitle}</span>
-						<span
+						</div>
+						<div className="adminStaffListCard__title">{d.jobTitle}</div>
+						<div
 							className={
 								d.isActive
 									? "adminStaffListCard__status active"
 									: "adminStaffListCard__status inactive"
 							}>
 							<span>{d.isActive ? "Active" : "Inactive"}</span>
-						</span>
+						</div>
 					</Link>
 				);
 			})}

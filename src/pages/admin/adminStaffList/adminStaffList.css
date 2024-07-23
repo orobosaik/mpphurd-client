@@ -37,14 +37,14 @@
 	/* border: 1px solid rgba(0, 0, 0, 0.2); */
 }
 
-.adminStaffListHeader span {
+.adminStaffListHeader div {
 	position: relative;
 	/* display: flex; */
 	align-items: center;
 	justify-content: center;
 }
 
-.adminStaffListHeader span:not(:nth-child(1)):before {
+.adminStaffListHeader div:not(:nth-child(1)):before {
 	position: absolute;
 	content: "";
 	left: -1rem;
@@ -57,67 +57,53 @@
 	min-width: 4.5rem;
 	/* flex: 4; */
 }
+.adminStaffListCard__office,
+.adminStaffListCard__name{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	gap: 0;
+}
+.adminStaffListCard__name,
 .adminStaffListHeader__name {
 	min-width: 20rem;
-	/* flex: 4; */
+	flex: 4;
 }
-.adminStaffListHeader__email {
-	min-width: 20rem;
-	/* flex: 4; */
+.adminStaffListCard__email{
+	/* color: rgb(101, 101, 223); */
+	color: var(--pc-green);
 }
+.adminStaffListCard__phone,
 .adminStaffListHeader__phone {
 	min-width: 10rem;
-	/* flex: 2; */
+	flex: 2;
 }
+.adminStaffListCard__region,
 .adminStaffListHeader__region {
 	min-width: 8rem;
-	/* flex: 2; */
+	flex: 2;
 }
+.adminStaffListCard__office,
 .adminStaffListHeader__office {
 	min-width: 8rem;
-	/* flex: 2.5; */
+	flex: 2.5;
 
 }
+.adminStaffListCard__title,
 .adminStaffListHeader__designation {
 	min-width: 8rem;
-	/* flex: 2; */
+	flex: 2;
 }
+.adminStaffListCard__status,
 .adminStaffListHeader__status {
 	min-width: 1rem;
-	/* flex: 1; */
+	flex: 1;
 }
 
 
 
-.adminStaffListCard__name {
-	width: 20rem;
-	/* flex: 4; */
-}
-.adminStaffListCard__email {
-	width: 20rem;
-	/* flex: 4; */
-}
-.adminStaffListCard__phone {
-	width: 10rem;
-	/* flex: 2; */
-}
-.adminStaffListCard__region {
-	width: 8rem;
-	/* flex: 2; */
-}
-.adminStaffListCard__office {
-	width: 8rem;
-	/* flex: 2.5; */
 
-}
-.adminStaffListCard__title {
-	width: 2rem;
-	/* flex: 2; */
-}
-.adminStaffListCard__status {
-	width: 1rem;
-	/* flex: 1; */
-}
 
 
 
@@ -136,7 +122,13 @@
 	height: calc(100vh - 200px);
 	overflow-y: auto;
 }
-
+.adminStaffListCardWrapperFlex{
+	height: 100%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
 
 .loading-container{
 	display: flex;

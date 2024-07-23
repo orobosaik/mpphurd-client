@@ -8,9 +8,8 @@ import ListCard from "../../../components/listCard/ListCard";
 import {
 	AddCard,
 	AddRounded,
-	Apartment,
-	ApartmentRounded,
-	CorporateFareRounded,
+	CloseRounded,
+	ExpandLessRounded,
 	ExpandMoreRounded,
 	PersonAddRounded,
 } from "@mui/icons-material";
@@ -24,14 +23,24 @@ import LoadingIcon from "../../../utilities/LoadingIcon";
 import { getFullName } from "../../../utilities/getFullName";
 import AdminStaffView from "../adminStaffView/adminStaffView";
 import { CircularProgress } from "@mui/material";
+import { JOB_TITLE_LIST } from "../../../utilities/appData";
+import Fuse from "fuse.js";
 
 export default function AdminOfficeList() {
 	const [isLoading, setIsLoading] = useState(true);
 	const [data, setData] = useState();
+	const [filteredData, setFilteredData] = useState([]);
 	const [staff, setStaff] = useState([]);
 	const [region, setRegion] = useState([]);
 	const themeColor = getThemeColor();
 	const [reload, setReload] = useState();
+
+	const [searchQuery, setSearchQuery] = useState("");
+	const [searchData, setSearchData] = useState([]);
+	const [status, setStatus] = useState("null");
+	const [designation, setDesignation] = useState("all");
+
+	const [sortReverse, setSortReverse] = useState(false);
 
 	const navigate = useNavigate();
 
@@ -47,6 +56,7 @@ export default function AdminOfficeList() {
 				]);
 
 				setData(res[0].data);
+				setFilteredData(res[0].data)
 				setStaff(res[1].data);
 				setRegion(res[2].data);
 				setIsLoading(false);
@@ -84,6 +94,43 @@ export default function AdminOfficeList() {
 	}, [reload]);
 
 	const todayDate = new Date().toISOString().slice(0, 10);
+
+	// CREATE SEARCH FUNCTIONALITY WITH FUSE JS
+	const options = {
+		includeScore: true,
+		includeMatches: true,
+		threshold: 0.2,
+		keys: [
+			"name",
+			"middleName",
+			"lastName",
+			"gender",
+			"jobTitle",
+			"position",
+			"region.name",
+			["office.name"],
+			"isActive",
+		],
+	};
+
+	useEffect(() => {
+		// console.log("DATA WHILE IN SEARCH", data);
+		// If the user searched for an empty string,
+		// display all data.
+		if (searchQuery.length === 0) {
+			setSearchData([]);
+			return;
+		}
+
+
+		const fuse = new Fuse(filteredData, options);
+		const results = fuse.search(searchQuery);
+		const items = results.map((result) => result.item);
+		// console.log("FUSE SEARCH: ", results);
+		// console.log("FUSE SEARCH MAPPED: ", items);
+		setSearchData(items);
+	}, [searchQuery]);
+
 	return (
 		<>
 			<div className="Office">
@@ -113,28 +160,113 @@ export default function AdminOfficeList() {
 								<>
 									<div className="listQuery">
 										<div className="listQueryOptions">
+											<span>Status: </span>
+											<select
+												defaultValue="null"
+												name="listQueryOption"
+												id="listQueryOption"
+												onChange={(e) => {
+													const statusVal = e.target.value;
+													const statusValBol =
+														statusVal === "true" ? true : false;
+													const designationVal = designation;
+													console.log(statusVal);
+													console.log(designationVal);
+													console.log(data);
+													console.log(filteredData);
+
+													setStatus(statusVal);
+
+													let newData;
+													if (statusVal === "null") {
+														newData = data;
+													} else {
+														newData = data.filter(
+															(d) => d.isActive === statusValBol
+														);
+													}
+
+													if (designationVal !== "all") {
+														newData = newData.filter(
+															(d) => d.jobTitle === designationVal
+														);
+													}
+
+													setFilteredData(newData);
+
+													if (searchQuery) {
+														setSearchQuery(()=> searchQuery)
+													}
+
+												}}>
+												<option value="null">All</option>
+												<option value="true">Active</option>
+												<option value="false">Inactive</option>
+											</select>
+										</div>
+										{/* <div className="listQueryOptions">
 											<span>REGION: </span>
 											<select name="listQueryOption" id="listQueryOption">
 												<option value="incoming">Benin</option>
-												{/* <option value="Outgoing">Outgoing</option> */}
-												{/* <option value="current">Current</option> */}
+											</select>
+										</div> */}
+										<div className="listQueryOptions">
+											<span>Region: </span>
+											<select
+												name="listQueryOption"
+												id="listQueryOption"
+												defaultValue="all">
+												<option value="all">All</option>
+												<option value="benin">Benin</option>
+												{/* {JOB_TITLE_LIST.map((job) => {
+													return <option value={job}>{job}</option>;
+												})} */}
 											</select>
 										</div>
 
-										<div>
-											<input type="text" placeholder="Search list..." />
+										<div className="querySearchBar">
+											<input
+												value={searchQuery}
+												onChange={(e) => {
+													setSearchQuery(e.target.value);
+												}}
+												type="text"
+												placeholder={`Search list...`}
+											/>
+											{searchQuery && (
+												<div
+													className="searchBarCloseButton"
+													onClick={() => setSearchQuery("")}>
+													{" "}
+													<CloseRounded />
+												</div>
+											)}
 										</div>
 
 										<div className="listCount">
 											<span>Count:</span>
-											<span>{data.length}</span>
+											{!searchQuery && (
+												<span>{filteredData?.length || "0"}</span>
+											)}
+											{searchQuery && <span>{searchData?.length || "0"}</span>}
 										</div>
 
-										<div className="listSort">
-											<span>Latest to Oldest</span>
-											<ExpandMoreRounded />
+										<div
+											className="listSort"
+											onClick={() => {
+												setSortReverse(!sortReverse);
+												setFilteredData(filteredData?.toReversed());
+												setSearchData(searchData?.toReversed());
+											}}>
+											<span>{!sortReverse ? "New to Old" : "Old to New"}</span>
+											{!sortReverse ? (
+												<ExpandMoreRounded />
+											) : (
+												<ExpandLessRounded />
+											)}
 										</div>
 									</div>
+
 									<div className="adminStaffListHeader">
 										<span className="adminOfficeListHeader__name"> Name</span>
 										<span className="adminOfficeListHeader__staff">Staff</span>
@@ -148,7 +280,7 @@ export default function AdminOfficeList() {
 										<span className="adminOfficeListHeader__edit">Edit</span>
 									</div>
 
-									<div className="adminStaffListCardWrapper">
+									{/* <div className="adminStaffListCardWrapper">
 										{data.map((d) => {
 											return (
 												<div className=" adminOfficeListCard" key={d._id}>
@@ -224,9 +356,175 @@ export default function AdminOfficeList() {
 												</div>
 											);
 										})}
-										{/*
-										<ListCard />
-										<ListCard /> */}
+									</div> */}
+
+									<div className="adminStaffListCardWrapper">
+										{searchQuery && (
+											<div className="searchHeader">
+												<p>Search Results</p>
+											</div>
+										)}
+										{isLoading && <LoadingIcon />}
+										{!isLoading &&
+											!searchQuery &&
+											filteredData.map((d) => {
+												return (
+													<div className=" adminOfficeListCard" key={d._id}>
+														<div className="adminOfficeListCard__name">
+															{d.name}
+														</div>
+
+														<div className="adminOfficeListCard__staff">
+															{staff
+																.filter((s) =>
+																	s.office.some(
+																		(office) => office?.id?._id === d?._id
+																	)
+																)
+																.map((s, i) => (
+																	<span
+																		key={i}
+																		onClick={() => {
+																			navigate("/staffs/staff", {
+																				state: { data: s },
+																			});
+																		}}>
+																		{[
+																			s.title,
+																			s.firstName,
+																			s.middleName,
+																			s.lastName,
+																			s.prefix,
+																		]
+																			.filter(
+																				(value) =>
+																					value != null &&
+																					value !== "" &&
+																					value !== undefined
+																			)
+																			.join(" ")}
+																	</span>
+																))}
+														</div>
+														<div className="adminOfficeListCard__tasks">
+															{d.tasks.map((word) => {
+																let wordsArray = word.split(" ");
+																let capitalizedArray = wordsArray.map(
+																	(word) =>
+																		word.charAt(0).toUpperCase() + word.slice(1)
+																);
+																return capitalizedArray.join(" ");
+															})}
+														</div>
+														<div className="adminOfficeListCard__region">
+															{d?.region?.name}
+														</div>
+														<div
+															className={
+																d.isActive
+																	? "adminOfficeListCard__status active"
+																	: "adminOfficeListCard__status inactive"
+															}>
+															{d.isActive ? "Active" : "Inactive"}
+														</div>
+
+														<div className="adminOfficeListCard__edit">
+															<AdminOfficeEditModal
+																className="adminOfficeListCardEditButton"
+																buttonName={"Edit"}
+																modalType={"edit"}
+																setReload={setReload}
+																data={d}
+																staff={staff}
+																region={region}
+															/>
+														</div>
+													</div>
+												);
+											})}
+										{!isLoading &&
+											searchQuery &&
+											searchData.map((d) => {
+												return (
+													<div className=" adminOfficeListCard" key={d._id}>
+														<div className="adminOfficeListCard__name">
+															{d.name}
+														</div>
+
+														<div className="adminOfficeListCard__staff">
+															{staff
+																.filter((s) =>
+																	s.office.some(
+																		(office) => office?.id?._id === d?._id
+																	)
+																)
+																.map((s, i) => (
+																	<span
+																		key={i}
+																		onClick={() => {
+																			navigate("/staffs/staff", {
+																				state: { data: s },
+																			});
+																		}}>
+																		{[
+																			s.title,
+																			s.firstName,
+																			s.middleName,
+																			s.lastName,
+																			s.prefix,
+																		]
+																			.filter(
+																				(value) =>
+																					value != null &&
+																					value !== "" &&
+																					value !== undefined
+																			)
+																			.join(" ")}
+																	</span>
+																))}
+														</div>
+														<div className="adminOfficeListCard__tasks">
+															{d.tasks.map((word) => {
+																let wordsArray = word.split(" ");
+																let capitalizedArray = wordsArray.map(
+																	(word) =>
+																		word.charAt(0).toUpperCase() + word.slice(1)
+																);
+																return capitalizedArray.join(" ");
+															})}
+														</div>
+														<div className="adminOfficeListCard__region">
+															{d?.region?.name}
+														</div>
+														<div
+															className={
+																d.isActive
+																	? "adminOfficeListCard__status active"
+																	: "adminOfficeListCard__status inactive"
+															}>
+															{d.isActive ? "Active" : "Inactive"}
+														</div>
+
+														<div className="adminOfficeListCard__edit">
+															<AdminOfficeEditModal
+																className="adminOfficeListCardEditButton"
+																buttonName={"Edit"}
+																modalType={"edit"}
+																setReload={setReload}
+																data={d}
+																staff={staff}
+																region={region}
+															/>
+														</div>
+													</div>
+												);
+											})}
+
+										{!isLoading && filteredData.length < 1 && (
+											<div className="adminStaffListCardWrapperFlex">
+												<p>No Data Found</p>
+											</div>
+										)}
 									</div>
 								</>
 							)}

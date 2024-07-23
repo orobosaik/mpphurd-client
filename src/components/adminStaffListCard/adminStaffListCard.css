@@ -21,15 +21,16 @@
 	background-color: var(--green-background);
 }
 
-.adminStaffListCard span {
+.adminStaffListCard div {
 	position: relative;
 	display: flex;
 	align-items: center;
-	/* justify-content: center; */
+	justify-content: center;
 	flex-wrap: wrap;
+	text-align: center;
 }
 
-.adminStaffListCard span:not(:nth-child(1)):before {
+.adminStaffListCard div:not(:nth-child(1)):before {
 	position: absolute;
 	content: "";
 	left: -1rem;
@@ -81,34 +82,4 @@
 		width: 4.5rem;
 	height: 4.5rem;
 	object-fit: cover;
-}
-
-.adminStaffListCard__name {
-	width: 20rem;
-	/* flex: 4; */
-}
-.adminStaffListCard__email {
-	width: 20rem;
-	/* flex: 4; */
-}
-.adminStaffListCard__phone {
-	width: 10rem;
-	/* flex: 2; */
-}
-.adminStaffListCard__region {
-	width: 8rem;
-	/* flex: 2; */
-}
-.adminStaffListCard__office {
-	width: 8rem;
-	/* flex: 2.5; */
-
-}
-.adminStaffListCard__title {
-	width: 8rem;
-	/* flex: 2; */
-}
-.adminStaffListCard__status {
-	width: 6rem;
-	/* flex: 2; */
 }
