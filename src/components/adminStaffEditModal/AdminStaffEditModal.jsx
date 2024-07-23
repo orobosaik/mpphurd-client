@@ -352,7 +352,7 @@ export default function AdminStaffEditModal({ ...props }) {
 				});
 			}, 0);
 		} catch (error) {
-			console.log(error);
+			// console.log(error);
 			let message = error.response
 				? error.response.data.message
 				: error.message;
