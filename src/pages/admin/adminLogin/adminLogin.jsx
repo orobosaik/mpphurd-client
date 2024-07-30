@@ -26,6 +26,7 @@ import AnimatedBackground from "../../../widgets/animatedBackground/AnimatedBack
 
 function AdminLogin() {
 	const [showPassword, setShowPassword] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 	const { currentAdmin, loading } = useSelector((state) => state.admin);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -59,6 +60,7 @@ function AdminLogin() {
 		dispatch(adminLoginStart());
 
 		try {
+			setIsLoading(true);
 			let host = import.meta.env.VITE_SERVER;
 			const res = await axios.post(`${host}/staffs/auth/admin_login`, {
 				email: email.current.value,
@@ -99,6 +101,8 @@ function AdminLogin() {
 			});
 
 			dispatch(adminLoginFailure());
+		} finally {
+			setIsLoading(false);
 		}
 	};
 
@@ -183,15 +187,14 @@ function AdminLogin() {
 							<button
 								type="submit"
 								className="btn btn-form-submit"
-								disabled={loading}>
-								{loading ? (
+								disabled={isLoading}>
+								Login Admin
+								{isLoading && (
 									<CircularProgress
-										thickness={5}
-										size={25}
+										thickness={6}
+										size={22}
 										sx={{ color: "white" }}
 									/>
-								) : (
-									"Login Admin"
 								)}
 							</button>
 						</form>

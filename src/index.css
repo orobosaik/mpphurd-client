@@ -249,11 +249,15 @@ html[data-theme="dark"] ::-webkit-scrollbar-thumb {
 	background-image: linear-gradient(
 			rgba(255, 255, 255, 0.5),
 			rgba(255, 255, 255, 0.5)
+		);
+	/* background-image: linear-gradient(
+			rgba(255, 255, 255, 0.5),
+			rgba(255, 255, 255, 0.5)
 		),
-		url(/assets/banners/bg2.jpg);
+		url(/assets/banners/bg2.jpg); */
 	background-size: cover;
 	background-repeat: repeat;
-	z-index: -10;
+	z-index: -5;
 	filter: brightness(80%) blur(4px);
 	-webkit-filter: brightness(80%) blur(4px);
 }

@@ -4,6 +4,7 @@ import "./App.css";
 import AdminRoutes from "./utilities/AdminRoutes";
 import MainRoutes from "./utilities/MainRoutes";
 import { ToastContainer } from "react-toastify";
+import AnimatedBackground from "./widgets/animatedBackground/AnimatedBackground";
 
 function App() {
 	const [view, setView] = useState(null);
@@ -40,6 +41,7 @@ function App() {
 
 	return (
 		<>
+			<AnimatedBackground />
 			<div className="pageWrapper"></div>
 
 			{view === "staff" ? (

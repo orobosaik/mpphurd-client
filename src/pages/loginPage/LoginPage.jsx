@@ -23,6 +23,7 @@ import AnimatedBackground from "../../widgets/animatedBackground/AnimatedBackgro
 
 function LoginPage() {
 	const [showPassword, setShowPassword] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const { currentUser, loading } = useSelector((state) => state.user);
 	const themeColor = getThemeColor();
@@ -59,6 +60,7 @@ function LoginPage() {
 		dispatch(loginStart());
 
 		try {
+			setIsLoading(true);
 			let host = import.meta.env.VITE_SERVER;
 			const res = await axios.post(`${host}/staffs/auth/login`, {
 				email: email.current.value,
@@ -99,6 +101,8 @@ function LoginPage() {
 			});
 
 			dispatch(loginFailure());
+		} finally {
+			setIsLoading(false);
 		}
 		if (loading) {
 			dispatch(loginFailure());
@@ -199,16 +203,15 @@ function LoginPage() {
 							<button
 								type="submit"
 								className="btn btn-form-submit"
-								// disabled={"loading"}
-							>
-								{loading ? (
+								disabled={isLoading}>
+								{" "}
+								Login
+								{isLoading && (
 									<CircularProgress
-										thickness={5}
-										size={25}
+										thickness={6}
+										size={22}
 										sx={{ color: "white" }}
 									/>
-								) : (
-									"Login"
 								)}
 							</button>
 						</form>
