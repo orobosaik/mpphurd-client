@@ -1,5 +1,5 @@
 import "./header.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
 	CloseRounded,
 	Email,
@@ -27,6 +27,7 @@ export default function Header() {
 	const staff = currentUser;
 
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const themeColor = getThemeColor();
 
 	const [isLoading, setIsLoading] = useState(true);
@@ -201,7 +202,8 @@ export default function Header() {
 						<Notifications className="notificationIcon" />
 						{/* <span className="headerIconBadge">3</span> */}
 					</div>
-					<div className="headerIconItem">
+
+					<div className="headerIconItem" onClick={() => navigate("/chat")}>
 						<Email className="emailIcon" />
 						{/* <span className="headerIconBadge">5</span> */}
 					</div>

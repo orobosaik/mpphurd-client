@@ -23,6 +23,7 @@ import InDevelopment from "../pages/inDevelopment/InDevelopment.jsx";
 import Profile from "../pages/profile/Profile.jsx";
 import Activity from "../pages/activity/Activity.jsx";
 import OfficeSetting from "../pages/officeSetting/OfficeSetting.jsx";
+import Chat from "../pages/chat/chat.jsx";
 
 function MainRoutes() {
 	const navigate = useNavigate();
@@ -129,6 +130,24 @@ function MainRoutes() {
 					{/* OFFICE SETTING */}
 					<Route path="/office_setting">
 						<Route index element={<OfficeSetting />} />
+
+						<Route path="new" element={<CreateApplication />} />
+						<Route path=":id">
+							<Route index element={<Plan />} />
+							<Route path="bills" element={<ViewBill />} />
+							<Route path="create_bill" element={<CreateBill />} />
+							<Route path="minute" element={<Minute />} />
+							<Route path="documents" element={<DocumentView />} />
+						</Route>
+						<Route path="office">
+							<Route path=":id" element={<Office />} />
+						</Route>
+					</Route>
+
+
+					{/* CHAT  */}
+					<Route path="/chat">
+						<Route index element={<Chat />} />
 
 						<Route path="new" element={<CreateApplication />} />
 						<Route path=":id">
