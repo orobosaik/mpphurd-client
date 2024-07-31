@@ -108,7 +108,8 @@ html[data-theme="dark"] {
 	--accent-3: rgb(196, 161, 97);
 	--accent-5: rgb(248, 161, 0);
 
-	--pc-green: #07bc0c;
+	/* --pc-green: #07bc0c; */
+	--pc-green: #2a8a2f;
 	/* --pc-green: #0d9f4f; */
 	/* --pc-green: #0d9f4f; */
 
@@ -121,6 +122,8 @@ html[data-theme="dark"] {
 	--green-background: rgba(238, 248, 243, 0.2);
 
 	--accent-action: rgb(59, 152, 184);
+
+	color: rgb(100, 100, 68);
 
 	/* BOX SHADOW */
 	--shadow: 0px 0px 9px -4px rgba(250, 250, 250, 0.5);
