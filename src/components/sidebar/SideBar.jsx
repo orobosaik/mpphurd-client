@@ -22,6 +22,7 @@ import { persistor } from "../../redux/store";
 import { getThemeColor } from "../../utilities/themeColor";
 import { resetOfficeData } from "../../redux/appSlice";
 import FeedbackModal from "../feedbackModal/FeedbackModal";
+import { socket } from "../../utilities/socket";
 
 export default function SideBar({ selected }) {
 	const navigate = useNavigate();
@@ -32,10 +33,16 @@ export default function SideBar({ selected }) {
 
 	const handleLogout = () => {
 		// console.log("YAYAYAYAYAYA");
-		dispatch(logout());
-		dispatch(resetOfficeData());
 		// navigate("/login");
 		// persistor.purge();
+
+		socket.disconnect();
+		socket.on("disconnect", () => {
+			console.log(`I'm disconnected from the back-end`);
+		});
+
+		dispatch(logout());
+		dispatch(resetOfficeData());
 
 		setTimeout(() => {
 			toast.success("Logout Successful", {

@@ -1,11 +1,11 @@
 import React from "react";
 
-export const ChatListCard = ({ data }) => {
-	const staff = null;
+export const StaffListCard = ({ data }) => {
+	const staff = data.user;
 	return (
 		<div
 			className={`chat-list-card ${
-				data?.id === data?.selectedId && "selected"
+				staff?._id === data?.recipient?._id && "selected"
 			}`}>
 			<div className="left">
 				<span className="avatar">
@@ -20,18 +20,12 @@ export const ChatListCard = ({ data }) => {
 					/>
 				</span>
 				<div className="text">
-					<span className="name">Orobosa Ikponmwosa</span>
+					<span className="name">{staff?.fullName}</span>
 					<div className="message">
 						<span></span>
-						<span className="">
-							I'm doing well, thanks for asking! How about you?
-						</span>
+						<span className="">{staff?.position}</span>
 					</div>
 				</div>
-			</div>
-			<div className="right">
-				<span className="time">12:32 AM</span>
-				<span className="count">4</span>
 			</div>
 		</div>
 	);

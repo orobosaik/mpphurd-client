@@ -5,6 +5,7 @@ const initialState = {
 	currentUser: null,
 	loading: null,
 	error: null,
+	chat: { allDirectMessages: [] },
 };
 
 const userSlice = createSlice({
@@ -30,6 +31,12 @@ const userSlice = createSlice({
 			state.currentUser = null;
 			state.loading = null;
 			state.error = null;
+			state.chat = {
+				allDirectMessages: [],
+			};
+		},
+		setChat: (state, action) => {
+			state.chat = action.payload;
 		},
 	},
 	extraReducers: (builder) => {
@@ -39,6 +46,6 @@ const userSlice = createSlice({
 	},
 });
 
-export const { loginStart, loginSuccess, loginFailure, logout } =
+export const { loginStart, loginSuccess, loginFailure, logout, setChat } =
 	userSlice.actions;
 export default userSlice.reducer;

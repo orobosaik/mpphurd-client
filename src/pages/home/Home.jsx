@@ -15,15 +15,6 @@ import { getThemeColor } from "../../utilities/themeColor";
 // const { format, getHours } = require("date-fns");
 import { format, getHours } from "date-fns";
 
-const events = [
-	"load",
-	"mousemove",
-	"mousedown",
-	"click",
-	"scroll",
-	"keypress",
-];
-let logoutCount = 0;
 
 export default function Home() {
 	const { currentUser, loading } = useSelector((state) => state.user);
@@ -64,78 +55,6 @@ export default function Home() {
 		})
 	);
 
-	// AUTO LOG OUT FUNCTIONALITY
-	let timer;
-
-	// this resets the timer if it exists.
-	const resetTimer = () => {
-		if (timer) clearTimeout(timer);
-	};
-
-	useEffect(() => {
-		if (currentUser) {
-			Object.values(events).forEach((item) => {
-				window.addEventListener(item, () => {
-					resetTimer();
-					handleLogoutTimer();
-				});
-			});
-
-			return () => {
-				resetTimer();
-				// Listener clean up. Removes the existing event listener from the window
-				Object.values(events).forEach((item) => {
-					window.removeEventListener(item, resetTimer);
-				});
-			};
-		}
-	});
-
-	// this function sets the timer that logs out the user after 10 secs
-	const handleLogoutTimer = () => {
-		const time = import.meta.env.VITE_LOGOUT_TIMER;
-		if (currentUser) {
-			// Add this check to ensure the user is still authenticated
-			timer = setTimeout(() => {
-				// clears any pending timer.
-				resetTimer();
-				// console.log("INSIDE TIMER");
-
-				// logs out user
-				// logoutAction();
-
-				if (logoutCount === 1) {
-					toast.error("Session Timeout", {
-						position: "top-right",
-						autoClose: 2500,
-						hideProgressBar: false,
-						closeOnClick: true,
-						pauseOnHover: true,
-						draggable: true,
-						progress: undefined,
-						theme: themeColor,
-					});
-				}
-
-				// Listener clean up. Removes the existing event listener from the window
-				Object.values(events).forEach((item) => {
-					window.removeEventListener(item, resetTimer);
-				});
-
-				// increase logoutCount on every call.
-				logoutCount++;
-
-				dispatch(resetOfficeData());
-				dispatch(logout());
-				window.location.reload();
-			}, 1000 * 60 * time); // 1000ms = 1secs. You can change the time in .env file.
-		} else {
-			resetTimer(); // Clear the timer
-			Object.values(events).forEach((item) => {
-				window.removeEventListener(item, resetTimer);
-			});
-		}
-	};
 
 	// FORMAT GREETING
 	const getGreeting = () => {

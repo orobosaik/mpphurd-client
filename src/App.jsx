@@ -5,11 +5,15 @@ import AdminRoutes from "./utilities/AdminRoutes";
 import MainRoutes from "./utilities/MainRoutes";
 import { ToastContainer } from "react-toastify";
 import AnimatedBackground from "./widgets/animatedBackground/AnimatedBackground";
+// import { socket } from "./utilities/socket";
 
 function App() {
 	const [view, setView] = useState(null);
 
 	useEffect(() => {
+		// socket.on("users", (data) => {
+		// 	console.log("USER:", data);
+		// });
 		const host = window.location.host;
 
 		// const path = window.location.pathname;

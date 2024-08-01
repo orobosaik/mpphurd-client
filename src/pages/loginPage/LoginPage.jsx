@@ -20,6 +20,8 @@ import ChangePasswordModal from "../../components/changePasswordModal/ChangePass
 import { getThemeColor } from "../../utilities/themeColor";
 import { useNavigate } from "react-router-dom";
 import AnimatedBackground from "../../widgets/animatedBackground/AnimatedBackground";
+import { socket } from "../../utilities/socket";
+import { useEffect } from "react";
 
 function LoginPage() {
 	const [showPassword, setShowPassword] = useState(false);
@@ -30,6 +32,12 @@ function LoginPage() {
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+
+	// useEffect(() => {
+	// 	if (currentUser) {
+	// 		navigate("/");
+	// 	}
+	// }, []);
 
 	const email = useRef();
 	const password = useRef();
@@ -68,7 +76,8 @@ function LoginPage() {
 			});
 
 			dispatch(loginSuccess(res.data));
-			navigate("/");
+
+			// navigate("/");
 
 			setTimeout(() => {
 				toast.success("Login Successful", {
