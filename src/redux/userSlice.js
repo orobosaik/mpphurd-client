@@ -5,7 +5,8 @@ const initialState = {
 	currentUser: null,
 	loading: null,
 	error: null,
-	chat: { allDirectMessages: [] },
+	chat: { typingList: [], allDirectMessages: [] },
+	messages: [],
 };
 
 const userSlice = createSlice({
@@ -31,12 +32,23 @@ const userSlice = createSlice({
 			state.currentUser = null;
 			state.loading = null;
 			state.error = null;
-			state.chat = {
-				allDirectMessages: [],
-			};
+			state.chat = { typingList: [], allDirectMessages: [] };
 		},
 		setChat: (state, action) => {
 			state.chat = action.payload;
+		},
+		addMessage: (state, action) => {
+			state.chat.allDirectMessages = [
+				...state.chat.allDirectMessages,
+				action.payload,
+			];
+		},
+		startTyping: (state, action) => {
+			state.chat.typingList = [...state.chat.typingList, action.payload];
+		},
+		endTyping: (state, action) => {
+			const newList = state.chat.typingList.filter((f) => f !== action.payload);
+			state.chat.typingList = newList;
 		},
 	},
 	extraReducers: (builder) => {
@@ -46,6 +58,14 @@ const userSlice = createSlice({
 	},
 });
 
-export const { loginStart, loginSuccess, loginFailure, logout, setChat } =
-	userSlice.actions;
+export const {
+	loginStart,
+	loginSuccess,
+	loginFailure,
+	logout,
+	setChat,
+	addMessage,
+	startTyping,
+	endTyping,
+} = userSlice.actions;
 export default userSlice.reducer;

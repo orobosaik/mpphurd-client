@@ -24,8 +24,14 @@ import Profile from "../pages/profile/Profile.jsx";
 import Activity from "../pages/activity/Activity.jsx";
 import OfficeSetting from "../pages/officeSetting/OfficeSetting.jsx";
 import Chat from "../pages/chat/chat.jsx";
-import { allDirectMessages, socket } from "./socket.js";
-import { logout, setChat } from "../redux/userSlice.js";
+import { socket } from "./socket.js";
+import {
+	addMessage,
+	endTyping,
+	logout,
+	setChat,
+	startTyping,
+} from "../redux/userSlice.js";
 import { resetOfficeData } from "../redux/appSlice.js";
 
 const events = [
@@ -45,156 +51,172 @@ function LoggedWrapper() {
 	const themeColor = getThemeColor();
 	// console.log(currentUser);
 
-
-  const [allDirectMessages, setAllDirectMessages]= useState([])
+	const [allDirectMessages, setAllDirectMessages] = useState([]);
+  const [typingUsers, setTypingUsers] = useState({});
 
 	useEffect(() => {
 		setThemeColor(theme);
 	}, [theme]);
 
-	let logoutCount = 0;
-	// AUTO LOG OUT FUNCTIONALITY
-	let timer;
+	// let logoutCount = 0;
+	// // AUTO LOG OUT FUNCTIONALITY
+	// let timer;
 
-	// this resets the timer if it exists.
-	const resetTimer = () => {
-		if (timer) clearTimeout(timer);
-	};
+	// // this resets the timer if it exists.
+	// const resetTimer = () => {
+	// 	if (timer) clearTimeout(timer);
+	// };
 
-	useEffect(() => {
-		if (currentUser) {
-			Object.values(events).forEach((item) => {
-				window.addEventListener(item, () => {
-					resetTimer();
-					handleLogoutTimer();
-				});
-			});
+	// useEffect(() => {
+	// 	if (currentUser) {
+	// 		Object.values(events).forEach((item) => {
+	// 			window.addEventListener(item, () => {
+	// 				resetTimer();
+	// 				handleLogoutTimer();
+	// 			});
+	// 		});
 
-			return () => {
-				resetTimer();
-				// Listener clean up. Removes the existing event listener from the window
-				Object.values(events).forEach((item) => {
-					window.removeEventListener(item, resetTimer);
-				});
-			};
-		}
-	});
+	// 		return () => {
+	// 			resetTimer();
+	// 			// Listener clean up. Removes the existing event listener from the window
+	// 			Object.values(events).forEach((item) => {
+	// 				window.removeEventListener(item, resetTimer);
+	// 			});
+	// 		};
+	// 	}
+	// });
 
-	// this function sets the timer that logs out the user after 10 secs
-	const handleLogoutTimer = () => {
-		const time = import.meta.env.VITE_LOGOUT_TIMER;
-		if (currentUser) {
-			// Add this check to ensure the user is still authenticated
-			timer = setTimeout(() => {
-				// clears any pending timer.
-				resetTimer();
-				// console.log("INSIDE TIMER");
+	// // this function sets the timer that logs out the user after 10 secs
+	// const handleLogoutTimer = () => {
+	// 	const time = import.meta.env.VITE_LOGOUT_TIMER;
+	// 	if (currentUser) {
+	// 		// Add this check to ensure the user is still authenticated
+	// 		timer = setTimeout(() => {
+	// 			// clears any pending timer.
+	// 			resetTimer();
+	// 			// console.log("INSIDE TIMER");
 
-				// logs out user
-				// logoutAction();
+	// 			// logs out user
+	// 			// logoutAction();
 
-				if (logoutCount === 1) {
-					toast.error("Session Timeout", {
-						position: "top-right",
-						autoClose: 2500,
-						hideProgressBar: false,
-						closeOnClick: true,
-						pauseOnHover: true,
-						draggable: true,
-						progress: undefined,
-						theme: themeColor,
-					});
-				}
+	// 			if (logoutCount === 1) {
+	// 				toast.error("Session Timeout", {
+	// 					position: "top-right",
+	// 					autoClose: 2500,
+	// 					hideProgressBar: false,
+	// 					closeOnClick: true,
+	// 					pauseOnHover: true,
+	// 					draggable: true,
+	// 					progress: undefined,
+	// 					theme: themeColor,
+	// 				});
+	// 			}
 
-				// Listener clean up. Removes the existing event listener from the window
-				Object.values(events).forEach((item) => {
-					window.removeEventListener(item, resetTimer);
-				});
+	// 			// Listener clean up. Removes the existing event listener from the window
+	// 			Object.values(events).forEach((item) => {
+	// 				window.removeEventListener(item, resetTimer);
+	// 			});
 
-				// increase logoutCount on every call.
-				logoutCount++;
+	// 			// increase logoutCount on every call.
+	// 			logoutCount++;
 
-				socket.disconnect();
-				socket.on("disconnected", () => {
-					console.log(`I'm disconnected from the back-end`);
-				});
-				dispatch(logout());
-				dispatch(resetOfficeData());
+	// 			socket.disconnect();
+	// 			socket.on("disconnected", () => {
+	// 				console.log(`I'm disconnected from the back-end`);
+	// 			});
+	// 			dispatch(logout());
+	// 			dispatch(resetOfficeData());
 
-				window.location.reload();
-			}, 1000 * 60 * time); // 1000ms = 1secs. You can change the time in .env file.
-		} else {
-			resetTimer(); // Clear the timer
-			Object.values(events).forEach((item) => {
-				window.removeEventListener(item, resetTimer);
-			});
-		}
-	};
-
+	// 			window.location.reload();
+	// 		}, 1000 * 60 * time); // 1000ms = 1secs. You can change the time in .env file.
+	// 	} else {
+	// 		resetTimer(); // Clear the timer
+	// 		Object.values(events).forEach((item) => {
+	// 			window.removeEventListener(item, resetTimer);
+	// 		});
+	// 	}
+	// };
 
 	// Connect Socket Io
 	useEffect(() => {
-		socket.auth = { userId: currentUser._id };
-		socket.connect();
-		socket.on("connect", () => {
-			console.log(`I'm connected with the back-end`);
-		});
-		socket.onAny((event, ...args) => {
-			console.log(event, args);
-		});
-		socket.on("users", (data) => {
-			console.log("USER:", data);
-		});
+		const connectSocket = () => {
+			console.log("testing This again In");
+			socket.auth = { userId: currentUser._id };
+			socket.connect();
+			socket.on("connect", () => {
+				console.log(`I'm connected with the back-end`);
+			});
+			socket.onAny((event, ...args) => {
+				console.log(event, args);
+			});
+			socket.on("users", (data) => {
+				console.log("USER:", data);
+			});
+		};
+		console.log("testing This again Out");
+		connectSocket();
 		return () => {
+			console.log("LOGOUT WORKING");
 			socket.off("connect", () => {
 				console.log(`I'm disconnected with the back-end`);
 			});
-			socket.offAny((event, ...args) => {
-				console.log(event, args);
+			socket.off("users", () => {
+				console.log("USER GONE");
 			});
-			socket.off("users", (data) => {
-				console.log("USER:", data);
-			});
+			// socket.off("directMessage");
+			// socket.off("allDirectMessages");
+			// socket.off("messageRead");
+			// console.log("LOGOUT WORKING222");
 		};
 	}, []);
 
 	// Receive Messages
 	useEffect(() => {
-
+		// Request notification permission
+		if (Notification.permission !== "granted") {
+			Notification.requestPermission();
+		}
 		socket.on("directMessage", (data) => {
 			console.log("INSIDE CLIENT DIRECT MSSG");
-			// setAllDirectMessages((prev) => [
-			// 	...prev,
-			// 	{
-			// 		timestamp: data.timestamp,
-			// 		content: data.content,
-			// 		sender: data.sender,
-			// 		receiver: data.receiver,
-			// 		read: data.read,
-			// 	},
-			// ]);
 
 			console.log(chat);
-      console.log(data);
-      const newAllMessages = [...chat.allDirectMessages, data]
-      console.log(newAllMessages);
+			console.log(data);
 
-      // const newData = {
-      //   ...chat,
-      //   allDirectMessages:
-      // }
-
-			// dispatch(
-			// 	setChat({
-			// 		// ...chat,
-			// 		allDirectMessages: newAllMessages,
-			// 	})
-      // );
-
-      allDirectMessages().add(data)
+			dispatch(addMessage(data));
+			showNotification(data);
 
 			console.log(chat);
 		});
+
+		socket.on("typing", (data) => {
+			// Logic
+
+			// Set the user as active
+			setTypingUsers((prev) => ({
+				...prev,
+				[data.sender]: true,
+			}));
+			dispatch(startTyping(data.sender));
+
+			// Clear the existing timeout for the user if it exists
+			if (typingUsers[data.sender]?.timeoutId) {
+				clearTimeout(typingUsers[data.sender].timeoutId);
+			}
+			// Set a new timeout to set the user to inactive after 5 seconds
+			const timeoutId = setTimeout(() => {
+				setTypingUsers((prev) => {
+					const { [data.sender]: _, ...newUsers } = prev;
+					return newUsers;
+				});
+				dispatch(endTyping(data.sender));
+			}, 5000);
+			// Store the timeout ID in activeUsers state
+			setTypingUsers((prev) => ({
+				...prev,
+				[data.sender]: { isActive: true, timeoutId },
+			}));
+		});
+
 		socket.on("allDirectMessages", (data) => {
 			console.log("INSIDE CLIENT ALL DIRECT MSSG");
 			setAllDirectMessages(data);
@@ -207,11 +229,40 @@ function LoggedWrapper() {
 			);
 		});
 
-		// return () => {
-		// 	socket.off("directMessage");
-		// 	socket.off("messageRead");
-		// };
+		return () => {
+			socket.off("directMessage");
+			socket.off("allDirectMessages");
+			socket.off("messageRead");
+			socket.off("typing");
+			console.log("LOGOUT WORKING222");
+		};
 	}, []);
+
+	// Cleanup timeouts when the component unmounts
+	useEffect(() => {
+		return () => {
+			Object.values(typingUsers).forEach(({ timeoutId }) => {
+				if (timeoutId) {
+					clearTimeout(timeoutId);
+				}
+			});
+		};
+	}, [typingUsers]);
+
+	const showNotification = (messageData) => {
+		if (Notification.permission === "granted") {
+			const notification = new Notification("New message", {
+				body: `${messageData.sender}: ${messageData.content}`,
+				icon: "assets/logos/Logo-Mpphurd.png",
+			});
+
+			notification.onclick = () => {
+				// Logic to focus on the chat window when the notification is clicked
+				window.focus();
+				// Optionally, navigate to the chat page or open the chat modal
+			};
+		}
+	};
 
 	// useEffect(() => {
 	// 	if (!currentUser) {

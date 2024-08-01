@@ -12,7 +12,7 @@ import { fetchInstance } from "../../utilities/fetcher";
 import { useDispatch, useSelector } from "react-redux";
 import { Messages } from "./messages";
 import { socket } from "../../utilities/socket";
-import { setChat } from "../../redux/userSlice";
+import { addMessage, setChat } from "../../redux/userSlice";
 
 const Chat = () => {
 	const dispatch = useDispatch();
@@ -22,7 +22,6 @@ const Chat = () => {
 
 	const [recipient, setRecipient] = useState(null);
 	const [messageContent, setMessageContent] = useState("");
-	const [messages, setMessages] = useState([]);
 	const [allDirectMessages, setAllDirectMessages] = useState([]);
 
 	const [newMessageCount, setNewMessageCount] = useState(0);
@@ -61,22 +60,6 @@ const Chat = () => {
 			// scrollToBottom();
 		}
 	}, [isScrolledToBottom]);
-
-	// Simulate receiving new messages
-	// useEffect(() => {
-	// 	const interval = setInterval(() => {
-	// 		const newMessage = {
-	// 			timestamp: Date.now(),
-	// 			content: `New message ${messages.length + 1}`,
-	// 			sender: currentUser._id,
-	// 			receiver: recipient._id,
-	// 			read: false,
-	// 		};
-	// 		setMessages((prevMessages) => [...prevMessages, newMessage]);
-	// 	}, 3000); // Every 3 seconds a new message is added
-
-	// 	return () => clearInterval(interval);
-	// }, [messages]);
 
 	const [isFetching, setIsFetching] = useState(false);
 
@@ -123,23 +106,20 @@ const Chat = () => {
 		socket.emit("directMessage", message);
 		console.log("INSIDE CLIENT SEND MSSG");
 
-		// setMessages((prev) => [...prev, { sender: currentUser._id, message }]);
-
-    // setAllDirectMessages((prev) => [...prev, message]);
-
-		dispatch(
-      setChat({
-        ...chat,
-				allDirectMessages : [...chat.allDirectMessages, message],
-			})
-		);
-    console.log(chat)
+		console.log(chat);
+		console.log(message);
+		dispatch(addMessage(message));
+		console.log(chat);
 
 		setMessageContent("");
 		// handleScrollDown();
 	};
 	const markAsRead = (message) => {
 		socket.emit("messageRead", message);
+	};
+
+	const handleTyping = () => {
+		socket.emit("typing", { receiver: recipient._id, sender: currentUser._id });
 	};
 
 	// CREATE SEARCH FUNCTIONALITY WITH FUSE JS
@@ -210,6 +190,7 @@ const Chat = () => {
 						// planNumber={topBarData.planNumber}
 						// lastPlanNo={topBarData.lastPlanNo}
 						// options={connectionStatus()}
+						options={chat.typingList.includes(recipient?._id) && "WATTTT"}
 						style={{
 							boxShadow:
 								scroll > 0 ? "inset 0 8px 5px -5px rgb(0 0 0 / 0.4)" : "none",
@@ -360,6 +341,7 @@ const Chat = () => {
 												data={{
 													allDirectMessages: chat.allDirectMessages,
 													recipient,
+													isTyping: chat.typingList.includes(recipient._id),
 												}}
 											/>
 											{!isScrolledToBottom && newMessageCount > 0 && (
@@ -384,7 +366,10 @@ const Chat = () => {
 											type="text"
 											placeholder="Type a message"
 											value={messageContent}
-											onChange={(e) => setMessageContent(e.target.value)}
+											onChange={(e) => {
+												handleTyping();
+												setMessageContent(e.target.value);
+											}}
 										/>
 										<button className="send-btn" type="submit">
 											Send

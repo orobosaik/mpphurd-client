@@ -5,6 +5,7 @@ import { format } from "date-fns";
 export const Messages = ({ data }) => {
 	const list = data.allDirectMessages || [];
 	const recipient = data.recipient;
+	const typing = data.isTyping;
 	const { currentUser } = useSelector((state) => state.user);
 	return (
 		<>
@@ -35,6 +36,16 @@ export const Messages = ({ data }) => {
 						</div>
 					);
 				})}
+
+			{typing && (
+				<div className="typing received">
+					<div className="message-content">
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+				</div>
+			)}
 
 			{/* <div className="message received">
 				<div className="message-content">
