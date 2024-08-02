@@ -29,7 +29,10 @@ import {
 	addMessage,
 	endTyping,
 	logout,
+	setActiveList,
 	setChat,
+	setChatList,
+	setTotalUnreadCount,
 	startTyping,
 } from "../redux/userSlice.js";
 import { resetOfficeData } from "../redux/appSlice.js";
@@ -52,7 +55,10 @@ function LoggedWrapper() {
 	// console.log(currentUser);
 
 	const [allDirectMessages, setAllDirectMessages] = useState([]);
-  const [typingUsers, setTypingUsers] = useState({});
+	const [typingUsers, setTypingUsers] = useState({});
+
+	const receivedSound = new Audio("/assets/sound/received.mp3");
+	const notificationSound = new Audio("/assets/sound/notification.mp3");
 
 	useEffect(() => {
 		setThemeColor(theme);
@@ -140,7 +146,6 @@ function LoggedWrapper() {
 	// Connect Socket Io
 	useEffect(() => {
 		const connectSocket = () => {
-			console.log("testing This again In");
 			socket.auth = { userId: currentUser._id };
 			socket.connect();
 			socket.on("connect", () => {
@@ -150,10 +155,12 @@ function LoggedWrapper() {
 				console.log(event, args);
 			});
 			socket.on("users", (data) => {
-				console.log("USER:", data);
+				const { [currentUser._id]: _, ...list } = data;
+
+				dispatch(setActiveList(list));
+				console.log("USER:", list);
 			});
 		};
-		console.log("testing This again Out");
 		connectSocket();
 		return () => {
 			console.log("LOGOUT WORKING");
@@ -179,13 +186,23 @@ function LoggedWrapper() {
 		socket.on("directMessage", (data) => {
 			console.log("INSIDE CLIENT DIRECT MSSG");
 
-			console.log(chat);
-			console.log(data);
+			receivedSound.play();
 
 			dispatch(addMessage(data));
 			showNotification(data);
 
-			console.log(chat);
+			const newActiveChats = getActiveChats(
+				[...chat.allDirectMessages, data],
+				currentUser._id
+			);
+
+			const totalUnreadCount = Object.values(newActiveChats).reduce(
+				(acc, chat) => acc + chat.unread,
+				0
+			);
+			// setActiveChats(newActiveChats);
+			dispatch(setTotalUnreadCount(totalUnreadCount));
+			dispatch(setChatList(newActiveChats));
 		});
 
 		socket.on("typing", (data) => {
@@ -209,7 +226,7 @@ function LoggedWrapper() {
 					return newUsers;
 				});
 				dispatch(endTyping(data.sender));
-			}, 5000);
+			}, 2000);
 			// Store the timeout ID in activeUsers state
 			setTypingUsers((prev) => ({
 				...prev,
@@ -249,6 +266,68 @@ function LoggedWrapper() {
 		};
 	}, [typingUsers]);
 
+	useEffect(() => {
+		return () => {
+			const newActiveChats = getActiveChats(
+				chat.allDirectMessages,
+				currentUser._id
+			);
+
+			const totalUnreadCount = Object.values(newActiveChats).reduce(
+				(acc, chat) => acc + chat.unread,
+				0
+			);
+			// setActiveChats(newActiveChats);
+			dispatch(setTotalUnreadCount(totalUnreadCount));
+			dispatch(setChatList(newActiveChats));
+		};
+	}, [chat.allDirectMessages]);
+
+	function getActiveChats(messages, currentUserId) {
+		// Filter out messages where the current user is not the sender or receiver
+		const filteredMessages = messages.filter(
+			(msg) => msg.sender === currentUserId || msg.receiver === currentUserId
+		);
+
+		// Create a dictionary to store the latest message for each user
+		const latestMessages = {};
+
+		// Iterate over the filtered messages
+		filteredMessages.forEach((msg) => {
+			// Get the user ID (either sender or receiver)
+			const userId = msg.sender === currentUserId ? msg.receiver : msg.sender;
+
+			// If the user ID is not in the dictionary or the current message is newer
+			if (
+				!latestMessages[userId] ||
+				msg.timestamp > latestMessages[userId].message.timestamp
+			) {
+				// Update the dictionary with the latest message
+				latestMessages[userId] = {
+					message: { ...msg },
+					unread: filteredMessages.filter(
+						(m) =>
+							m.sender === userId && m.receiver === currentUserId && !m.read
+					).length,
+				};
+			}
+		});
+
+		// Sort the messages by timestamp
+		const sortedMessages = Object.keys(latestMessages)
+			.sort(
+				(a, b) =>
+					latestMessages[b].message.timestamp -
+					latestMessages[a].message.timestamp
+			)
+			.reduce((acc, key) => {
+				acc[key] = latestMessages[key];
+				return acc;
+			}, {});
+
+		return sortedMessages;
+	}
+
 	const showNotification = (messageData) => {
 		if (Notification.permission === "granted") {
 			const notification = new Notification("New message", {
@@ -273,7 +352,7 @@ function LoggedWrapper() {
 
 	return (
 		<>
-			<div>WORKING YEAH</div>
+			{/* <div>WORKING YEAH</div> */}
 
 			<Routes>
 				{/* HOME PAGE */}

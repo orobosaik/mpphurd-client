@@ -5,7 +5,13 @@ const initialState = {
 	currentUser: null,
 	loading: null,
 	error: null,
-	chat: { typingList: [], allDirectMessages: [] },
+	chat: {
+		totalUnreadCount: "",
+		chatList: {},
+		activeList: [],
+		typingList: [],
+		allDirectMessages: [],
+	},
 	messages: [],
 };
 
@@ -32,7 +38,13 @@ const userSlice = createSlice({
 			state.currentUser = null;
 			state.loading = null;
 			state.error = null;
-			state.chat = { typingList: [], allDirectMessages: [] };
+			state.chat = {
+				totalUnreadCount: "",
+				chatList: {},
+				activeList: [],
+				typingList: [],
+				allDirectMessages: [],
+			};
 		},
 		setChat: (state, action) => {
 			state.chat = action.payload;
@@ -49,6 +61,15 @@ const userSlice = createSlice({
 		endTyping: (state, action) => {
 			const newList = state.chat.typingList.filter((f) => f !== action.payload);
 			state.chat.typingList = newList;
+		},
+		setActiveList: (state, action) => {
+			state.chat.activeList = action.payload;
+		},
+		setChatList: (state, action) => {
+			state.chat.chatList = action.payload;
+		},
+		setTotalUnreadCount: (state, action) => {
+			state.chat.totalUnreadCount = action.payload;
 		},
 	},
 	extraReducers: (builder) => {
@@ -67,5 +88,8 @@ export const {
 	addMessage,
 	startTyping,
 	endTyping,
+	setActiveList,
+	setChatList,
+	setTotalUnreadCount,
 } = userSlice.actions;
 export default userSlice.reducer;

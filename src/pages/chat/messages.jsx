@@ -18,7 +18,7 @@ export const Messages = ({ data }) => {
 			{list
 				.filter(
 					(msg) =>
-						msg.receiver === recipient._id || msg.sender === recipient._id
+						msg.receiver === recipient || msg.sender === recipient
 				)
 				.map((e, i) => {
 					return (

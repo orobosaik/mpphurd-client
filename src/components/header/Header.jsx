@@ -23,7 +23,7 @@ export default function Header() {
 	const [searchData, setSearchData] = useState([]);
 	const [open, setOpen] = useState(false);
 	const [isFetching, setIsFetching] = useState(false);
-	const { currentUser, loading } = useSelector((state) => state.user);
+	const { currentUser, loading, chat } = useSelector((state) => state.user);
 	const staff = currentUser;
 
 	const dispatch = useDispatch();
@@ -205,7 +205,9 @@ export default function Header() {
 
 					<div className="headerIconItem" onClick={() => navigate("/chat")}>
 						<Email className="emailIcon" />
-						{/* <span className="headerIconBadge">5</span> */}
+						{chat.totalUnreadCount > 0 && (
+							<span className="headerIconBadge">{chat.totalUnreadCount}</span>
+						)}
 					</div>
 				</div>
 
