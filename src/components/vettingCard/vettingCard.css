@@ -79,7 +79,7 @@ html[data-theme="dark"] .vettingCard {
 }
 .vettingCard .type__title {
 	text-transform: uppercase;
-	font-size: 1em;
+	font-size: 0.95em;
 }
 .vettingCard .type__status {
 	font-size: 0.7em;
@@ -127,7 +127,7 @@ html[data-theme="dark"] .vettingCard {
 	font-size: 1em;
 }
 .vettingCard .vet__status {
-	font-size: 0.95em;
+	font-size: 0.85em;
 	/* padding: 0 .2rem; */
 	font-weight: 700;
 	text-transform: capitalize;
@@ -164,7 +164,9 @@ html[data-theme="dark"] .vettingCard {
 }
 .vettingCard .vet__officer {
 	font-weight: 700;
-	font-size: 1.3rem;
+	/* font-size: 1.3rem; */
+	font-size: 0.90em;
+
 	color: var(--accent-action);
 }
 .vettingCard .vet__add {
@@ -206,8 +208,8 @@ html[data-theme="dark"] .vettingCard {
 
 .vettingCardCommentText {
 	border-top: solid var(--sc-grey) 1px;
-	padding: 1rem;
-	white-space: pre-wrap;
+	font-size: 0.94em;
+	/* padding: 1rem 0; */
 }
 
 .vettingCardArrow {

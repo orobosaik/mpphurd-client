@@ -107,12 +107,12 @@ function VettingCard({ data, header, reload, reloadActivities }) {
 
 								{/* <div className="vet__comment">{item?.comment}</div> */}
 
-									<div
-										// className="activityCardCommentText"
-										dangerouslySetInnerHTML={{
-											__html: item?.comment,
-										}}
-									/>
+								<div
+									className="vettingCardCommentText"
+									dangerouslySetInnerHTML={{
+										__html: item?.comment,
+									}}
+								/>
 								<div className="vet__officer">{item?.staffName}</div>
 							</div>
 						);

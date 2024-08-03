@@ -140,7 +140,7 @@ export default function AddCommentModal({
 							<div>
 								<div className="minuteItems">
 									<div className="minuteItem">
-										<label htmlFor="minuteStatus">Status:</label>
+										<label htmlFor="minuteStatus">Select Type:</label>
 										<select name="minuteStatus" id="minuteStatus" required>
 											<option value="">...</option>
 
