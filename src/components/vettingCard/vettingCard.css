@@ -69,6 +69,7 @@ html[data-theme="dark"] .vettingCard {
 }
 
 .vettingCard .type {
+	display: flex;
 	font-size: 1.6rem;
 	cursor: pointer;
 	align-items: center;
@@ -78,6 +79,7 @@ html[data-theme="dark"] .vettingCard {
 }
 .vettingCard .type__title {
 	text-transform: uppercase;
+	font-size: 1em;
 }
 .vettingCard .type__status {
 	font-size: 0.7em;
@@ -106,12 +108,6 @@ html[data-theme="dark"] .vettingCard {
 	background-color: var(--accent-red);
 }
 
-.vettingCard * {
-	font-size: 0.95em;
-}
-.vettingCard div {
-	display: flex;
-}
 .vettingCard .vet {
 	display: flex;
 	flex-direction: column;
@@ -131,7 +127,7 @@ html[data-theme="dark"] .vettingCard {
 	font-size: 1em;
 }
 .vettingCard .vet__status {
-	font-size: 0.9em;
+	font-size: 0.95em;
 	/* padding: 0 .2rem; */
 	font-weight: 700;
 	text-transform: capitalize;
@@ -151,6 +147,7 @@ html[data-theme="dark"] .vettingCard {
 
 .vettingCard .vet__date {
 	color: #fe7a36;
+	font-size: 1.2rem;
 
 	color: var(--pc-green);
 	font-weight: 400;
@@ -167,6 +164,7 @@ html[data-theme="dark"] .vettingCard {
 }
 .vettingCard .vet__officer {
 	font-weight: 700;
+	font-size: 1.3rem;
 	color: var(--accent-action);
 }
 .vettingCard .vet__add {

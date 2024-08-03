@@ -83,16 +83,7 @@ export default function AdminHome() {
 				// logoutAction();
 
 				if (logoutCount === 1) {
-					toast.error("Session Timeout", {
-						position: "top-right",
-						autoClose: 2500,
-						hideProgressBar: false,
-						closeOnClick: true,
-						pauseOnHover: true,
-						draggable: true,
-						progress: undefined,
-						theme: themeColor,
-					});
+					toast.error("Session Timeout", {});
 				}
 
 				// Listener clean up. Removes the existing event listener from the window

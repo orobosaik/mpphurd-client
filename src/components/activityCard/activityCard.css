@@ -140,7 +140,7 @@ html[data-theme="dark"] .activityCard {
 	border-top: none;
 	border-bottom-left-radius: 8px;
 	border-bottom-right-radius: 8px;
-	padding: 1rem;
+	padding: 1rem .5rem;
 	white-space: pre-wrap;
 	line-height: 1.2;
 }

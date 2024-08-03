@@ -108,14 +108,7 @@ export default function OfficeSelect() {
 										navigate("/permit/new");
 									} else {
 										toast.error("Cannot Perform Action", {
-											position: "top-right",
-											autoClose: 2500,
-											hideProgressBar: false,
-											closeOnClick: true,
-											pauseOnHover: true,
-											draggable: true,
-											progress: undefined,
-											theme: themeColor,
+
 										});
 									}
 								}}>

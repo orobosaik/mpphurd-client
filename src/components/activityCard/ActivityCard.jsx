@@ -60,7 +60,10 @@ export default function ActivityCard({ data }) {
 
 			<div className="activityCardHead">
 				<h2 className="title">
-					{data.type === "Minute" ? data.to?.office : data.title}
+					{data.type === "Minute" && `To ${data.to?.office}`}
+					{data.type === "Action" &&
+						(data.comment.status ? data.comment.status : data.title)}
+					{data.type === "Vetting" && data.title}
 				</h2>
 				{displayDate(data.createdAt)}
 			</div>
@@ -82,7 +85,7 @@ export default function ActivityCard({ data }) {
 				</div>
 			)}
 
-			{data?.comment?.status && (
+			{data?.comment?.status && data.type !== "Action" && (
 				<div>
 					<span className="activityCardTitle">Status:</span>{" "}
 					<span className="activityCardText">{data?.comment?.status}</span>

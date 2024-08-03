@@ -22,10 +22,18 @@ export default function AddCommentModal({
 	const [open, setOpen] = useState(false);
 	const [loading, setLoading] = useState(false);
 
+	const [contentValue, setContentValue] = useState();
+
 	const themeColor = getThemeColor();
 
-	const handleOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
+	const handleOpen = () => {
+		setOpen(true);
+	};
+	const handleClose = () => {
+		const content =  editorRef.current.getContent(); // Get content from the editor
+		setContentValue(content);
+		setOpen(false);
+	};
 
 	const KEY_NAME_ESC = "Escape";
 	const KEY_EVENT_TYPE = "keyup";
@@ -51,12 +59,18 @@ export default function AddCommentModal({
 		}, [handleEscKey]);
 	}
 
-	  const editorRef = useRef();
+	const editorRef = useRef();
 
-		const handleSubmit = async (e) => {
-			e.preventDefault();
-			const content = editorRef.current.getContent(); // Get content from the editor
-			console.log(content); // Do something with the content, e.g., send to server or log
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+
+		const content = editorRef.current.getContent(); // Get content from the editor
+		if (!content) {
+			setTimeout(() => {
+				toast.error("Cannot save without a comment!", {});
+			}, 200);
+			return;
+		}
 		setLoading(true);
 		const form = new FormData(e.target);
 		// console.log(form);
@@ -78,16 +92,7 @@ export default function AddCommentModal({
 			handleClose();
 
 			setTimeout(() => {
-				toast.success(res.data, {
-					position: "top-right",
-					autoClose: 1000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-					theme: themeColor,
-				});
+				toast.success(res.data, {});
 			}, 200);
 		} catch (error) {
 			let message = error.response
@@ -98,16 +103,7 @@ export default function AddCommentModal({
 
 			setLoading(false);
 
-			toast.error(message, {
-				position: "top-right",
-				autoClose: 2000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-				theme: themeColor,
-			});
+			toast.error(message, {});
 		}
 	};
 
@@ -122,7 +118,7 @@ export default function AddCommentModal({
 		<div>
 			<div>
 				<button className="modalTrigger secondary" onClick={handleOpen}>
-					Add Comment
+					Action Plan
 				</button>
 			</div>
 
@@ -138,14 +134,14 @@ export default function AddCommentModal({
 					<form action="" onSubmit={handleSubmit}>
 						<div className="applicationItemsWrapper">
 							<div className="applicationTitle">
-								<h3>Add Comment</h3>
+								<h3>Add an Action</h3>
 							</div>
 
 							<div>
 								<div className="minuteItems">
 									<div className="minuteItem">
 										<label htmlFor="minuteStatus">Status:</label>
-										<select name="minuteStatus" id="minuteStatus">
+										<select name="minuteStatus" id="minuteStatus" required>
 											<option value="">...</option>
 
 											{COMMENT_STATUS_LIST.map((e) => {
@@ -154,6 +150,7 @@ export default function AddCommentModal({
 										</select>
 									</div>
 
+
 									<div className="minuteItem">
 										<label htmlFor="minuteText">Comment:</label>
 										{/* <textarea
@@ -161,7 +158,10 @@ export default function AddCommentModal({
 											id="minuteText"
 											cols="30"
 											rows="8"></textarea> */}
-										<TextEditor className="quill-editor" ref={editorRef} />
+										<TextEditor
+											value={contentValue}
+											ref={editorRef}
+										/>
 									</div>
 								</div>
 							</div>

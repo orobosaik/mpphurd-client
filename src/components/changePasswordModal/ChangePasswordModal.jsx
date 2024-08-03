@@ -66,32 +66,14 @@ export default function ChangePasswordModal({ ...props }) {
 				setOpen(false);
 
 				setTimeout(() => {
-					toast.success(res.data, {
-						position: "top-right",
-						autoClose: 3000,
-						hideProgressBar: false,
-						closeOnClick: true,
-						pauseOnHover: true,
-						draggable: true,
-						progress: undefined,
-						theme: themeColor,
-					});
+					toast.success(res.data, {});
 				}, 0);
 			} catch (error) {
 				let message = error.response
 					? error.response.data.message
 					: error.message;
 
-				toast.error(message, {
-					position: "top-right",
-					autoClose: 2000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-					theme: themeColor,
-				});
+				toast.error(message, {});
 
 				setLoading(false);
 			}
@@ -111,16 +93,7 @@ export default function ChangePasswordModal({ ...props }) {
 					? error.response.data.message
 					: error.message;
 
-				toast.error(message, {
-					position: "top-right",
-					autoClose: 3000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-					theme: themeColor,
-				});
+				toast.error(message, {});
 			}
 		};
 

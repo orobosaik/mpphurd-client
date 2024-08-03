@@ -38,16 +38,7 @@ export default function AdminSideBar({ selected }) {
 		// persistor.purge();
 
 		setTimeout(() => {
-			toast.success("Logout Successful", {
-				position: "top-right",
-				autoClose: 1000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-				theme: themeColor,
-			});
+			toast.success("Logout Successful", {});
 
 			// console.log("LOGEDOUT");
 		}, 0);

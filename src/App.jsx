@@ -5,10 +5,12 @@ import AdminRoutes from "./utilities/AdminRoutes";
 import MainRoutes from "./utilities/MainRoutes";
 import { ToastContainer } from "react-toastify";
 import AnimatedBackground from "./widgets/animatedBackground/AnimatedBackground";
+import { getThemeColor } from "./utilities/themeColor";
 // import { socket } from "./utilities/socket";
 
 function App() {
 	const [view, setView] = useState(null);
+	const themeColor = getThemeColor();
 
 	useEffect(() => {
 		// socket.on("users", (data) => {
@@ -55,7 +57,14 @@ function App() {
 			) : (
 				""
 			)}
-			<ToastContainer />
+			<ToastContainer
+				autoClose={3000}
+				hideProgressBar={false}
+				closeOnClick={true}
+				pauseOnHover={true}
+				draggable={true}
+				theme={themeColor}
+			/>
 		</>
 	);
 }

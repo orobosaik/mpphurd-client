@@ -96,32 +96,14 @@ export default function Profile() {
 			setPhoto(null);
 
 			setTimeout(() => {
-				toast.success(res.data, {
-					position: "top-right",
-					autoClose: 1000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-					theme: theme,
-				});
+				toast.success(res.data, {});
 			}, 0);
 		} catch (error) {
 			let message = error.response
 				? error.response.data.message
 				: error.message;
 
-			toast.error(message, {
-				position: "top-right",
-				autoClose: 2000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-				theme: theme,
-			});
+			toast.error(message, {});
 		} finally {
 			setLoading(false);
 		}

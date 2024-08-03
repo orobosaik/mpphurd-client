@@ -81,16 +81,7 @@ export default function Minute() {
 			navigate(-2);
 
 			setTimeout(() => {
-				toast.success(res.data, {
-					position: "top-right",
-					autoClose: 1000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-					theme: themeColor,
-				});
+				toast.success(res.data, {});
 			}, 200);
 		} catch (error) {
 			setLoading(false);
@@ -101,16 +92,7 @@ export default function Minute() {
 			// console.log(error);
 			// console.log(message);
 
-			toast.error(message, {
-				position: "top-right",
-				autoClose: 2000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-				theme: themeColor,
-			});
+			toast.error(message, {});
 		}
 	};
 

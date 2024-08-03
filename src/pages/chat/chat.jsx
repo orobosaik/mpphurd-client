@@ -47,6 +47,7 @@ const Chat = () => {
 	const chatRef = useRef(null);
 
 	const [isFetching, setIsFetching] = useState(false);
+	const [isFetchingError, setIsFetchingError] = useState("");
 
 	const [selectedChatId, setSelectedChatId] = useState("");
 
@@ -115,8 +116,13 @@ const Chat = () => {
 			setIsFetching(true);
 			const res = await fetchInstance.get("/staffs/staff/all");
 			setStaffList(res.data);
+			setIsFetchingError("");
 			console.log(res.data);
-		} catch (e) {
+		} catch (error) {
+			let message = error.response
+				? error.response.data.message
+				: error.message;
+			setIsFetchingError(message);
 		} finally {
 			setIsFetching(false);
 		}
@@ -288,6 +294,7 @@ const Chat = () => {
 						}}
 					/>
 					<div className="chat-main">
+						{/* LEFT VIEW */}
 						<div className="chat-left">
 							<div className="chat-left-top">
 								<span className="searchBar">
@@ -318,91 +325,105 @@ const Chat = () => {
 								</span>
 							</div>
 
+							{/* Chat List */}
 							<div className="chat-list">
 								{!isFetching ? (
 									<>
-										{!chatSearchQuery && (
+										{isFetchingError !== "" ? (
+											<div
+												style={{ fontSize: "1.6rem" }}
+												className="chat-empty">
+												<p>{isFetchingError}</p>
+												<span className="button" onClick={getStaffList}>
+													Retry
+												</span>
+											</div>
+										) : (
 											<>
-												{Object.keys(chat.chatList).map((e, i) => {
-													return (
-														<div onClick={() => setRecipient(e)}>
-															<ChatListCard
-																data={{
-																	staff: staffList.filter(
-																		(s) => s._id === e
-																	)[0],
-																	chat: chat.chatList[e],
-																	activeList: chat.activeList,
-																	recipient,
-																	isTyping: chat.typingList.includes(e),
-																}}
-															/>
-														</div>
-													);
-												})}
+												{!chatSearchQuery && (
+													<>
+														{Object.keys(chat.chatList).map((e, i) => {
+															return (
+																<div onClick={() => setRecipient(e)}>
+																	<ChatListCard
+																		data={{
+																			staff: staffList.filter(
+																				(s) => s._id === e
+																			)[0],
+																			chat: chat.chatList[e],
+																			activeList: chat.activeList,
+																			recipient,
+																			isTyping: chat.typingList.includes(e),
+																		}}
+																	/>
+																</div>
+															);
+														})}
 
-												{Object.keys(chat.chatList)?.length < 1 && (
-													<div className="chat-empty">
-														<h3>No Current Chat</h3>
-														<p>Start a new conversation</p>
-													</div>
+														{Object.keys(chat.chatList)?.length < 1 && (
+															<div className="chat-empty">
+																<h3>No Current Chat</h3>
+																<p>Start a new conversation</p>
+															</div>
+														)}
+													</>
 												)}
-											</>
-										)}
-										{chatSearchQuery && (
-											<>
-												<div>
-													<span>Conversations</span>
-													<div>
-														<div onClick={() => setSelectedChatId(1)}>
-															{/* <ChatListCard
+												{chatSearchQuery && (
+													<>
+														<div>
+															<span>Conversations</span>
+															<div>
+																<div onClick={() => setSelectedChatId(1)}>
+																	{/* <ChatListCard
 														data={{
 															selectedId: selectedChatId,
 															id: 1,
 															activeList: chat.activeList,
 														}}
 													/> */}
+																</div>
+															</div>
 														</div>
-													</div>
-												</div>
-												<div>
-													<span>Staff</span>
-													<div className="chat-list">
-														{searchData.staff.map((e) => {
-															return (
-																<div
-																	onClick={() => {
-																		setRecipient(e._id);
-																		setRecipientData(e);
-																	}}>
-																	<StaffListCard
-																		data={{
-																			staff: [e],
+														<div>
+															<span>Staff</span>
+															<div className="chat-list">
+																{searchData.staff.map((e) => {
+																	return (
+																		<div
+																			onClick={() => {
+																				setRecipient(e._id);
+																				setRecipientData(e);
+																			}}>
+																			<StaffListCard
+																				data={{
+																					staff: [e],
 
-																			activeList: chat.activeList,
-																			recipient,
-																		}}
+																					activeList: chat.activeList,
+																					recipient,
+																				}}
+																			/>
+																		</div>
+																	);
+																})}
+															</div>
+														</div>
+														<div>
+															<span>Messages</span>
+															<div>
+																<div onClick={() => setSelectedChatId(1)}>
+																	<MessageListCard
+																		data={{ selectedId: selectedChatId, id: 1 }}
 																	/>
 																</div>
-															);
-														})}
-													</div>
-												</div>
-												<div>
-													<span>Messages</span>
-													<div>
-														<div onClick={() => setSelectedChatId(1)}>
-															<MessageListCard
-																data={{ selectedId: selectedChatId, id: 1 }}
-															/>
+																<div onClick={() => setSelectedChatId(2)}>
+																	<MessageListCard
+																		data={{ selectedId: selectedChatId, id: 2 }}
+																	/>
+																</div>
+															</div>
 														</div>
-														<div onClick={() => setSelectedChatId(2)}>
-															<MessageListCard
-																data={{ selectedId: selectedChatId, id: 2 }}
-															/>
-														</div>
-													</div>
-												</div>
+													</>
+												)}
 											</>
 										)}
 									</>
@@ -419,6 +440,8 @@ const Chat = () => {
 								)}
 							</div>
 						</div>
+
+						{/* RIGHT VIEW */}
 						<div className="chat-right">
 							<div className="chat-right-bg"></div>
 							{!recipient && (

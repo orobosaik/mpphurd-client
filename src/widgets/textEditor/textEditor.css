@@ -1,18 +1,48 @@
+.text-editor,
 .quill {
-	height: 20rem;
 	background-color: var(--white);
-	font-size: 1.6rem;
-	font-weight: normal;
+  height: 100%;
 }
-.ql-editor {
-	height: 20rem;
-	background-color: var(--white);
+/* .ql-editor, */
+.ql-container {
+  display: flex;
+	flex-direction: column;
 	font-size: 1.6rem;
 	font-weight: normal;
+	height: 20rem;
 }
-.quill-editor div div {
-	height: 20rem;
-	background-color: var(--white);
+/* .fullscreen .ql-editor, */
+.fullScreen .ql-container {
+	display: flex;
+	flex-direction: column;
 	font-size: 1.6rem;
 	font-weight: normal;
+	height: 100%;
+  background-color: var(--white);
+}
+
+.text-editor .fullScreen{
+  background-color: var(--white);
+  height: 100%;
+}
+.ql-omega:after {
+	content: "Ω";
+}
+
+/*
+#toolbar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+} */
+
+.ql-fullScreen {
+  background: none;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.ql-fullScreen:hover {
+  background-color: #f0f0f0;
 }

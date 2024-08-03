@@ -71,16 +71,7 @@ function AdminLogin() {
 			navigate("/");
 
 			setTimeout(() => {
-				toast.success("Login Successful", {
-					position: "top-right",
-					autoClose: 1000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-					theme: themeColor,
-				});
+				toast.success("Login Successful", {});
 			}, 200);
 		} catch (error) {
 			let message = error.response
@@ -89,16 +80,7 @@ function AdminLogin() {
 			// console.log(error);
 			// console.log(message);
 
-			toast.error(message, {
-				position: "top-right",
-				autoClose: 2000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-				theme: themeColor,
-			});
+			toast.error(message, {});
 
 			dispatch(adminLoginFailure());
 		} finally {

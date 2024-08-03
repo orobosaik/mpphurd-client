@@ -56,7 +56,7 @@ export default function AdminOfficeList() {
 				]);
 
 				setData(res[0].data);
-				setFilteredData(res[0].data)
+				setFilteredData(res[0].data);
 				setStaff(res[1].data);
 				setRegion(res[2].data);
 				setIsLoading(false);
@@ -71,16 +71,7 @@ export default function AdminOfficeList() {
 				// console.log(message);
 
 				setTimeout(() => {
-					toast.error(message, {
-						position: "top-right",
-						autoClose: 2000,
-						hideProgressBar: false,
-						closeOnClick: true,
-						pauseOnHover: true,
-						draggable: true,
-						progress: undefined,
-						theme: themeColor,
-					});
+					toast.error(message, {});
 				}, 0);
 				setIsLoading(false);
 			}
@@ -121,7 +112,6 @@ export default function AdminOfficeList() {
 			setSearchData([]);
 			return;
 		}
-
 
 		const fuse = new Fuse(filteredData, options);
 		const results = fuse.search(searchQuery);
@@ -191,9 +181,8 @@ export default function AdminOfficeList() {
 													setFilteredData(newData);
 
 													if (searchQuery) {
-														setSearchQuery(()=> searchQuery)
+														setSearchQuery(() => searchQuery);
 													}
-
 												}}>
 												<option value="null">All</option>
 												<option value="true">Active</option>

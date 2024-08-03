@@ -23,16 +23,7 @@ export default function ConfirmationModal({
 			// setData(res.data);
 			// setIsLoading(false);
 			// console.log(res.data);
-			toast.error(res.data, {
-				position: "top-right",
-				autoClose: 2000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-				theme: themeColor,
-			});
+			toast.error(res.data, {});
 			setOpen(false);
 		} catch (error) {
 			let message = error.response
@@ -41,16 +32,7 @@ export default function ConfirmationModal({
 			// console.log(error);
 			// console.log(message);
 			setTimeout(() => {
-				toast.error(message, {
-					position: "top-right",
-					autoClose: 2000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-					theme: themeColor,
-				});
+				toast.error(message, {});
 			}, 0);
 		}
 	};

@@ -133,16 +133,7 @@ export default function Activity() {
 			// console.log(message);
 
 			setTimeout(() => {
-				toast.error(message, {
-					position: "top-right",
-					autoClose: 3000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-					theme: themeColor,
-				});
+				toast.error(message, {});
 			}, 0);
 			// setTimeout(() => {
 			// }, 2000);

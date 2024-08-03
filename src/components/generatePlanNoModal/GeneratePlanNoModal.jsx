@@ -49,16 +49,7 @@ export default function GeneratePlanNoModal({
 			// console.log(res.data);
 
 			setTimeout(() => {
-				toast.success(res.data, {
-					position: "top-right",
-					autoClose: 2000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-					theme: themeColor,
-				});
+				toast.success(res.data, {});
 			}, 0);
 		} catch (error) {
 			let message = error.response
@@ -68,16 +59,7 @@ export default function GeneratePlanNoModal({
 			// console.log(message);
 
 			setTimeout(() => {
-				toast.error(message, {
-					position: "top-right",
-					autoClose: 2000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-					theme: themeColor,
-				});
+				toast.error(message, {});
 			}, 0);
 		}
 		setIsLoading(false);

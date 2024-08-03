@@ -105,7 +105,14 @@ function VettingCard({ data, header, reload, reloadActivities }) {
 									<div className="vet__date">{displayDate(item?.date)}</div>
 								</div>
 
-								<div className="vet__comment">{item?.comment}</div>
+								{/* <div className="vet__comment">{item?.comment}</div> */}
+
+									<div
+										// className="activityCardCommentText"
+										dangerouslySetInnerHTML={{
+											__html: item?.comment,
+										}}
+									/>
 								<div className="vet__officer">{item?.staffName}</div>
 							</div>
 						);

@@ -40,6 +40,7 @@ function ListWrapper({ children }) {
 	const state = location.state;
 
 	const [isLoading, setIsLoading] = useState(true);
+	const [isFetchingError, setIsFetchingError] = useState("");
 	const [data, setData] = useState();
 	const [sortReverse, setSortReverse] = useState(false);
 	const [staff, setStaff] = useState([]);
@@ -85,6 +86,7 @@ function ListWrapper({ children }) {
 	};
 
 	const getData = async () => {
+		setIsLoading(true);
 		axios.defaults.withCredentials = true;
 		try {
 			let host = import.meta.env.VITE_SERVER;
@@ -132,6 +134,7 @@ function ListWrapper({ children }) {
 					sort: sortReverse,
 				})
 			);
+			setIsFetchingError("");
 
 			// const size =
 			// 	encodeURI(JSON.stringify(listArray)).split(/%..|./).length - 1;
@@ -146,17 +149,10 @@ function ListWrapper({ children }) {
 			// console.log(error);
 			// console.log(message);
 
+			setIsFetchingError(message);
+
 			setTimeout(() => {
-				toast.error(message, {
-					position: "top-right",
-					autoClose: 3000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-					theme: themeColor,
-				});
+				toast.error(message, {});
 			}, 0);
 			setIsLoading(false);
 			// setTimeout(() => {
@@ -360,76 +356,89 @@ function ListWrapper({ children }) {
 					</div>
 				) : (
 					<>
-						{(listArray?.length === 0 ||
-							(searchQuery && searchResult?.length === 0)) && (
-							<p className="empty">No Data Found...</p>
+						{isFetchingError !== "" ? (
+							<div style={{ fontSize: "1.6rem" }} className="chat-empty">
+								<p>{isFetchingError}</p>
+								<span className="button" onClick={getData}>
+									Retry
+								</span>
+							</div>
+						) : (
+							<>
+								{(listArray?.length === 0 ||
+									(searchQuery && searchResult?.length === 0)) && (
+									<div style={{ fontSize: "1.6rem" }} className="chat-empty">
+										<p>No data found...</p>
+									</div>
+								)}
+
+								{!searchQuery &&
+									listArray.map((arr, index) => {
+										return (
+											<ListCardContainer
+												key={index}
+												date={arr.date}
+												count={arr.items.length}>
+												{arr.items.toReversed().map((item, i) => {
+													return (
+														<ListCard
+															key={uuid()}
+															data={item}
+															type={type}
+															officeState={{
+																active: true,
+																type,
+																data,
+																listArray,
+																startDate,
+																endDate,
+																searchQuery,
+																searchResult,
+																searchData,
+																sort: sortReverse,
+															}}
+															scrollSection={scrollSection}
+														/>
+													);
+												})}
+											</ListCardContainer>
+										);
+									})}
+
+								{searchQuery &&
+									searchResult?.map((arr, index) => {
+										return (
+											<ListCardContainer
+												key={uuid()}
+												date={arr.date}
+												count={arr.items.length}>
+												{arr.items.map((item, i) => {
+													return (
+														<ListCard
+															key={uuid()}
+															data={item}
+															type={type}
+															officeState={{
+																active: true,
+																type,
+																data,
+																listArray,
+																startDate,
+																endDate,
+																searchQuery,
+																searchResult,
+																searchData,
+																sort: sortReverse,
+															}}
+															scrollSection={scrollSection}
+														/>
+													);
+												})}
+											</ListCardContainer>
+										);
+									})}
+							</>
 						)}
-
-						{!searchQuery &&
-							listArray.map((arr, index) => {
-								return (
-									<ListCardContainer
-										key={index}
-										date={arr.date}
-										count={arr.items.length}>
-										{arr.items.toReversed().map((item, i) => {
-											return (
-												<ListCard
-													key={uuid()}
-													data={item}
-													type={type}
-													officeState={{
-														active: true,
-														type,
-														data,
-														listArray,
-														startDate,
-														endDate,
-														searchQuery,
-														searchResult,
-														searchData,
-														sort: sortReverse,
-													}}
-													scrollSection={scrollSection}
-												/>
-											);
-										})}
-									</ListCardContainer>
-								);
-							})}
-
-						{searchQuery &&
-							searchResult?.map((arr, index) => {
-								return (
-									<ListCardContainer
-										key={uuid()}
-										date={arr.date}
-										count={arr.items.length}>
-										{arr.items.map((item, i) => {
-											return (
-												<ListCard
-													key={uuid()}
-													data={item}
-													type={type}
-													officeState={{
-														active: true,
-														type,
-														data,
-														listArray,
-														startDate,
-														endDate,
-														searchQuery,
-														searchResult,
-														searchData,
-														sort: sortReverse,
-													}}
-													scrollSection={scrollSection}
-												/>
-											);
-										})}
-									</ListCardContainer>
-								);
-							})}
 					</>
 				)}
 			</div>

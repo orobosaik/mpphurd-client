@@ -103,16 +103,7 @@ export default function GenerateBill() {
 			// handleClose();
 
 			setTimeout(() => {
-				toast.success(res.data, {
-					position: "top-right",
-					autoClose: 1000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-					theme: themeColor,
-				});
+				toast.success(res.data, {});
 			}, 200);
 		} catch (error) {
 			let message = error.response
@@ -121,16 +112,7 @@ export default function GenerateBill() {
 			// console.log(error);
 			// console.log(message);
 			// handleClose();
-			toast.error(message, {
-				position: "top-right",
-				autoClose: 2000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-				theme: themeColor,
-			});
+			toast.error(message, {});
 		} finally {
 			setSubmitting(false);
 		}

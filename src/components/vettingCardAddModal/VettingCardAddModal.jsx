@@ -31,9 +31,14 @@ function VettingCardAddModal({
 
 	const themeColor = getThemeColor();
 
+	const [contentValue, setContentValue] = useState();
+	const editorRef1 = useRef();
+
 	const handleOpen = () => setOpen(true);
-	const handleClose = () => {
+	const handleClose =  () => {
 		setLoading(false);
+		const content =  editorRef1.current.getContent(); // Get content from the editor
+		setContentValue(content);
 		setOpen(false);
 	};
 
@@ -60,15 +65,18 @@ function VettingCardAddModal({
 			};
 		}, [handleEscKey]);
 	}
-	const editorRef1 = useRef();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const form = new FormData(e.target);
 		// console.log(form);
-
-		const content1 = editorRef1.current.getContent();
-
+		const content = editorRef1.current.getContent(); // Get content from the editor
+		if (!content) {
+			setTimeout(() => {
+				toast.error("Cannot save without a comment!", {});
+			}, 200);
+			return;
+		}
 
 		const newData = {
 			status: form.get("minuteStatus"),
@@ -91,16 +99,7 @@ function VettingCardAddModal({
 			reloadActivities(() => []);
 
 			setTimeout(() => {
-				toast.success(res.data, {
-					position: "top-right",
-					autoClose: 1000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-					theme: themeColor,
-				});
+				toast.success(res.data, {});
 			}, 200);
 		} catch (error) {
 			let message = error.response
@@ -111,16 +110,7 @@ function VettingCardAddModal({
 
 			setLoading(false);
 
-			toast.error(message, {
-				position: "top-right",
-				autoClose: 2000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-				theme: themeColor,
-			});
+			toast.error(message, {});
 		}
 	};
 
@@ -138,67 +128,72 @@ function VettingCardAddModal({
 			</button>
 
 			{open && (
-				<dialog className="modalView vettingCardAddModal">
-					<header>
-						<span>Plan - {data?.planNumber?.fullValue || data?.uniqueId}</span>
-						<div className="modalViewCloseButton" onClick={handleClose}>
-							<CloseRounded className="closeButton" />
-						</div>
-					</header>
-
-					<form action="" onSubmit={handleSubmit}>
-						<div className="applicationItemsWrapper">
-							<div className="applicationTitle">
-								<h3>Add {type} Comment </h3>
+				<dialog className="modalView">
+					<div className="vettingCardAddModal">
+						<header>
+							<span>
+								Plan - {data?.planNumber?.fullValue || data?.uniqueId}
+							</span>
+							<div className="modalViewCloseButton" onClick={handleClose}>
+								<CloseRounded className="closeButton" />
 							</div>
-							{isCleared && (
-								<div className="errorProhibited">
-									<ErrorRounded className="errorProhibitedIcon" />{" "}
-									<p>
-										Adding comment after it is cleared is prohibited. Make sure
-										you have the appropriate permission to perform this task!
-									</p>
+						</header>
+
+						<form action="" onSubmit={handleSubmit}>
+							<div className="applicationItemsWrapper">
+								<div className="applicationTitle">
+									<h3>Add {type} Comment </h3>
 								</div>
-							)}
+								{isCleared && (
+									<div className="errorProhibited">
+										<ErrorRounded className="errorProhibitedIcon" />{" "}
+										<p>
+											Adding comment after it is cleared is prohibited. Make
+											sure you have the appropriate permission to perform this
+											task!
+										</p>
+									</div>
+								)}
 
-							<div className="minuteItems">
-								<div className="minuteItem">
-									<label htmlFor="minuteStatus">Status:</label>
-									<select name="minuteStatus" id="minuteStatus" required>
-										<option value="">...</option>
+								<div className="minuteItems">
+									<div className="minuteItem">
+										<label htmlFor="minuteStatus">Status:</label>
+										<select name="minuteStatus" id="minuteStatus" required>
+											<option value="">...</option>
 
-										{VETTING_STATUS_LIST.map((e) => {
-											return <option value={e}>{e}</option>;
-										})}
-									</select>
-								</div>
+											{VETTING_STATUS_LIST.map((e) => {
+												return <option value={e}>{e}</option>;
+											})}
+										</select>
+									</div>
 
-								<div className="minuteItem">
-									<label htmlFor="minuteText">Comment:</label>
-									{/* <textarea
+									<div className="minuteItem">
+										<label htmlFor="minuteText">Comment:</label>
+										{/* <textarea
 										required
 										name="minuteText"
 										id="minuteText"
 										cols="30"
 										rows="8"></textarea> */}
-									<TextEditor className="quill-editor" ref={editorRef1} />
+										<TextEditor value={contentValue} ref={editorRef1} />
+									</div>
 								</div>
 							</div>
-						</div>
-						<footer>
-							<button type="submit" className="primary" disabled={loading}>
-								{loading ? (
-									<CircularProgress
-										thickness={5}
-										size={20}
-										sx={{ color: "white" }}
-									/>
-								) : (
-									"Save"
-								)}
-							</button>
-						</footer>
-					</form>
+							<footer>
+								<button type="submit" className="primary" disabled={loading}>
+									{loading ? (
+										<CircularProgress
+											thickness={5}
+											size={20}
+											sx={{ color: "white" }}
+										/>
+									) : (
+										"Save"
+									)}
+								</button>
+							</footer>
+						</form>
+					</div>
 				</dialog>
 			)}
 		</>

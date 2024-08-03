@@ -67,16 +67,7 @@ export default function AdminPlan() {
 			navigate(-2);
 
 			setTimeout(() => {
-				toast.success(res.data, {
-					position: "top-right",
-					autoClose: 1000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-					theme: themeColor,
-				});
+				toast.success(res.data, {});
 			}, 200);
 		} catch (error) {
 			setLoading(false);
@@ -87,16 +78,7 @@ export default function AdminPlan() {
 			// console.log(error);
 			// console.log(message);
 
-			toast.error(message, {
-				position: "top-right",
-				autoClose: 2000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-				theme: themeColor,
-			});
+			toast.error(message, {});
 		}
 	};
 
@@ -120,16 +102,7 @@ export default function AdminPlan() {
 			// console.log(message);
 
 			setTimeout(() => {
-				toast.error(message, {
-					position: "top-right",
-					autoClose: 2000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-					theme: themeColor,
-				});
+				toast.error(message, {});
 			}, 0);
 			setIsLoading(false);
 		}
@@ -174,8 +147,8 @@ export default function AdminPlan() {
 
 	// 			setTimeout(() => {
 	// 				toast.error(message, {
-	// 					position: "top-right",
-	// 					autoClose: 2000,
+	//
+	//
 	// 					hideProgressBar: false,
 	// 					closeOnClick: true,
 	// 					pauseOnHover: true,

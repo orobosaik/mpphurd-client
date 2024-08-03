@@ -107,14 +107,7 @@ function LoggedWrapper() {
 
 	// 			if (logoutCount === 1) {
 	// 				toast.error("Session Timeout", {
-	// 					position: "top-right",
-	// 					autoClose: 2500,
-	// 					hideProgressBar: false,
-	// 					closeOnClick: true,
-	// 					pauseOnHover: true,
-	// 					draggable: true,
-	// 					progress: undefined,
-	// 					theme: themeColor,
+
 	// 				});
 	// 			}
 
@@ -188,9 +181,6 @@ function LoggedWrapper() {
 
 			receivedSound.play();
 
-			dispatch(addMessage(data));
-			showNotification(data);
-
 			const newActiveChats = getActiveChats(
 				[...chat.allDirectMessages, data],
 				currentUser._id
@@ -200,9 +190,12 @@ function LoggedWrapper() {
 				(acc, chat) => acc + chat.unread,
 				0
 			);
+			alert(totalUnreadCount);
 			// setActiveChats(newActiveChats);
 			dispatch(setTotalUnreadCount(totalUnreadCount));
 			dispatch(setChatList(newActiveChats));
+			dispatch(addMessage(data));
+			showNotification(data);
 		});
 
 		socket.on("typing", (data) => {

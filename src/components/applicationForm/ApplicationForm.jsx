@@ -103,16 +103,7 @@ export default function ApplicationForm() {
 			navigate(`/permit/${res.data._id}`);
 
 			setTimeout(() => {
-				toast.success("New Application Created", {
-					position: "top-right",
-					autoClose: 1000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-					theme: themeColor,
-				});
+				toast.success("New Application Created", {});
 			}, 200);
 		} catch (error) {
 			let message = error.response
@@ -123,16 +114,7 @@ export default function ApplicationForm() {
 
 			setIsLoading(false);
 
-			toast.error(message, {
-				position: "top-right",
-				autoClose: 2000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-				theme: themeColor,
-			});
+			toast.error(message, {});
 		}
 	};
 
@@ -216,11 +198,7 @@ export default function ApplicationForm() {
 				</div>
 				<div className="applicationItem">
 					<label htmlFor={type + "Email"}>Email:</label>
-					<input
-						type="email"
-						name={type + "Email"}
-						id={type + "Email"}
-					/>
+					<input type="email" name={type + "Email"} id={type + "Email"} />
 				</div>
 
 				{(!isCompany || type === "rep") && (

@@ -90,16 +90,7 @@ export default function AdminHeader() {
 				// console.log(message);
 
 				setIsFetching(false);
-				toast.error(message, {
-					position: "top-right",
-					autoClose: 2000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-					theme: themeColor,
-				});
+				toast.error(message, {});
 			}
 		};
 
@@ -210,9 +201,10 @@ export default function AdminHeader() {
 					</div>
 
 					<img
-						src={ staff.profilePicture ?
-							`${import.meta.env.VITE_STORAGE_LINK}${staff.profilePicture}` :
-							"/assets/persons/no_avatar.png"
+						src={
+							staff.profilePicture
+								? `${import.meta.env.VITE_STORAGE_LINK}${staff.profilePicture}`
+								: "/assets/persons/no_avatar.png"
 						}
 						alt=""
 						className="headerImg"
