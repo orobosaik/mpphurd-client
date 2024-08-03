@@ -8,7 +8,7 @@ import PlanInfo from "../../components/planInfo/PlanInfo";
 import FeedCard from "../../components/feedCard/FeedCard";
 import Activities from "../../components/activities/Activities";
 import Document from "../../components/document/Document";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import TopBar from "../../components/topBar/TopBar";
 import PlanBill from "../../components/planBill/PlanBill";
 import GenerateBill from "../../components/generateBill/GenerateBill";
@@ -23,6 +23,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { resetOfficeData } from "../../redux/appSlice";
 import { CircularProgress } from "@mui/material";
 import { MINUTE_STATUS_LIST } from "../../utilities/appData";
+import TextEditor from "../../widgets/textEditor/TextEditor";
 
 export default function Minute() {
 	const [rightBarView, setRightBarView] = useState(0);
@@ -44,16 +45,18 @@ export default function Minute() {
 	const themeColor = getThemeColor();
 	const dispatch = useDispatch();
 
+	const editorRef = useRef();
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setLoading(true);
 		const form = new FormData(e.target);
-		// console.log(form.get("plan.PlotNo"));
-		// console.log(form);
+
+		const content = editorRef.current.getContent();
 
 		const newData = {
 			status: form.get("minuteStatus"),
-			text: form.get("minuteText"),
+			text: content,
 			proposedActions: form.get("proposedActions"),
 			newOfficeId: form.get("minuteToOfficer"),
 		};
@@ -217,12 +220,13 @@ export default function Minute() {
 
 								<div className="minuteItem">
 									<label htmlFor="minuteText">Comment:</label>
-									<textarea
+									{/* <textarea
 										required
 										name="minuteText"
 										id="minuteText"
 										cols="30"
-										rows="10"></textarea>
+										rows="10"></textarea> */}
+									<TextEditor className="quill-editor" ref={editorRef} />
 								</div>
 
 								<div className="minuteItem">

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import "./vettingCardAddModal.css";
 import {
 	CloseRounded,
@@ -14,6 +14,7 @@ import {
 	COMMENT_STATUS_LIST,
 	VETTING_STATUS_LIST,
 } from "../../utilities/appData";
+import TextEditor from "../../widgets/textEditor/TextEditor";
 
 function VettingCardAddModal({
 	buttonIcon,
@@ -59,15 +60,19 @@ function VettingCardAddModal({
 			};
 		}, [handleEscKey]);
 	}
+	const editorRef1 = useRef();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const form = new FormData(e.target);
 		// console.log(form);
 
+		const content1 = editorRef1.current.getContent();
+
+
 		const newData = {
 			status: form.get("minuteStatus"),
-			text: form.get("minuteText"),
+			text: content1,
 			type: type,
 		};
 		// console.log(newData);
@@ -170,12 +175,13 @@ function VettingCardAddModal({
 
 								<div className="minuteItem">
 									<label htmlFor="minuteText">Comment:</label>
-									<textarea
+									{/* <textarea
 										required
 										name="minuteText"
 										id="minuteText"
 										cols="30"
-										rows="8"></textarea>
+										rows="8"></textarea> */}
+									<TextEditor className="quill-editor" ref={editorRef1} />
 								</div>
 							</div>
 						</div>

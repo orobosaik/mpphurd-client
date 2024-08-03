@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { dangerouslySetInnerHTML } from "react";
 import "./activityCard.css";
 import {
 	ExpandLessRounded,
@@ -104,7 +105,13 @@ export default function ActivityCard({ data }) {
 				)}
 
 				{showComment && (
-					<p className="activityCardCommentText">{data?.comment?.text}</p>
+					// <div className="activityCardCommentText">{data?.comment?.text}</div>
+					<div
+						className="activityCardCommentText"
+						dangerouslySetInnerHTML={{
+							__html: data?.comment?.text,
+						}}
+					/>
 				)}
 			</div>
 		</div>

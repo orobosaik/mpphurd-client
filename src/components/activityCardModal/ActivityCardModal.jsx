@@ -168,7 +168,14 @@ export default function ActivityCardModal({
 							<>
 								<div className="title">Comment:</div>
 								<div className="card comment">
-									<span className="text ">{`${data.comment.text}`}</span>
+									{/* <span className="text ">{`${data.comment.text}`}</span> */}
+
+									<div
+										className="text"
+										dangerouslySetInnerHTML={{
+											__html: data?.comment?.text,
+										}}
+									/>
 								</div>
 							</>
 						)}

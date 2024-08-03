@@ -109,6 +109,7 @@ html[data-theme="dark"] .activityCard {
 }
 
 .activityCardComment {
+	display: flex;
 	flex-direction: column;
 	overflow: hidden;
 	border-radius: 8px;
@@ -133,6 +134,8 @@ html[data-theme="dark"] .activityCard {
 }
 
 .activityCardCommentText {
+	display: flex;
+	flex-direction: column;
 	border: solid var(--light-grey) 2px;
 	border-top: none;
 	border-bottom-left-radius: 8px;

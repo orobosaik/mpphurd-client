@@ -94,12 +94,20 @@ html[data-theme="dark"] .activityCardModalWrapper .card {
 }
 
 .activityCardModalWrapper .comment {
+	display: flex;
+	flex-direction: column;
 	box-shadow: none;
 	/* margin-top: 1.5rem; */
 	font-weight: 600;
 	white-space: pre-wrap;
-	background-color: var(--light-grey);
+	background-color: rgb(245, 239, 208);
+}
+
+.activityCardModalWrapper .text {
+	display: flex;
+	flex-direction: column;
 }
 html[data-theme="dark"] .activityCardModalWrapper .comment {
+	background-color: rgb(65, 61, 41);
 	box-shadow: none;
 }

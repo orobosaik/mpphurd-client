@@ -10,7 +10,7 @@
 
 dialog {
 	max-height: 90%;
-	max-width: 60rem;
+	max-width: 90rem;
 	margin: auto;
 	outline: none;
 	padding: 2.5rem 2.5rem;
@@ -28,7 +28,7 @@ html[data-theme="dark"] dialog {
 	box-shadow: 0 0 0.5rem 0.25rem rgba(255, 255, 255, 0.2);
 }
 .modalView {
-	min-width: 40%;
+	min-width: 60%;
 	width: 100%;
 }
 .modalView header {

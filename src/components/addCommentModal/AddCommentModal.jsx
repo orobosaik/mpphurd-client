@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useRef } from "react";
 import "./addCommentModal.css";
 import {
 	CloseRounded,
@@ -10,6 +10,7 @@ import axios from "axios";
 import { getThemeColor } from "../../utilities/themeColor";
 import { CircularProgress } from "@mui/material";
 import { COMMENT_STATUS_LIST } from "../../utilities/appData";
+import TextEditor from "../../widgets/textEditor/TextEditor";
 
 export default function AddCommentModal({
 	buttonIcon,
@@ -50,15 +51,19 @@ export default function AddCommentModal({
 		}, [handleEscKey]);
 	}
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
+	  const editorRef = useRef();
+
+		const handleSubmit = async (e) => {
+			e.preventDefault();
+			const content = editorRef.current.getContent(); // Get content from the editor
+			console.log(content); // Do something with the content, e.g., send to server or log
 		setLoading(true);
 		const form = new FormData(e.target);
 		// console.log(form);
 
 		const newData = {
 			status: form.get("minuteStatus"),
-			text: form.get("minuteText"),
+			text: content,
 		};
 		// console.log(newData);
 
@@ -151,11 +156,12 @@ export default function AddCommentModal({
 
 									<div className="minuteItem">
 										<label htmlFor="minuteText">Comment:</label>
-										<textarea
+										{/* <textarea
 											name="minuteText"
 											id="minuteText"
 											cols="30"
-											rows="8"></textarea>
+											rows="8"></textarea> */}
+										<TextEditor className="quill-editor" ref={editorRef} />
 									</div>
 								</div>
 							</div>

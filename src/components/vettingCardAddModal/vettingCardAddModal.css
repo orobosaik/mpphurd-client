@@ -5,6 +5,16 @@
   display: flex;
   flex-direction: column;
 }
+.vettingCardAddModal  *{
+  display:block
+}
+.quill{
+}
+.vettingCardAddModal .ql-container,
+.vettingCardAddModal .quill {
+  display: flex;
+  flex-direction: column;
+}
 .errorProhibited{
   display: flex;
   align-items: center;
