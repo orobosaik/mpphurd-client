@@ -33,6 +33,8 @@ function PlanInfo({ setTopBarData, setViewBills, state, reload }) {
 	}, [state]);
 
 	return (
+
+		
 		<div className="planInfo">
 			<div className="planInfoSummary">
 				<div className="planInfoSummaryDetails">

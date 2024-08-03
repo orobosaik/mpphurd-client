@@ -33,6 +33,7 @@ function Plan() {
 			: "Plan Info";
 
 	const [isLoading, setIsLoading] = useState(true);
+	const [isFetchingError, setIsFetchingError] = useState("");
 	const [data, setData] = useState(null);
 	const themeColor = getThemeColor();
 	const [reload, setReload] = useState();
@@ -55,6 +56,7 @@ function Plan() {
 			);
 
 			setData(() => res.data);
+			setIsFetchingError("");
 			setIsLoading(false);
 
 			// console.log(res.data);
@@ -65,6 +67,7 @@ function Plan() {
 			// console.log(error);
 			// console.log(message);
 
+			setIsFetchingError(message);
 			setTimeout(() => {
 				toast.error(message, {
 					position: "top-right",
@@ -80,19 +83,8 @@ function Plan() {
 			setIsLoading(false);
 		}
 	};
-	useEffect(() => {
-		// if (location.state) {
-		// 	setData(location.state);
-		// 	setIsLoading(false);
-		// } else {
-		// 	getData();
-		// }
 
-		getData();
-		// 	// return () => {
-		// 	// 	second
-		// 	// }
-	}, []);
+
 	useEffect(() => {
 		getData();
 	}, [reload, params.id]);
@@ -118,11 +110,22 @@ function Plan() {
 							: data?.uniqueId,
 					}}>
 					{!isLoading ? (
-						<PlanInfo
-							setViewBills={setViewBills}
-							state={data}
-							reload={setReload}
-						/>
+						<>
+							{isFetchingError !== "" ? (
+								<div style={{ fontSize: "1.6rem" }} className="chat-empty">
+									<p>{isFetchingError}</p>
+									<span className="button" onClick={getData}>
+										Retry
+									</span>
+								</div>
+							) : (
+								<PlanInfo
+									setViewBills={setViewBills}
+									state={data}
+									reload={setReload}
+								/>
+							)}
+						</>
 					) : (
 						<LoadingIcon />
 					)}
@@ -134,7 +137,7 @@ function Plan() {
 							isInUserOffice={isInUserOffice}
 							reload={setReload}
 							setRightBarView={setRightBarView}
-							plan={data}
+							reloadFromPlan={data}
 						/>
 					) : (
 						<Document setRightBarView={setRightBarView} />

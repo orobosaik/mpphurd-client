@@ -12,7 +12,7 @@ import { getThemeColor } from "../../utilities/themeColor";
 import { useSelector } from "react-redux";
 import { format } from "date-fns";
 
-function Activities({ setRightBarView, reload, admin }) {
+function Activities({ setRightBarView, reload, admin, reloadFromPlan }) {
 	const [isLoading, setIsLoading] = useState(false);
 	const [data, setData] = useState([]);
 	const [isAdmin, setIsAdmin] = useState(admin);
@@ -335,13 +335,13 @@ function Activities({ setRightBarView, reload, admin }) {
 		setIsLoading(true);
 		// setPlanData(plan);
 		// if (plan) {
-			// getData();
+		// getData();
 		// }
 	}, []);
 
 	useEffect(() => {
 		getData();
-	}, [reloadActivities, reload, params.id]);
+	}, [reloadActivities, reload, params.id, reloadFromPlan]);
 
 	return (
 		<div className="activities">
