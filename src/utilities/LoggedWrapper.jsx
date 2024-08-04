@@ -190,7 +190,6 @@ function LoggedWrapper() {
 				(acc, chat) => acc + chat.unread,
 				0
 			);
-			alert(totalUnreadCount);
 			// setActiveChats(newActiveChats);
 			dispatch(setTotalUnreadCount(totalUnreadCount));
 			dispatch(setChatList(newActiveChats));
@@ -326,6 +325,8 @@ function LoggedWrapper() {
 			const notification = new Notification("New message", {
 				body: `${messageData.sender}: ${messageData.content}`,
 				icon: "assets/logos/Logo-Mpphurd.png",
+				badge: "assets/logos/Logo-Mpphurd.png",
+				vibrate: [200, 100, 200],
 			});
 
 			notification.onclick = () => {

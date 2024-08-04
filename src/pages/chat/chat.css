@@ -267,7 +267,7 @@ html[data-theme="dark"] .chat-list-card.selected {
 	font-size: 0.8em;
 	align-items: end;
 }
-.count{
+.count {
 	padding: 1px 5px;
 	font-size: 1.3rem;
 	font-weight: 800;
@@ -276,12 +276,13 @@ html[data-theme="dark"] .chat-list-card.selected {
 	justify-content: center;
 	color: #fff;
 	/*background-color: rgb(255, 48, 48);
-	*/background-color: #4caf50;
-	border-radius: .5rem;
-	-webkit-border-radius: .5rem;
-	-moz-border-radius: .5rem;
-	-ms-border-radius: .5rem;
-	-o-border-radius: .5rem;
+	*/
+	background-color: #4caf50;
+	border-radius: 0.5rem;
+	-webkit-border-radius: 0.5rem;
+	-moz-border-radius: 0.5rem;
+	-ms-border-radius: 0.5rem;
+	-o-border-radius: 0.5rem;
 }
 .online-dot {
 	width: 15px;
@@ -408,6 +409,8 @@ html[data-theme="dark"] .chat-list-card.selected {
 }
 
 .message-content {
+	display: flex;
+	gap: 1rem;
 	position: relative;
 	padding: 10px 15px;
 	border-radius: 20px;
@@ -415,6 +418,9 @@ html[data-theme="dark"] .chat-list-card.selected {
 	font-weight: 600;
 	max-width: 500px;
 }
+/* .message-content div{
+	position: relative;
+} */
 
 .received .message-content {
 	/* background-color: #e1ffc7; */
@@ -581,4 +587,50 @@ html[data-theme="dark"] .timestamp {
 	position: absolute;
 	bottom: 100%;
 	right: 0;
+}
+
+.context-button {
+	position: relative;
+	right: 0;
+	margin-left: auto;
+	background: none;
+	border: none;
+	cursor: pointer;
+	font-size: 16px;
+	width: 1rem;
+	background-color: var(--semi-white);
+	border-radius: 1rem;
+	-webkit-border-radius: 1rem;
+	-moz-border-radius: 1rem;
+	-ms-border-radius: 1rem;
+	-o-border-radius: 1rem;
+}
+
+/* .context-button svg {
+	font-size: 50px !important;
+} */
+.context-button:hover {
+	color: #0056b3;
+}
+
+#popup-options {
+	z-index: 1000;
+	position: absolute;
+	right: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+#popup-options button {
+	background-color: #007bff;
+	color: white;
+	border: none;
+	padding: 8px 12px;
+	margin: 5px 0;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+#popup-options button:hover {
+	background-color: #0056b3;
 }

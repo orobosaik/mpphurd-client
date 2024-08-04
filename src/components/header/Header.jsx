@@ -17,6 +17,7 @@ import { LinearProgress } from "@mui/material";
 import { toast } from "react-toastify";
 import { getThemeColor } from "../../utilities/themeColor";
 import HeaderUserOptions from "../../widgets/headerUserOptions/HeaderUserOptions";
+import NotificationsPanel from "../../pages/notifications/NotificationsPanel";
 
 export default function Header() {
 	const [searchQuery, setSearchQuery] = useState("");
@@ -190,8 +191,9 @@ export default function Header() {
 				</div>
 				<div className="headerIcons">
 					<div className="headerIconItem">
-						<Notifications className="notificationIcon" />
+						{/* <Notifications className="notificationIcon" /> */}
 						{/* <span className="headerIconBadge">3</span> */}
+						<NotificationsPanel />
 					</div>
 
 					<div className="headerIconItem" onClick={() => navigate("/chat")}>

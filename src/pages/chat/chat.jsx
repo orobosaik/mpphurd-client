@@ -163,7 +163,7 @@ const Chat = () => {
 		console.log(chat);
 
 		setMessageContent("");
-		// handleScrollDown();
+		handleScrollDown();
 	};
 	const markAsRead = (message) => {
 		socket.emit("messageRead", message);
