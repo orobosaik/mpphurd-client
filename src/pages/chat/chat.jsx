@@ -26,6 +26,7 @@ import {
 } from "../../redux/userSlice";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
+import uuid from "react-uuid";
 
 const Chat = () => {
 	const dispatch = useDispatch();
@@ -52,7 +53,7 @@ const Chat = () => {
 	const [selectedChatId, setSelectedChatId] = useState("");
 
 	const [staffList, setStaffList] = useState([]);
-	const [activeChats, setActiveChats] = useState({});
+	const [activeChatsForSearch, setActiveChatsForSearch] = useState([]);
 
 	const scrollToBottom = () => {
 		console.log(chatRef.current);
@@ -72,12 +73,9 @@ const Chat = () => {
 		setNewMessageCount(0); // Reset new messages count
 	};
 	useEffect(() => {
-		if (isScrolledToBottom) {
-			setNewMessageCount(0); // Reset new messages count
-			scrollToBottom();
-		} else {
-			setNewMessageCount(newMessageCount + 1); // Update new message count
-		}
+		console.log("AFTER MESSAGE ADDED");
+
+		console.log(chat.allDirectMessages);
 
 		const newActiveChats = getActiveChats(
 			chat.allDirectMessages,
@@ -89,8 +87,19 @@ const Chat = () => {
 			0
 		);
 		// setActiveChats(newActiveChats);
-		dispatch(setTotalUnreadCount(totalUnreadCount));
 		dispatch(setChatList(newActiveChats));
+		console.log("AFTER NEW ACTIVE CHATS");
+		console.log(newActiveChats);
+		dispatch(setTotalUnreadCount(totalUnreadCount));
+
+		// setActiveChatsForSearch(getConversationList());
+
+		if (isScrolledToBottom) {
+			setNewMessageCount(0); // Reset new messages count
+			scrollToBottom();
+		} else {
+			setNewMessageCount(newMessageCount + 1); // Update new message count
+		}
 	}, [chat.allDirectMessages]);
 
 	useEffect(() => {
@@ -131,39 +140,39 @@ const Chat = () => {
 	useEffect(() => {
 		const staff = staffList.filter((s) => s._id === recipient);
 		setRecipientData(staff[0]);
-
-		return () => {};
 	}, [recipient]);
 
 	useEffect(() => {
 		getStaffList();
-		return () => {};
 	}, []);
 
-	const sendMessage = (e) => {
+	const sendMessage = async (e) => {
 		e.preventDefault();
 		console.log(messageContent);
 		setShowEmojis(false);
 
 		const message = {
+			key: uuid(),
 			timestamp: Date.now(),
 			content: messageContent,
 			sender: currentUser._id,
 			receiver: recipient,
 			delivered: false,
+			saved: false,
 			read: false,
 		};
-		socket.emit("directMessage", message);
 		console.log("INSIDE CLIENT SEND MSSG");
 
 		console.log(chat);
 		console.log(message);
-		dispatch(addMessage(message));
 		sendSound.play();
 		console.log(chat);
+		socket.emit("directMessage", message);
+		dispatch(addMessage(message));
 
 		setMessageContent("");
 		handleScrollDown();
+		console.log(chat.allDirectMessages);
 	};
 	const markAsRead = (message) => {
 		socket.emit("messageRead", message);
@@ -218,6 +227,29 @@ const Chat = () => {
 		return sortedMessages;
 	}
 
+	function getConversationList() {
+		const staffListWithNames = staffList.reduce((acc, cur) => {
+			acc[cur._id] = {
+				id: cur._id,
+				name: cur.fullName || cur.firstName + " " + cur.lastName,
+				jobTitle: cur.jobTitle,
+				position: cur.position,
+			};
+			return acc;
+		}, {});
+
+		console.log(staffListWithNames);
+
+		const searchData = Object.keys(chat.chatList).map((key) => ({
+			id: staffListWithNames[key]?.id,
+			name: staffListWithNames[key]?.name,
+			jobTitle: staffListWithNames[key].jobTitle,
+			position: staffListWithNames[key].position,
+			...chat.chatList[key],
+		}));
+		console.log(searchData);
+		return searchData;
+	}
 	// CREATE SEARCH FUNCTIONALITY WITH FUSE JS
 	const options = {
 		includeScore: true,
@@ -232,6 +264,7 @@ const Chat = () => {
 			"position",
 			"region.name",
 			["office.name"],
+			"name",
 		],
 	};
 
@@ -244,8 +277,11 @@ const Chat = () => {
 			return;
 		}
 
+		console.log("INSIDE FUSSE");
+		const newData = getConversationList();
+
 		// conversation query
-		const fuse1 = new Fuse(chat.chatList, options);
+		const fuse1 = new Fuse(newData, options);
 		const results1 = fuse1.search(chatSearchQuery);
 		const items1 = results1.map((result) => result.item);
 
@@ -342,7 +378,10 @@ const Chat = () => {
 											<>
 												{!chatSearchQuery && (
 													<>
+														<span className="chat-list-header">Chat</span>
 														{Object.keys(chat.chatList).map((e, i) => {
+															console.log(chat.chatList);
+
 															return (
 																<div onClick={() => setRecipient(e)}>
 																	<ChatListCard
@@ -370,22 +409,53 @@ const Chat = () => {
 												)}
 												{chatSearchQuery && (
 													<>
-														<div>
-															<span>Conversations</span>
-															<div>
-																<div onClick={() => setSelectedChatId(1)}>
-																	{/* <ChatListCard
-														data={{
-															selectedId: selectedChatId,
-															id: 1,
-															activeList: chat.activeList,
-														}}
-													/> */}
+														{searchData.conversation.length === 0 &&
+															searchData.staff.length === 0 && (
+																<div className="chat-empty">
+																	<p>No result found</p>
+																	<p>Try searching with other criteria</p>
 																</div>
+															)}
+														{/* Conversation search */}
+														<div>
+															{searchData.conversation.length > 0 && (
+																<span className="chat-list-header">Chat</span>
+															)}
+															<div className="chat-list">
+																{searchData.conversation.map((e) => {
+																	// console.log(
+																	// 	staffList.filter((s) => s._id === e)[0]
+																	// );
+																	console.log(searchData.conversation);
+																	return (
+																		<div
+																			onClick={() => {
+																				setRecipient(e.id);
+																			}}>
+																			<ChatListCard
+																				data={{
+																					staff: staffList.filter(
+																						(s) => s._id === e.id
+																					)[0],
+																					chat: chat.chatList[e.id],
+																					activeList: chat.activeList,
+																					// activeList: searchData.conversation,
+																					recipient,
+																					isTyping: chat.typingList.includes(
+																						e.id
+																					),
+																				}}
+																			/>
+																		</div>
+																	);
+																})}
 															</div>
 														</div>
+														{/* Staff search */}
 														<div>
-															<span>Staff</span>
+															{searchData.staff.length > 0 && (
+																<span className="chat-list-header">Staff</span>
+															)}
 															<div className="chat-list">
 																{searchData.staff.map((e) => {
 																	return (
@@ -407,7 +477,8 @@ const Chat = () => {
 																})}
 															</div>
 														</div>
-														<div>
+														{/* Messages search */}
+														{/* <div>
 															<span>Messages</span>
 															<div>
 																<div onClick={() => setSelectedChatId(1)}>
@@ -421,7 +492,7 @@ const Chat = () => {
 																	/>
 																</div>
 															</div>
-														</div>
+														</div> */}
 													</>
 												)}
 											</>

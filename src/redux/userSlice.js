@@ -49,6 +49,9 @@ const userSlice = createSlice({
 		setChat: (state, action) => {
 			state.chat = action.payload;
 		},
+		setAllDirectMessages: (state, action) => {
+			state.chat.allDirectMessages = action.payload;
+		},
 		addMessage: (state, action) => {
 			state.chat.allDirectMessages = [
 				...state.chat.allDirectMessages,
@@ -85,6 +88,7 @@ export const {
 	loginFailure,
 	logout,
 	setChat,
+	setAllDirectMessages,
 	addMessage,
 	startTyping,
 	endTyping,

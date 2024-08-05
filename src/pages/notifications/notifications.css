@@ -66,6 +66,11 @@ html[data-theme="dark"] .clear-all {
 	max-height: 400px; /* Limit height */
 	overflow-y: auto; /* Enable scrolling */
 }
+.notifications-empty{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .notification-card {
 	border-bottom: 1px solid var(--light-grey);

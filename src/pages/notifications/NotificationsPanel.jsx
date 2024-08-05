@@ -32,15 +32,15 @@ const NotificationCard = ({ notification, onClear }) => {
 
 const NotificationsPanel = () => {
 	const [notifications, setNotifications] = useState([
-		{ id: 1, message: "New comment on your post." },
-		{ id: 1, message: "New comment on your post." },
-		{ id: 2, message: "You have a new follower." },
-		{ id: 2, message: "You have a new follower." },
-		{ id: 3, message: "Your password was changed successfully." },
-		{ id: 3, message: "Your password was changed successfully." },
-		{ id: 3, message: "Your password was changed successfully." },
-		{ id: 3, message: "Your password was changed successfully." },
-		{ id: 3, message: "Your password was changed successfully." },
+		// { id: 1, message: "New comment on your post." },
+		// { id: 1, message: "New comment on your post." },
+		// { id: 2, message: "You have a new follower." },
+		// { id: 2, message: "You have a new follower." },
+		// { id: 3, message: "Your password was changed successfully." },
+		// { id: 3, message: "Your password was changed successfully." },
+		// { id: 3, message: "Your password was changed successfully." },
+		// { id: 3, message: "Your password was changed successfully." },
+		// { id: 3, message: "Your password was changed successfully." },
 	]);
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -62,7 +62,7 @@ const NotificationsPanel = () => {
 		<div className="notifications">
 			<div className="notification-icon headerIconItem" onClick={togglePanel}>
 				<Notifications className="notificationIcon" />
-				<span className="headerIconBadge">3</span>
+				{/* <span className="headerIconBadge">3</span> */}
 			</div>
 
 			{isOpen && (
@@ -75,7 +75,7 @@ const NotificationsPanel = () => {
 					</div>
 					<div className="notifications-list">
 						{notifications.length === 0 && (
-							<div className="chat-empty">
+							<div className="notifications-empty">
 								<p>No notifications</p>
 							</div>
 						)}

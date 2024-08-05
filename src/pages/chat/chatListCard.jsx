@@ -1,13 +1,17 @@
 import { format } from "date-fns";
 import React from "react";
+import { useSelector } from "react-redux";
 
 export const ChatListCard = ({ data }) => {
+	const { currentUser } = useSelector((state) => state.user);
+
 	const staff = data.staff;
 	const chat = data.chat;
 	const activeList = data.activeList;
 	const recipient = data.recipient;
 	const typing = data.isTyping;
-console.log(chat)
+	const sameUser = staff?._id === currentUser?._id;
+	console.log(chat);
 	return (
 		<div className={`chat-list-card ${staff?._id === recipient && "selected"}`}>
 			<div className="left">
@@ -24,7 +28,7 @@ console.log(chat)
 					{staff?._id in activeList && <div className="online-dot"></div>}
 				</div>
 				<div className="text">
-					<span className="name">{staff?.fullName}</span>
+					<span className="name">{sameUser ? "You" : staff?.fullName}</span>
 					<div className="message">
 						<span></span>
 
