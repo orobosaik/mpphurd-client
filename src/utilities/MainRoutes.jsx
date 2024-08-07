@@ -24,7 +24,6 @@ import Profile from "../pages/profile/Profile.jsx";
 import Activity from "../pages/activity/Activity.jsx";
 import OfficeSetting from "../pages/officeSetting/OfficeSetting.jsx";
 import Chat from "../pages/chat/chat.jsx";
-import LoggedWrapper from "./LoggedWrapper.jsx";
 import { socket } from "./socket.js";
 
 function MainRoutes() {

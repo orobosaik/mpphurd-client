@@ -11,7 +11,6 @@ export const ChatListCard = ({ data }) => {
 	const recipient = data.recipient;
 	const typing = data.isTyping;
 	const sameUser = staff?._id === currentUser?._id;
-	console.log(chat);
 	return (
 		<div className={`chat-list-card ${staff?._id === recipient && "selected"}`}>
 			<div className="left">

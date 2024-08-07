@@ -56,7 +56,6 @@ const Chat = () => {
 	const [activeChatsForSearch, setActiveChatsForSearch] = useState([]);
 
 	const scrollToBottom = () => {
-		console.log(chatRef.current);
 		if (chatRef.current) {
 			chatRef.current.scrollTop = chatRef.current.scrollHeight;
 		}
@@ -73,9 +72,6 @@ const Chat = () => {
 		setNewMessageCount(0); // Reset new messages count
 	};
 	useEffect(() => {
-		console.log("AFTER MESSAGE ADDED");
-
-		console.log(chat.allDirectMessages);
 
 		const newActiveChats = getActiveChats(
 			chat.allDirectMessages,
@@ -88,8 +84,6 @@ const Chat = () => {
 		);
 		// setActiveChats(newActiveChats);
 		dispatch(setChatList(newActiveChats));
-		console.log("AFTER NEW ACTIVE CHATS");
-		console.log(newActiveChats);
 		dispatch(setTotalUnreadCount(totalUnreadCount));
 
 		// setActiveChatsForSearch(getConversationList());
@@ -126,7 +120,6 @@ const Chat = () => {
 			const res = await fetchInstance.get("/staffs/staff/all");
 			setStaffList(res.data);
 			setIsFetchingError("");
-			console.log(res.data);
 		} catch (error) {
 			let message = error.response
 				? error.response.data.message
@@ -145,10 +138,14 @@ const Chat = () => {
 	useEffect(() => {
 		getStaffList();
 	}, []);
+	useEffect(() => {
+		if (socket.disconnected) {
+			dispatch(setActiveList([]));
+		}
+	}, [socket.connected]);
 
 	const sendMessage = async (e) => {
 		e.preventDefault();
-		console.log(messageContent);
 		setShowEmojis(false);
 
 		const message = {
@@ -161,18 +158,13 @@ const Chat = () => {
 			saved: false,
 			read: false,
 		};
-		console.log("INSIDE CLIENT SEND MSSG");
 
-		console.log(chat);
-		console.log(message);
 		sendSound.play();
-		console.log(chat);
 		socket.emit("directMessage", message);
 		dispatch(addMessage(message));
 
 		setMessageContent("");
 		handleScrollDown();
-		console.log(chat.allDirectMessages);
 	};
 	const markAsRead = (message) => {
 		socket.emit("messageRead", message);
@@ -238,7 +230,6 @@ const Chat = () => {
 			return acc;
 		}, {});
 
-		console.log(staffListWithNames);
 
 		const searchData = Object.keys(chat.chatList).map((key) => ({
 			id: staffListWithNames[key]?.id,
@@ -247,7 +238,6 @@ const Chat = () => {
 			position: staffListWithNames[key].position,
 			...chat.chatList[key],
 		}));
-		console.log(searchData);
 		return searchData;
 	}
 	// CREATE SEARCH FUNCTIONALITY WITH FUSE JS
@@ -269,7 +259,6 @@ const Chat = () => {
 	};
 
 	useEffect(() => {
-		// console.log("DATA WHILE IN SEARCH", data);
 		// If the user searched for an empty string,
 		// display all data.
 		if (chatSearchQuery.length === 0) {
@@ -277,7 +266,6 @@ const Chat = () => {
 			return;
 		}
 
-		console.log("INSIDE FUSSE");
 		const newData = getConversationList();
 
 		// conversation query
@@ -295,8 +283,6 @@ const Chat = () => {
 		const results3 = fuse3.search(chatSearchQuery);
 		const items3 = results3.map((result) => result.item);
 
-		// console.log("FUSE SEARCH: ", results);
-		// console.log("FUSE SEARCH MAPPED: ", items);
 		setSearchData({ conversation: items1, staff: items2, messages: items3 });
 	}, [chatSearchQuery]);
 
@@ -323,6 +309,13 @@ const Chat = () => {
 						// lastPlanNo={topBarData.lastPlanNo}
 						// options={connectionStatus()}
 						// options={chat.typingList.includes(recipient) && "WATTTT"}
+						options={
+							socket.connected ? (
+								<span className="online-status online">Online</span>
+							) : (
+								<span className="online-status offline">Offline</span>
+							)
+						}
 						style={{
 							boxShadow:
 								scroll > 0 ? "inset 0 8px 5px -5px rgb(0 0 0 / 0.4)" : "none",
@@ -378,12 +371,13 @@ const Chat = () => {
 											<>
 												{!chatSearchQuery && (
 													<>
-														<span className="chat-list-header">Chat</span>
+														<span className="chat-list-header">
+															Conversations
+														</span>
 														{Object.keys(chat.chatList).map((e, i) => {
-															console.log(chat.chatList);
 
 															return (
-																<div onClick={() => setRecipient(e)}>
+																<div key={i} onClick={() => setRecipient(e)}>
 																	<ChatListCard
 																		data={{
 																			staff: staffList.filter(
@@ -422,13 +416,10 @@ const Chat = () => {
 																<span className="chat-list-header">Chat</span>
 															)}
 															<div className="chat-list">
-																{searchData.conversation.map((e) => {
-																	// console.log(
-																	// 	staffList.filter((s) => s._id === e)[0]
-																	// );
-																	console.log(searchData.conversation);
+																{searchData.conversation.map((e, i) => {
 																	return (
 																		<div
+																			key={i}
 																			onClick={() => {
 																				setRecipient(e.id);
 																			}}>
@@ -457,9 +448,10 @@ const Chat = () => {
 																<span className="chat-list-header">Staff</span>
 															)}
 															<div className="chat-list">
-																{searchData.staff.map((e) => {
+																{searchData.staff.map((e, i) => {
 																	return (
 																		<div
+																			key={i}
 																			onClick={() => {
 																				setRecipient(e._id);
 																				setRecipientData(e);
@@ -585,7 +577,6 @@ const Chat = () => {
 											placeholder="Type a message"
 											value={messageContent}
 											onChange={(e) => {
-												console.log(recipient);
 												handleTyping();
 												setMessageContent(e.target.value);
 											}}

@@ -106,7 +106,27 @@ html[data-theme="dark"] .chat-right-bg {
 	font-size: 1.7rem;
 	font-weight: 600;
 }
+.online-status{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #fefefe;
+	font-weight: bold;
+	padding: .2rem 1rem;
+	font-size: 1.2rem;
 
+	border-radius: .8rem;
+	-webkit-border-radius: .8rem;
+	-moz-border-radius: .8rem;
+	-ms-border-radius: .8rem;
+	-o-border-radius: .8rem;
+}
+.online{
+	background-color: var(--pc-green);
+}
+.offline{
+	background-color: var(--accent-red);
+}
 /* CHAT LEFT */
 
 .chat-left-top {

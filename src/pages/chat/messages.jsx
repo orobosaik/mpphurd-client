@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { format } from "date-fns";
 import { socket } from "../../utilities/socket";
 import {
@@ -9,21 +9,33 @@ import {
 	ThreeDRotationRounded,
 } from "@mui/icons-material";
 import { MessageContextMenu } from "./MessageContextMenu";
+import { addMessage } from "../../redux/userSlice";
 
 const Message = ({ message, userId }) => {
-	const { currentUser } = useSelector((state) => state.user);
+	const { currentUser, chat } = useSelector((state) => state.user);
 	const [contextMenuVisible, setContextMenuVisible] = useState(false);
 	const [showError, setShowError] = useState(false);
+	const [reload, setReload] = useState([]);
+
+	const resendMessage = async (message) => {
+		// filter
+
+		setReload(() => []);
+		socket.emit("directMessage", message);
+	};
 
 	useEffect(() => {
+		if (showError) {
+			setShowError(false);
+		}
 		const timer = setTimeout(() => {
 			setShowError(true);
-		}, 5000);
+		}, 3000);
 
 		return () => {
 			clearTimeout(timer);
 		};
-	}, []);
+	}, [reload]);
 
 	return (
 		<div
@@ -45,7 +57,11 @@ const Message = ({ message, userId }) => {
 									{currentUser._id === message.sender && (
 										<>
 											{showError && !message.saved && (
-												<span className="resend">Resend</span>
+												<span
+													onClick={() => resendMessage(message)}
+													className="resend">
+													Resend
+												</span>
 											)}
 										</>
 									)}
@@ -69,9 +85,9 @@ const Message = ({ message, userId }) => {
 														<path
 															d="M2 12L9 19L22 3"
 															stroke="currentColor"
-															stroke-width="2"
-															stroke-linecap="round"
-															stroke-linejoin="round"
+															strokeWidth="2"
+															strokeLinecap="round"
+															strokeLinejoin="round"
 														/>
 													</svg>
 												</span>
@@ -107,8 +123,8 @@ const Message = ({ message, userId }) => {
 											{!showError && !message.saved && (
 												<span className="sent">
 													<svg
-														width="18"
-														height="18"
+														width="12"
+														height="12"
 														viewBox="0 0 100 100"
 														xmlns="http://www.w3.org/2000/svg"
 														style={{
@@ -245,7 +261,7 @@ export const Messages = ({ data }) => {
 						// 		</span>
 						// 	</div>
 						// </div>
-						<Message message={e} />
+						<Message key={i} message={e} />
 					);
 				})}
 
