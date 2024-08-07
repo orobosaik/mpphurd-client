@@ -25,6 +25,7 @@ import Activity from "../pages/activity/Activity.jsx";
 import OfficeSetting from "../pages/officeSetting/OfficeSetting.jsx";
 import Chat from "../pages/chat/chat.jsx";
 import LoggedWrapper from "./LoggedWrapper.jsx";
+import { socket } from "./socket.js";
 
 function MainRoutes() {
 	const navigate = useNavigate();
@@ -40,20 +41,123 @@ function MainRoutes() {
 		if (!currentUser) {
 			navigate("/login");
 		} else {
-			navigate("/")
+			socket.auth = { userId: currentUser._id };
+			socket.connect();
 		}
 		// return () => {};
-	}, [currentUser]);
+	}, []);
 
 	return (
 		<>
 			{currentUser ? (
 				<>
-					<LoggedWrapper />
-				</>
-			) : (
-				<>
 					<Routes>
+						{/* HOME PAGE */}
+						<Route path="/">
+							<Route
+								index
+								// element={!currentUser ? <Navigate to="/login" /> : <Home />}
+								element={<Home />}
+							/>
+						</Route>
+
+						{/* PERMIT | APPROVAL */}
+						<Route path="/permit">
+							{/* <Route index element={currentUser && <Approval />} /> */}
+							<Route index element={<OfficeSelect />} />
+
+							<Route path="new" element={<CreateApplication />} />
+							<Route path=":id">
+								<Route index element={<Plan />} />
+								<Route path="bills" element={<ViewBill />} />
+								<Route path="create_bill" element={<CreateBill />} />
+								<Route path="minute" element={<Minute />} />
+								<Route path="documents" element={<DocumentView />} />
+							</Route>
+							<Route path="office">
+								<Route path=":id" element={<Office />} />
+							</Route>
+						</Route>
+
+						{/* PETITION */}
+						<Route path="/petition">
+							<Route index element={<InDevelopment />} />
+						</Route>
+
+						{/* BUILDING CONTROL */}
+						<Route path="/b_control">
+							{/* <Route index element={<BuildingControl />} /> */}
+							<Route index element={<InDevelopment />} />
+						</Route>
+
+						{/* DEVELOPMENT CONTROL */}
+						<Route path="/d_control">
+							{/* <Route index element={<DevelopmentControl />} /> */}
+							<Route index element={<InDevelopment />} />
+						</Route>
+
+						{/* ACTIVITIES */}
+						<Route path="/activities">
+							{/* <Route index element={<ActivitiesView />} /> */}
+							<Route index element={<Activity />} />
+						</Route>
+						{/* ANALYSIS */}
+						<Route path="/analysis">
+							{/* <Route index element={<Analysis />} /> */}
+							<Route index element={<Analysis />} />
+						</Route>
+
+						{/* PROFILE */}
+						<Route path="/profile">
+							<Route index element={<Profile />} />
+
+							<Route path="new" element={<CreateApplication />} />
+							<Route path=":id">
+								<Route index element={<Plan />} />
+								<Route path="bills" element={<ViewBill />} />
+								<Route path="create_bill" element={<CreateBill />} />
+								<Route path="minute" element={<Minute />} />
+								<Route path="documents" element={<DocumentView />} />
+							</Route>
+							<Route path="office">
+								<Route path=":id" element={<Office />} />
+							</Route>
+						</Route>
+
+						{/* OFFICE SETTING */}
+						<Route path="/office_setting">
+							<Route index element={<OfficeSetting />} />
+
+							<Route path="new" element={<CreateApplication />} />
+							<Route path=":id">
+								<Route index element={<Plan />} />
+								<Route path="bills" element={<ViewBill />} />
+								<Route path="create_bill" element={<CreateBill />} />
+								<Route path="minute" element={<Minute />} />
+								<Route path="documents" element={<DocumentView />} />
+							</Route>
+							<Route path="office">
+								<Route path=":id" element={<Office />} />
+							</Route>
+						</Route>
+
+						{/* CHAT  */}
+						<Route path="/chat">
+							<Route index element={<Chat />} />
+
+							<Route path="new" element={<CreateApplication />} />
+							<Route path=":id">
+								<Route index element={<Plan />} />
+								<Route path="bills" element={<ViewBill />} />
+								<Route path="create_bill" element={<CreateBill />} />
+								<Route path="minute" element={<Minute />} />
+								<Route path="documents" element={<DocumentView />} />
+							</Route>
+							<Route path="office">
+								<Route path=":id" element={<Office />} />
+							</Route>
+						</Route>
+
 						{/* LOGIN PAGE */}
 						<Route path="/login">
 							<Route
@@ -63,6 +167,10 @@ function MainRoutes() {
 							/>
 						</Route>
 					</Routes>
+				</>
+			) : (
+				<>
+					<LoginPage />
 				</>
 			)}
 		</>

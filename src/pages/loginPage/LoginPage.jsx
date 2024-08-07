@@ -33,11 +33,11 @@ function LoginPage() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	// useEffect(() => {
-	// 	if (currentUser) {
-	// 		navigate("/");
-	// 	}
-	// }, []);
+	useEffect(() => {
+		if (currentUser) {
+			navigate("/");
+		}
+	}, []);
 
 	const email = useRef();
 	const password = useRef();
@@ -77,7 +77,10 @@ function LoginPage() {
 
 			dispatch(loginSuccess(res.data));
 
-			// navigate("/");
+			navigate("/");
+
+			socket.auth = { userId: res.data._id };
+			socket.connect();
 
 			setTimeout(() => {
 				toast.success("Login Successful", {});

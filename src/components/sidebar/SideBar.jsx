@@ -33,7 +33,6 @@ export default function SideBar({ selected }) {
 
 	const handleLogout = () => {
 		// console.log("YAYAYAYAYAYA");
-		// navigate("/login");
 		// persistor.purge();
 
 		socket.disconnect();
@@ -42,6 +41,7 @@ export default function SideBar({ selected }) {
 		});
 
 		dispatch(logout());
+		navigate("/login");
 		dispatch(resetOfficeData());
 
 		setTimeout(() => {
