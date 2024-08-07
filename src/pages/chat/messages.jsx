@@ -48,7 +48,22 @@ const Message = ({ message, userId }) => {
 				onMouseLeave={() => setContextMenuVisible(false)}>
 				<div className="message-wrapper">
 					{message.deletedForAll ? (
-						"This message was deleted."
+						<span className="align-center">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 24 24"
+								width="14"
+								height="14"
+								fill="none"
+								stroke="currentColor"
+								strokeWidth="2"
+								strokeLinecap="round"
+								strokeLinejoin="round">
+								<circle cx="12" cy="12" r="10" />
+								<line x1="8" y1="16" x2="16" y2="8" />
+							</svg>
+							<span>This message was deleted</span>
+						</span>
 					) : (
 						<>
 							<p>{message.content}</p>
@@ -186,8 +201,8 @@ const Message = ({ message, userId }) => {
 											{message.read && (
 												<span className="read">
 													<svg
-														width="20"
-														height="20"
+														width="14"
+														height="14"
 														viewBox="0 0 24 24"
 														fill="none"
 														xmlns="http://www.w3.org/2000/svg">
@@ -265,8 +280,8 @@ export const Messages = ({ data }) => {
 					);
 				})}
 
-			{typing && (
-				<div className="typing received">
+			{typing && recipient !== currentUser._id && (
+				<div className="typing">
 					<div className="message-content">
 						<span></span>
 						<span></span>
