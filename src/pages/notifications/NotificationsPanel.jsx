@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./notifications.css";
 import {
 	ClearAllRounded,
@@ -44,6 +44,8 @@ const NotificationsPanel = () => {
 	]);
 	const [isOpen, setIsOpen] = useState(false);
 
+	const dropdownRef = useRef(null);
+
 	const togglePanel = () => {
 		setIsOpen(!isOpen);
 	};
@@ -58,8 +60,21 @@ const NotificationsPanel = () => {
 		setNotifications([]);
 	};
 
+	const handleClickOutside = (event) => {
+		if (dropdownRef.current && !dropdownRef.current?.contains(event.target)) {
+			setIsOpen(false);
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, []);
+
 	return (
-		<div className="notifications">
+		<div className="notifications" ref={dropdownRef}>
 			<div className="notification-icon headerIconItem" onClick={togglePanel}>
 				<Notifications className="notificationIcon" />
 				{/* <span className="headerIconBadge">3</span> */}

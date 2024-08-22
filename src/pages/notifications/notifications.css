@@ -11,6 +11,7 @@
 
 .notifications-panel {
 	position: absolute;
+	cursor: auto;
 	top: 100%;
 	right: 0;
 	width: 400px;
@@ -66,10 +67,10 @@ html[data-theme="dark"] .clear-all {
 	max-height: 400px; /* Limit height */
 	overflow-y: auto; /* Enable scrolling */
 }
-.notifications-empty{
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.notifications-empty {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .notification-card {
