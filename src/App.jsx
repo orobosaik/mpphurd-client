@@ -84,26 +84,26 @@ function App() {
 	useEffect(() => {
 		const connectSocket = () => {
 			socket.on("connect", () => {
-				console.log(`I'm connected with the back-end`);
+				// console.log(`I'm connected with the back-end`);
 			});
 			socket.onAny((event, ...args) => {
-				console.log(event, args);
+				// console.log(event, args);
 			});
 			socket.on("users", (data) => {
 				const { [currentUser?._id]: _, ...list } = data;
 
 				dispatch(setActiveList(list));
-				console.log("USER:", list);
+				// console.log("USER:", list);
 			});
 		};
 		connectSocket();
 		return () => {
-			console.log("LOGOUT WORKING");
+			// console.log("LOGOUT WORKING");
 			socket.off("connect", () => {
-				console.log(`I'm disconnected with the back-end`);
+				// console.log(`I'm disconnected with the back-end`);
 			});
 			socket.off("users", () => {
-				console.log("USER GONE");
+				// console.log("USER GONE");
 			});
 		};
 	}, []);
@@ -111,33 +111,33 @@ function App() {
 	// Receive Messages
 	useEffect(() => {
 		socket.on("directMessage", (data) => {
-			console.log("INSIDE CLIENT DIRECT MSSG");
+			// console.log("INSIDE CLIENT DIRECT MSSG");
 
-			console.log("SENDER === CURRENT: " + (data.sender == currentUser._id));
-			console.log("SENDER: " + data.sender);
-			console.log("CURRENT: " + currentUser._id);
+			// console.log("SENDER === CURRENT: " + (data.sender == currentUser._id));
+			// console.log("SENDER: " + data.sender);
+			// console.log("CURRENT: " + currentUser._id);
 			if (data.sender === currentUser._id) {
 				let isOldMessage;
 
 				const messages = chat.allDirectMessages.map((msg) => {
 					const isSameMessage = msg.key === data.key;
-					console.log([msg, data]);
+					// console.log([msg, data]);
 					if (isSameMessage) {
 						isOldMessage = true;
 					}
-					console.log("ISOLDMESSAGE: " + isOldMessage);
-					console.log("ISTHESAMEMESSAGE: " + isSameMessage);
+					// console.log("ISOLDMESSAGE: " + isOldMessage);
+					// console.log("ISTHESAMEMESSAGE: " + isSameMessage);
 					return isSameMessage ? data : msg;
 				});
 
-				console.log("INSIDE AFTER FILTER OF SAME OWNER OF MESSAGE");
+				// console.log("INSIDE AFTER FILTER OF SAME OWNER OF MESSAGE");
 				!isOldMessage
 					? dispatch(addMessage(data))
 					: dispatch(setAllDirectMessages(messages));
 
-				console.log(data);
-				console.log(chat.allDirectMessages);
-				console.log(messages);
+				// console.log(data);
+				// console.log(chat.allDirectMessages);
+				// console.log(messages);
 			} else {
 				// Request notification permission
 				if (Notification.permission !== "granted") {
@@ -148,7 +148,7 @@ function App() {
 
 				dispatch(addMessage(data));
 				showNotification(data);
-				console.log("INSIDE AFTER FILTER OF NEW TYPE OF MESSAGE");
+				// console.log("INSIDE AFTER FILTER OF NEW TYPE OF MESSAGE");
 			}
 		});
 
@@ -182,7 +182,7 @@ function App() {
 		});
 
 		socket.on("allDirectMessages", (data) => {
-			console.log("INSIDE CLIENT ALL DIRECT MSSG");
+			// console.log("INSIDE CLIENT ALL DIRECT MSSG");
 			dispatch(setAllDirectMessages(data));
 		});
 		socket.on("messageRead", (data) => {
@@ -232,7 +232,7 @@ function App() {
 			socket.off("deleteForMe");
 			socket.off("deleteForAll");
 
-			console.log("LOGOUT WORKING222");
+			// console.log("LOGOUT WORKING222");
 		};
 	}, []);
 

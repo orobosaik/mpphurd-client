@@ -39,7 +39,7 @@ export const setupInterceptors = (dispatch, navigate) => {
 
 		socket.disconnect();
 		socket.on("disconnect", () => {
-			console.log(`I'm disconnected from the back-end`);
+			// console.log(`I'm disconnected from the back-end`);
 		});
 
 		dispatch(logout());

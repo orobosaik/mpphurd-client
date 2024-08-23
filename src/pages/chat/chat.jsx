@@ -373,7 +373,7 @@ const Chat = () => {
 															Conversations
 														</span>
 														{Object.keys(chat.chatList).map((e, i) => {
-															console.log(chat.chatList);
+															// console.log(chat.chatList);
 
 															return (
 																<div key={i} onClick={() => setRecipient(e)}>

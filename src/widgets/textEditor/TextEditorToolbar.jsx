@@ -70,10 +70,10 @@ function redoChange() {
 	this.quill.history.redo();
 }
 function fullscreenChange() {
-	console.log(this.quill);
+	// console.log(this.quill);
 	const quill = this.quill;
 
-	console.log(document.fullscreenElement);
+	// console.log(document.fullscreenElement);
 	if (!document.fullscreenElement) {
 		quill.container.style.height = "100%";
 		quill.container.parentElement.parentElement.requestFullscreen();

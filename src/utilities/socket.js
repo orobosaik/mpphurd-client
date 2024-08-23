@@ -5,7 +5,7 @@ export const socket = io(import.meta.env.VITE_SERVER_PLAIN, {
 }); // Replace with your server address
 
 socket.onAny((event, ...args) => {
-	console.log(event, args);
+	// console.log(event, args);
 });
 
 // export const connectSocket = async () => {
