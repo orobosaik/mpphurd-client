@@ -151,7 +151,7 @@ export default function Header() {
 										<h2>Search Results</h2>
 
 										<div>
-											<span>{searchData.length || 0}</span>
+											<span>{searchData?.length || 0}</span>
 											<span>Found</span>
 										</div>
 									</div>
@@ -168,7 +168,7 @@ export default function Header() {
 											/>
 										);
 									})}
-									{searchData.length < 1 && <div>No Result Found</div>}
+									{searchData?.length < 1 && <div>No Result Found</div>}
 								</section>
 							</div>
 						)}
@@ -195,8 +195,8 @@ export default function Header() {
 
 					<div className="headerIconItem" onClick={() => navigate("/chat")}>
 						<Email className="emailIcon" />
-						{chat.totalUnreadCount > 0 && (
-							<span className="headerIconBadge">{chat.totalUnreadCount}</span>
+						{chat?.totalUnreadCount > 0 && (
+							<span className="headerIconBadge">{chat?.totalUnreadCount}</span>
 						)}
 					</div>
 				</div>
