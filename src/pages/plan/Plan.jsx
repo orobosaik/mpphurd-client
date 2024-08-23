@@ -18,6 +18,7 @@ import { getThemeColor } from "../../utilities/themeColor";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import { fetchInstance } from "../../utilities/fetcher";
 
 function Plan() {
 	const [rightBarView, setRightBarView] = useState(0);
@@ -46,8 +47,7 @@ function Plan() {
 		// console.log(location.state);
 		setIsLoading(true);
 		try {
-			let host = import.meta.env.VITE_SERVER;
-			const res = await axios.get(`${host}/staffs/plan/${params.id}`);
+			const res = await fetchInstance.get(`/staffs/plan/${params.id}`);
 			// Check if Plan is in User Office(s)
 			setIsInUserOffice(
 				currentUser.office.some((e) => {

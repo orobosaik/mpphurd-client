@@ -16,6 +16,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import LoadingIcon from "../../utilities/LoadingIcon";
+import { fetchInstance } from "../../utilities/fetcher";
 
 export default function ViewBill() {
 	const [rightBarView, setRightBarView] = useState(0);
@@ -28,12 +29,9 @@ export default function ViewBill() {
 	const params = useParams();
 
 	useEffect(() => {
-		axios.defaults.withCredentials = true;
-
 		const getData = async () => {
 			try {
 				setIsLoading(true);
-				let host = import.meta.env.VITE_SERVER;
 
 				// const res = await Promise.all([
 				// 	axios.get(`${host}/staffs/office/all`, {
@@ -44,7 +42,7 @@ export default function ViewBill() {
 				// 	}),
 				// 	axios.get(`${host}/staffs/plan/${params.id}`),
 				// ]);
-				const res = await axios.get(`${host}/staffs/plan/${params.id}`);
+				const res = await fetchInstance.get(`/staffs/plan/${params.id}`);
 
 				setData(res.data);
 

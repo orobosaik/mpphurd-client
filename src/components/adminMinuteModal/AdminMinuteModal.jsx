@@ -10,6 +10,7 @@ import axios from "axios";
 import { getThemeColor } from "../../utilities/themeColor";
 import { CircularProgress } from "@mui/material";
 import { MINUTE_STATUS_LIST } from "../../utilities/appData";
+import { fetchInstance } from "../../utilities/fetcher";
 
 export default function AdminMinuteModal({
 	buttonIcon,
@@ -72,16 +73,10 @@ export default function AdminMinuteModal({
 
 		// console.log(newData);
 
-		axios.defaults.withCredentials = true;
-
 		try {
-			let host = import.meta.env.VITE_SERVER;
-			const res = await axios.post(
-				`${host}/admin/plan/${data._id}/minute`,
-				newData,
-				{
-					withCredentials: true,
-				}
+			const res = await fetchInstance.post(
+				`/admin/plan/${data._id}/minute`,
+				newData
 			);
 			// console.log(res.data);
 
@@ -117,17 +112,10 @@ export default function AdminMinuteModal({
 		setInitLoading(true);
 
 		const getData = async () => {
-			axios.defaults.withCredentials = true;
 			try {
-				let host = import.meta.env.VITE_SERVER;
-
 				const res = await Promise.all([
-					axios.get(`${host}/admin/office`, {
-						withCredentials: true,
-					}),
-					axios.get(`${host}/admin/staff/active`, {
-						withCredentials: true,
-					}),
+					fetchInstance.get(`/admin/office`),
+					fetchInstance.get(`/admin/staff/active`),
 				]);
 
 				const office = res[0].data;

@@ -12,6 +12,7 @@ import { CloseRounded, EditRounded } from "@mui/icons-material";
 import { CircularProgress } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
 import { getThemeColor } from "../../utilities/themeColor";
+import { fetchInstance } from "../../utilities/fetcher";
 
 export default function ChangePasswordModal({ ...props }) {
 	const [open, setOpen] = useState(false);
@@ -55,8 +56,7 @@ export default function ChangePasswordModal({ ...props }) {
 
 		const resetPassword = async (email, password, otp) => {
 			try {
-				let host = import.meta.env.VITE_SERVER;
-				const res = await axios.post(`${host}/staffs/auth/change-password`, {
+				const res = await fetchInstance.post(`/staffs/auth/change-password`, {
 					email: email,
 					password: password,
 					otp: otp,
@@ -80,8 +80,7 @@ export default function ChangePasswordModal({ ...props }) {
 		};
 		const sendOTPCode = async (email) => {
 			try {
-				let host = import.meta.env.VITE_SERVER;
-				const res = await axios.post(`${host}/staffs/staff/send-otp`, {
+				const res = await fetchInstance.post(`/staffs/staff/send-otp`, {
 					email: email,
 				});
 				setLoading(false);

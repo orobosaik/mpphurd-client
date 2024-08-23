@@ -11,6 +11,7 @@ import { getThemeColor } from "../../utilities/themeColor";
 import { CircularProgress } from "@mui/material";
 import { FEEDBACK_LIST } from "../../utilities/appData";
 import { useSelector } from "react-redux";
+import { fetchInstance } from "../../utilities/fetcher";
 
 export default function FeedbackModal({ classList }) {
 	const [open, setOpen] = useState(false);
@@ -64,9 +65,8 @@ export default function FeedbackModal({ classList }) {
 		// console.log(newData);
 
 		try {
-			let host = import.meta.env.VITE_SERVER;
-			const res = await axios.post(
-				`${host}/staffs/staff/${currentUser._id}/feedback`,
+			const res = await fetchInstance.post(
+				`/staffs/staff/${currentUser._id}/feedback`,
 				newData
 			);
 

@@ -22,6 +22,7 @@ import { useNavigate } from "react-router-dom";
 import AnimatedBackground from "../../widgets/animatedBackground/AnimatedBackground";
 import { socket } from "../../utilities/socket";
 import { useEffect } from "react";
+import { fetchInstance } from "../../utilities/fetcher";
 
 function LoginPage() {
 	const [showPassword, setShowPassword] = useState(false);
@@ -42,35 +43,13 @@ function LoginPage() {
 	const email = useRef();
 	const password = useRef();
 
-	// SET AXIOS CONNECTION TIMEOUT
-	const timeoutDuration = import.meta.env.VITE_TIMEOUT;
-	axios.interceptors.request.use((config) => {
-		config.timeout = timeoutDuration; // Wait for timeout duration in seconds before timing out
-		config.signal = AbortSignal.timeout(timeoutDuration); // Wait for timeout duration in seconds before timing out
-		return config;
-	});
-	axios.interceptors.response.use(
-		(response) => response,
-		(error) => {
-			if (error.code === "ECONNABORTED" || error.code === "ERR_CANCELED") {
-				error.message = "Request timed out";
-			}
-			// if (error.code === "ECONNABORTED" && error.message.includes("timeout")) {
-			// 	console.log("Request timed out");
-			// }
-			return Promise.reject(error);
-		}
-	);
-	axios.defaults.withCredentials = true;
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		dispatch(loginStart());
 
 		try {
 			setIsLoading(true);
-			let host = import.meta.env.VITE_SERVER;
-			const res = await axios.post(`${host}/staffs/auth/login`, {
+			const res = await fetchInstance.post(`/staffs/auth/login`, {
 				email: email.current.value,
 				password: password.current.value,
 			});

@@ -64,8 +64,7 @@ export default function AdminStaffEditModal({ ...props }) {
 
 		const loadOffices = async () => {
 			try {
-				let host = import.meta.env.VITE_SERVER;
-				let res = await axios.get(`${host}/admin/office`);
+				let res = await fetchInstance.get(`/admin/office`);
 
 				const offices = await res.data;
 

@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import { getThemeColor } from "../../utilities/themeColor";
 import axios from "axios";
 import { TASK_LIST } from "../../utilities/appData";
+import { fetchInstance } from "../../utilities/fetcher";
 
 export default function AdminOfficeEditModal({ ...props }) {
 	const [open, setOpen] = useState(false);
@@ -105,8 +106,7 @@ export default function AdminOfficeEditModal({ ...props }) {
 		tasks && (newData.tasks = tasks.filter((str) => str !== ""));
 
 		try {
-			let host = import.meta.env.VITE_SERVER;
-			let res = await axios.post(`${host}/admin/office`, newData);
+			let res = await fetchInstance.post(`/admin/office`, newData);
 
 			handleClose();
 
@@ -136,8 +136,7 @@ export default function AdminOfficeEditModal({ ...props }) {
 		tasks && (newData.tasks = tasks.filter((str) => str !== ""));
 
 		try {
-			let host = import.meta.env.VITE_SERVER;
-			let res = await axios.put(`${host}/admin/office/${data._id}`, newData);
+			let res = await fetchInstance.put(`/admin/office/${data._id}`, newData);
 
 			setLoading(false);
 			setOpen(false);

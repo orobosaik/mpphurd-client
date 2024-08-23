@@ -18,6 +18,7 @@ import { toast } from "react-toastify";
 import { getThemeColor } from "../../utilities/themeColor";
 import HeaderUserOptions from "../../widgets/headerUserOptions/HeaderUserOptions";
 import NotificationsPanel from "../../pages/notifications/NotificationsPanel";
+import { fetchInstance } from "../../utilities/fetcher";
 
 export default function Header() {
 	const [searchQuery, setSearchQuery] = useState("");
@@ -76,12 +77,8 @@ export default function Header() {
 		setIsFetching(true);
 		const getData = async () => {
 			try {
-				let host = import.meta.env.VITE_SERVER;
-				const res = await axios.get(
-					`${host}/staffs/plan?search=${searchQuery}`,
-					{
-						withCredentials: true,
-					}
+				const res = await fetchInstance.get(
+					`/staffs/plan?search=${searchQuery}`
 				);
 				setSearchData(res.data);
 				setIsFetching(false);

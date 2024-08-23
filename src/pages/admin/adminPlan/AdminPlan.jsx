@@ -19,6 +19,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import PlanInfoCard from "../../../components/planInfoCard/PlanInfoCard";
 import AdminMinuteModal from "../../../components/adminMinuteModal/AdminMinuteModal";
+import { fetchInstance } from "../../../utilities/fetcher";
 
 export default function AdminPlan() {
 	const [rightBarView, setRightBarView] = useState(0);
@@ -47,17 +48,10 @@ export default function AdminPlan() {
 			newOfficeId: form.get("minuteToOfficer"),
 		};
 		// console.log(newData);
-
-		axios.defaults.withCredentials = true;
-
 		try {
-			let host = import.meta.env.VITE_SERVER;
-			const res = await axios.post(
-				`${host}/staffs/plan/${data._id}/minute`,
-				newData,
-				{
-					withCredentials: true,
-				}
+			const res = await fetchInstance.post(
+				`/staffs/plan/${data._id}/minute`,
+				newData
 			);
 			// console.log(res.data);
 
@@ -87,8 +81,7 @@ export default function AdminPlan() {
 		// console.log(location.state);
 		setIsLoading(true);
 		try {
-			let host = import.meta.env.VITE_SERVER;
-			const res = await axios.get(`${host}/admin/plan/${params.id}`);
+			const res = await fetchInstance.get(`/admin/plan/${params.id}`);
 
 			setData(() => res.data);
 			setIsLoading(false);

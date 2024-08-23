@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import appSlice, { resetOfficeData, setOfficeData } from "../../redux/appSlice";
 import Fuse from "fuse.js";
 import uuid from "react-uuid";
+import { fetchInstance } from "../../utilities/fetcher";
 
 function ListWrapper({ children }) {
 	const { officeData } = useSelector((state) => state.app);
@@ -87,22 +88,15 @@ function ListWrapper({ children }) {
 
 	const getData = async () => {
 		setIsLoading(true);
-		axios.defaults.withCredentials = true;
 		try {
-			let host = import.meta.env.VITE_SERVER;
 			let res;
 
 			if (type !== "current") {
-				res = await axios.get(
-					`${host}/staffs/office/${state.id._id}/${type}?dateFrom=${startDate}&dateTo=${endDate}`,
-					{
-						withCredentials: true,
-					}
+				res = await fetchInstance.get(
+					`/staffs/office/${state.id._id}/${type}?dateFrom=${startDate}&dateTo=${endDate}`
 				);
 			} else {
-				res = await axios.get(`${host}/staffs/office/${state.id._id}/${type}`, {
-					withCredentials: true,
-				});
+				res = await fetchInstance.get(`/staffs/office/${state.id._id}/${type}`);
 			}
 
 			setIsLoading(false);

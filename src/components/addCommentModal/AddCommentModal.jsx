@@ -11,6 +11,7 @@ import { getThemeColor } from "../../utilities/themeColor";
 import { CircularProgress } from "@mui/material";
 import { COMMENT_STATUS_LIST } from "../../utilities/appData";
 import TextEditor from "../../widgets/textEditor/TextEditor";
+import { fetchInstance } from "../../utilities/fetcher";
 
 export default function AddCommentModal({
 	buttonIcon,
@@ -30,7 +31,7 @@ export default function AddCommentModal({
 		setOpen(true);
 	};
 	const handleClose = () => {
-		const content =  editorRef.current.getContent(); // Get content from the editor
+		const content = editorRef.current.getContent(); // Get content from the editor
 		setContentValue(content);
 		setOpen(false);
 	};
@@ -82,9 +83,8 @@ export default function AddCommentModal({
 		// console.log(newData);
 
 		try {
-			let host = import.meta.env.VITE_SERVER;
-			const res = await axios.post(
-				`${host}/staffs/plan/${data._id}/comment`,
+			const res = await fetchInstance.post(
+				`/staffs/plan/${data._id}/comment`,
 				newData
 			);
 
@@ -150,7 +150,6 @@ export default function AddCommentModal({
 										</select>
 									</div>
 
-
 									<div className="minuteItem">
 										<label htmlFor="minuteText">Comment:</label>
 										{/* <textarea
@@ -158,10 +157,7 @@ export default function AddCommentModal({
 											id="minuteText"
 											cols="30"
 											rows="8"></textarea> */}
-										<TextEditor
-											value={contentValue}
-											ref={editorRef}
-										/>
+										<TextEditor value={contentValue} ref={editorRef} />
 									</div>
 								</div>
 							</div>

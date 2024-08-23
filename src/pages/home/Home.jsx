@@ -14,7 +14,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { getThemeColor } from "../../utilities/themeColor";
 // const { format, getHours } = require("date-fns");
 import { format, getHours } from "date-fns";
-
+import { fetchInstance } from "../../utilities/fetcher";
 
 export default function Home() {
 	const { currentUser, loading } = useSelector((state) => state.user);
@@ -54,7 +54,6 @@ export default function Home() {
 			return e?.id?.name?.includes("ARCHIVE");
 		})
 	);
-
 
 	// FORMAT GREETING
 	const getGreeting = () => {
@@ -110,8 +109,7 @@ export default function Home() {
 	useEffect(() => {
 		const getData = async () => {
 			try {
-				let host = import.meta.env.VITE_SERVER;
-				const res = await axios.get(`${host}/staffs/staff`);
+				const res = await fetchInstance.get(`/staffs/staff`);
 
 				setData(res.data);
 				setIsLoading(false);

@@ -15,6 +15,7 @@ import {
 	VETTING_STATUS_LIST,
 } from "../../utilities/appData";
 import TextEditor from "../../widgets/textEditor/TextEditor";
+import { fetchInstance } from "../../utilities/fetcher";
 
 function VettingCardAddModal({
 	buttonIcon,
@@ -35,9 +36,9 @@ function VettingCardAddModal({
 	const editorRef1 = useRef();
 
 	const handleOpen = () => setOpen(true);
-	const handleClose =  () => {
+	const handleClose = () => {
 		setLoading(false);
-		const content =  editorRef1.current.getContent(); // Get content from the editor
+		const content = editorRef1.current.getContent(); // Get content from the editor
 		setContentValue(content);
 		setOpen(false);
 	};
@@ -80,7 +81,7 @@ function VettingCardAddModal({
 
 		const newData = {
 			status: form.get("minuteStatus"),
-			text: content1,
+			text: content,
 			type: type,
 		};
 		// console.log(newData);
@@ -88,9 +89,8 @@ function VettingCardAddModal({
 
 		try {
 			setLoading(true);
-			let host = import.meta.env.VITE_SERVER;
-			const res = await axios.post(
-				`${host}/staffs/plan/${data._id}/vet_plan`,
+			const res = await fetchInstance.post(
+				`/staffs/plan/${data._id}/vet_plan`,
 				newData
 			);
 

@@ -24,6 +24,7 @@ import { resetOfficeData } from "../../redux/appSlice";
 import { CircularProgress } from "@mui/material";
 import { MINUTE_STATUS_LIST } from "../../utilities/appData";
 import TextEditor from "../../widgets/textEditor/TextEditor";
+import { fetchInstance } from "../../utilities/fetcher";
 
 export default function Minute() {
 	const [rightBarView, setRightBarView] = useState(0);
@@ -62,16 +63,10 @@ export default function Minute() {
 		};
 		// console.log(newData);
 
-		axios.defaults.withCredentials = true;
-
 		try {
-			let host = import.meta.env.VITE_SERVER;
-			const res = await axios.post(
-				`${host}/staffs/plan/${data._id}/minute`,
-				newData,
-				{
-					withCredentials: true,
-				}
+			const res = await fetchInstance.post(
+				`/staffs/plan/${data._id}/minute`,
+				newData
 			);
 			// console.log(res.data);
 
@@ -97,20 +92,12 @@ export default function Minute() {
 	};
 
 	useEffect(() => {
-		axios.defaults.withCredentials = true;
-
 		const getData = async () => {
 			try {
-				let host = import.meta.env.VITE_SERVER;
-
 				const res = await Promise.all([
-					axios.get(`${host}/staffs/office/all`, {
-						withCredentials: true,
-					}),
-					axios.get(`${host}/staffs/staff/all`, {
-						withCredentials: true,
-					}),
-					axios.get(`${host}/staffs/plan/${params.id}`),
+					fetchInstance.get(`/staffs/office/all`),
+					fetchInstance.get(`/staffs/staff/all`),
+					fetchInstance.get(`/staffs/plan/${params.id}`),
 				]);
 
 				const office = res[0].data;

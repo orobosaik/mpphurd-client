@@ -17,6 +17,7 @@ import ListCard from "../../components/listCard/ListCard";
 import uuid from "react-uuid";
 import ListCardContainer from "../../components/listCardContainer/ListCardContainer";
 import { format } from "date-fns";
+import { fetchInstance } from "../../utilities/fetcher";
 
 export default function Office() {
 	const dispatch = useDispatch();
@@ -240,8 +241,7 @@ export default function Office() {
 	useEffect(() => {
 		const getData = async () => {
 			try {
-				let host = import.meta.env.VITE_SERVER;
-				const res = await axios.get(`${host}/staffs/plan/last-plan-number`);
+				const res = await fetchInstance.get(`/staffs/plan/last-plan-number`);
 				setLastPlanNumber(res.data);
 			} catch (error) {}
 		};

@@ -17,6 +17,7 @@ import { getThemeColor } from "../../../utilities/themeColor";
 import LoadingIcon from "../../../utilities/LoadingIcon";
 import AdminOfficeEditModal from "../../../components/adminOfficeEditModal/AdminOfficeEditModal";
 import AdminRegionEditModal from "../../../components/adminRegionEditModal/AdminRegionEditModal";
+import { fetchInstance } from "../../../utilities/fetcher";
 
 export default function AdminRegionList() {
 	const [isLoading, setIsLoading] = useState(true);
@@ -27,8 +28,7 @@ export default function AdminRegionList() {
 	useEffect(() => {
 		const getData = async () => {
 			try {
-				let host = import.meta.env.VITE_SERVER;
-				const res = await axios.get(`${host}/admin/region`);
+				const res = await fetchInstance.get(`/admin/region`);
 
 				setData(res.data);
 				setIsLoading(false);

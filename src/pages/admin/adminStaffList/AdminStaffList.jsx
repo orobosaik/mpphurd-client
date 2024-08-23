@@ -22,6 +22,7 @@ import { getThemeColor } from "../../../utilities/themeColor";
 import LoadingIcon from "../../../utilities/LoadingIcon";
 import { JOB_TITLE_LIST } from "../../../utilities/appData";
 import Fuse from "fuse.js";
+import { fetchInstance } from "../../../utilities/fetcher";
 
 export default function AdminStaffList() {
 	const [isLoading, setIsLoading] = useState(true);
@@ -40,8 +41,7 @@ export default function AdminStaffList() {
 	useEffect(() => {
 		const getData = async () => {
 			try {
-				let host = import.meta.env.VITE_SERVER;
-				const res = await axios.get(`${host}/admin/staff`);
+				const res = await fetchInstance.get(`/admin/staff`);
 
 				setData(res.data);
 				setFilteredData(res.data);

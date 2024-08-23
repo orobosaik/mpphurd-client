@@ -22,6 +22,7 @@ import {
 	LGA_LIST,
 } from "../../utilities/appData";
 import FileUploadWithThumbnail from "../../widgets/fileUploadWithThumbnail/FileUploadWithThumbnail";
+import { fetchInstance } from "../../utilities/fetcher";
 
 export default function ApplicationForm() {
 	const [isLoading, setIsLoading] = useState(false);
@@ -91,13 +92,8 @@ export default function ApplicationForm() {
 
 		// console.log(newData);
 
-		axios.defaults.withCredentials = true;
-
 		try {
-			let host = import.meta.env.VITE_SERVER;
-			const res = await axios.post(`${host}/staffs/plan`, newData, {
-				withCredentials: true,
-			});
+			const res = await fetchInstance.post(`/staffs/plan`, newData);
 			// console.log(res.data);
 
 			navigate(`/permit/${res.data._id}`);

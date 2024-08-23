@@ -13,6 +13,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { getThemeColor } from "../../utilities/themeColor";
 import { useNavigate } from "react-router-dom";
 import ToggleSwitch from "../toggleSwitch/ToggleSwitch";
+import { fetchInstance } from "../../utilities/fetcher";
 
 export default function AdminRegionEditModal({ ...props }) {
 	const [open, setOpen] = useState(false);
@@ -88,8 +89,7 @@ export default function AdminRegionEditModal({ ...props }) {
 		zones && (newData.zones = zones.filter((str) => str !== ""));
 
 		try {
-			let host = import.meta.env.VITE_SERVER;
-			let res = await axios.post(`${host}/admin/region`, newData);
+			let res = await fetchInstance.post(`/admin/region`, newData);
 
 			handleClose();
 
@@ -117,8 +117,7 @@ export default function AdminRegionEditModal({ ...props }) {
 		zones && (newData.zones = zones.filter((str) => str !== ""));
 
 		try {
-			let host = import.meta.env.VITE_SERVER;
-			let res = await axios.put(`${host}/admin/region/${data._id}`, newData);
+			let res = await fetchInstance.put(`/admin/region/${data._id}`, newData);
 
 			setLoading(false);
 			setOpen(false);

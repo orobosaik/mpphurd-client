@@ -130,6 +130,7 @@ const Chat = () => {
 	};
 
 	useEffect(() => {
+		handleScrollDown();
 		const staff = staffList.filter((s) => s._id === recipient);
 		setRecipientData(staff[0]);
 	}, [recipient]);
@@ -376,7 +377,12 @@ const Chat = () => {
 															// console.log(chat.chatList);
 
 															return (
-																<div key={i} onClick={() => setRecipient(e)}>
+																<div
+																	key={i}
+																	onClick={() => {
+																		setRecipient(e);
+																		handleScrollDown();
+																	}}>
 																	<ChatListCard
 																		data={{
 																			staff: staffList.filter(

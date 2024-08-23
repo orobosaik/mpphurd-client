@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { getThemeColor } from "../../utilities/themeColor";
 import { useDispatch } from "react-redux";
 import { resetOfficeData } from "../../redux/appSlice";
+import { fetchInstance } from "../../utilities/fetcher";
 
 export default function GeneratePlanNoModal({
 	buttonIcon,
@@ -31,12 +32,8 @@ export default function GeneratePlanNoModal({
 	const handleSubmit = async () => {
 		setIsLoading(true);
 		try {
-			let host = import.meta.env.VITE_SERVER;
-			const res = await axios.get(
-				`${host}/staffs/plan/${params.id}/generate_id`,
-				{
-					withCredentials: true,
-				}
+			const res = await fetchInstance.get(
+				`/staffs/plan/${params.id}/generate_id`
 			);
 
 			// console.log(res.data);

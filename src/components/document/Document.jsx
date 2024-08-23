@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./document.css";
 
 export default function Document({ setRightBarView }) {
+	const params = useParams();
 	return (
 		<div className="document">
 			<div className="documentTop">
@@ -15,7 +16,7 @@ export default function Document({ setRightBarView }) {
 				</div>
 				<div className="documentWrapper">
 					<div className="documentPages">
-						<Link to="/permit/planId/documents">
+						<Link to={`/permit/${params.id}/documents`}>
 							<div className="documentPage selected">
 								<div className="documentPageBg"></div>
 								<div className="documentPageName">

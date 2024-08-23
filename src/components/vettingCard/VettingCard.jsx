@@ -38,6 +38,8 @@ function VettingCard({ data, header, reload, reloadActivities }) {
 	};
 
 	// Check if User has authorization to vet plan
+	const isInVettingOffice =
+		data?.plan?.currentOffice?.id?.name.toLowerCase() === "vetting";
 	const isInOfficeAndPermitted = currentUser?.office?.some((e) => {
 		return (
 			data?.plan?.currentOffice?.id?._id === e?.id?._id &&
@@ -122,7 +124,7 @@ function VettingCard({ data, header, reload, reloadActivities }) {
 
 					{/* {console.log({ Header: header, User: currentUser })} */}
 
-					{isCorrectJobTitle && isInOfficeAndPermitted && (
+					{isCorrectJobTitle && isInVettingOffice && isInOfficeAndPermitted && (
 						<VettingCardAddModal
 							data={data.plan}
 							reload={reload}

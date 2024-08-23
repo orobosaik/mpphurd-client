@@ -16,6 +16,7 @@ import axios from "axios";
 import { LinearProgress } from "@mui/material";
 import { toast } from "react-toastify";
 import { getThemeColor } from "../../utilities/themeColor";
+import { fetchInstance } from "../../utilities/fetcher";
 export default function AdminHeader() {
 	const [searchQuery, setSearchQuery] = useState("");
 	const [searchData, setSearchData] = useState([]);
@@ -72,12 +73,8 @@ export default function AdminHeader() {
 		setIsFetching(true);
 		const getData = async () => {
 			try {
-				let host = import.meta.env.VITE_SERVER;
-				const res = await axios.get(
-					`${host}/admin/plan?search=${searchQuery}`,
-					{
-						withCredentials: true,
-					}
+				const res = await fetchInstance.get(
+					`/admin/plan?search=${searchQuery}`
 				);
 				setSearchData(res.data);
 				setIsFetching(false);

@@ -25,6 +25,7 @@ import AdminStaffView from "../adminStaffView/adminStaffView";
 import { CircularProgress } from "@mui/material";
 import { JOB_TITLE_LIST } from "../../../utilities/appData";
 import Fuse from "fuse.js";
+import { fetchInstance } from "../../../utilities/fetcher";
 
 export default function AdminOfficeList() {
 	const [isLoading, setIsLoading] = useState(true);
@@ -47,12 +48,10 @@ export default function AdminOfficeList() {
 	useEffect(() => {
 		const getData = async () => {
 			try {
-				let host = import.meta.env.VITE_SERVER;
-
 				const res = await Promise.all([
-					axios.get(`${host}/admin/office`),
-					axios.get(`${host}/admin/staff`),
-					axios.get(`${host}/admin/region`),
+					fetchInstance.get(`/admin/office`),
+					fetchInstance.get(`/admin/staff`),
+					fetchInstance.get(`/admin/region`),
 				]);
 
 				setData(res[0].data);

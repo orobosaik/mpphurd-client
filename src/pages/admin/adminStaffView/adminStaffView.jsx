@@ -22,6 +22,7 @@ import LoadingIcon from "../../../utilities/LoadingIcon";
 import { getFullName } from "../../../utilities/getFullName";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { fetchInstance } from "../../../utilities/fetcher";
 
 export default function AdminStaffView() {
 	const [isLoading, setIsLoading] = useState(true);
@@ -35,8 +36,7 @@ export default function AdminStaffView() {
 	useEffect(() => {
 		const getData = async () => {
 			try {
-				let host = import.meta.env.VITE_SERVER;
-				const res = await axios.get(`${host}/admin/staff/${state.data._id}`);
+				const res = await fetchInstance.get(`/admin/staff/${state.data._id}`);
 
 				setData(() => res.data);
 				setIsLoading(false);

@@ -18,6 +18,7 @@ import {
 	LGA_LIST,
 	STACK_LIST,
 } from "../../utilities/appData";
+import { fetchInstance } from "../../utilities/fetcher";
 
 export default function PlanEditInfoModal({
 	buttonIcon,
@@ -223,13 +224,8 @@ export default function PlanEditInfoModal({
 		// console.log(newData);
 		// console.log(isOldFile);
 
-		axios.defaults.withCredentials = true;
-
 		try {
-			let host = import.meta.env.VITE_SERVER;
-			const res = await axios.put(`${host}/staffs/plan/${data._id}`, newData, {
-				withCredentials: true,
-			});
+			const res = await fetchInstance.put(`/staffs/plan/${data._id}`, newData);
 			// console.log(res.data);
 
 			// dispatch(resetOfficeData());

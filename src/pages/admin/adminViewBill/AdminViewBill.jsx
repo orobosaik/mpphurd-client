@@ -14,6 +14,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import AdminHeader from "../../../components/adminHeader/AdminHeader";
 import AdminSideBar from "../../../components/adminSideBar/AdminSideBar";
+import { fetchInstance } from "../../../utilities/fetcher";
 
 export default function ViewBill() {
 	const [rightBarView, setRightBarView] = useState(0);
@@ -27,10 +28,7 @@ export default function ViewBill() {
 	useEffect(() => {
 		const getData = async () => {
 			try {
-				let host = import.meta.env.VITE_SERVER;
-
-				// const res = await axios.get(`${host}/staffs/plan/${params.id}`);
-				const res = await axios.get(`${host}/admin/plan/${params.id}`);
+				const res = await fetchInstance.get(`/admin/plan/${params.id}`);
 
 				setData(res.data);
 			} catch (error) {

@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import { getThemeColor } from "../../utilities/themeColor";
 import { useSelector } from "react-redux";
 import { format } from "date-fns";
+import { fetchInstance } from "../../utilities/fetcher";
 
 function Activities({ setRightBarView, reload, admin, reloadFromPlan }) {
 	const [isLoading, setIsLoading] = useState(false);
@@ -251,18 +252,16 @@ function Activities({ setRightBarView, reload, admin, reloadFromPlan }) {
 
 	const getData = async () => {
 		try {
-			let host = import.meta.env.VITE_SERVER;
-
 			let res;
 			if (!isAdmin) {
 				res = await Promise.all([
-					axios.get(`${host}/staffs/plan/${params.id}/activities`),
-					axios.get(`${host}/staffs/plan/${params.id}`),
+					fetchInstance.get(`/staffs/plan/${params.id}/activities`),
+					fetchInstance.get(`/staffs/plan/${params.id}`),
 				]);
 			} else {
 				res = await Promise.all([
-					axios.get(`${host}/admin/plan/${params.id}/activities`),
-					axios.get(`${host}/admin/plan/${params.id}`),
+					fetchInstance.get(`/admin/plan/${params.id}/activities`),
+					fetchInstance.get(`/admin/plan/${params.id}`),
 				]);
 			}
 
