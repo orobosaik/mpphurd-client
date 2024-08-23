@@ -72,7 +72,6 @@ const Chat = () => {
 		setNewMessageCount(0); // Reset new messages count
 	};
 	useEffect(() => {
-
 		const newActiveChats = getActiveChats(
 			chat.allDirectMessages,
 			currentUser._id
@@ -148,6 +147,8 @@ const Chat = () => {
 		e.preventDefault();
 		setShowEmojis(false);
 
+		if (!messageContent) return;
+
 		const message = {
 			key: uuid(),
 			timestamp: Date.now(),
@@ -205,16 +206,14 @@ const Chat = () => {
 		});
 
 		// Sort the messages by timestamp
-		const sortedMessages = Object.keys(latestMessages)
-			.sort(
-				(a, b) =>
-					latestMessages[b].message.timestamp -
-					latestMessages[a].message.timestamp
-			)
-			.reduce((acc, key) => {
-				acc[key] = latestMessages[key];
-				return acc;
-			}, {});
+		// Extracting entries into an array and sorting them by timestamp
+		const sortedEntries = Object.entries(latestMessages).sort(
+			([, a], [, b]) => {
+				return new Date(b.message?.timestamp) - new Date(a.message?.timestamp);
+			}
+		);
+		// Converting the sorted array back into an object
+		const sortedMessages = Object.fromEntries(sortedEntries);
 
 		return sortedMessages;
 	}
@@ -230,12 +229,11 @@ const Chat = () => {
 			return acc;
 		}, {});
 
-
 		const searchData = Object.keys(chat.chatList).map((key) => ({
 			id: staffListWithNames[key]?.id,
 			name: staffListWithNames[key]?.name,
-			jobTitle: staffListWithNames[key].jobTitle,
-			position: staffListWithNames[key].position,
+			jobTitle: staffListWithNames[key]?.jobTitle,
+			position: staffListWithNames[key]?.position,
 			...chat.chatList[key],
 		}));
 		return searchData;
@@ -375,6 +373,7 @@ const Chat = () => {
 															Conversations
 														</span>
 														{Object.keys(chat.chatList).map((e, i) => {
+															console.log(chat.chatList);
 
 															return (
 																<div key={i} onClick={() => setRecipient(e)}>

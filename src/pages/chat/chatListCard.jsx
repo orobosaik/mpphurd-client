@@ -32,7 +32,30 @@ export const ChatListCard = ({ data }) => {
 						<span></span>
 
 						{!typing ? (
-							<span className="">{chat.message.content}</span>
+							<>
+								{chat.message.deletedForAll ? (
+									<span className="align-center deleted ">
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											viewBox="0 0 24 24"
+											width="14"
+											height="14"
+											fill="none"
+											stroke="currentColor"
+											strokeWidth="2"
+											strokeLinecap="round"
+											strokeLinejoin="round">
+											<circle cx="12" cy="12" r="10" />
+											<line x1="8" y1="16" x2="16" y2="8" />
+										</svg>
+										<span className="deletedMessage">
+											This message was deleted
+										</span>
+									</span>
+								) : (
+									<span className="">{chat.message?.content}</span>
+								)}
+							</>
 						) : (
 							<span>Typing...</span>
 						)}
@@ -41,7 +64,7 @@ export const ChatListCard = ({ data }) => {
 			</div>
 			<div className="right">
 				<span className="time">
-					{format(chat.message.timestamp, "hh:mm a")}
+					{format(chat.message?.timestamp, "hh:mm a")}
 				</span>
 				{/* <span className="count">54,853</span> */}
 				{chat.unread > 0 && <span className="count">{chat.unread}</span>}

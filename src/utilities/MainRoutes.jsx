@@ -25,6 +25,7 @@ import Activity from "../pages/activity/Activity.jsx";
 import OfficeSetting from "../pages/officeSetting/OfficeSetting.jsx";
 import Chat from "../pages/chat/chat.jsx";
 import { socket } from "./socket.js";
+import Settings from "../pages/settings/Settings.jsx";
 
 function MainRoutes() {
 	const navigate = useNavigate();
@@ -104,6 +105,23 @@ function MainRoutes() {
 						<Route path="/analysis">
 							{/* <Route index element={<Analysis />} /> */}
 							<Route index element={<Analysis />} />
+						</Route>
+
+						{/* SETTINGS */}
+						<Route path="/settings">
+							<Route index element={<Settings />} />
+
+							<Route path="new" element={<CreateApplication />} />
+							<Route path=":id">
+								<Route index element={<Plan />} />
+								<Route path="bills" element={<ViewBill />} />
+								<Route path="create_bill" element={<CreateBill />} />
+								<Route path="minute" element={<Minute />} />
+								<Route path="documents" element={<DocumentView />} />
+							</Route>
+							<Route path="office">
+								<Route path=":id" element={<Office />} />
+							</Route>
 						</Route>
 
 						{/* PROFILE */}

@@ -738,4 +738,11 @@ html[data-theme="dark"] .received .message-content {
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
+	font-style: italic;
+}
+.deleted .deletedMessage{
+ font-style: oblique;
+ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ font-weight: normal;
+ font-size: 1.3rem;
 }

@@ -11,18 +11,29 @@ export const MessageContextMenu = ({ message, userId }) => {
 	const handleEdit = () => {
 		const newContent = prompt("Edit your message:", message.content);
 		if (newContent) {
-			socket.emit("editMessage", { id: message.id, content: newContent });
+			const newMessage = { ...message, content: newContent };
+			socket.emit("editMessage", newMessage);
 			setPopupVisible(false);
 		}
 	};
 
 	const handleDeleteForMe = () => {
-		socket.emit("deleteForMe", message.id);
+		let newMessage;
+		if (currentUser._id === message.sender) {
+			newMessage = { ...message, deletedForSender: true };
+		}
+		if (currentUser._id === message.receiver) {
+			newMessage = { ...message, deletedForReceiver: true };
+		}
+
+		socket.emit("deleteForMe", newMessage);
 		setPopupVisible(false);
 	};
 
 	const handleDeleteForAll = () => {
-		socket.emit("deleteForAll", message.id);
+		let newMessage = { ...message, deletedForAll: true };
+
+		socket.emit("deleteForAll", newMessage);
 		setPopupVisible(false);
 	};
 
@@ -81,7 +92,7 @@ export const MessageContextMenu = ({ message, userId }) => {
 					}}>
 					{canEdit && <button onClick={handleEdit}>Edit</button>}
 					<button onClick={handleDeleteForMe}>Delete for me</button>
-					{canDeleteForAll && (
+					{canDeleteForAll && !message.deletedForAll && (
 						<button onClick={handleDeleteForAll}>Delete for everyone</button>
 					)}
 				</div>

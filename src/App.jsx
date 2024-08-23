@@ -14,6 +14,9 @@ import { getThemeColor, setThemeColor } from "./utilities/themeColor.js";
 
 import {
 	addMessage,
+	deleteBothMessage,
+	deleteMessage,
+	editMessage,
 	endTyping,
 	logout,
 	setActiveList,
@@ -24,6 +27,7 @@ import {
 	startTyping,
 } from "./redux/userSlice.js";
 import { setupInterceptors } from "./utilities/fetcher.js";
+import { MessageOutlined } from "@mui/icons-material";
 
 function App() {
 	const [view, setView] = useState(null);
@@ -196,35 +200,27 @@ function App() {
 			// 	)
 			// );
 
-			const newAllDirectMessages = chat.allDirectMessages.map((msg) =>
-				msg.id === updatedMessage.id ? updatedMessage : msg
-			);
-			dispatch(setAllDirectMessages(newAllDirectMessages));
+			// const newAllDirectMessages = chat.allDirectMessages.map((msg) =>
+			// 	msg.id === updatedMessage.id ? updatedMessage : msg
+			// );
+			dispatch(editMessage(updatedMessage));
 		});
 
-		socket.on("deleteForMe", (messageId) => {
+		socket.on("deleteForMe", (deletedMessage) => {
 			// setMessages((prevMessages) =>
 			// 	prevMessages.map((msg) =>
-			// 		msg.id === messageId ? { ...msg, deletedForMe: true } : msg
+			// 		msg.id === messageId ? deletedMessage : msg
 			// 	)
 			// );
-			const newAllDirectMessages = chat.allDirectMessages.map((msg) =>
-				msg.id === messageId ? { ...msg, deletedForMe: true } : msg
+			const newAllDirectMessages = chat.allDirectMessages.filter(
+				(msg) => msg.key !== deletedMessage.key
 			);
-			dispatch(setAllDirectMessages(newAllDirectMessages));
+			// dispatch(setAllDirectMessages(newAllDirectMessages));
+			dispatch(deleteMessage(deletedMessage));
 		});
 
-		socket.on("deleteForAll", (messageId) => {
-			// setMessages((prevMessages) =>
-			// 	prevMessages.map((msg) =>
-			// 		msg.id === messageId ? { ...msg, deletedForAll: true } : msg
-			// 	)
-			// );
-
-			const newAllDirectMessages = chat.allDirectMessages.map((msg) =>
-				msg.id === messageId ? { ...msg, deletedForAll: true } : msg
-			);
-			dispatch(setAllDirectMessages(newAllDirectMessages));
+		socket.on("deleteForAll", (deletedMessage) => {
+			dispatch(deleteBothMessage(deletedMessage));
 		});
 
 		return () => {

@@ -58,6 +58,21 @@ const userSlice = createSlice({
 				action.payload,
 			];
 		},
+		editMessage: (state, action) => {
+			state.chat.allDirectMessages = state.chat.allDirectMessages.map((msg) =>
+				msg.key === action.payload.key ? action.payload : msg
+			);
+		},
+		deleteMessage: (state, action) => {
+			state.chat.allDirectMessages = state.chat.allDirectMessages.filter(
+				(msg) => msg.key !== action.payload.key
+			);
+		},
+		deleteBothMessage: (state, action) => {
+			state.chat.allDirectMessages = state.chat.allDirectMessages.map((msg) =>
+				msg.key === action.payload.key ? action.payload : msg
+			);
+		},
 		startTyping: (state, action) => {
 			state.chat.typingList = [...state.chat.typingList, action.payload];
 		},
@@ -90,6 +105,9 @@ export const {
 	setChat,
 	setAllDirectMessages,
 	addMessage,
+	editMessage,
+	deleteMessage,
+	deleteBothMessage,
 	startTyping,
 	endTyping,
 	setActiveList,
