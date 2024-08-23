@@ -110,7 +110,7 @@ export default function Profile() {
 	};
 
 	let topBarDataObj = {
-		action: "Profile Page",
+		action: "Profile",
 		// action: data.id.name + " Office",
 
 		// planNumber: "BC/1212/2023",

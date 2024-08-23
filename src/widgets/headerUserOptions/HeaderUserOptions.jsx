@@ -60,12 +60,14 @@ export default function HeaderUserOptions({ staff }) {
 					</MenuItem>
 					<MenuItem
 						className="dropdown-item"
-						onClick={() => navigate("/office_setting")}>
+						onClick={() => navigate("/office_setting")}
+						>
 						<ApartmentRounded className="theme-icon" />
 						<span>Office Setting</span>
 					</MenuItem>
 					<MenuItem
 						className="dropdown-item"
+						onClick={() => navigate("/settings")}
 						// onClick={() => dispatch(setTheme("system"))}
 					>
 						<SettingsRounded className="theme-icon" />

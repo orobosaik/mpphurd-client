@@ -116,7 +116,7 @@ export default function Header() {
 			<div className="headerLeft">
 				<Link to="/">
 					<span className="headerLogo">
-						<img src="/assets/logos/Logo-Mpphurd.png" alt="" />
+						<img src="/assets/logos/Logo-Mpphurd.svg" alt="" />
 						<div></div>
 						<p>MPPHURD</p>
 					</span>
